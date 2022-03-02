@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Food_Product_Comparison_Android_App</string>
-    <string name="username_login">Username / Email</string>
+    <string name="app_name">Scannera</string>
+    <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
     <string name="login_cap">LOGIN</string>
+    <string name="content_description_start_icon">A start icon displayed</string>
+    <string name="content_description_end_icon">An end icon displayed</string>
 </resources>
