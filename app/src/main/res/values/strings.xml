@@ -3,6 +3,13 @@
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
     <string name="login_cap">LOGIN</string>
+    <string name="signup_cap">SIGN UP</string>
+    <string name="forgotten_password"><u>Forgotten password?</u></string>
+    <string name="dont_have_an_acc_tv">Don\'t have an account?</string>
     <string name="content_description_start_icon">A start icon displayed</string>
     <string name="content_description_end_icon">An end icon displayed</string>
+    <string name="facebook_app_id">487504102712984</string>
+    <string name="fb_login_protocol_scheme">fb487504102712984</string>
+    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
+
 </resources>
