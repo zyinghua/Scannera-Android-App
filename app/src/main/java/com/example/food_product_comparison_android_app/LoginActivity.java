@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food_product_comparison_android_app.Fragments.LoginFragment;
+import com.example.food_product_comparison_android_app.Fragments.LoginIconFragment;
+import com.example.food_product_comparison_android_app.Fragments.LoginMainFragment;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -20,6 +22,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.LoginStatusCallback;
+import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -28,66 +31,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView forgotten_password_tv;
-    private CallbackManager callbackManager;
-    private LoginButton fbloginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        callbackManager = CallbackManager.Factory.create();
-        getSupportFragmentManager().beginTransaction().replace(R.id.login_fragment, new LoginFragment()).addToBackStack("login_frag").commit();
-
-        this.findInstantiatedViews();
-        this.setupDefaultListeners();
-
-        fbloginBtn.setPermissions(Arrays.asList("email", "public_profile"));
-        // If you are using in a fragment, call loginButton.setFragment(this);
-
-        // Callback registration
-        fbloginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
+        this.inflateFragments();
 
         checkLoginStatus();
     }
 
-    private void findInstantiatedViews()
+    private void inflateFragments()
     {
-        this.forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
-        this.fbloginBtn = findViewById(R.id.login_button);
-    }
-
-    private void setupDefaultListeners()
-    {
-        this.forgotten_password_tv.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "forgotten password textview clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.login_icon_fragment, new LoginIconFragment()).addToBackStack("login_icon_frag").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.login_main_fragment, new LoginMainFragment()).addToBackStack("login_main_frag").commit();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -158,7 +123,5 @@ public class LoginActivity extends AppCompatActivity {
                 // An error occurred
             }
         });
-
-
     }
 }
