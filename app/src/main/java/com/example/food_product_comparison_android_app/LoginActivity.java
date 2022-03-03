@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +22,18 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.LoginStatusCallback;
+import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,9 +41,9 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView forgotten_password_tv;
+    private static final int RC_SIGN_IN = 900914;
     private CallbackManager callbackManager;
-    private LoginButton fb_login_btn;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,73 +52,142 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.login_icon_fragment, new LoginIconFragment()).addToBackStack("login_icon_frag").commit();
 
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         callbackManager = CallbackManager.Factory.create();
-
-        this.findInstantiatedViews();
-        this.setupDefaultListeners();
-
-        fb_login_btn.setPermissions(Arrays.asList("email", "public_profile"));
-        // If you are using in a fragment, call loginButton.setFragment(this);
-
-        // Callback registration
-        fb_login_btn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(@NonNull FacebookException exception) {
-                // App code
-            }
-        });
-
-        checkLoginStatus();
     }
 
-    private void findInstantiatedViews()
-    {
-        this.forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
-        this.fb_login_btn = findViewById(R.id.fb_login_button);
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!checkLoginStatus())
+        {
+            // Not signed in, initialise all the necessary components for
+            // the login activity.
+            TextView forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
+            LoginButton fb_login_btn = findViewById(R.id.fb_login_button);
+            SignInButton google_login_btn = findViewById(R.id.google_login_button);
+            Button sign_up_btn = findViewById(R.id.sign_up_btn);
+            sign_up_btn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            fb_login_btn.setPermissions(Arrays.asList("email", "public_profile"));
+            // If you are using in a fragment, call loginButton.setFragment(this);
+
+            // Callback registration
+            fb_login_btn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    // App code
+                }
+
+                @Override
+                public void onCancel() {
+                    // App code
+                }
+
+                @Override
+                public void onError(@NonNull FacebookException exception) {
+                    // App code
+                }
+            });
+
+            google_login_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v.getId() == R.id.google_login_button) {
+                        googleSignIn();
+                    }
+                }
+            });
+
+            forgotten_password_tv.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(LoginActivity.this, "forgotten password textview clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else
+        {
+            // User have signed in successfully
+            this.navigateToLandingActivity();
+        }
     }
 
-    private void setupDefaultListeners()
-    {
-        this.forgotten_password_tv.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "forgotten password textview clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleGoogleSignInResult(task);
+        }
     }
 
-    AccessTokenTracker tokenTracker = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(@Nullable AccessToken accessToken, @Nullable AccessToken accessToken1) {
-            if (accessToken1 == null)
-            {
-                /*Current access token is null, user logged out...*/
+    private void googleSignIn()
+    {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
-            }
-            else
+    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            if (account != null)
             {
-                loadUserProfile(accessToken1);
+                loadGoogleUserProfile(account);
+                navigateToLandingActivity();
             }
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            // Log.w(R.string.LOG_TAG, "signInResult:failed code=" + e.getStatusCode());
+            loadGoogleUserProfile(null);
         }
-    };
+    }
 
-    private void loadUserProfile(AccessToken newAccessToken) {
+//    AccessTokenTracker fbTokenTracker = new AccessTokenTracker() {
+//        @Override
+//        protected void onCurrentAccessTokenChanged(@Nullable AccessToken accessToken, @Nullable AccessToken accessToken1) {
+//            if (accessToken1 == null)
+//            {
+//                /*Current access token is null, user logged out...*/
+//
+//            }
+//            else
+//            {
+//                loadFBUserProfile(accessToken1);
+//            }
+//        }
+//    };
+
+    private void loadFBUserProfile(AccessToken newAccessToken) {
         /*Instantiate a request*/
         GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
             @Override
@@ -134,13 +215,26 @@ public class LoginActivity extends AppCompatActivity {
         request.executeAsync(); // Now execute the request with the parameters
     }
 
-    private void checkLoginStatus()
+    private void loadGoogleUserProfile(GoogleSignInAccount account)
+    {
+        if (account != null)
+        {
+            String first_name = account.getGivenName();
+            String last_name = account.getFamilyName();
+            String email = account.getEmail();
+            String id = account.getId();
+            String user_icon_url = account.getPhotoUrl().toString();
+            Toast.makeText(LoginActivity.this, "Google Login: First Name: "+first_name+", Last Name: "+last_name+", Email: "+email+", Id: "+id+";", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean checkFBLoginStatus()
     {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if (isLoggedIn)
-            loadUserProfile(accessToken);  // Load user data automatically
+            loadFBUserProfile(accessToken);  // Load user data automatically
 
         LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
             @Override
@@ -159,6 +253,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        return isLoggedIn;
+    }
 
+    private boolean checkGoogleLoginStatus()
+    {
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        loadGoogleUserProfile(account);
+
+        return account != null;
+    }
+
+    private boolean checkLoginStatus()
+    {
+        return checkFBLoginStatus() || checkGoogleLoginStatus();
+    }
+
+    private void navigateToLandingActivity()
+    {
+        finish(); // Avoid the users being able to navigate back to this login activity
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
