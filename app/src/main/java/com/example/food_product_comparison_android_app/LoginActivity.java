@@ -313,6 +313,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setAnimationsOnStart()
     {
+        // Basically the idea is set the views to positions
+        // that is away from the positions they are meant to be.
+        // Then transit them back using animate() with the
+        // associated duration, etc...
+
         float v = 0;
 
         username_login_input.setTranslationX(Utils.login_view_animation_translation);

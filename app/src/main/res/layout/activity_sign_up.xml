@@ -38,14 +38,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/username_sign_up"
+        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fst_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,14 +63,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/first_name_sign_up"
+        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/snd_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -84,14 +88,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/last_name_sign_up"
+        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/trd_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -107,14 +113,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/email_sign_up"
+        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fourth_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -130,15 +138,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/phone_sign_up"
+        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fifth_h_guideline"
         app:prefixText="+61 "
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_phone_android">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -154,14 +164,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:hint="@string/password_sign_up"
+        app:errorEnabled="true"
+        android:inputType="textPassword"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sixth_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_lock">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -177,14 +190,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
+        app:errorEnabled="true"
         android:hint="@string/confirm_password_sign_up"
+        android:inputType="textPassword"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seventh_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
+        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_check_circle">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -200,8 +216,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_btn_height"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/login_linear_layout_padding"
-        android:layout_marginEnd="@dimen/login_linear_layout_padding"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
         android:background="@drawable/button_round_style"
         android:text="@string/signup_cap"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -270,7 +286,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.07" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/back_btn_v_guideline"
