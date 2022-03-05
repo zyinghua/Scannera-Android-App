@@ -8,8 +8,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +44,12 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 900914;
+    public static final int RC_SIGN_IN = 900914;
+    public static final int NOT_LOGGED_IN = 0;
+    public static final int LOCAL_LOGIN = 1;
+    public static final int FACEBOOK_LOGIN = 2;
+    public static final int GOOGLE_LOGIN = 3;
+    public static final String LOGIN_OPTION_TAG = "LOGIN_OPTION";
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -64,19 +72,21 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (!checkLoginStatus())
+        int login_status = checkLoginStatus();
+
+        if (login_status == 0)
         {
             // Not signed in, initialise all the necessary components for
             // the login activity.
             TextView forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
-            LoginButton fb_login_btn = findViewById(R.id.fb_login_button);
-            SignInButton google_login_btn = findViewById(R.id.google_login_button);
+            ImageView facebook_login_btn = findViewById(R.id.fb_login_button);
+            ImageView google_login_btn = findViewById(R.id.google_login_button);
             Button sign_up_btn = findViewById(R.id.sign_up_btn);
+
             sign_up_btn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
@@ -85,24 +95,33 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
 
-            fb_login_btn.setPermissions(Arrays.asList("email", "public_profile"));
-            // If you are using in a fragment, call loginButton.setFragment(this);
-
             // Callback registration
-            fb_login_btn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    // App code
+                    // Successful Facebook login
+                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                    loadFBUserProfile(accessToken);
+
+                    navigateToLandingActivity(FACEBOOK_LOGIN);
                 }
 
                 @Override
                 public void onCancel() {
-                    // App code
+                    Toast.makeText(LoginActivity.this, "Facebook Login Cancelled", Toast.LENGTH_LONG).show();
+
                 }
 
                 @Override
                 public void onError(@NonNull FacebookException exception) {
-                    // App code
+                    Toast.makeText(LoginActivity.this, "Facebook Login Error", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            facebook_login_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
                 }
             });
 
@@ -125,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
             // User have signed in successfully
-            this.navigateToLandingActivity();
+            this.navigateToLandingActivity(login_status);
         }
     }
 
@@ -158,34 +177,18 @@ public class LoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            if (account != null)
-            {
+            if (account != null) {
                 loadGoogleUserProfile(account);
-                navigateToLandingActivity();
+                navigateToLandingActivity(GOOGLE_LOGIN);
             }
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             // Log.w(R.string.LOG_TAG, "signInResult:failed code=" + e.getStatusCode());
-            loadGoogleUserProfile(null);
+            Toast.makeText(LoginActivity.this, "*Google Login Error*", Toast.LENGTH_LONG).show();
         }
     }
-
-//    AccessTokenTracker fbTokenTracker = new AccessTokenTracker() {
-//        @Override
-//        protected void onCurrentAccessTokenChanged(@Nullable AccessToken accessToken, @Nullable AccessToken accessToken1) {
-//            if (accessToken1 == null)
-//            {
-//                /*Current access token is null, user logged out...*/
-//
-//            }
-//            else
-//            {
-//                loadFBUserProfile(accessToken1);
-//            }
-//        }
-//    };
 
     private void loadFBUserProfile(AccessToken newAccessToken) {
         /*Instantiate a request*/
@@ -198,6 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                     String last_name = jsonObject.getString("last_name");
                     String email = jsonObject.getString("email");
                     String id = jsonObject.getString("id");
+
                     String user_icon_url = "https://graph.facebook.com/"+id+"/picture?type=normal";
                     Toast.makeText(LoginActivity.this, "Facebook Login: First Name: "+first_name+", Last Name: "+last_name+", Email: "+email+", Id: "+id+";", Toast.LENGTH_LONG).show();
 
@@ -205,7 +209,6 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
@@ -223,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
             String last_name = account.getFamilyName();
             String email = account.getEmail();
             String id = account.getId();
-            String user_icon_url = account.getPhotoUrl().toString();
+            // String user_icon_url = account.getPhotoUrl().toString();
             Toast.makeText(LoginActivity.this, "Google Login: First Name: "+first_name+", Last Name: "+last_name+", Email: "+email+", Id: "+id+";", Toast.LENGTH_LONG).show();
         }
     }
@@ -266,15 +269,27 @@ public class LoginActivity extends AppCompatActivity {
         return account != null;
     }
 
-    private boolean checkLoginStatus()
+    private int checkLoginStatus()
     {
-        return checkFBLoginStatus() || checkGoogleLoginStatus();
+        if (checkFBLoginStatus())
+        {
+            return FACEBOOK_LOGIN;
+        }
+        else if(checkGoogleLoginStatus())
+        {
+            return GOOGLE_LOGIN;
+        }
+        else
+        {
+            return NOT_LOGGED_IN;
+        }
     }
 
-    private void navigateToLandingActivity()
+    private void navigateToLandingActivity(int login_option)
     {
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra(LOGIN_OPTION_TAG, login_option);
         startActivity(intent);
     }
 }
