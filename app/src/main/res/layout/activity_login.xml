@@ -105,11 +105,12 @@
                 android:textColor="@color/chathams_blue"
                 android:textSize="@dimen/small_text_size" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/medium_btn_height"
                 android:layout_marginTop="48dp"
+                android:background="@drawable/button_round_style"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/login_cap" />
 

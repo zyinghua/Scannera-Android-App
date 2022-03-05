@@ -20,7 +20,13 @@
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LoginActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.food_product_comparison_android_app.LoginActivity" />
+        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
