@@ -22,4 +22,6 @@
     <string name="phone_sign_up">Phone Number</string>
     <string name="password_sign_up">Password</string>
     <string name="confirm_password_sign_up">Confirm Password</string>
+    <string name="send_email">Send Email</string>
+    <string name="forgot_your_password_title">Forgot your password?</string>
 </resources>

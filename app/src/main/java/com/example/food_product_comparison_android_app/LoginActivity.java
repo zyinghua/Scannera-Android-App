@@ -148,13 +148,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            forgotten_password_tv.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(LoginActivity.this, "forgotten password textview clicked", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
         else
         {
