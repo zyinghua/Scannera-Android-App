@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.food_product_comparison_android_app.ForgottenPasswordActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
@@ -18,6 +19,7 @@ import com.google.android.material.button.MaterialButton;
 public class PasswordResetEmailSentFragment extends Fragment {
     private ImageButton top_close_btn;
     private MaterialButton login_btn;
+    private TextView resend_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +38,7 @@ public class PasswordResetEmailSentFragment extends Fragment {
     {
         this.top_close_btn = view.findViewById(R.id.top_close_btn);
         this.login_btn = view.findViewById(R.id.login_btn);
+        this.resend_btn = view.findViewById(R.id.resend_tv);
     }
 
     private void setDefaultListeners()
@@ -55,6 +58,13 @@ public class PasswordResetEmailSentFragment extends Fragment {
                 ((ForgottenPasswordActivity) getActivity()).finish();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        this.resend_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ForgottenPasswordActivity) getActivity()).resend();
             }
         });
     }
