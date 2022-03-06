@@ -7,5 +7,6 @@
     <dimen name="small_text_size">16sp</dimen>
     <dimen name="medium_btn_height">48dp</dimen>
     <dimen name="login_layout_margin">24dp</dimen>
-    <dimen name="button_margin_top_input">12dp</dimen>
+    <dimen name="button_margin_top_input">8dp</dimen>
+    <dimen name="lottie_square_animation_size">300dp</dimen>
 </resources>

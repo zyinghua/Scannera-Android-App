@@ -129,7 +129,7 @@
             android:id="@+id/email_sign_up_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLength="35" />
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

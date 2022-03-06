@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class ForgottenPasswordActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
+    private LottieAnimationView forgot_password_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     private void findViews()
     {
         this.top_back_btn = findViewById(R.id.top_back_btn);
+        this.forgot_password_animation = findViewById(R.id.forgot_password_animation);
     }
 
     private void setDefaultListeners()

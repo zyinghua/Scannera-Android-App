@@ -24,4 +24,5 @@
     <string name="confirm_password_sign_up">Confirm Password</string>
     <string name="send_email">Send Email</string>
     <string name="forgot_your_password_title">Forgot your password?</string>
+    <string name="forgotten_password_instruction">Please enter the email associated with your account, and we will send you an email with the password reset instruction.</string>
 </resources>
