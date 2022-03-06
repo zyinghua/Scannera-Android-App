@@ -112,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/medium_btn_height"
             android:background="@drawable/button_round_style"
-            android:text="@string/login_cap"
+            android:text="@string/login"
             android:layout_marginStart="@dimen/login_layout_margin"
             android:layout_marginEnd="@dimen/login_layout_margin"
             android:layout_marginTop="72dp"
@@ -191,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:text="@string/signup_cap" />
+                android:text="@string/signup" />
 
         </LinearLayout>
 

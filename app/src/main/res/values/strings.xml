@@ -7,9 +7,9 @@
     <string name="LOG_TAG">LOG</string>
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
-    <string name="login_cap">LOGIN</string>
+    <string name="login">Login</string>
     <string name="or_login_with">Or login with</string>
-    <string name="signup_cap">SIGN UP</string>
+    <string name="signup">Sign Up</string>
     <string name="forgotten_password"><u>Forgotten password?</u></string>
     <string name="dont_have_an_acc_tv">Don\'t have an account?</string>
     <string name="content_description_start_icon">A start icon displayed</string>
@@ -27,4 +27,8 @@
     <string name="send_email">Send Email</string>
     <string name="forgot_your_password_title">Forgot your password?</string>
     <string name="forgotten_password_instruction">Please enter the email associated with your account, and we will send you an email with the password reset instruction.</string>
+    <string name="email_sent">Email has been sent!</string>
+    <string name="password_reset_email_sent_description">Please check your inbox and follow the instruction to reset your password.</string>
+    <string name="didnt_receive_email">Didn\'t receive the email?</string>
+    <string name="resend"><u>Resend</u></string>
 </resources>

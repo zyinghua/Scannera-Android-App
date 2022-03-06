@@ -8,39 +8,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.food_product_comparison_android_app.Fragments.ForgottenPasswordFragment;
+import com.example.food_product_comparison_android_app.Fragments.LoginIconFragment;
+import com.example.food_product_comparison_android_app.Fragments.PasswordResetEmailSentFragment;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
-    private ImageButton top_back_btn;
-    private LottieAnimationView forgot_password_animation;
+    private ForgottenPasswordFragment forgotten_password_fragment;
+    private PasswordResetEmailSentFragment email_sent_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotten_password);
 
-        this.findViews();
-        this.setDefaultListeners();
-        this.setAnimationsOnStart();
+        this.forgotten_password_fragment = new ForgottenPasswordFragment();
+        this.email_sent_fragment = new PasswordResetEmailSentFragment();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.forgotten_password_activity_container, this.forgotten_password_fragment).addToBackStack("forgotten_password_frag").commit();
     }
 
-    private void findViews()
+    public void changeToEmailSentFrag()
     {
-        this.top_back_btn = findViewById(R.id.top_back_btn);
-        this.forgot_password_animation = findViewById(R.id.forgot_password_animation);
-    }
-
-    private void setDefaultListeners()
-    {
-        this.top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
-
-    private void setAnimationsOnStart()
-    {
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.forgotten_password_activity_container, this.email_sent_fragment).addToBackStack("email_sent_frag").commit();
     }
 }
