@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/email_sign_up"
-            android:maxLength="30" />
+            android:maxLength="35" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
