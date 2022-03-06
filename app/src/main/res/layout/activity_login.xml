@@ -50,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/login_layout_margin"
             android:layout_marginEnd="@dimen/login_layout_margin"
-            android:hint="@string/username_login"
             app:endIconContentDescription="@string/content_description_end_icon"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
@@ -64,6 +63,7 @@
                 android:id="@+id/username_login_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/username_login"
                 android:maxLength="30" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +75,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/login_layout_margin"
             android:layout_marginEnd="@dimen/login_layout_margin"
-            android:hint="@string/password_login"
             app:endIconContentDescription="@string/content_description_end_icon"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
@@ -90,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:hint="@string/password_login"
                 android:maxLength="15" />
 
         </com.google.android.material.textfield.TextInputLayout>
