@@ -42,6 +42,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     public void resend()
     {
         getSupportFragmentManager().beginTransaction().remove(this.email_sent_fragment).commit();
+        this.email_sent_fragment = new PasswordResetEmailSentFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, this.email_sent_fragment).addToBackStack("email_sent_frag").commit();
     }
 

@@ -14,9 +14,11 @@ import android.widget.TextView;
 import com.example.food_product_comparison_android_app.ForgottenPasswordActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.R;
+import com.example.food_product_comparison_android_app.Utils;
 import com.google.android.material.button.MaterialButton;
 
 public class PasswordResetEmailSentFragment extends Fragment {
+    private TextView email_sent_tv;
     private ImageButton top_close_btn;
     private MaterialButton login_btn;
     private TextView resend_btn;
@@ -37,6 +39,7 @@ public class PasswordResetEmailSentFragment extends Fragment {
     private void findViews(View view)
     {
         this.top_close_btn = view.findViewById(R.id.top_close_btn);
+        this.email_sent_tv = view.findViewById(R.id.email_sent_tv);
         this.login_btn = view.findViewById(R.id.login_btn);
         this.resend_btn = view.findViewById(R.id.resend_tv);
     }
@@ -71,6 +74,21 @@ public class PasswordResetEmailSentFragment extends Fragment {
 
     private void setAnimationsOnStart()
     {
+        float v = 0;
 
+        top_close_btn.setTranslationX(Utils.login_view_animation_translation);
+        email_sent_tv.setTranslationY(-Utils.login_view_animation_translation);
+        login_btn.setTranslationX(Utils.login_view_animation_translation);
+        resend_btn.setTranslationX(Utils.login_view_animation_translation);
+
+        top_close_btn.setAlpha(v);
+        email_sent_tv.setAlpha(v);
+        login_btn.setAlpha(v);
+        resend_btn.setAlpha(v);
+
+        top_close_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        email_sent_tv.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        resend_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
     }
 }
