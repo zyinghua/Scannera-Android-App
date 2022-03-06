@@ -16,13 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
+            android:name=".ForgottenPasswordActivity"
+            android:exported="false"
+            android:parentActivityName=".LoginActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.food_product_comparison_android_app.LoginActivity" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
-            android:parentActivityName=".LoginActivity" >
-
+            android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.food_product_comparison_android_app.LoginActivity" />
