@@ -168,7 +168,6 @@
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
         app:errorEnabled="true"
-        android:inputType="textPassword"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,6 +180,7 @@
             android:id="@+id/password_sign_up_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:hint="@string/password_sign_up"
             android:maxLength="15" />
 
@@ -194,7 +194,6 @@
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
         app:errorEnabled="true"
-        android:inputType="textPassword"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -208,6 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/confirm_password_sign_up"
+            android:inputType="textPassword"
             android:maxLength="15" />
 
     </com.google.android.material.textfield.TextInputLayout>
