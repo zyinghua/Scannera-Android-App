@@ -28,7 +28,6 @@ import java.lang.reflect.Type;
 public class HomeFragment extends Fragment {
     private int login_option;
     private User user;
-    private MaterialButton scan_btn;
     private TextView welcome_username_tv;
 
     @Override
@@ -56,7 +55,6 @@ public class HomeFragment extends Fragment {
 
     private void findViews(View view)
     {
-        this.scan_btn = view.findViewById(R.id.scan_btn);
         this.welcome_username_tv = view.findViewById(R.id.welcome_username_tv);
     }
 
@@ -75,7 +73,7 @@ public class HomeFragment extends Fragment {
                         String id = jsonObject.getString("id");
                         String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                        welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername() + "!");
+                        welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -90,7 +88,7 @@ public class HomeFragment extends Fragment {
         }
         else
         {
-            welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername() + "!");
+            welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername());
         }
     }
 }

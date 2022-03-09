@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.food_product_comparison_android_app.Fragments.HomeFragment;
 import com.example.food_product_comparison_android_app.Fragments.MeFragment;
@@ -15,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
     private MeFragment meFragment;
+    private FloatingActionButton scan_fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
+
+        this.scan_fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void googleLogOut() {
@@ -95,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     private void findViews()
     {
         this.bottomNavigationView = findViewById(R.id.main_bottom_nav);
+        this.scan_fab = findViewById(R.id.scan_fab);
     }
 
     private void initialiseFragments()

@@ -14,24 +14,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab"
         android:maxLength="24"
-        android:text="Welcome, "
+        android:text="Hi, "
         android:textColor="@color/black"
         android:textSize="@dimen/small_title_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/scan_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/medium_btn_height"
-        android:layout_marginStart="@dimen/general_btn_margin"
-        android:layout_marginEnd="@dimen/general_btn_margin"
-        android:background="@drawable/button_round_style"
-        android:text="@string/scan_a_barcode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
