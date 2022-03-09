@@ -15,6 +15,8 @@ import com.example.food_product_comparison_android_app.Fragments.LoginIconFragme
 import com.example.food_product_comparison_android_app.Fragments.PasswordResetEmailSentFragment;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
+    public static final String FORGOTTEN_PASSWORD_FRAG_TAG = "forgotten_password_frag";
+    public static final String EMAIL_SENT_FRAG_TAG = "email_sent_frag";
     private ForgottenPasswordFragment forgotten_password_fragment;
     private PasswordResetEmailSentFragment email_sent_fragment;
     private static final int SHOWING_INSTRUCTION_FRAG = 1;
@@ -29,13 +31,13 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         this.forgotten_password_fragment = new ForgottenPasswordFragment();
         this.email_sent_fragment = new PasswordResetEmailSentFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, this.forgotten_password_fragment).addToBackStack("forgotten_password_frag").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fp_fragment_container, this.forgotten_password_fragment).addToBackStack(FORGOTTEN_PASSWORD_FRAG_TAG).commit();
         this.current_frag = SHOWING_INSTRUCTION_FRAG;
     }
 
     public void changeToEmailSentFrag()
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, this.email_sent_fragment).addToBackStack("email_sent_frag").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fp_fragment_container, this.email_sent_fragment).addToBackStack(EMAIL_SENT_FRAG_TAG).commit();
         this.current_frag = SHOWING_RESET_FRAG;
     }
 
@@ -43,7 +45,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     {
         getSupportFragmentManager().beginTransaction().remove(this.email_sent_fragment).commit();
         this.email_sent_fragment = new PasswordResetEmailSentFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, this.email_sent_fragment).addToBackStack("email_sent_frag").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fp_fragment_container, this.email_sent_fragment).addToBackStack(EMAIL_SENT_FRAG_TAG).commit();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         }
         else if (current_frag == SHOWING_RESET_FRAG)
         {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, this.forgotten_password_fragment).addToBackStack("forgotten_password_frag").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fp_fragment_container, this.forgotten_password_fragment).addToBackStack(FORGOTTEN_PASSWORD_FRAG_TAG).commit();
             this.current_frag = SHOWING_INSTRUCTION_FRAG;
         }
     }

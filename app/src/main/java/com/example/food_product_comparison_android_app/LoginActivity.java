@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final int LOCAL_LOGIN = 1;
     public static final int FACEBOOK_LOGIN = 2;
     public static final int GOOGLE_LOGIN = 3;
-    public static final String LOGIN_OPTION_TAG = "LOGIN_OPTION";
+    public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION";
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout username_login_input;
@@ -206,7 +206,6 @@ public class LoginActivity extends AppCompatActivity {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             // Log.w(R.string.LOG_TAG, "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(LoginActivity.this, "*Google Login Error*", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -309,7 +308,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(LOGIN_OPTION_TAG, login_option);
+        intent.putExtra(LOGIN_OPTION_KEY, login_option);
         startActivity(intent);
     }
 

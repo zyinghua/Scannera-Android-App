@@ -31,4 +31,7 @@
     <string name="password_reset_email_sent_description">Please check your inbox and follow the instruction to reset your password.</string>
     <string name="didnt_receive_email">Didn\'t receive the email?</string>
     <string name="resend"><u>Resend</u></string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Log Out</string>
 </resources>
