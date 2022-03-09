@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="general_btn_margin">24dp</dimen>
     <dimen name="social_icons_size">42dp</dimen>
     <dimen name="social_icons_margin">20dp</dimen>
     <dimen name="general_icons_size">42dp</dimen>
@@ -12,4 +13,7 @@
     <dimen name="button_margin_top_input">8dp</dimen>
     <dimen name="lottie_square_animation_size">300dp</dimen>
     <dimen name="user_info_display_margin">24dp</dimen>
+    <dimen name="user_activity_list_btn_height">72dp</dimen>
+    <dimen name="user_activity_list_btn_text_size">18sp</dimen>
+    <dimen name="user_activity_list_btn_icon_padding">24dp</dimen>
 </resources>

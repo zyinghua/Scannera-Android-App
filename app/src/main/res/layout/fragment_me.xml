@@ -42,7 +42,6 @@
                 android:id="@+id/username_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Caius Zhou"
                 android:fontFamily="@font/roboto_slab"
                 android:textColor="@color/black"
                 android:textSize="@dimen/small_title_text_size"
@@ -63,34 +62,60 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toBottomOf="@id/user_info_top"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scan_history_btn"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_activity_list_btn_height"
+        android:elegantTextHeight="true"
+        android:fontFamily="@font/roboto_slab"
+        android:gravity="start|center_vertical"
+        android:text="@string/scan_history"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+        android:textSize="@dimen/user_activity_list_btn_text_size"
+        app:icon="@drawable/ic_history"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@id/user_info_top"
-        app:layout_constraintTop_toTopOf="@id/user_info_top" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings_btn"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_activity_list_btn_height"
+        android:elegantTextHeight="true"
+        android:fontFamily="@font/roboto_slab"
+        android:gravity="start|center_vertical"
+        android:text="@string/settings"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/user_activity_list_btn_text_size"
+        app:icon="@drawable/ic_settings"
+        app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/log_out_btn"
-        android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_btn_height"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        android:background="@drawable/button_round_style" />
+        android:layout_marginStart="@dimen/general_btn_margin"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="@dimen/general_btn_margin"
+        android:background="@drawable/button_round_style"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_btn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

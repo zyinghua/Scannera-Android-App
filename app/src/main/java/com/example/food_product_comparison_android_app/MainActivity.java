@@ -99,12 +99,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialiseFragments()
     {
-        this.homeFragment = new HomeFragment();
-
-        this.meFragment = new MeFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(LoginActivity.LOGIN_OPTION_KEY, login_option);
         bundle.putString(LoginActivity.USER_INFO_KEY, user_info);
+
+        this.homeFragment = new HomeFragment();
+        this.meFragment = new MeFragment();
+
+        homeFragment.setArguments(bundle);
         meFragment.setArguments(bundle);
     }
 }

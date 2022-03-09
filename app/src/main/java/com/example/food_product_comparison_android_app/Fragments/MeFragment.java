@@ -88,7 +88,7 @@ public class MeFragment extends Fragment {
             }
         });
 
-        loadUserProfile();
+        this.loadUserProfile();
 
         return view;
     }
