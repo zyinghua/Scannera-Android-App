@@ -10,13 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.food_product_comparison_android_app.ForgottenPasswordActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
 
-
-public class ProfileFragment extends Fragment {
+public class MeFragment extends Fragment {
     private int login_option;
     private Button log_out_btn;
 
@@ -32,7 +30,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_me, container, false);
         this.findViews(view);
 
         log_out_btn.setOnClickListener(new View.OnClickListener(){

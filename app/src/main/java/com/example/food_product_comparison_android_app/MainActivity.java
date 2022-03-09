@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.HomeFragment;
-import com.example.food_product_comparison_android_app.Fragments.ProfileFragment;
+import com.example.food_product_comparison_android_app.Fragments.MeFragment;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,12 +18,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
-    public static final String PROFILE_FRAG_TAG = "profile_fragment";
+    public static final String ME_FRAG_TAG = "me_fragment";
     private GoogleSignInClient mGoogleSignInClient;
     private int login_option;
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
-    private ProfileFragment profileFragment;
+    private MeFragment meFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             }
-            else if (id == R.id.profile)
+            else if (id == R.id.me)
             {
                 if (bottomNavigationView.getSelectedItemId() != id)
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.profileFragment).addToBackStack(PROFILE_FRAG_TAG).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.meFragment).addToBackStack(ME_FRAG_TAG).commit();
 
                 return true;
             }
@@ -104,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
     {
         this.homeFragment = new HomeFragment();
 
-        this.profileFragment = new ProfileFragment();
+        this.meFragment = new MeFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(LoginActivity.LOGIN_OPTION_KEY, login_option);
-        profileFragment.setArguments(bundle);
+        meFragment.setArguments(bundle);
     }
 }

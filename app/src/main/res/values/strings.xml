@@ -32,6 +32,6 @@
     <string name="didnt_receive_email">Didn\'t receive the email?</string>
     <string name="resend"><u>Resend</u></string>
     <string name="home">Home</string>
-    <string name="profile">Profile</string>
+    <string name="me">Me</string>
     <string name="logout">Log Out</string>
 </resources>
