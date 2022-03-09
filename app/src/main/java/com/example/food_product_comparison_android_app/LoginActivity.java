@@ -38,6 +38,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,12 +47,13 @@ import org.w3c.dom.Text;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String USER_INFO_KEY = "USER_INFO";
+    public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION";
     public static final int RC_SIGN_IN = 900914;
     public static final int NOT_LOGGED_IN = 0;
     public static final int LOCAL_LOGIN = 1;
     public static final int FACEBOOK_LOGIN = 2;
     public static final int GOOGLE_LOGIN = 3;
-    public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION";
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout username_login_input;
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView google_login_btn;
     private Button login_btn;
     private Button sign_up_btn;
+    private User user;
 
 
     @Override
@@ -116,9 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
-                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                    loadFBUserProfile(accessToken);
-
+                    user = new User(AccessToken.getCurrentAccessToken());
                     navigateToLandingActivity(FACEBOOK_LOGIN);
                 }
 
@@ -209,34 +210,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void loadFBUserProfile(AccessToken newAccessToken) {
-        /*Instantiate a request*/
-        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
-                try {
-                    assert jsonObject != null;
-                    String first_name = jsonObject.getString("first_name");
-                    String last_name = jsonObject.getString("last_name");
-                    String email = jsonObject.getString("email");
-                    String id = jsonObject.getString("id");
-
-                    String user_icon_url = "https://graph.facebook.com/"+id+"/picture?type=normal";
-                    Toast.makeText(LoginActivity.this, "Facebook Login: First Name: "+first_name+", Last Name: "+last_name+", Email: "+email+", Id: "+id+";", Toast.LENGTH_LONG).show();
-
-                    /*Now perform actions with the data obtained...*/
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name, last_name, email, id");
-        request.setParameters(parameters);
-        request.executeAsync(); // Now execute the request with the parameters
-    }
-
     private void loadGoogleUserProfile(GoogleSignInAccount account)
     {
         if (account != null)
@@ -245,8 +218,9 @@ public class LoginActivity extends AppCompatActivity {
             String last_name = account.getFamilyName();
             String email = account.getEmail();
             String id = account.getId();
-            // String user_icon_url = account.getPhotoUrl().toString();
-            Toast.makeText(LoginActivity.this, "Google Login: First Name: "+first_name+", Last Name: "+last_name+", Email: "+email+", Id: "+id+";", Toast.LENGTH_LONG).show();
+            String img_url = account.getPhotoUrl().toString();
+
+            user = new User(id, first_name, first_name, last_name, email, img_url);
         }
     }
 
@@ -256,7 +230,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if (isLoggedIn)
-            loadFBUserProfile(accessToken);  // Load user data automatically
+            user = new User(accessToken);
 
         LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
             @Override
@@ -306,9 +280,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToLandingActivity(int login_option)
     {
+        Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(LOGIN_OPTION_KEY, login_option);
+        intent.putExtra(USER_INFO_KEY, gson.toJson(user));
         startActivity(intent);
     }
 

@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/username_sign_up"
-            android:maxLength="12" />
+            android:maxLength="15" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -216,7 +216,6 @@
         android:id="@+id/sign_up_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_btn_height"
-        android:layout_gravity="center_horizontal"
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
         android:background="@drawable/button_round_style"

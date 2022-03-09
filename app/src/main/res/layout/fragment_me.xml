@@ -1,21 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.MeFragment">
 
-    <Button
-        android:id="@+id/log_out_btn"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/user_info_top"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="@dimen/user_info_display_margin"
+        android:layout_marginBottom="@dimen/user_info_display_margin"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/user_profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="@color/chathams_blue"
+            app:civ_shadow_radius="0dp"
+             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/user_info_display_margin">
+            <TextView
+                android:id="@+id/username_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caius Zhou"
+                android:fontFamily="@font/roboto_slab"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_title_text_size"
+                android:maxLength="15"
+                />
+
+            <TextView
+                android:id="@+id/contribution_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contribution_score"
+                android:fontFamily="@font/roboto_slab"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                android:layout_marginTop="12dp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@id/user_info_top"
+        app:layout_constraintTop_toTopOf="@id/user_info_top" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/log_out_btn"
         android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/medium_btn_height"
+        android:layout_marginStart="@dimen/login_layout_margin"
+        android:layout_marginEnd="@dimen/login_layout_margin"
+        android:background="@drawable/button_round_style" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

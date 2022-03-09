@@ -34,4 +34,5 @@
     <string name="home">Home</string>
     <string name="me">Me</string>
     <string name="logout">Log Out</string>
+    <string name="contribution_score">Contribution: </string>
 </resources>
