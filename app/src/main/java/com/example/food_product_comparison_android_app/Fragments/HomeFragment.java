@@ -4,12 +4,15 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.food_product_comparison_android_app.HomeListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.User;
@@ -25,12 +28,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private int login_option;
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
+    private RecyclerView homeRecyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private HomeListRecyclerViewAdapter homeListRecyclerViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,22 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        this.homeRecyclerView = view.findViewById(R.id.home_recyclerView);
+
+        this.layoutManager = new LinearLayoutManager(getContext());
+        this.homeRecyclerView.setLayoutManager(this.layoutManager);
+
+        List<String> products = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++)
+        {
+            products.add(i + "");
+        }
+
+        this.homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(products);
+        this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
+
         this.findViews(view);
         this.loadUserProfile();
 
