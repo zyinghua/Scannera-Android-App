@@ -47,6 +47,9 @@ public class MeFragment extends Fragment {
     private CircularImageView user_profile_img;
     private TextView username_tv;
     private TextView contribution_score;
+    private MaterialButton starred_btn;
+    private MaterialButton scan_history_btn;
+    private MaterialButton settings_btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,9 @@ public class MeFragment extends Fragment {
         this.user_profile_img = view.findViewById(R.id.user_profile_img);
         this.username_tv = view.findViewById(R.id.username_display);
         this.contribution_score = view.findViewById(R.id.contribution_score);
+        this.starred_btn = view.findViewById(R.id.starred_btn);
+        this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
+        this.settings_btn = view.findViewById(R.id.settings_btn);
     }
 
     private void loadUserProfile() {
