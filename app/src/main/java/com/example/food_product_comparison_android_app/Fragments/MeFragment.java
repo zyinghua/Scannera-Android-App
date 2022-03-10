@@ -132,7 +132,8 @@ public class MeFragment extends Fragment {
         }
         else
         {
-            Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
+            if (user.getProfile_img_url() != null)
+                Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
             username_tv.setText(user.getUsername());
         }
     }

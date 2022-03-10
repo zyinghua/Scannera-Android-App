@@ -21,7 +21,6 @@
     <string name="first_name_sign_up">First Name</string>
     <string name="last_name_sign_up">Last Name</string>
     <string name="email_sign_up">Email Address</string>
-    <string name="phone_sign_up">Phone Number</string>
     <string name="password_sign_up">Password</string>
     <string name="confirm_password_sign_up">Confirm Password</string>
     <string name="send_email">Send Email</string>

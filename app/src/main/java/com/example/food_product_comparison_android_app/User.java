@@ -1,10 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
-import androidx.annotation.NonNull;
-
 import com.facebook.AccessToken;
-
-import java.util.StringTokenizer;
 
 public class User {
     private AccessToken fb_access_token;
@@ -13,23 +9,10 @@ public class User {
     private String first_name;
     private String last_name;
     private String email;
-    private String phone;
     private String profile_img_url;
-
-    public User(String id, String username, String first_name, String last_name, String email, String phone, String profile_img_url) {
-        this.fb_access_token = null;
-        this.id = id;
-        this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.phone = phone;
-        this.profile_img_url = profile_img_url;
-    }
 
     public User(String id, String username, String first_name, String last_name, String email, String profile_img_url) {
         this.fb_access_token = null;
-        this.phone = "null";
         this.id = id;
         this.username = username;
         this.first_name = first_name;
@@ -42,7 +25,8 @@ public class User {
         String s = "Facebook User";
 
         this.fb_access_token = fb_access_token;
-        this.id = this.username = this.first_name = this.last_name = this.email = this.phone = this.profile_img_url = s;
+        this.id = this.username = this.first_name = this.last_name = this.email = s;
+        this.profile_img_url = null;
     }
 
     public AccessToken getFb_access_token() {
@@ -91,14 +75,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getProfile_img_url() {

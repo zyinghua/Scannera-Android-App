@@ -215,7 +215,10 @@ public class LoginActivity extends AppCompatActivity {
             String last_name = account.getFamilyName();
             String email = account.getEmail();
             String id = account.getId();
-            String img_url = account.getPhotoUrl().toString();
+            String img_url = null;
+
+            if (account.getPhotoUrl() != null)
+                img_url = account.getPhotoUrl().toString();
 
             user = new User(id, first_name, first_name, last_name, email, img_url);
         }

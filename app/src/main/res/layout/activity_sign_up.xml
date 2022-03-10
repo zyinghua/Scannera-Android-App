@@ -135,32 +135,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fifth_h_guideline"
-        app:prefixText="+61 "
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
-        app:startIconDrawable="@drawable/ic_phone_android">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_sign_up_et"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/phone_sign_up"
-            android:maxLength="9" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_sign_up"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -171,7 +145,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sixth_h_guideline"
+        app:layout_constraintTop_toTopOf="@+id/fifth_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
         app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_lock">
@@ -197,7 +171,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seventh_h_guideline"
+        app:layout_constraintTop_toTopOf="@+id/sixth_h_guideline"
         app:startIconContentDescription="@string/content_description_start_icon"
         app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_check_circle">
@@ -223,7 +197,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+        app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/fst_h_guideline"
@@ -268,14 +242,7 @@
         app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/seventh_h_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/bottom_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
