@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab"
         android:text="@string/create_account"
-        android:textColor="@color/denim"
+        android:textColor="?attr/colorPrimary"
         android:textSize="@dimen/title_text_size"
         app:layout_constraintBottom_toTopOf="@+id/fst_h_guideline"
         app:layout_constraintEnd_toEndOf="parent"

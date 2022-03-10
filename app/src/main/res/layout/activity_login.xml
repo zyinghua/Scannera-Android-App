@@ -101,7 +101,7 @@
             android:clickable="true"
             android:fontFamily="@font/roboto_slab"
             android:text="@string/forgotten_password"
-            android:textColor="@color/chathams_blue"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="@dimen/small_text_size"
             android:layout_marginStart="@dimen/login_layout_margin"
             app:layout_constraintStart_toStartOf="parent"
