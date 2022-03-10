@@ -3,6 +3,11 @@
     package="com.example.food_product_comparison_android_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <queries>
         <package android:name="com.facebook.katana" />
@@ -16,12 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
+            android:name=".ScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ForgottenPasswordActivity"
             android:exported="false"
             android:parentActivityName=".LoginActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.food_product_comparison_android_app.LoginActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.food_product_comparison_android_app.LoginActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
