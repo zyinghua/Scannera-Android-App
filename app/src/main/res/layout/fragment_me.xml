@@ -21,8 +21,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_profile_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/me_fragment_user_profile_img_size"
+            android:layout_height="@dimen/me_fragment_user_profile_img_size"
             android:layout_gravity="center"
             android:src="@drawable/ic_person"
             app:civ_border_color="@color/black"

@@ -18,6 +18,7 @@ import com.facebook.GraphResponse;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
     private int login_option;
     private User user;
     private TextView welcome_username_tv;
+    private CircularImageView home_user_img;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class HomeFragment extends Fragment {
     private void findViews(View view)
     {
         this.welcome_username_tv = view.findViewById(R.id.welcome_username_tv);
+        this.home_user_img = view.findViewById(R.id.home_user_img);
     }
 
     private void loadUserProfile() {
@@ -73,7 +76,8 @@ public class HomeFragment extends Fragment {
                         String id = jsonObject.getString("id");
                         String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                        welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername());
+                        Picasso.get().load(img_url).into(home_user_img);
+                        welcome_username_tv.setText(getString(R.string.home_greeting) + " " + user.getUsername());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -88,7 +92,10 @@ public class HomeFragment extends Fragment {
         }
         else
         {
-            welcome_username_tv.setText(welcome_username_tv.getText().toString() + user.getUsername());
+            if (user.getProfile_img_url() != null)
+                Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
+
+            welcome_username_tv.setText(getString(R.string.home_greeting)+ " " + user.getUsername());
         }
     }
 }

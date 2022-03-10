@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ScanActivity extends AppCompatActivity {
+    private static final int CAMERA_REQUEST_CODE = 814736521;
     private CodeScanner mCodeScanner;
 
     @Override
@@ -31,6 +33,7 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
+        checkPermissions();
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
 //        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
@@ -68,5 +71,33 @@ public class ScanActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mCodeScanner.releaseResources(); // avoid memory leaks
+    }
+
+    private void checkPermissions()
+    {
+        int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
+
+        if (permission != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE:
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast toast = Toast.makeText(this, "This activity requires your camera permission in order to proceed", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    onBackPressed();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

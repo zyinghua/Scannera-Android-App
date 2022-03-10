@@ -14,18 +14,34 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab"
         android:maxLength="24"
-        android:text="Hi, "
+        android:layout_marginStart="24dp"
         android:textColor="@color/black"
         android:textSize="@dimen/small_title_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@id/top_guideline" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/home_user_img"
+        android:layout_width="@dimen/home_fragment_user_img_size"
+        android:layout_height="@dimen/home_fragment_user_img_size"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_person"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="1dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="?attr/colorPrimaryDark"
+        app:civ_shadow_radius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/welcome_username_tv"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
+        app:layout_constraintGuide_percent="0.03" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int CAMERA_REQUEST_CODE = 0;
+
     public static final String HOME_FRAG_TAG = "home_fragment";
     public static final String ME_FRAG_TAG = "me_fragment";
     private GoogleSignInClient mGoogleSignInClient;
@@ -76,11 +76,7 @@ public class MainActivity extends AppCompatActivity {
         this.scan_fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                checkPermissions();
-
-                int permission = ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CAMERA);
-                if (permission == PackageManager.PERMISSION_GRANTED)
-                    startActivity(new Intent(MainActivity.this, ScanActivity.class));
+                startActivity(new Intent(MainActivity.this, ScanActivity.class));
             }
         });
     }
@@ -131,30 +127,6 @@ public class MainActivity extends AppCompatActivity {
         meFragment.setArguments(bundle);
     }
 
-    private void checkPermissions()
-    {
-        int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
 
-        if (permission != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case CAMERA_REQUEST_CODE:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast toast = Toast.makeText(this, "This activity requires your camera permission in order to proceed", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                break;
-            default:
-                break;
-        }
-    }
 }
