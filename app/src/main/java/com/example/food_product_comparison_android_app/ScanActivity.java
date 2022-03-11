@@ -9,6 +9,9 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
@@ -36,19 +39,22 @@ public class ScanActivity extends AppCompatActivity {
         checkPermissions();
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
-//        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
-//        mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
-//        mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
-//        mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
-//        mCodeScanner.setAutoFocusEnabled(true);
-//        mCodeScanner.setFlashEnabled(false);
+        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
+        mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
+        mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
+        mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
+        mCodeScanner.setAutoFocusEnabled(true);
+        mCodeScanner.setFlashEnabled(false);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull Result result) {
                 ExecutorService singleExecutor = Executors.newSingleThreadExecutor();
+                Handler uiHandler = new Handler(Looper.getMainLooper());
 
                 singleExecutor.execute(() -> {
-                    Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                    uiHandler.post(() -> {
+                        Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                    });
                 });
             }
         });
@@ -89,7 +95,7 @@ public class ScanActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast toast = Toast.makeText(this, "This activity requires your camera permission in order to proceed", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
