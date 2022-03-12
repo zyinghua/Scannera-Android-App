@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
+import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.Result;
 
@@ -96,10 +98,8 @@ public class ScanActivity extends AppCompatActivity {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast toast = Toast.makeText(this, "This activity requires your camera permission in order to proceed", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                    onBackPressed();
+                    DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment();
+                    cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
                 }
                 break;
             default:

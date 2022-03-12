@@ -39,4 +39,8 @@
     <string name="settings">Settings</string>
     <string name="scan_a_barcode">Scan a barcode</string>
     <string name="home_greeting">Hi,</string>
+    <string name="dialog_camera_permission_title">Camera Access Not Enabled</string>
+    <string name="dialog_camera_permission_msg">Camera permission is required to proceed this activity, enable access via "Settings" -> "Scannera"</string>
+    <string name="dialog_btn_reject">Reject</string>
+    <string name="dialog_btn_enable">Enable</string>
 </resources>

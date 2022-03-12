@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ScanActivity.class));
-//                Intent dialogIntent = new Intent(android.provider.Settings.ACTION_SETTINGS);
-//                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(dialogIntent);
             }
         });
     }
