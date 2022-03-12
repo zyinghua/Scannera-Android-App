@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -98,7 +99,7 @@ public class ScanActivity extends AppCompatActivity {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment();
+                    DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
                     cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
                 }
                 break;

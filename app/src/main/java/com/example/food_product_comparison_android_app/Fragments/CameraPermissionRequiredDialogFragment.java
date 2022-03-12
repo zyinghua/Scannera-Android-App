@@ -2,13 +2,17 @@ package com.example.food_product_comparison_android_app.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.RestrictionEntry;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,13 @@ import android.view.ViewGroup;
 import com.example.food_product_comparison_android_app.R;
 
 public class CameraPermissionRequiredDialogFragment extends DialogFragment {
+    private final String app_package_name;
+
+    public CameraPermissionRequiredDialogFragment(String app_package_name)
+    {
+        this.app_package_name = app_package_name;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
@@ -24,9 +35,13 @@ public class CameraPermissionRequiredDialogFragment extends DialogFragment {
                 .setTitle(R.string.dialog_camera_permission_title)
                 .setPositiveButton(R.string.dialog_btn_enable, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent dialogIntent = new Intent(android.provider.Settings.ACTION_SETTINGS);
-                        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(dialogIntent);
+                        try {
+                            Intent dialogIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            dialogIntent.setData(Uri.parse("package:" + app_package_name));
+                            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(dialogIntent);
+                        }catch (ActivityNotFoundException e) {
+                        }
                     }
                 })
                 .setNegativeButton(R.string.dialog_btn_reject, new DialogInterface.OnClickListener() {
