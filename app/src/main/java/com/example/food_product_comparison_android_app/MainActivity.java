@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         this.login_option = getIntent().getIntExtra(LoginActivity.LOGIN_OPTION_KEY, -1);
 
         this.initialiseFragments();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.homeFragment).addToBackStack(HOME_FRAG_TAG).commit();
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.homeFragment).commit();
 
         this.bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
