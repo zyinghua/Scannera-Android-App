@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.AutoFocusMode;
@@ -35,6 +36,7 @@ public class ScanActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 814736521;
     private CodeScanner mCodeScanner;
     private ImageButton close_btn;
+    private TextView hint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ScanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan);
 
         checkPermissions();
+        hint = findViewById(R.id.scanner_hint);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
@@ -58,6 +61,7 @@ public class ScanActivity extends AppCompatActivity {
 
                 singleExecutor.execute(() -> {
                     uiHandler.post(() -> {
+                        hint.setText("");
                         Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                     });
                 });

@@ -42,4 +42,6 @@
     <string name="dialog_camera_permission_msg">Camera permission is required to proceed this activity, enable access via "Settings" -> "App info" -> "Scannera".</string>
     <string name="dialog_btn_reject">Reject</string>
     <string name="dialog_btn_enable">Enable</string>
+    <string name="search">Search</string>
+    <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
 </resources>

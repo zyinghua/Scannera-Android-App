@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,12 +41,12 @@ public class HomeFragment extends Fragment {
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
     private RecyclerView homeRecyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private HomeListRecyclerViewAdapter homeListRecyclerViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
         if (getArguments() != null) {
             login_option = getArguments().getInt(LoginActivity.LOGIN_OPTION_KEY);
 
@@ -64,8 +66,8 @@ public class HomeFragment extends Fragment {
         setUpToolbar(view);
         this.loadUserProfile();
 
-        this.layoutManager = new LinearLayoutManager(getContext());
-        this.homeRecyclerView.setLayoutManager(this.layoutManager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        this.homeRecyclerView.setLayoutManager(layoutManager);
 
         List<String> products = new ArrayList<>();
 
@@ -74,7 +76,7 @@ public class HomeFragment extends Fragment {
             products.add(i + "");
         }
 
-        this.homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(products);
+        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(products);
         this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
 
         return view;
@@ -92,6 +94,7 @@ public class HomeFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             activity.setSupportActionBar(toolbar);
+//            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -131,5 +134,11 @@ public class HomeFragment extends Fragment {
 
             welcome_username_tv.setText(getString(R.string.home_greeting)+ " " + user.getUsername());
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menuInflater.inflate(R.menu.home_toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
     }
 }
