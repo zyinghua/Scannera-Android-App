@@ -1,47 +1,41 @@
-package com.example.food_product_comparison_android_app.Fragments;
+package com.example.food_product_comparison_android_app;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.food_product_comparison_android_app.ForgottenPasswordActivity;
-import com.example.food_product_comparison_android_app.LoginActivity;
-import com.example.food_product_comparison_android_app.R;
-import com.example.food_product_comparison_android_app.Utils;
 import com.google.android.material.button.MaterialButton;
 
-public class PasswordResetEmailSentFragment extends Fragment {
+public class PasswordEmailSentActivity extends AppCompatActivity {
     private TextView email_sent_tv;
     private ImageButton top_close_btn;
     private MaterialButton login_btn;
     private TextView resend_btn;
+    private String target_email;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_password_reset_email_sent, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_password_email_sent);
 
-        this.findViews(view);
+        this.findViews();
         this.setDefaultListeners();
         this.setAnimationsOnStart();
 
-        return view;
+        this.target_email = getIntent().getStringExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY);
     }
 
-    private void findViews(View view)
+    private void findViews()
     {
-        this.top_close_btn = view.findViewById(R.id.top_close_btn);
-        this.email_sent_tv = view.findViewById(R.id.email_sent_tv);
-        this.login_btn = view.findViewById(R.id.login_btn);
-        this.resend_btn = view.findViewById(R.id.resend_tv);
+        this.top_close_btn = findViewById(R.id.top_close_btn);
+        this.email_sent_tv = findViewById(R.id.email_sent_tv);
+        this.login_btn = findViewById(R.id.login_btn);
+        this.resend_btn = findViewById(R.id.resend_tv);
     }
 
     private void setDefaultListeners()
@@ -49,25 +43,24 @@ public class PasswordResetEmailSentFragment extends Fragment {
         this.top_close_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ForgottenPasswordActivity) getActivity()).finish();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                finish(); // This will lead to the original login activity we started with
             }
         });
 
         this.login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ForgottenPasswordActivity) getActivity()).finish();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                finish(); // This will lead to the original login activity we started with
             }
         });
 
         this.resend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ForgottenPasswordActivity) getActivity()).resend();
+                finish();
+                Intent intent = new Intent(PasswordEmailSentActivity.this, PasswordEmailSentActivity.class);
+                intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, target_email);
+                startActivity(intent);
             }
         });
     }
@@ -91,4 +84,5 @@ public class PasswordResetEmailSentFragment extends Fragment {
         login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         resend_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
     }
+
 }
