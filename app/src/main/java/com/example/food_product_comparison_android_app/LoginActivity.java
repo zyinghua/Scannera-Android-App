@@ -32,6 +32,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button sign_up_btn;
     private User user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
         int login_status = checkLoginStatus();
 
-        if (login_status == 0)
+        if (login_status == NOT_LOGGED_IN)
         {
             // Not signed in, initialise all the necessary components for
             // the login activity.
@@ -142,9 +143,12 @@ public class LoginActivity extends AppCompatActivity {
             google_login_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (v.getId() == R.id.google_login_button) {
+                    int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+
+                    if(status == ConnectionResult.SUCCESS)
                         googleSignIn();
-                    }
+                    else
+                        Toast.makeText(LoginActivity.this, getString(R.string.google_ps_missing_msg), Toast.LENGTH_LONG).show();
                 }
             });
         }

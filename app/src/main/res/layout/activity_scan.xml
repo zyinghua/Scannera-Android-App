@@ -10,15 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:autoFocusButtonColor="@android:color/white"
-
+        app:autoFocusButtonVisible="true"
         app:flashButtonColor="@android:color/white"
-
-        app:frameColor="@android:color/white"
-        app:frameCornersSize="50dp"
-        app:frameCornersRadius="0dp"
-        app:frameAspectRatioWidth="1"
+        app:flashButtonVisible="true"
         app:frameAspectRatioHeight="1"
+        app:frameAspectRatioWidth="1"
+        app:frameColor="@android:color/white"
+        app:frameCornersRadius="0dp"
+        app:frameCornersSize="50dp"
         app:frameSize="0.75"
         app:frameThickness="2dp"
-        app:maskColor="#77000000"/>
+        app:maskColor="#77000000" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/top_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_btn_round_background"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/close_btn_content_description" />
 </FrameLayout>

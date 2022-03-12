@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username_login"
-                android:maxLength="35" />
+                android:maxLength="50" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="@string/password_login"
-                android:maxLength="15" />
+                android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

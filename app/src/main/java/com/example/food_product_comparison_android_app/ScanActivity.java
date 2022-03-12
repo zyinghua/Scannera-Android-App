@@ -16,6 +16,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.AutoFocusMode;
@@ -33,6 +34,7 @@ import java.util.concurrent.Executors;
 public class ScanActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 814736521;
     private CodeScanner mCodeScanner;
+    private ImageButton close_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,14 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCodeScanner.startPreview();
+            }
+        });
+
+        close_btn = findViewById(R.id.top_close_btn);
+        close_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

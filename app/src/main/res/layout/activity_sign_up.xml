@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/username_sign_up"
-            android:maxLength="15" />
+            android:maxLength="20" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/first_name_sign_up"
-            android:maxLength="15" />
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/last_name_sign_up"
-            android:maxLength="15" />
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/email_sign_up"
-            android:maxLength="35" />
+            android:maxLength="50" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +156,7 @@
             android:layout_height="match_parent"
             android:inputType="textPassword"
             android:hint="@string/password_sign_up"
-            android:maxLength="15" />
+            android:maxLength="20" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,7 +182,7 @@
             android:layout_height="match_parent"
             android:hint="@string/confirm_password_sign_up"
             android:inputType="textPassword"
-            android:maxLength="15" />
+            android:maxLength="20" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
