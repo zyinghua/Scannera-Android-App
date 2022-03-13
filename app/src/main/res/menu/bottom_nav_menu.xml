@@ -7,8 +7,8 @@
         android:title="@string/home"/>
 
     <item
-        android:id="@+id/me"
+        android:id="@+id/account"
         android:icon="@drawable/ic_person_outline"
-        android:title="@string/me"/>
+        android:title="@string/account"/>
 
 </menu>

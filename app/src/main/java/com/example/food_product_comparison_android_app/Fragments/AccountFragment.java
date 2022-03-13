@@ -40,7 +40,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 import com.google.gson.Gson;
 
-public class MeFragment extends Fragment {
+public class AccountFragment extends Fragment {
     private int login_option;
     private User user;
     private MaterialButton log_out_btn;
@@ -67,7 +67,7 @@ public class MeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_me, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
         this.findViews(view);
 
         log_out_btn.setOnClickListener(new View.OnClickListener(){

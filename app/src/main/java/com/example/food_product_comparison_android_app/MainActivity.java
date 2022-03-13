@@ -2,19 +2,13 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Toast;
 
+import com.example.food_product_comparison_android_app.Fragments.AccountFragment;
 import com.example.food_product_comparison_android_app.Fragments.HomeFragment;
-import com.example.food_product_comparison_android_app.Fragments.MeFragment;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -26,16 +20,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
-    public static final String ME_FRAG_TAG = "me_fragment";
+    public static final String ACCOUNT_FRAG_TAG = "account_fragment";
     private GoogleSignInClient mGoogleSignInClient;
     private int login_option;
     private String user_info;
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
-    private MeFragment meFragment;
+    private AccountFragment accountFragment;
     private FloatingActionButton scan_fab;
     private static final int HOME_FRAG = 0;
-    private static final int ME_FRAG = 1;
+    private static final int ACCOUNT_FRAG = 1;
     private int current_frag;
 
     @Override
@@ -65,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 navigateTo(HOME_FRAG);
                 return true;
             }
-            else if (id == R.id.me)
+            else if (id == R.id.account)
             {
-                navigateTo(ME_FRAG);
+                navigateTo(ACCOUNT_FRAG);
                 return true;
             }
 
@@ -122,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString(LoginActivity.USER_INFO_KEY, user_info);
 
         this.homeFragment = new HomeFragment();
-        this.meFragment = new MeFragment();
+        this.accountFragment = new AccountFragment();
 
         homeFragment.setArguments(bundle);
-        meFragment.setArguments(bundle);
+        accountFragment.setArguments(bundle);
     }
 
     private void navigateTo(int frag)
@@ -137,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.homeFragment).addToBackStack(HOME_FRAG_TAG).commit();
                 current_frag = HOME_FRAG;
             }
-            else if(frag == ME_FRAG)
+            else if(frag == ACCOUNT_FRAG)
             {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.meFragment).addToBackStack(ME_FRAG_TAG).commit();
-                current_frag = ME_FRAG;
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.accountFragment).addToBackStack(ACCOUNT_FRAG_TAG).commit();
+                current_frag = ACCOUNT_FRAG;
             }
         }
     }
@@ -148,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        current_frag = current_frag == HOME_FRAG ? ME_FRAG : HOME_FRAG;
-        this.bottomNavigationView.setSelectedItemId(current_frag == HOME_FRAG ? R.id.home : R.id.me);
+        current_frag = current_frag == HOME_FRAG ? ACCOUNT_FRAG : HOME_FRAG;
+        this.bottomNavigationView.setSelectedItemId(current_frag == HOME_FRAG ? R.id.home : R.id.account);
     }
 }

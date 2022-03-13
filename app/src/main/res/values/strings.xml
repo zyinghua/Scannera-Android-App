@@ -30,7 +30,7 @@
     <string name="didnt_receive_email">Didn\'t receive the email?</string>
     <string name="resend"><u>Resend</u></string>
     <string name="home">Home</string>
-    <string name="me">Me</string>
+    <string name="account">Account</string>
     <string name="logout">Log Out</string>
     <string name="contribution_score">Contribution: </string>
     <string name="starred">Starred products</string>
