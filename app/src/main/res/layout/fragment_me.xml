@@ -114,6 +114,7 @@
         app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
 
     <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Scannera.Button"
         android:id="@+id/log_out_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_btn_height"
@@ -123,7 +124,7 @@
         app:iconGravity="textStart"
         android:gravity="center"
         android:layout_marginEnd="@dimen/general_btn_margin"
-        android:background="@drawable/button_round_style"
+        app:cornerRadius="@dimen/round_btn_corner_radius"
         android:text="@string/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

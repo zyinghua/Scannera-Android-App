@@ -36,18 +36,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fst_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,18 +56,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/first_name_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/snd_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,18 +76,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/last_name_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/trd_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -111,18 +96,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fourth_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -136,18 +116,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fifth_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_lock">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -162,18 +137,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/confirm_password_sign_up"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_layout_margin"
-        android:layout_marginEnd="@dimen/login_layout_margin"
-        app:errorEnabled="true"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sixth_h_guideline"
-        app:startIconContentDescription="@string/content_description_start_icon"
-        app:endIconContentDescription="@string/content_description_end_icon"
         app:startIconDrawable="@drawable/ic_check_circle">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -187,12 +157,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Scannera.Button"
         android:id="@+id/sign_up_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_btn_height"
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
-        android:background="@drawable/button_round_style"
+        app:cornerRadius="@dimen/round_btn_corner_radius"
         android:text="@string/signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

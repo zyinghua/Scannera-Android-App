@@ -15,4 +15,26 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Widget.Scannera.TextInputLayout.OutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextAppearance.Scannera.TextInputLayout.HintText</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="errorEnabled">true</item>
+        <item name="startIconContentDescription">@string/content_description_start_icon</item>
+        <item name="endIconContentDescription">@string/content_description_end_icon</item>
+        <item name="boxStrokeColor">@color/textInputOutlineColor</item>
+    </style>
+
+    <style name="TextAppearance.Scannera.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Widget.Scannera.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/button_state_list_anim
+        </item>
+    </style>
+
 </resources>

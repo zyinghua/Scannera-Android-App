@@ -6,6 +6,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cardinal">#B41434</color>
+    <color name="darkCardinal">#870B24</color>
     <color name="chathams_blue">#195386</color>
     <color name="pinky_red">#DA688F</color>
+    <color name="textInputOutlineColor">#45D5E8</color>
 </resources>

@@ -26,6 +26,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgotten_password_tv;
     private ImageView facebook_login_btn;
     private ImageView google_login_btn;
-    private Button login_btn;
+    private MaterialButton login_btn;
     private Button sign_up_btn;
     private User user;
 
