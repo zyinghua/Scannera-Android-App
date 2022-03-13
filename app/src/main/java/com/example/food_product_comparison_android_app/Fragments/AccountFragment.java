@@ -49,7 +49,7 @@ public class AccountFragment extends Fragment {
     private TextView contribution_score;
     private MaterialButton starred_btn;
     private MaterialButton scan_history_btn;
-    private MaterialButton settings_btn;
+    private MaterialButton about_us_btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,7 @@ public class AccountFragment extends Fragment {
         this.contribution_score = view.findViewById(R.id.contribution_score);
         this.starred_btn = view.findViewById(R.id.starred_btn);
         this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
-        this.settings_btn = view.findViewById(R.id.settings_btn);
+        this.about_us_btn = view.findViewById(R.id.about_us_btn);
     }
 
     private void loadUserProfile() {
