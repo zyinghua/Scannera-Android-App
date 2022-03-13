@@ -25,7 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-
     public static final String HOME_FRAG_TAG = "home_fragment";
     public static final String ME_FRAG_TAG = "me_fragment";
     private GoogleSignInClient mGoogleSignInClient;
@@ -35,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private FloatingActionButton scan_fab;
+    private static final int HOME_FRAG = 0;
+    private static final int ME_FRAG = 1;
+    private int current_frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +56,18 @@ public class MainActivity extends AppCompatActivity {
         this.initialiseFragments();
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.homeFragment).commit();
+            current_frag = HOME_FRAG;
 
         this.bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.home)
             {
-                if (bottomNavigationView.getSelectedItemId() != id)
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.homeFragment).addToBackStack(HOME_FRAG_TAG).commit();
-
+                navigateTo(HOME_FRAG);
                 return true;
             }
             else if (id == R.id.me)
             {
-                if (bottomNavigationView.getSelectedItemId() != id)
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.meFragment).addToBackStack(ME_FRAG_TAG).commit();
-
+                navigateTo(ME_FRAG);
                 return true;
             }
 
@@ -129,6 +128,27 @@ public class MainActivity extends AppCompatActivity {
         meFragment.setArguments(bundle);
     }
 
+    private void navigateTo(int frag)
+    {
+        if (current_frag != frag)
+        {
+            if (frag == HOME_FRAG)
+            {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.homeFragment).addToBackStack(HOME_FRAG_TAG).commit();
+                current_frag = HOME_FRAG;
+            }
+            else if(frag == ME_FRAG)
+            {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.meFragment).addToBackStack(ME_FRAG_TAG).commit();
+                current_frag = ME_FRAG;
+            }
+        }
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        current_frag = current_frag == HOME_FRAG ? ME_FRAG : HOME_FRAG;
+        this.bottomNavigationView.setSelectedItemId(current_frag == HOME_FRAG ? R.id.home : R.id.me);
+    }
 }
