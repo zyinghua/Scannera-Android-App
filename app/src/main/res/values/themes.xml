@@ -32,9 +32,15 @@
     <style name="Widget.Scannera.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="cornerRadius">@dimen/round_btn_corner_radius</item>
         <item name="android:stateListAnimator" tools:ignore="NewApi">
             @animator/button_state_list_anim
         </item>
+    </style>
+
+    <style name="Widget.Scannera.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/roboto_slab</item>
     </style>
 
 </resources>

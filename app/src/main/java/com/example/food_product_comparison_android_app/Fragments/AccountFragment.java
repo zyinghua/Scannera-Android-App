@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.food_product_comparison_android_app.AboutUsActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
@@ -69,7 +70,25 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         this.findViews(view);
+        this.loadUserProfile();
+        this.setUpListeners();
 
+        return view;
+    }
+
+    private void findViews(View view)
+    {
+        this.log_out_btn = view.findViewById(R.id.log_out_btn);
+        this.user_profile_img = view.findViewById(R.id.user_profile_img);
+        this.username_tv = view.findViewById(R.id.username_display);
+        this.contribution_score = view.findViewById(R.id.contribution_score);
+        this.starred_btn = view.findViewById(R.id.starred_btn);
+        this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
+        this.about_us_btn = view.findViewById(R.id.about_us_btn);
+    }
+
+    private void setUpListeners()
+    {
         log_out_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -91,20 +110,12 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        this.loadUserProfile();
-
-        return view;
-    }
-
-    private void findViews(View view)
-    {
-        this.log_out_btn = view.findViewById(R.id.log_out_btn);
-        this.user_profile_img = view.findViewById(R.id.user_profile_img);
-        this.username_tv = view.findViewById(R.id.username_display);
-        this.contribution_score = view.findViewById(R.id.contribution_score);
-        this.starred_btn = view.findViewById(R.id.starred_btn);
-        this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
-        this.about_us_btn = view.findViewById(R.id.about_us_btn);
+        this.about_us_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AboutUsActivity.class));
+            }
+        });
     }
 
     private void loadUserProfile() {

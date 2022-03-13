@@ -124,7 +124,6 @@
         app:iconGravity="textStart"
         android:gravity="center"
         android:layout_marginEnd="@dimen/general_btn_margin"
-        app:cornerRadius="@dimen/round_btn_corner_radius"
         android:text="@string/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

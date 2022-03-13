@@ -44,4 +44,15 @@
     <string name="dialog_btn_enable">Enable</string>
     <string name="search">Search</string>
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
+    <string name="about_us_description">
+        This App is built by 3 Computer Science students from Monash University as an university project.
+        It is aimed to help supermarket customers avoid their need of reading the packages,
+        and support their decisions on buying food products by providing nutritional comparisons.
+        Hope you are enjoying the App!
+    </string>
+    <string name="provide_feedback">Provide Feedback</string>
+    <string name="rating_feedback_prompt">If you are interested in, please rate us and let us know how we are doing! We are always trying to improve and your feedback is invaluable!</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedback_et_hint">Please write your feedback here</string>
+    <string name="submit">Submit</string>
 </resources>

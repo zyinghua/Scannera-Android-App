@@ -163,7 +163,6 @@
         android:layout_height="@dimen/medium_btn_height"
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
-        app:cornerRadius="@dimen/round_btn_corner_radius"
         android:text="@string/signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
