@@ -55,4 +55,6 @@
     <string name="feedback">Feedback</string>
     <string name="feedback_et_hint">Please write your feedback here</string>
     <string name="submit">Submit</string>
+    <string name="feedback_empty">Please let us know what you thought by writing some feedback :D</string>
+    <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
 </resources>

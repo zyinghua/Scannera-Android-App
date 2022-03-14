@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5157407407407407" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/button_round_style.xml" value="0.199" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_feedback.xml" value="0.4135" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5157407407407407" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_person.xml" value="0.193" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_person_outline.xml" value="0.193" />
@@ -21,7 +22,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/font/fonts.xml" value="0.5287037037037037" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/font/roboto_slab.xml" value="0.5838541666666667" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_about_us.xml" value="0.5" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_feedback.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_feedback.xml" value="0.5127701375245579" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_forgotten_password.xml" value="0.31155778894472363" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_main.xml" value="0.5" />
