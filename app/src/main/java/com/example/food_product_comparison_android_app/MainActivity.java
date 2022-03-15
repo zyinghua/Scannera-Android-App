@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         this.findViews();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.google_client_id))
                 .requestEmail()
                 .build();
 

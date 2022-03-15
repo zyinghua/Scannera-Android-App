@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.google_client_id))
                 .requestEmail()
                 .build();
 
@@ -189,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            // Log.w(R.string.LOG_TAG, "signInResult:failed code=" + e.getStatusCode());
+             Log.w("DEBUG", "signInResult:failed code=" + e.getStatusCode());
         }
     }
 

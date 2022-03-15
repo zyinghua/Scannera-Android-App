@@ -3,6 +3,7 @@
     <string name="facebook_app_id">487504102712984</string>
     <string name="fb_login_protocol_scheme">fb487504102712984</string>
     <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
+    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
@@ -33,7 +34,7 @@
     <string name="account">Account</string>
     <string name="logout">Log Out</string>
     <string name="contribution_score">Contribution: </string>
-    <string name="starred">Starred products</string>
+    <string name="starred">Starred Products</string>
     <string name="scan_history">Scan History</string>
     <string name="about_us">About Us</string>
     <string name="scan_a_barcode">Scan a barcode</string>
@@ -46,7 +47,7 @@
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
     <string name="about_us_description">
         This App is built by 3 Computer Science students from Monash University as an university project.
-        It is aimed to help supermarket customers avoid their need of reading the packages,
+        It is aimed to help supermarket customers avoid their needs of reading the packages,
         and support their decisions on buying food products by providing nutritional comparisons.
         Hope you are enjoying the App!
     </string>
