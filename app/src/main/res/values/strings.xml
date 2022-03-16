@@ -59,4 +59,5 @@
     <string name="rating_empty">Please give us a rate :D</string>
     <string name="feedback_empty">Please let us know what you thought by writing some feedback :D</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
+    <string name="loading">Loading…</string>
 </resources>

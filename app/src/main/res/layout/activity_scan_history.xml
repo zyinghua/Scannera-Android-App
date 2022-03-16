@@ -33,6 +33,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
 
+    <FrameLayout
+        android:id="@+id/SH_content_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title_barrier"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/back_btn_h_guideline"
         android:layout_width="wrap_content"
@@ -46,5 +55,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/title_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="activity_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
