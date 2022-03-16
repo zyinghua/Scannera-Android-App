@@ -29,6 +29,9 @@ import com.example.food_product_comparison_android_app.Fragments.CameraPermissio
 import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.Result;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -60,6 +63,7 @@ public class ScanActivity extends AppCompatActivity {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
 
                 singleExecutor.execute(() -> {
+                    String currentDate = new SimpleDateFormat("d MMM yyyy, EEE, HH:mm", Locale.getDefault()).format(new Date());
                     uiHandler.post(() -> {
                         hint.setText("");
                         Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();

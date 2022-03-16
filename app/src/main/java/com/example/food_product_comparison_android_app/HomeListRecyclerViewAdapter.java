@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRecyclerViewAdapter.ViewHolder> {
-    List<String> products;
+    List<Product> products;
 
-    public HomeListRecyclerViewAdapter(List<String> products)
+    public HomeListRecyclerViewAdapter(List<Product> products)
     {
         this.products = products;
     }
@@ -25,18 +25,18 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_recom_product_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv.setText("Product No. " + this.products.get(position));
+        holder.tv.setText("Product No. " + this.products.get(position).getBarcode());
     }
 
     @Override
     public int getItemCount() {
-        if (products == null) //In case of the pcs arraylist is not initialised
+        if (products == null)
             return 0;
         else
             return products.size();
@@ -52,7 +52,7 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
         }
     }
 
-    public void setProducts(List<String> products){
+    public void setProducts(List<Product> products){
         this.products = products;
     }
 }

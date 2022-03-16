@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.food_product_comparison_android_app.HomeListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.LoginActivity;
+import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.User;
 import com.facebook.GraphRequest;
@@ -69,11 +70,11 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         this.homeRecyclerView.setLayoutManager(layoutManager);
 
-        List<String> products = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
         for(int i = 0; i < 10; i++)
         {
-            products.add(i + "");
+            products.add(new Product(i + ""));
         }
 
         HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(products);

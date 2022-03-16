@@ -56,7 +56,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.login_icon_fragment, new LoginIconFragment()).addToBackStack("login_icon_frag").commit();
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(R.id.login_icon_fragment, new LoginIconFragment()).commit();
+
         findViews();
         setAnimationsOnStart();
 
