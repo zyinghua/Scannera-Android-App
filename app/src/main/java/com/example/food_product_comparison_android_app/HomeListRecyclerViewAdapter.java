@@ -31,7 +31,7 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv.setText(holder.tv.getText() + " " + this.products.get(position));
+        holder.tv.setText("Product No. " + this.products.get(position));
     }
 
     @Override

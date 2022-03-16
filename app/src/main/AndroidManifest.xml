@@ -26,11 +26,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
+            android:name=".ScanHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".FeedbackActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AboutUsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ScanActivity"
             android:exported="false"
