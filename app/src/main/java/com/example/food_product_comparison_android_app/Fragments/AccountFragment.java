@@ -25,6 +25,7 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;

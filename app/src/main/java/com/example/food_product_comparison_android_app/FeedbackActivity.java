@@ -40,10 +40,18 @@ public class FeedbackActivity extends AppCompatActivity {
                 float rating = rating_bar.getRating();
                 String feedback = feedback_et.getText().toString();
 
-                if (feedback.isEmpty())
+                if (rating == 0.0)
+                {
+                    Animation shake = AnimationUtils.loadAnimation(FeedbackActivity.this, R.anim.shake);
+                    rating_bar.startAnimation(shake);
+
+                    Toast.makeText(FeedbackActivity.this, getString(R.string.rating_empty), Toast.LENGTH_LONG).show();
+                }
+                else if (feedback.isEmpty())
                 {
                     Animation shake = AnimationUtils.loadAnimation(FeedbackActivity.this, R.anim.shake);
                     feedback_et.startAnimation(shake);
+
                     Toast.makeText(FeedbackActivity.this, getString(R.string.feedback_empty), Toast.LENGTH_LONG).show();
                 }
                 else
