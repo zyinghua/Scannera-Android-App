@@ -19,6 +19,7 @@ import com.example.food_product_comparison_android_app.AboutUsActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
+import com.example.food_product_comparison_android_app.ScanHistoryActivity;
 import com.example.food_product_comparison_android_app.User;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -107,6 +108,14 @@ public class AccountFragment extends Fragment {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
                 }
+            }
+        });
+
+        this.scan_history_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScanHistoryActivity.class);
+                startActivity(intent);
             }
         });
 
