@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.AccountFragment;
 import com.example.food_product_comparison_android_app.Fragments.HomeFragment;
@@ -17,6 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
@@ -36,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // -----------------------------------------------
+        Gson gson = new Gson();
+        SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
+        SharedPreferences.Editor editor = sp.edit();
+        ArrayList<Product> products;
+        ArrayList<String> dates;
+        dates = new ArrayList<>();
+        dates.add("16 Mar 2022, Wednesday");
+        products = new ArrayList<>();
+        products.add(new Product("14210247109512"));
+        editor.putString("ScanHistoryProducts", gson.toJson(products));
+        editor.putString("ScanHistoryDates", gson.toJson(dates));
+        editor.apply();
+        // -----------------------------------------------
 
         this.findViews();
 

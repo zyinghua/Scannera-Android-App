@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,9 +28,13 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.Result;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -63,7 +68,26 @@ public class ScanActivity extends AppCompatActivity {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
 
                 singleExecutor.execute(() -> {
-                    String currentDate = new SimpleDateFormat("d MMM yyyy, EEE, HH:mm", Locale.getDefault()).format(new Date());
+                    // -----------------------------------------------
+                    SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
+                    SharedPreferences.Editor editor = sp.edit();
+
+                    Gson gson = new Gson();
+                    String str_products = sp.getString("ScanHistoryProducts", "");
+                    String str_dates = sp.getString("ScanHistoryDates", "");
+                    Type ptype = new TypeToken<ArrayList<Product>>() {}.getType();
+                    Type dtype = new TypeToken<ArrayList<String>>() {}.getType();
+
+                    ArrayList<Product> products = gson.fromJson(str_products, ptype);
+                    ArrayList<String> dates = gson.fromJson(str_dates, dtype);
+
+                    products.add(new Product(result.getText()));
+                    dates.add(new SimpleDateFormat("d MMM yyyy, EEEE", Locale.getDefault()).format(new Date()));
+                    editor.putString("ScanHistoryProducts", gson.toJson(products));
+                    editor.putString("ScanHistoryDates", gson.toJson(dates));
+
+                    editor.apply();
+                    // -----------------------------------------------
                     uiHandler.post(() -> {
                         hint.setText("");
                         Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
