@@ -32,7 +32,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TITLE_VIEW_TYPE)
         {
-            View v = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scan_history_date_title, parent, false);
             return new TitleViewHolder(v);
         }
         else // actual product item
@@ -70,7 +70,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
         public TitleViewHolder(View view) {
             super(view);
 
-            this.tv = view.findViewById(android.R.id.text1);
+            this.tv = view.findViewById(R.id.date_title_tv);
         }
     }
 
