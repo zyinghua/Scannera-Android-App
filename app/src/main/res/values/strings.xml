@@ -66,4 +66,5 @@
         would you like to manually contribute the product information?</string>
     <string name="not_now">Not now</string>
     <string name="sure">Sure</string>
+    <string name="contribute_new_product">Contribute a New Product</string>
 </resources>

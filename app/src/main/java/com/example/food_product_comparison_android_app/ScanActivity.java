@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -60,7 +61,7 @@ public class ScanActivity extends AppCompatActivity {
         mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
         mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
         mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
-        mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
+        mCodeScanner.setScanMode(ScanMode.SINGLE);
         mCodeScanner.setAutoFocusEnabled(true);
         mCodeScanner.setFlashEnabled(false);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
@@ -188,6 +189,7 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                startActivity(new Intent(ScanActivity.this, ProductFeedActivity.class));
             }
         });
 
