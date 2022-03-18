@@ -21,6 +21,7 @@
     <dimen name="home_fragment_user_img_size">40dp</dimen>
     <dimen name="dialog_msg_max_width">350dp</dimen>
     <dimen name="product_feed_text_size">17sp</dimen>
-    <dimen name="product_feed_input_margin_start">12dp</dimen>
+    <dimen name="product_feed_input_margin_start">18dp</dimen>
     <dimen name="product_feed_input_max_width">150dp</dimen>
+    <dimen name="product_feed_h_spacing">24dp</dimen>
 </resources>
