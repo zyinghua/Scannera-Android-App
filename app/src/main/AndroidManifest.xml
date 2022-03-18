@@ -8,7 +8,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera.flash" />
     <uses-feature
-        android:name="android.hardware.camera"
+        android:name="android.hardware.camera2"
         android:required="false" />
 
     <queries>
@@ -24,6 +24,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
             android:name=".ScanHistoryActivity"

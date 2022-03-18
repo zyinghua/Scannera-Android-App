@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,29 +70,17 @@ public class ScanActivity extends AppCompatActivity {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
 
                 singleExecutor.execute(() -> {
-                    // -----------------------------------------------
-                    SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
-                    SharedPreferences.Editor editor = sp.edit();
+                    recordScan(result);
 
-                    Gson gson = new Gson();
-                    String str_products = sp.getString("ScanHistoryProducts", "");
-                    String str_dates = sp.getString("ScanHistoryDates", "");
-                    Type ptype = new TypeToken<ArrayList<Product>>() {}.getType();
-                    Type dtype = new TypeToken<ArrayList<String>>() {}.getType();
-
-                    ArrayList<Product> products = gson.fromJson(str_products, ptype);
-                    ArrayList<String> dates = gson.fromJson(str_dates, dtype);
-
-                    products.add(new Product(result.getText()));
-                    dates.add(new SimpleDateFormat("d MMM yyyy, EEEE", Locale.getDefault()).format(new Date()));
-                    editor.putString("ScanHistoryProducts", gson.toJson(products));
-                    editor.putString("ScanHistoryDates", gson.toJson(dates));
-
-                    editor.apply();
-                    // -----------------------------------------------
                     uiHandler.post(() -> {
                         hint.setText("");
                         Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+
+                        if (!find_product())
+                        {
+                            mCodeScanner.stopPreview();
+                            showPNFDialog();
+                        }
                     });
                 });
             }
@@ -148,5 +138,59 @@ public class ScanActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    private boolean find_product()
+    {
+        // Send a request to the server here
+        return false;
+    }
+
+    private void recordScan(Result result)
+    {
+        SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
+        SharedPreferences.Editor editor = sp.edit();
+
+        Gson gson = new Gson();
+        String str_products = sp.getString("ScanHistoryProducts", "");
+        String str_dates = sp.getString("ScanHistoryDates", "");
+        Type ptype = new TypeToken<ArrayList<Product>>() {}.getType();
+        Type dtype = new TypeToken<ArrayList<String>>() {}.getType();
+
+        ArrayList<Product> products = gson.fromJson(str_products, ptype);
+        ArrayList<String> dates = gson.fromJson(str_dates, dtype);
+
+        products.add(new Product(result.getText()));
+        dates.add(new SimpleDateFormat("d MMM yyyy, EEEE", Locale.getDefault()).format(new Date()));
+        editor.putString("ScanHistoryProducts", gson.toJson(products));
+        editor.putString("ScanHistoryDates", gson.toJson(dates));
+
+        editor.apply();
+    }
+
+    private void showPNFDialog()
+    {
+        final Dialog dialog = new Dialog(this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_product_not_found);
+
+        dialog.findViewById(R.id.not_now_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCodeScanner.startPreview();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

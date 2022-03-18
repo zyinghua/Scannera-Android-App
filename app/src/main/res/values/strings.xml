@@ -60,4 +60,10 @@
     <string name="feedback_empty">Please let us know what you thought by writing some feedback :D</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
     <string name="loading">Loading…</string>
+    <string name="product_not_found">Product Not Found</string>
+    <string name="pnf_dialog_msg">
+        Our apologise that it seems like this product hasn\'t been added to our database yet,
+        would you like to manually contribute the product information?</string>
+    <string name="not_now">Not now</string>
+    <string name="sure">Sure</string>
 </resources>
