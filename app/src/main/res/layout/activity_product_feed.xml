@@ -33,6 +33,178 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
 
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_brand_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_brand"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/fst_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_name"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/snd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_price_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_price"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/trd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_category_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_category"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/fourth_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_nutritional_table_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_nutritional_table"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/fifth_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_brand_input"
+        android:layout_width="@dimen/product_feed_input_max_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/labels_barrier"
+        app:layout_constraintTop_toBottomOf="@id/fst_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_name_input"
+        android:layout_width="@dimen/product_feed_input_max_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/labels_barrier"
+        app:layout_constraintTop_toBottomOf="@id/snd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_price_input"
+        android:layout_width="@dimen/product_feed_input_max_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/labels_barrier"
+        app:layout_constraintTop_toBottomOf="@id/trd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_category_input"
+        android:layout_width="@dimen/product_feed_input_max_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@id/labels_barrier"
+        app:layout_constraintTop_toBottomOf="@id/fourth_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_brand_edit_tvbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="@color/pinky_red"
+        android:text="@string/edit_tvbtn"
+        app:layout_constraintStart_toStartOf="@id/inputs_barrier"
+        app:layout_constraintTop_toBottomOf="@id/fst_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_name_edit_tvbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="@color/pinky_red"
+        android:text="@string/edit_tvbtn"
+        app:layout_constraintStart_toStartOf="@id/inputs_barrier"
+        app:layout_constraintTop_toBottomOf="@id/snd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_price_edit_tvbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="@color/pinky_red"
+        android:text="@string/edit_tvbtn"
+        app:layout_constraintStart_toStartOf="@id/inputs_barrier"
+        app:layout_constraintTop_toBottomOf="@id/trd_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_category_edit_tvbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/product_feed_input_margin_start"
+        android:textColor="@color/pinky_red"
+        android:text="@string/edit_tvbtn"
+        app:layout_constraintStart_toStartOf="@id/inputs_barrier"
+        app:layout_constraintTop_toBottomOf="@id/fourth_h_guideline" />
+
+    <TextView
+        style="@style/Widget.Scannera.ProductFeedTextView"
+        android:id="@+id/product_nutritionalT_edit_tvbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pinky_red"
+        android:text="@string/retake_tvbtn"
+        app:layout_constraintStart_toStartOf="@id/inputs_barrier"
+        app:layout_constraintTop_toBottomOf="@id/fifth_h_guideline" />
+
+    <ImageView
+        android:id="@+id/nutritional_table_pic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="@string/nutritional_pic_content_description"
+        app:layout_constraintBottom_toTopOf="@id/confirm_btn"
+        app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+        app:layout_constraintTop_toBottomOf="@id/product_nutritional_table_label"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Scannera.Button"
+        android:id="@+id/confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/medium_btn_height"
+        android:layout_marginStart="@dimen/general_btn_margin"
+        android:layout_marginEnd="@dimen/general_btn_margin"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:text="@string/confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/back_btn_h_guideline"
         android:layout_width="wrap_content"
@@ -46,5 +218,63 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fst_h_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/snd_h_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/trd_h_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fourth_h_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fifth_h_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.43" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_v_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/labels_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="product_brand_label,product_name_label,product_price_label,product_category_label"
+        tools:layout_editor_absoluteX="168dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/inputs_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="product_brand_input,product_name_input,product_price_input,product_category_input"
+        tools:layout_editor_absoluteX="346dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

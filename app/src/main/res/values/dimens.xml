@@ -20,4 +20,7 @@
     <dimen name="me_fragment_user_profile_img_size">100dp</dimen>
     <dimen name="home_fragment_user_img_size">40dp</dimen>
     <dimen name="dialog_msg_max_width">350dp</dimen>
+    <dimen name="product_feed_text_size">17sp</dimen>
+    <dimen name="product_feed_input_margin_start">12dp</dimen>
+    <dimen name="product_feed_input_max_width">150dp</dimen>
 </resources>

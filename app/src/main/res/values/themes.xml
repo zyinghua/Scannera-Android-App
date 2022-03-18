@@ -43,4 +43,9 @@
         <item name="android:fontFamily">@font/roboto_slab</item>
     </style>
 
+    <style name="Widget.Scannera.ProductFeedTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/product_feed_text_size</item>
+        <item name="android:fontFamily">@font/roboto_slab</item>
+    </style>
+
 </resources>

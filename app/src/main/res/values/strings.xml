@@ -67,4 +67,14 @@
     <string name="not_now">Not now</string>
     <string name="sure">Sure</string>
     <string name="contribute_new_product">Contribute a New Product</string>
+    <string name="product_brand">Product Brand:</string>
+    <string name="product_name">Product Name:</string>
+    <string name="product_price">Product Price:</string>
+    <string name="product_category">Product Category:</string>
+    <string name="product_nutritional_table">Product Nutritional Table:</string>
+    <string name="nutritional_pic_content_description">A picture of the product\'s nutritional table taken by the user.</string>
+    <string name="retake_tvbtn"><u>retake</u></string>
+    <string name="edit_tvbtn"><u>edit</u></string>
+    <string name="editing">editing…</string>
+    <string name="confirm">Confirm</string>
 </resources>
