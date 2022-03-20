@@ -69,21 +69,21 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.brand_view_group.findViewById(R.id.product_brand_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input), false);
+                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input), getString(R.string.product_brand), false);
             }
         });
 
         this.name_view_group.findViewById(R.id.product_name_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(name_view_group.findViewById(R.id.product_name_input), false);
+                showEditDialog(name_view_group.findViewById(R.id.product_name_input), getString(R.string.product_name),false);
             }
         });
 
         this.price_view_group.findViewById(R.id.product_price_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(price_view_group.findViewById(R.id.product_price_input), true);
+                showEditDialog(price_view_group.findViewById(R.id.product_price_input), getString(R.string.product_price),true);
             }
         });
 
@@ -172,13 +172,15 @@ public class ProductFeedActivity extends AppCompatActivity {
         set.applyTo(constraintLayout);
     }
 
-    private void showEditDialog(TextView input, boolean isNumerical)
+    private void showEditDialog(TextView input, String title, boolean isNumerical)
     {
         final Dialog dialog = new Dialog(this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_product_feed_tv_edit);
+
+        ((TextView) dialog.findViewById(R.id.dialog_title)).setText(getString(R.string.edit) + " " + title);
 
         dialog.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
             @Override

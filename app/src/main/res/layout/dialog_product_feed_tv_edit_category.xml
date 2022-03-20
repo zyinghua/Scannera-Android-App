@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab"
-        android:text="@string/edit"
+        android:text="@string/edit_category"
         android:textColor="?attr/colorPrimary"
         android:textSize="23sp"
         android:layout_gravity="center_horizontal"
@@ -23,9 +23,7 @@
         android:layout_margin="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_title">
+        android:layout_gravity="center_horizontal">
 
         <AutoCompleteTextView
             android:id="@+id/cdm_autoCompTv_edit"
