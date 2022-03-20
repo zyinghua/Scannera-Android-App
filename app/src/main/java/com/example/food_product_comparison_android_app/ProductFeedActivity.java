@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +25,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
-    private LinearLayout dynamic_input_prompt;
+    private ConstraintLayout dynamic_input_prompt;
     private ConstraintLayout brand_view_group;
     private ConstraintLayout name_view_group;
     private ConstraintLayout price_view_group;
@@ -67,21 +69,28 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.brand_view_group.findViewById(R.id.product_brand_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input));
+                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input), false);
             }
         });
 
         this.name_view_group.findViewById(R.id.product_name_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(name_view_group.findViewById(R.id.product_name_input));
+                showEditDialog(name_view_group.findViewById(R.id.product_name_input), false);
             }
         });
 
         this.price_view_group.findViewById(R.id.product_price_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(price_view_group.findViewById(R.id.product_price_input));
+                showEditDialog(price_view_group.findViewById(R.id.product_price_input), true);
+            }
+        });
+
+        this.category_view_group.findViewById(R.id.product_category_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCategoryEditDialog(category_view_group.findViewById(R.id.product_category_input));
             }
         });
 
@@ -92,11 +101,13 @@ public class ProductFeedActivity extends AppCompatActivity {
                 TextInputLayout input_layout = dynamic_input_prompt.findViewById(R.id.input_layout);
                 TextInputEditText input_et = dynamic_input_prompt.findViewById(R.id.input_et);
 
-                if (input_et.getText().toString().isEmpty()) {
+                if (input_et != null && input_et.getText().toString().isEmpty()) {
                     input_layout.setError(getString(R.string.error_input_must_not_be_empty));
                 }
                 else {
-                    input_layout.setError(null);
+                    if (input_layout != null)
+                        input_layout.setError(null);
+
                     ConstraintLayout constraintLayout = findViewById(R.id.product_feed_constraint_layout);
 
                     if (((TextView) brand_view_group.findViewById(R.id.product_brand_input)).getText().toString().isEmpty()) {
@@ -115,7 +126,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                         Barrier barrier = constraintLayout.findViewById(R.id.price_barrier);
                         moveDynamicInputPrompt(constraintLayout, barrier);
 
-                        input_et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                        input_et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_price));
                     } else if (((TextView) price_view_group.findViewById(R.id.product_price_input)).getText().toString().isEmpty()) {
@@ -125,27 +136,43 @@ public class ProductFeedActivity extends AppCompatActivity {
                         Barrier barrier = constraintLayout.findViewById(R.id.category_barrier);
                         moveDynamicInputPrompt(constraintLayout, barrier);
 
-                        input_et.setText("");
                         input_title.setText(getString(R.string.product_category));
+                        transformTextInputToDropDownMenu();
+                    } else if (((TextView) category_view_group.findViewById(R.id.product_category_input)).getText().toString().isEmpty()) {
+                        AutoCompleteTextView acTv = dynamic_input_prompt.findViewById(R.id.cdm_autoCompTv);
+
+                        if (acTv.getText().toString().isEmpty())
+                        {
+                            TextInputLayout category_input_layout = dynamic_input_prompt.findViewById(R.id.category_dropdown_menu);
+                            category_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                        }
+                        else
+                        {
+                            category_view_group.setVisibility(View.VISIBLE);
+
+                            ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
+
+                            moveDynamicInputPrompt(constraintLayout, constraintLayout.findViewById(R.id.product_nutritional_table_title_views));
+                            input_title.setText(getString(R.string.product_nutritional_table));
+                        }
                     }
                 }
-
             }
         });
     }
 
-    private void moveDynamicInputPrompt(ConstraintLayout constraintLayout, Barrier barrier)
+    private void moveDynamicInputPrompt(ConstraintLayout constraintLayout, View view)
     {
         ConstraintSet set = new ConstraintSet();
         // The layout has a ConstraintSet already, so we have to get a clone of it to manipulate.
         set.clone(constraintLayout);
         // Now we can make the connections. All of our views and their ids are available in the
         // ConstraintSet.
-        set.connect(dynamic_input_prompt.getId(), ConstraintSet.TOP, barrier.getId(), ConstraintSet.BOTTOM);
+        set.connect(dynamic_input_prompt.getId(), ConstraintSet.TOP, view.getId(), ConstraintSet.BOTTOM);
         set.applyTo(constraintLayout);
     }
 
-    private void showEditDialog(TextView input)
+    private void showEditDialog(TextView input, boolean isNumerical)
     {
         final Dialog dialog = new Dialog(this);
 
@@ -160,13 +187,16 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
+        if (isNumerical) ((TextInputEditText) dialog.findViewById(R.id.edit_et)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
         dialog.findViewById(R.id.confirm_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextInputEditText edited_input_et = dialog.findViewById(R.id.edit_et);
 
                 if (edited_input_et.getText().toString().isEmpty()) {
-                    edited_input_et.setError(getString(R.string.error_input_must_not_be_empty));
+                    TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
+                    edit_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
                 }
                 else
                 {
@@ -177,5 +207,62 @@ public class ProductFeedActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    private void showCategoryEditDialog(TextView input)
+    {
+        final Dialog dialog = new Dialog(this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_product_feed_tv_edit_category);
+
+        setCategoryAdapter(dialog.findViewById(R.id.cdm_autoCompTv_edit));
+        dialog.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.findViewById(R.id.confirm_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoCompleteTextView acTv = dialog.findViewById(R.id.cdm_autoCompTv_edit);
+
+                if (acTv.getText().toString().isEmpty()) {
+                    TextInputLayout edit_input_layout = dialog.findViewById(R.id.category_dropdown_menu_edit);
+                    edit_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                }
+                else
+                {
+                    input.setText(acTv.getText().toString());
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void transformTextInputToDropDownMenu()
+    {
+        this.dynamic_input_prompt.removeView(this.dynamic_input_prompt.findViewById(R.id.input_layout));
+        this.dynamic_input_prompt.findViewById(R.id.category_dropdown_menu).setVisibility(View.VISIBLE);
+
+        setCategoryAdapter(this.dynamic_input_prompt.findViewById(R.id.category_dropdown_menu).findViewById(R.id.cdm_autoCompTv));
+
+        ConstraintSet set = new ConstraintSet();
+        ConstraintLayout constraintLayout = findViewById(R.id.dynamic_input_prompt);
+        set.clone(constraintLayout);
+        set.connect(R.id.next_btn, ConstraintSet.TOP, R.id.category_dropdown_menu, ConstraintSet.BOTTOM);
+        set.applyTo(constraintLayout);
+    }
+
+    private void setCategoryAdapter(AutoCompleteTextView acTv)
+    {
+        String[] categories = getResources().getStringArray(R.array.categories);
+        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+        acTv.setAdapter(categoryArrayAdapter);
     }
 }

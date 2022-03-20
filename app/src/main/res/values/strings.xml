@@ -74,6 +74,7 @@
     <string name="product_nutritional_table">Product Nutritional Table:</string>
     <string name="nutritional_pic_content_description">A picture of the product\'s nutritional table taken by the user.</string>
     <string name="retake_tvbtn"><u>retake</u></string>
+    <string name="category_drop_down_menu_hint">Please select a category</string>
     <string name="edit_tvbtn"><u>edit</u></string>
     <string name="editing">editing…</string>
     <string name="close">Close</string>
@@ -81,6 +82,12 @@
     <string name="edit">Edit</string>
     <string name="enter_info_hint">Please enter the information here</string>
     <string name="next">Next</string>
+
+    <!-- Category Dropdown Menu String Array -->
+    <string-array name="categories">
+        <item>Drink</item>
+        <item>Food</item>
+    </string-array>
 
     <!-- ERROR STRINGS -->
     <string name="error_input_must_not_be_empty">This field must not be empty.</string>
