@@ -111,6 +111,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                     ConstraintLayout constraintLayout = findViewById(R.id.product_feed_constraint_layout);
 
                     if (((TextView) brand_view_group.findViewById(R.id.product_brand_input)).getText().toString().isEmpty()) {
+                        /*Process brand input*/
+
                         brand_view_group.setVisibility(View.VISIBLE);
                         ((TextView) brand_view_group.findViewById(R.id.product_brand_input)).setText(input_et.getText().toString());
 
@@ -120,6 +122,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_name));
                     } else if (((TextView) name_view_group.findViewById(R.id.product_name_input)).getText().toString().isEmpty()) {
+                        /*Process name input*/
+
                         name_view_group.setVisibility(View.VISIBLE);
                         ((TextView) name_view_group.findViewById(R.id.product_name_input)).setText(input_et.getText().toString());
 
@@ -130,6 +134,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_price));
                     } else if (((TextView) price_view_group.findViewById(R.id.product_price_input)).getText().toString().isEmpty()) {
+                        /*Process price input*/
+
                         price_view_group.setVisibility(View.VISIBLE);
                         ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText(input_et.getText().toString());
 
@@ -139,6 +145,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                         input_title.setText(getString(R.string.product_category));
                         transformTextInputToDropDownMenu();
                     } else if (((TextView) category_view_group.findViewById(R.id.product_category_input)).getText().toString().isEmpty()) {
+                        /*Process category input*/
+
                         AutoCompleteTextView acTv = dynamic_input_prompt.findViewById(R.id.cdm_autoCompTv);
 
                         if (acTv.getText().toString().isEmpty())
@@ -149,12 +157,23 @@ public class ProductFeedActivity extends AppCompatActivity {
                         else
                         {
                             category_view_group.setVisibility(View.VISIBLE);
-
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
 
                             moveDynamicInputPrompt(constraintLayout, constraintLayout.findViewById(R.id.product_nutritional_table_title_views));
                             input_title.setText(getString(R.string.product_nutritional_table));
+
+                            dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
+                            ConstraintSet set = new ConstraintSet();
+                            set.clone(dynamic_input_prompt);
+                            set.connect(R.id.next_btn, ConstraintSet.TOP, R.id.input_title, ConstraintSet.BOTTOM);
+                            set.applyTo(dynamic_input_prompt);
+
+                            ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setText(getString(R.string.capture));
+                            ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(getDrawable(R.drawable.ic_capture_photo));
+                            ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
+                    } else {
+
                     }
                 }
             }
@@ -255,10 +274,9 @@ public class ProductFeedActivity extends AppCompatActivity {
         setCategoryAdapter(this.dynamic_input_prompt.findViewById(R.id.category_dropdown_menu).findViewById(R.id.cdm_autoCompTv));
 
         ConstraintSet set = new ConstraintSet();
-        ConstraintLayout constraintLayout = findViewById(R.id.dynamic_input_prompt);
-        set.clone(constraintLayout);
+        set.clone(dynamic_input_prompt);
         set.connect(R.id.next_btn, ConstraintSet.TOP, R.id.category_dropdown_menu, ConstraintSet.BOTTOM);
-        set.applyTo(constraintLayout);
+        set.applyTo(dynamic_input_prompt);
     }
 
     private void setCategoryAdapter(AutoCompleteTextView acTv)
