@@ -206,14 +206,16 @@ public class ProductFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
         {
             Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
             this.nutrition_table_pic.setImageBitmap(imgBitmap);
 
             onNutritionPicReceived();
+        }
+        else
+        {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -328,8 +330,9 @@ public class ProductFeedActivity extends AppCompatActivity {
         checkPermissions();
 
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//      if (capturePicIntent.resolveActivity(getPackageManager()) != null)
-        startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
+
+        if (capturePicIntent.resolveActivity(getPackageManager()) != null)
+            startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
     }
 
     private void onNutritionPicReceived()
