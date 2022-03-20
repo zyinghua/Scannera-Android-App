@@ -71,6 +71,20 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
+        this.name_view_group.findViewById(R.id.product_name_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditDialog(name_view_group.findViewById(R.id.product_name_input));
+            }
+        });
+
+        this.price_view_group.findViewById(R.id.product_price_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditDialog(price_view_group.findViewById(R.id.product_price_input));
+            }
+        });
+
         this.dynamic_input_prompt.findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
