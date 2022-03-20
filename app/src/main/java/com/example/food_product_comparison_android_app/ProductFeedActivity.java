@@ -1,6 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,7 +14,9 @@ import androidx.fragment.app.DialogFragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
 import com.google.android.material.button.MaterialButton;
@@ -31,13 +35,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
+    private ConstraintLayout mainConstraintLayout;
     private ConstraintLayout dynamic_input_prompt;
     private ConstraintLayout brand_view_group;
     private ConstraintLayout name_view_group;
     private ConstraintLayout price_view_group;
     private ConstraintLayout category_view_group;
     private ConstraintLayout nutri_table_title_views;
-    private ImageView nutritional_table_pic;
+    private ImageView nutrition_table_pic;
     private MaterialButton confirm_btn;
 
 
@@ -59,8 +64,9 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.price_view_group = findViewById(R.id.product_price_views);
         this.category_view_group = findViewById(R.id.product_category_views);
         this.nutri_table_title_views = findViewById(R.id.product_nutritional_table_title_views);
-        this.nutritional_table_pic = findViewById(R.id.nutritional_table_pic);
+        this.nutrition_table_pic = findViewById(R.id.nutritional_table_pic);
         this.confirm_btn = findViewById(R.id.confirm_btn);
+        this.mainConstraintLayout = findViewById(R.id.product_feed_constraint_layout);
     }
 
     private void setUpListeners()
@@ -100,6 +106,20 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
+        this.nutri_table_title_views.findViewById(R.id.retake_tvbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                captureAPhoto();
+            }
+        });
+
+        this.confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         this.dynamic_input_prompt.findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,16 +134,14 @@ public class ProductFeedActivity extends AppCompatActivity {
                     if (input_layout != null)
                         input_layout.setError(null);
 
-                    ConstraintLayout constraintLayout = findViewById(R.id.product_feed_constraint_layout);
-
                     if (((TextView) brand_view_group.findViewById(R.id.product_brand_input)).getText().toString().isEmpty()) {
                         /*Process brand input*/
 
                         brand_view_group.setVisibility(View.VISIBLE);
                         ((TextView) brand_view_group.findViewById(R.id.product_brand_input)).setText(input_et.getText().toString());
 
-                        Barrier barrier = constraintLayout.findViewById(R.id.name_barrier);
-                        moveDynamicInputPrompt(constraintLayout, barrier);
+                        Barrier barrier = mainConstraintLayout.findViewById(R.id.name_barrier);
+                        moveDynamicInputPrompt(mainConstraintLayout, barrier);
 
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_name));
@@ -133,8 +151,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                         name_view_group.setVisibility(View.VISIBLE);
                         ((TextView) name_view_group.findViewById(R.id.product_name_input)).setText(input_et.getText().toString());
 
-                        Barrier barrier = constraintLayout.findViewById(R.id.price_barrier);
-                        moveDynamicInputPrompt(constraintLayout, barrier);
+                        Barrier barrier = mainConstraintLayout.findViewById(R.id.price_barrier);
+                        moveDynamicInputPrompt(mainConstraintLayout, barrier);
 
                         input_et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         input_et.setText("");
@@ -145,8 +163,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                         price_view_group.setVisibility(View.VISIBLE);
                         ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText(input_et.getText().toString());
 
-                        Barrier barrier = constraintLayout.findViewById(R.id.category_barrier);
-                        moveDynamicInputPrompt(constraintLayout, barrier);
+                        Barrier barrier = mainConstraintLayout.findViewById(R.id.category_barrier);
+                        moveDynamicInputPrompt(mainConstraintLayout, barrier);
 
                         input_title.setText(getString(R.string.product_category));
                         transformTextInputToDropDownMenu();
@@ -165,7 +183,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             category_view_group.setVisibility(View.VISIBLE);
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
 
-                            moveDynamicInputPrompt(constraintLayout, constraintLayout.findViewById(R.id.product_nutritional_table_title_views));
+                            moveDynamicInputPrompt(mainConstraintLayout, nutri_table_title_views);
                             input_title.setText(getString(R.string.product_nutritional_table));
 
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
@@ -179,11 +197,24 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
                     } else {
-
+                        captureAPhoto();
                     }
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
+        {
+            Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
+            this.nutrition_table_pic.setImageBitmap(imgBitmap);
+
+            onNutritionPicReceived();
+        }
     }
 
     private void moveDynamicInputPrompt(ConstraintLayout constraintLayout, View view)
@@ -290,6 +321,24 @@ public class ProductFeedActivity extends AppCompatActivity {
         String[] categories = getResources().getStringArray(R.array.categories);
         ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
         acTv.setAdapter(categoryArrayAdapter);
+    }
+
+    private void captureAPhoto()
+    {
+        checkPermissions();
+
+        Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//      if (capturePicIntent.resolveActivity(getPackageManager()) != null)
+        startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
+    }
+
+    private void onNutritionPicReceived()
+    {
+        // Show up the confirm button only when this as the last step is successfully completed
+
+        mainConstraintLayout.removeView(dynamic_input_prompt);
+        this.nutri_table_title_views.setVisibility(View.VISIBLE);
+        this.confirm_btn.setVisibility(View.VISIBLE);
     }
 
     private void checkPermissions()

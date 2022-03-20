@@ -307,7 +307,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-            android:id="@+id/product_nutritionalT_edit_tvbtn"
+            android:id="@+id/retake_tvbtn"
             style="@style/Widget.Scannera.ProductFeedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

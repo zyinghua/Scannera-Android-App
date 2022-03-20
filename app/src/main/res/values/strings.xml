@@ -91,6 +91,6 @@
         <item>Food</item>
     </string-array>
 
-    <!-- ERROR STRINGS -->
+    <!-- ERROR MESSAGES -->
     <string name="error_input_must_not_be_empty">This field must not be empty.</string>
 </resources>
