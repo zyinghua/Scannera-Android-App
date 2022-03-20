@@ -21,6 +21,7 @@ import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.ScanHistoryActivity;
 import com.example.food_product_comparison_android_app.User;
+import com.example.food_product_comparison_android_app.Utils;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -96,11 +97,11 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 switch(login_option)
                 {
-                    case LoginActivity.FACEBOOK_LOGIN:
+                    case Utils.FACEBOOK_LOGIN:
                         ((MainActivity) getActivity()).facebookLogOut();
                         break;
 
-                    case LoginActivity.GOOGLE_LOGIN:
+                    case Utils.GOOGLE_LOGIN:
                         ((MainActivity) getActivity()).googleLogOut();
                         break;
 
@@ -129,7 +130,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (login_option == LoginActivity.FACEBOOK_LOGIN)
+        if (login_option == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {

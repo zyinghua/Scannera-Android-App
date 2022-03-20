@@ -44,7 +44,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ScanActivity extends AppCompatActivity {
-    private static final int CAMERA_REQUEST_CODE = 814736521;
     private CodeScanner mCodeScanner;
     private ImageButton close_btn;
     private TextView hint;
@@ -121,7 +120,7 @@ public class ScanActivity extends AppCompatActivity {
 
         if (permission != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
         }
     }
 
@@ -130,7 +129,7 @@ public class ScanActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         switch (requestCode) {
-            case CAMERA_REQUEST_CODE:
+            case Utils.CAMERA_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
                     cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");

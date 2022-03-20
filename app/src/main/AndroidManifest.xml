@@ -9,7 +9,7 @@
     <uses-feature android:name="android.hardware.camera.flash" />
     <uses-feature
         android:name="android.hardware.camera2"
-        android:required="false" />
+        android:required="true" />
 
     <queries>
         <package android:name="com.facebook.katana" />

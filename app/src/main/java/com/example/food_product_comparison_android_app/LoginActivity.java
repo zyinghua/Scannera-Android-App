@@ -35,11 +35,6 @@ import java.util.Arrays;
 public class LoginActivity extends AppCompatActivity {
     public static final String USER_INFO_KEY = "USER_INFO";
     public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION";
-    public static final int RC_SIGN_IN = 900914;
-    public static final int NOT_LOGGED_IN = 0;
-    public static final int LOCAL_LOGIN = 1;
-    public static final int FACEBOOK_LOGIN = 2;
-    public static final int GOOGLE_LOGIN = 3;
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout username_login_input;
@@ -81,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
         int login_status = checkLoginStatus();
 
-        if (login_status == NOT_LOGGED_IN)
+        if (login_status == Utils.NOT_LOGGED_IN)
         {
             // Not signed in, initialise all the necessary components for
             // the login activity.
@@ -107,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
                     user = new User(AccessToken.getCurrentAccessToken());
-                    navigateToLandingActivity(FACEBOOK_LOGIN);
+                    navigateToLandingActivity(Utils.FACEBOOK_LOGIN);
                 }
 
                 @Override
@@ -156,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == Utils.RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -178,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
     private void googleSignIn()
     {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, Utils.RC_SIGN_IN);
     }
 
     private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask) {
@@ -187,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (account != null) {
                 loadGoogleUserProfile(account);
-                navigateToLandingActivity(GOOGLE_LOGIN);
+                navigateToLandingActivity(Utils.GOOGLE_LOGIN);
             }
 
         } catch (ApiException e) {
@@ -256,15 +251,15 @@ public class LoginActivity extends AppCompatActivity {
     {
         if (checkFBLoginStatus())
         {
-            return FACEBOOK_LOGIN;
+            return Utils.FACEBOOK_LOGIN;
         }
         else if(checkGoogleLoginStatus())
         {
-            return GOOGLE_LOGIN;
+            return Utils.GOOGLE_LOGIN;
         }
         else
         {
-            return NOT_LOGGED_IN;
+            return Utils.NOT_LOGGED_IN;
         }
     }
 

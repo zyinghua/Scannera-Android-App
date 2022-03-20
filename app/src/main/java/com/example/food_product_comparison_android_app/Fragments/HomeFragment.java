@@ -22,6 +22,7 @@ import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.User;
+import com.example.food_product_comparison_android_app.Utils;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.google.gson.Gson;
@@ -100,7 +101,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (login_option == LoginActivity.FACEBOOK_LOGIN)
+        if (login_option == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {
