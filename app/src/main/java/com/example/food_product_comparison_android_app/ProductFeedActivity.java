@@ -33,6 +33,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+
 public class ProductFeedActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
     private ConstraintLayout mainConstraintLayout;
@@ -44,7 +46,7 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout nutri_table_title_views;
     private ImageView nutrition_table_pic;
     private MaterialButton confirm_btn;
-
+    private File nutrition_pic_file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +118,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
@@ -186,12 +188,14 @@ public class ProductFeedActivity extends AppCompatActivity {
                             moveDynamicInputPrompt(mainConstraintLayout, nutri_table_title_views);
                             input_title.setText(getString(R.string.product_nutritional_table));
 
+                            // Remove the input edittext as we don't need it anymore
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
                             ConstraintSet set = new ConstraintSet();
                             set.clone(dynamic_input_prompt);
                             set.connect(R.id.next_btn, ConstraintSet.TOP, R.id.input_title, ConstraintSet.BOTTOM);
                             set.applyTo(dynamic_input_prompt);
 
+                            // change next  button text and add an icon to it
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setText(getString(R.string.capture));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(getDrawable(R.drawable.ic_capture_photo));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
@@ -206,16 +210,14 @@ public class ProductFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
         {
             Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
             this.nutrition_table_pic.setImageBitmap(imgBitmap);
 
             onNutritionPicReceived();
-        }
-        else
-        {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
