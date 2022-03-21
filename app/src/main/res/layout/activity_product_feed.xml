@@ -1,413 +1,411 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/product_feed_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductFeedActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dynamic_input_prompt"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
-        app:layout_constraintTop_toBottomOf="@id/fst_h_guideline">
+        android:id="@+id/product_feed_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/input_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dynamic_input_prompt"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
+            app:layout_constraintTop_toTopOf="@id/product_brand_views">
+
+            <TextView
+                android:id="@+id/input_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_brand"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout"
+                style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
+                android:layout_margin="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_title"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_et"
+                    android:hint="@string/enter_info_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLength="50"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/category_dropdown_menu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_margin="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_title">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cdm_autoCompTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:hint="@string/category_drop_down_menu_hint"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Scannera.Button"
+                android:id="@+id/next_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:layout_margin="12dp"
+                android:text="@string/next"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/top_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/product_brand"
-            android:textColor="?attr/colorPrimaryDark"
-            android:textSize="20sp"
+            android:background="@color/white"
+            android:contentDescription="@string/back_btn_content_description"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toTopOf="@+id/back_btn_h_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/back_btn_v_guideline"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintVertical_bias="0.75"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout"
-            style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
-            android:layout_margin="12dp"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/activity_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/contribute_new_product"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/small_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_title"
-            app:endIconMode="clear_text">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_et"
-                android:hint="@string/enter_info_hint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="50"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/category_dropdown_menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_margin="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_title">
-
-            <AutoCompleteTextView
-                android:id="@+id/cdm_autoCompTv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:hint="@string/category_drop_down_menu_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_brand_views"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/activity_title">
+            <TextView
+                android:id="@+id/product_brand_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_brand"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/product_brand_input"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintStart_toEndOf="@id/product_brand_label"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/product_brand_edit_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_name_views"
+            android:layout_marginTop="@dimen/product_feed_h_spacing"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/brand_barrier">
+            <TextView
+                android:id="@+id/product_name_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/product_name_input"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_name_label"/>
+
+            <TextView
+                android:id="@+id/product_name_edit_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:text="@string/edit_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_price_views"
+            android:layout_marginTop="@dimen/product_feed_h_spacing"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/name_barrier">
+
+            <TextView
+                android:id="@+id/product_price_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_price"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/product_price_input"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_price_label"/>
+
+            <TextView
+                android:id="@+id/product_price_edit_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:text="@string/edit_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_category_views"
+            android:layout_marginTop="@dimen/product_feed_h_spacing"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/price_barrier">
+            <TextView
+                android:id="@+id/product_category_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_category"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/product_category_input"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_category_label"/>
+
+            <TextView
+                android:id="@+id/product_category_edit_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_feed_input_margin_start"
+                android:text="@string/edit_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_nutritional_info_title_views"
+            android:layout_marginTop="@dimen/product_feed_h_spacing"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintTop_toBottomOf="@id/category_barrier">
+            <TextView
+                android:id="@+id/product_nutritional_table_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_nutritional_table"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/retake_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retake_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/nutritional_info_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/nutritional_pic_content_description"
+            app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintTop_toBottomOf="@id/product_nutritional_info_title_views"
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_btn"
             style="@style/Widget.Scannera.Button"
-            android:id="@+id/next_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/medium_btn_height"
+            android:layout_marginStart="@dimen/general_btn_margin"
+            android:layout_marginEnd="@dimen/general_btn_margin"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:textAllCaps="false"
-            android:layout_margin="12dp"
-            android:text="@string/next"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/confirm"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/nutritional_info_pic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_layout"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/back_btn_h_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/back_btn_v_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_v_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_v_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/brand_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="product_brand_views"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/name_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="product_name_views" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/price_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="product_price_views" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/category_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="product_category_views"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/top_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:contentDescription="@string/back_btn_content_description"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintBottom_toTopOf="@+id/back_btn_h_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/back_btn_v_guideline"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/activity_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_slab"
-        android:text="@string/contribute_new_product"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="@dimen/small_title_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_brand_views"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-        app:layout_constraintTop_toBottomOf="@id/fst_h_guideline">
-        <TextView
-            android:id="@+id/product_brand_label"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_brand"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/product_brand_input"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="@dimen/product_feed_input_max_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintStart_toEndOf="@id/product_brand_label"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <TextView
-            android:id="@+id/product_brand_edit_tvbtn"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_tvbtn"
-            android:textColor="@color/pinky_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_name_views"
-        android:layout_marginTop="@dimen/product_feed_h_spacing"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-        app:layout_constraintTop_toBottomOf="@id/brand_barrier">
-        <TextView
-            android:id="@+id/product_name_label"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_name"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/product_name_input"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="@dimen/product_feed_input_max_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/product_name_label"/>
-
-        <TextView
-            android:id="@+id/product_name_edit_tvbtn"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:text="@string/edit_tvbtn"
-            android:textColor="@color/pinky_red"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_price_views"
-        android:layout_marginTop="@dimen/product_feed_h_spacing"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-        app:layout_constraintTop_toBottomOf="@id/name_barrier">
-
-        <TextView
-            android:id="@+id/product_price_label"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_price"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/product_price_input"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="@dimen/product_feed_input_max_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/product_price_label"/>
-
-        <TextView
-            android:id="@+id/product_price_edit_tvbtn"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:text="@string/edit_tvbtn"
-            android:textColor="@color/pinky_red"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_category_views"
-        android:layout_marginTop="@dimen/product_feed_h_spacing"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-        app:layout_constraintTop_toBottomOf="@id/price_barrier">
-        <TextView
-            android:id="@+id/product_category_label"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_category"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/product_category_input"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="@dimen/product_feed_input_max_width"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/product_category_label"/>
-
-        <TextView
-            android:id="@+id/product_category_edit_tvbtn"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:text="@string/edit_tvbtn"
-            android:textColor="@color/pinky_red"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_nutritional_info_title_views"
-        android:layout_marginTop="@dimen/product_feed_h_spacing"
-        app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintTop_toBottomOf="@id/category_barrier">
-        <TextView
-            android:id="@+id/product_nutritional_table_label"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_nutritional_table"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/retake_tvbtn"
-            style="@style/Widget.Scannera.ProductFeedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/retake_tvbtn"
-            android:textColor="@color/pinky_red"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/nutritional_info_pic"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:contentDescription="@string/nutritional_pic_content_description"
-        app:layout_constraintBottom_toTopOf="@id/confirm_btn"
-        app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintTop_toBottomOf="@id/product_nutritional_info_title_views"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/confirm_btn"
-        style="@style/Widget.Scannera.Button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_btn_height"
-        android:layout_marginStart="@dimen/general_btn_margin"
-        android:layout_marginEnd="@dimen/general_btn_margin"
-        android:layout_marginBottom="12dp"
-        android:gravity="center"
-        android:text="@string/confirm"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/back_btn_h_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/back_btn_v_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/fst_h_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/end_v_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/end_v_guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/brand_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="product_brand_views"/>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/name_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="product_name_views" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/price_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="product_price_views" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/category_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="product_category_views"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

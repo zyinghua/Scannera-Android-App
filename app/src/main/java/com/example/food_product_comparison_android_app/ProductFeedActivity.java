@@ -141,7 +141,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                 TextInputEditText input_et = dynamic_input_prompt.findViewById(R.id.input_et);
 
                 if (input_et != null && input_et.getText().toString().isEmpty()) {
-                    input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                    input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }
                 else {
                     if (input_layout != null)
@@ -189,7 +189,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                         if (acTv.getText().toString().isEmpty())
                         {
                             TextInputLayout category_input_layout = dynamic_input_prompt.findViewById(R.id.category_dropdown_menu);
-                            category_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                            category_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                         }
                         else
                         {
@@ -275,7 +275,7 @@ public class ProductFeedActivity extends AppCompatActivity {
 
                 if (edited_input_et.getText().toString().isEmpty()) {
                     TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
-                    edit_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                    edit_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }
                 else
                 {
@@ -311,7 +311,7 @@ public class ProductFeedActivity extends AppCompatActivity {
 
                 if (acTv.getText().toString().isEmpty()) {
                     TextInputLayout edit_input_layout = dialog.findViewById(R.id.category_dropdown_menu_edit);
-                    edit_input_layout.setError(getString(R.string.error_input_must_not_be_empty));
+                    edit_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }
                 else
                 {

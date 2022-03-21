@@ -93,5 +93,5 @@
     </string-array>
 
     <!-- ERROR MESSAGES -->
-    <string name="error_input_must_not_be_empty">This field must not be empty.</string>
+    <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
 </resources>
