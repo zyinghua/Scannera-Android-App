@@ -9,12 +9,15 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -226,7 +229,8 @@ public class ProductFeedActivity extends AppCompatActivity {
 
         if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
         {
-            Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
+            // Get the image from the file path as a bitmap
+            Bitmap imgBitmap = BitmapFactory.decodeFile(nutrition_pic_file.getAbsolutePath());
             this.nutrition_info_pic.setImageBitmap(imgBitmap);
 
             onNutritionPicReceived();
@@ -345,21 +349,24 @@ public class ProductFeedActivity extends AppCompatActivity {
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         this.nutrition_pic_file = getNutritionPhotoFile();
 
+        Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), this.nutrition_pic_file);
+        capturePicIntent.putExtra(MediaStore.EXTRA_OUTPUT, fpUri);
+
         if (capturePicIntent.resolveActivity(getPackageManager()) != null)
             startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
     }
 
     private File getNutritionPhotoFile() throws IOException {
+        // Use 'getExternalFilesDir' on Context to access package-specific directories
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         return File.createTempFile(NUTRITION_PIC_FILE_NAME, ".jpg", storageDirectory);
     }
 
     private void onNutritionPicReceived()
     {
-        // Show up the confirm button only when this as the last step is successfully completed
-
         mainConstraintLayout.removeView(dynamic_input_prompt);
         this.nutri_info_title_views.setVisibility(View.VISIBLE);
+        // Show up the confirm button only when this as the last step is successfully completed
         this.confirm_btn.setVisibility(View.VISIBLE);
     }
 
