@@ -212,6 +212,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
                     } else {
+                        // Only nutrition table picture left to capture
                         try {
                             captureNutritionPhoto();
                         } catch (IOException e) {
@@ -229,7 +230,7 @@ public class ProductFeedActivity extends AppCompatActivity {
 
         if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
         {
-            // Get the image from the file path as a bitmap
+            // Get the image from the file path we set up previously rather than the intent itself as a bitmap
             Bitmap imgBitmap = BitmapFactory.decodeFile(nutrition_pic_file.getAbsolutePath());
             this.nutrition_info_pic.setImageBitmap(imgBitmap);
 
@@ -347,12 +348,14 @@ public class ProductFeedActivity extends AppCompatActivity {
         checkPermissions();
 
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        this.nutrition_pic_file = getNutritionPhotoFile();
+        this.nutrition_pic_file = getNutritionPhotoFile(); // Get file
 
+        // Get Uri for the file and put with the particular key to allow the camera app we are
+        // delegating to, to be able to access the file and put the output there
         Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), this.nutrition_pic_file);
         capturePicIntent.putExtra(MediaStore.EXTRA_OUTPUT, fpUri);
 
-        if (capturePicIntent.resolveActivity(getPackageManager()) != null)
+        if (capturePicIntent.resolveActivity(getPackageManager()) != null)  // Make sure there exists an app that is able to handle such
             startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
     }
 
