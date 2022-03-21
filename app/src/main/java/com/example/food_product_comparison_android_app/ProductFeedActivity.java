@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
@@ -43,10 +45,12 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout name_view_group;
     private ConstraintLayout price_view_group;
     private ConstraintLayout category_view_group;
-    private ConstraintLayout nutri_table_title_views;
-    private ImageView nutrition_table_pic;
+    private ConstraintLayout nutri_info_title_views;
+    private ImageView nutrition_info_pic;
     private MaterialButton confirm_btn;
     private File nutrition_pic_file;
+    private static final String NUTRITION_PIC_FILE_NAME = "nutrition_info.jpg";
+    private static final String CAPTURE_PHOTO_IO_EXCEPTION_MSG = "Capture Photo IO Exception";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +69,8 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.name_view_group = findViewById(R.id.product_name_views);
         this.price_view_group = findViewById(R.id.product_price_views);
         this.category_view_group = findViewById(R.id.product_category_views);
-        this.nutri_table_title_views = findViewById(R.id.product_nutritional_table_title_views);
-        this.nutrition_table_pic = findViewById(R.id.nutritional_table_pic);
+        this.nutri_info_title_views = findViewById(R.id.product_nutritional_info_title_views);
+        this.nutrition_info_pic = findViewById(R.id.nutritional_info_pic);
         this.confirm_btn = findViewById(R.id.confirm_btn);
         this.mainConstraintLayout = findViewById(R.id.product_feed_constraint_layout);
     }
@@ -108,10 +112,14 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
-        this.nutri_table_title_views.findViewById(R.id.retake_tvbtn).setOnClickListener(new View.OnClickListener() {
+        this.nutri_info_title_views.findViewById(R.id.retake_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                captureAPhoto();
+                try {
+                    captureNutritionPhoto();
+                } catch (IOException e) {
+                    Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -185,7 +193,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             category_view_group.setVisibility(View.VISIBLE);
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
 
-                            moveDynamicInputPrompt(mainConstraintLayout, nutri_table_title_views);
+                            moveDynamicInputPrompt(mainConstraintLayout, nutri_info_title_views);
                             input_title.setText(getString(R.string.product_nutritional_table));
 
                             // Remove the input edittext as we don't need it anymore
@@ -201,7 +209,11 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
                     } else {
-                        captureAPhoto();
+                        try {
+                            captureNutritionPhoto();
+                        } catch (IOException e) {
+                            Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             }
@@ -215,7 +227,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST && resultCode == RESULT_OK)
         {
             Bitmap imgBitmap = (Bitmap) data.getExtras().get("data");
-            this.nutrition_table_pic.setImageBitmap(imgBitmap);
+            this.nutrition_info_pic.setImageBitmap(imgBitmap);
 
             onNutritionPicReceived();
         }
@@ -327,14 +339,19 @@ public class ProductFeedActivity extends AppCompatActivity {
         acTv.setAdapter(categoryArrayAdapter);
     }
 
-    private void captureAPhoto()
-    {
+    private void captureNutritionPhoto() throws IOException {
         checkPermissions();
 
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        this.nutrition_pic_file = getNutritionPhotoFile();
 
         if (capturePicIntent.resolveActivity(getPackageManager()) != null)
             startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
+    }
+
+    private File getNutritionPhotoFile() throws IOException {
+        File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(NUTRITION_PIC_FILE_NAME, ".jpg", storageDirectory);
     }
 
     private void onNutritionPicReceived()
@@ -342,7 +359,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         // Show up the confirm button only when this as the last step is successfully completed
 
         mainConstraintLayout.removeView(dynamic_input_prompt);
-        this.nutri_table_title_views.setVisibility(View.VISIBLE);
+        this.nutri_info_title_views.setVisibility(View.VISIBLE);
         this.confirm_btn.setVisibility(View.VISIBLE);
     }
 

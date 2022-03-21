@@ -290,7 +290,7 @@
         android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/product_nutritional_table_title_views"
+        android:id="@+id/product_nutritional_info_title_views"
         android:layout_marginTop="@dimen/product_feed_h_spacing"
         app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
         app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
@@ -319,7 +319,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/nutritional_table_pic"
+        android:id="@+id/nutritional_info_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
@@ -329,7 +329,7 @@
         app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
-        app:layout_constraintTop_toBottomOf="@id/product_nutritional_table_title_views"
+        app:layout_constraintTop_toBottomOf="@id/product_nutritional_info_title_views"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
