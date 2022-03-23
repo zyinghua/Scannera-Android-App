@@ -174,7 +174,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                         /*Process price input*/
 
                         price_view_group.setVisibility(View.VISIBLE);
-                        ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText(input_et.getText().toString());
+                        ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText("$" + input_et.getText().toString());
 
                         Barrier barrier = mainConstraintLayout.findViewById(R.id.category_barrier);
                         moveDynamicInputPrompt(mainConstraintLayout, barrier);
@@ -279,7 +279,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    input.setText(edited_input_et.getText().toString());
+                    input.setText((isNumerical ? "$" : "") + edited_input_et.getText().toString());
                     dialog.dismiss();
                 }
             }
