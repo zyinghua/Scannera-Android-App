@@ -160,7 +160,6 @@
         style="@style/Widget.Scannera.Button"
         android:id="@+id/sign_up_btn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_btn_height"
         android:layout_marginStart="@dimen/login_layout_margin"
         android:layout_marginEnd="@dimen/login_layout_margin"
         android:text="@string/signup"
