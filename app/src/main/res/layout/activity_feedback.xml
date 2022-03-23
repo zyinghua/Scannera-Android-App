@@ -38,47 +38,34 @@
         style="@style/Widget.Scannera.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:gravity="center"
         android:maxWidth="350dp"
         android:text="@string/rating_feedback_prompt"
         android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/about_us_rating_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_title" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/rating_animation"
-        android:layout_width="@dimen/lottie_square_animation_size"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintBottom_toTopOf="@id/animation_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating_feedback_prompt"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/rating" />
+        app:layout_constraintTop_toBottomOf="@id/activity_title"
+        app:layout_constraintVertical_bias="0.3" />
 
     <RatingBar
         android:id="@+id/about_us_rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:progressTint="@color/rating_star_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:progressTint="@color/rating_star_color"
-        app:layout_constraintTop_toBottomOf="@id/animation_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/rating_guideline" />
 
     <EditText
         android:id="@+id/feedback_et"
         android:layout_width="@dimen/lottie_square_animation_size"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/feedback_et_hint"
         android:inputType="textMultiLine"
         android:lines="6"
-        android:hint="@string/feedback_et_hint"
         android:scrollHorizontally="false"
-        app:layout_constraintBottom_toTopOf="@+id/submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/about_us_rating_bar" />
@@ -94,7 +81,9 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_et"
+        app:layout_constraintVertical_bias="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/back_btn_h_guideline"
@@ -111,10 +100,10 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/animation_guideline"
+        android:id="@+id/rating_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

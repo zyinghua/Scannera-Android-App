@@ -11,13 +11,13 @@
         android:id="@+id/user_info_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="@dimen/user_info_display_margin"
-        android:layout_marginBottom="@dimen/user_info_display_margin"
         android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/starred_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_profile_img"
@@ -29,35 +29,33 @@
             app:civ_border_width="1dp"
             app:civ_shadow="true"
             app:civ_shadow_color="?attr/colorPrimaryDark"
-            app:civ_shadow_radius="0dp"
-            />
+            app:civ_shadow_radius="0dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/user_info_display_margin">
+            android:layout_marginStart="@dimen/user_info_display_margin"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/username_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_slab"
-                android:textColor="@color/black"
-                android:textSize="@dimen/small_title_text_size"
                 android:maxLength="15"
-                />
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_title_text_size" />
 
             <TextView
                 android:id="@+id/contribution_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/contribution_score"
-                android:fontFamily="@font/roboto_slab"
-                android:textColor="@color/black"
-                android:textSize="@dimen/small_text_size"
                 android:layout_marginTop="12dp"
-                />
+                android:fontFamily="@font/roboto_slab"
+                android:text="@string/contribution_score"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size" />
 
         </LinearLayout>
     </LinearLayout>
@@ -134,6 +132,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
