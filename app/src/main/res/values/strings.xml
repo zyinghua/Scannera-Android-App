@@ -75,7 +75,7 @@
     <string name="product_nutritional_table">Product Nutritional Table:</string>
     <string name="nutritional_pic_content_description">A picture of the product\'s nutritional table taken by the user.</string>
     <string name="retake_tvbtn"><u>retake</u></string>
-    <string name="category_drop_down_menu_hint">Please select a category</string>
+    <string name="category_drop_down_menu_hint">Please select or enter a category</string>
     <string name="edit_tvbtn"><u>edit</u></string>
     <string name="editing">editing…</string>
     <string name="close">Close</string>
@@ -88,8 +88,37 @@
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
-        <item>Drink</item>
-        <item>Food</item>
+        <item>Soft Drinks</item>
+        <item>Soft Drink Cans</item>
+        <item>Energy Drinks</item>
+        <item>Juice</item>
+        <item>Coffee</item>
+        <item>Longlife Milk</item>
+        <item>Iced Tea</item>
+        <item>Health Food</item>
+        <item>Cordial</item>
+        <item>Cereal</item>
+        <item>Spreads</item>
+        <item>Wraps</item>
+        <item>Food Wraps &amp; Bags</item>
+        <item>Bread</item>
+        <item>Muesli Bars</item>
+        <item>Granola &amp; Muesli</item>
+        <item>Canned Fruit</item>
+        <item>Biscuits</item>
+        <item>Crispbread</item>
+        <item>Chocolate Biscuits</item>
+        <item>Gum &amp; Mints</item>
+        <item>Chocolate</item>
+        <item>Lollies</item>
+        <item>Popcorn</item>
+        <item>Chips</item>
+        <item>Noodles</item>
+        <item>Sauces</item>
+        <item>Relishes &amp; Pickles</item>
+        <item>Soup</item>
+        <item>Cheese</item>
+        <item>Butter</item>
     </string-array>
 
     <!-- ERROR MESSAGES -->

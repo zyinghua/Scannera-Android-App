@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:inputType="none"
+                    android:inputType="textAutoComplete"
                     android:hint="@string/category_drop_down_menu_hint"
                     />
             </com.google.android.material.textfield.TextInputLayout>
