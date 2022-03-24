@@ -87,6 +87,7 @@
     <string name="enter_info_hint">Please enter the information here</string>
     <string name="next">Next</string>
     <string name="capture">Capture</string>
+    <string name="product_comparisons">Product Comparisons</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

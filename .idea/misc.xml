@@ -29,7 +29,9 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_password_email_sent.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_password_email_sent_fragment.xml" value="0.5536458333333333" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_feed.xml" value="0.1" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_comparison_display.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_comparisons_display.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_feed.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan_history.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />

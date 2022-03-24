@@ -34,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
+            android:name=".ProductComparisonsDisplayActivity"
+            android:exported="false" />
+        <activity
             android:name=".StarredProductActivity"
             android:exported="false" />
 
