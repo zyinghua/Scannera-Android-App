@@ -58,10 +58,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
 
     @Override
     public int getItemCount() {
-        if (items == null)
-            return 0;
-        else
-            return items.size();
+        return items == null ? 0 : items.size();
     }
 
     public static class TitleViewHolder extends RecyclerView.ViewHolder {

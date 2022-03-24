@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import com.example.food_product_comparison_android_app.Fragments.LoadingFragment;
 import com.example.food_product_comparison_android_app.Fragments.ScanHistoryListContentFragment;
+import com.example.food_product_comparison_android_app.Fragments.StarredProductListContentFragment;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ScanHistoryActivity extends AppCompatActivity {
+public class StarredProductActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
 
     @Override
@@ -23,7 +24,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_with_product_list);
 
-        ((TextView) findViewById(R.id.activity_title)).setText(getString(R.string.scan_history));
+        ((TextView) findViewById(R.id.activity_title)).setText(getString(R.string.starred_products));
 
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction().add(R.id.content_container, new LoadingFragment()).commit();
@@ -39,7 +40,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
         });
 
         executor.execute(()->{
-            ScanHistoryListContentFragment content_frag = new ScanHistoryListContentFragment();
+            StarredProductListContentFragment content_frag = new StarredProductListContentFragment();
             uiHandler.post(()->{
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_container, content_frag).commit();
             });

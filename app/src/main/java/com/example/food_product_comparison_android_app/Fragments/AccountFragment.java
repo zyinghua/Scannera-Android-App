@@ -20,6 +20,7 @@ import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.ScanHistoryActivity;
+import com.example.food_product_comparison_android_app.StarredProductActivity;
 import com.example.food_product_comparison_android_app.User;
 import com.example.food_product_comparison_android_app.Utils;
 import com.facebook.AccessToken;
@@ -51,7 +52,7 @@ public class AccountFragment extends Fragment {
     private CircularImageView user_profile_img;
     private TextView username_tv;
     private TextView contribution_score;
-    private MaterialButton starred_btn;
+    private MaterialButton starred_products_btn;
     private MaterialButton scan_history_btn;
     private MaterialButton about_us_btn;
 
@@ -85,7 +86,7 @@ public class AccountFragment extends Fragment {
         this.user_profile_img = view.findViewById(R.id.user_profile_img);
         this.username_tv = view.findViewById(R.id.username_display);
         this.contribution_score = view.findViewById(R.id.contribution_score);
-        this.starred_btn = view.findViewById(R.id.starred_btn);
+        this.starred_products_btn = view.findViewById(R.id.starred_products_btn);
         this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
         this.about_us_btn = view.findViewById(R.id.about_us_btn);
     }
@@ -110,6 +111,13 @@ public class AccountFragment extends Fragment {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
                 }
+            }
+        });
+
+        this.starred_products_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), StarredProductActivity.class));
             }
         });
 
