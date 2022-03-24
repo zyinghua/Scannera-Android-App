@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -127,6 +128,17 @@ public class ProductFeedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     capturePhoto(NUTRITION_PIC_FILE_NAME);
+                } catch (IOException e) {
+                    Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        this.product_look_title_views.findViewById(R.id.plook_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    capturePhoto(PRODUCT_LOOK_FILE_NAME);
                 } catch (IOException e) {
                     Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
                 }
