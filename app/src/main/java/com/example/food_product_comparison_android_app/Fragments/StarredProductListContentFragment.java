@@ -34,10 +34,12 @@ public class StarredProductListContentFragment extends Fragment {
 
         ArrayList<Product> starred_products = new ArrayList<>();
 
+        //******************************************************
         starred_products.add(new Product("12431435235"));
         starred_products.add(new Product("32523634"));
         starred_products.add(new Product("1435645674456"));
         starred_products.add(new Product("145645645646"));
+        //******************************************************
 
         StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(starred_products);
         recyclerView.setAdapter(spAdapter);

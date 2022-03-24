@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductFeedActivity">
@@ -302,7 +303,6 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:visibility="invisible"
             android:layout_width="0dp"
@@ -313,18 +313,18 @@
             app:layout_constraintStart_toStartOf="@id/start_v_guideline"
             app:layout_constraintTop_toBottomOf="@id/category_barrier">
             <TextView
-                android:id="@+id/product_nutritional_table_label"
+                android:id="@+id/product_nutritional_info_label"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_nutritional_table"
+                android:text="@string/product_nutritional_info"
                 android:textColor="?attr/colorPrimaryDark"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
-                android:id="@+id/retake_tvbtn"
+                android:id="@+id/nutri_retake_tvbtn"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -347,6 +347,50 @@
             app:layout_constraintTop_toBottomOf="@id/product_nutritional_info_title_views"
             app:layout_constraintVertical_bias="0.0" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_look_title_views"
+            android:layout_marginTop="@dimen/product_feed_h_spacing"
+            app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintTop_toBottomOf="@id/nutritional_info_pic">
+            <TextView
+                android:id="@+id/product_look_label"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_look"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/plook_retake_tvbtn"
+                style="@style/Widget.Scannera.ProductFeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retake_tvbtn"
+                android:textColor="@color/pinky_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/product_look_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/product_look_content_description"
+            app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintTop_toBottomOf="@id/product_look_title_views"
+            app:layout_constraintVertical_bias="0.0" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/confirm_btn"
             style="@style/Widget.Scannera.Button"
@@ -359,7 +403,7 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nutritional_info_pic" />
+            app:layout_constraintTop_toBottomOf="@id/product_look_pic" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/back_btn_h_guideline"

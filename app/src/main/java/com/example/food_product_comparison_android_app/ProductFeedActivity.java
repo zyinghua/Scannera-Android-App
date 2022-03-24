@@ -29,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,10 +50,14 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout price_view_group;
     private ConstraintLayout category_view_group;
     private ConstraintLayout nutri_info_title_views;
+    private ConstraintLayout product_look_title_views;
     private ImageView nutrition_info_pic;
+    private ImageView product_look_pic;
     private MaterialButton confirm_btn;
     private File nutrition_pic_file;
+    private File product_look_file;
     private static final String NUTRITION_PIC_FILE_NAME = "nutrition_info.jpg";
+    private static final String PRODUCT_LOOK_FILE_NAME = "product_look.jpg";
     private static final String CAPTURE_PHOTO_IO_EXCEPTION_MSG = "Capture Photo IO Exception";
 
     @Override
@@ -73,7 +78,9 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.price_view_group = findViewById(R.id.product_price_views);
         this.category_view_group = findViewById(R.id.product_category_views);
         this.nutri_info_title_views = findViewById(R.id.product_nutritional_info_title_views);
+        this.product_look_title_views = findViewById(R.id.product_look_title_views);
         this.nutrition_info_pic = findViewById(R.id.nutritional_info_pic);
+        this.product_look_pic = findViewById(R.id.product_look_pic);
         this.confirm_btn = findViewById(R.id.confirm_btn);
         this.mainConstraintLayout = findViewById(R.id.product_feed_constraint_layout);
     }
@@ -115,11 +122,11 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
-        this.nutri_info_title_views.findViewById(R.id.retake_tvbtn).setOnClickListener(new View.OnClickListener() {
+        this.nutri_info_title_views.findViewById(R.id.nutri_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    captureNutritionPhoto();
+                    capturePhoto(NUTRITION_PIC_FILE_NAME);
                 } catch (IOException e) {
                     Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
                 }
@@ -197,7 +204,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
 
                             moveDynamicInputPrompt(mainConstraintLayout, nutri_info_title_views);
-                            input_title.setText(getString(R.string.product_nutritional_table));
+                            input_title.setText(getString(R.string.product_nutritional_info));
 
                             // Remove the input edittext as we don't need it anymore
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
@@ -211,10 +218,17 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(getDrawable(R.drawable.ic_capture_photo));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
-                    } else {
-                        // Only nutrition table picture left to capture
+                    } else if (nutrition_info_pic.getDrawable() == null) {
+                        /*Process Nutritional Information Picture input*/
                         try {
-                            captureNutritionPhoto();
+                            capturePhoto(NUTRITION_PIC_FILE_NAME);
+                        } catch (IOException e) {
+                            Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        /*Process Product Look Picture input*/
+                        try {
+                            capturePhoto(PRODUCT_LOOK_FILE_NAME);
                         } catch (IOException e) {
                             Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
                         }
@@ -235,6 +249,14 @@ public class ProductFeedActivity extends AppCompatActivity {
             this.nutrition_info_pic.setImageBitmap(imgBitmap);
 
             onNutritionPicReceived();
+        }
+        else if (requestCode == Utils.PRODUCT_LOOK_PIC_REQUEST && resultCode == RESULT_OK)
+        {
+            // Get the image from the file path we set up previously rather than the intent itself as a bitmap
+            Bitmap imgBitmap = BitmapFactory.decodeFile(product_look_file.getAbsolutePath());
+            this.product_look_pic.setImageBitmap(imgBitmap);
+
+            onProductLookPicReceived();
         }
     }
 
@@ -344,31 +366,47 @@ public class ProductFeedActivity extends AppCompatActivity {
         acTv.setAdapter(categoryArrayAdapter);
     }
 
-    private void captureNutritionPhoto() throws IOException {
+    private void capturePhoto(String file_name) throws IOException {
         checkPermissions();
 
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        this.nutrition_pic_file = getNutritionPhotoFile(); // Get file
+
+        if (file_name.equals(NUTRITION_PIC_FILE_NAME))
+        {
+            this.nutrition_pic_file = getPhotoFile(file_name); // Get file
+        }
+        else
+        {
+            this.product_look_file = getPhotoFile(file_name); // Get file
+        }
 
         // Get Uri for the file and put with the particular key to allow the camera app we are
         // delegating to, to be able to access the file and put the output there
-        Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), this.nutrition_pic_file);
+        Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), file_name.equals(NUTRITION_PIC_FILE_NAME) ? this.nutrition_pic_file : this.product_look_file);
         capturePicIntent.putExtra(MediaStore.EXTRA_OUTPUT, fpUri);
 
         if (capturePicIntent.resolveActivity(getPackageManager()) != null)  // Make sure there exists an app that is able to handle such
-            startActivityForResult(capturePicIntent, Utils.NUTRITION_TABLE_PIC_REQUEST);
+            startActivityForResult(capturePicIntent, file_name.equals(NUTRITION_PIC_FILE_NAME) ? Utils.NUTRITION_TABLE_PIC_REQUEST : Utils.PRODUCT_LOOK_PIC_REQUEST);
     }
 
-    private File getNutritionPhotoFile() throws IOException {
+    private File getPhotoFile(String file_name) throws IOException {
         // Use 'getExternalFilesDir' on Context to access package-specific directories
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        return File.createTempFile(NUTRITION_PIC_FILE_NAME, ".jpg", storageDirectory);
+        return File.createTempFile(file_name, ".jpg", storageDirectory);
     }
 
     private void onNutritionPicReceived()
     {
-        mainConstraintLayout.removeView(dynamic_input_prompt);
         this.nutri_info_title_views.setVisibility(View.VISIBLE);
+
+        moveDynamicInputPrompt(mainConstraintLayout, nutrition_info_pic);
+        ((TextView) dynamic_input_prompt.findViewById(R.id.input_title)).setText(getString(R.string.product_look));
+    }
+
+    private void onProductLookPicReceived()
+    {
+        mainConstraintLayout.removeView(dynamic_input_prompt);
+        this.product_look_title_views.setVisibility(View.VISIBLE);
         // Show up the confirm button only when this as the last step is successfully completed
         this.confirm_btn.setVisibility(View.VISIBLE);
     }
