@@ -54,7 +54,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
         {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             Product product = (Product) items.get(position);
-            itemViewHolder.tv.setText(product.getBarcode());
+            itemViewHolder.nameTv.setText(product.getBarcode());
             itemViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,13 +80,17 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
+        private TextView nameTv;
+        private TextView brandTv;
+        private TextView priceTv;
         private ImageButton star_btn;
 
         public ItemViewHolder(View view) {
             super(view);
 
-            this.tv = view.findViewById(R.id.text);
+            this.nameTv = view.findViewById(R.id.cardview_product_name);
+            this.brandTv = view.findViewById(R.id.cardview_product_brand);
+            this.priceTv = view.findViewById(R.id.cardview_product_price);
             this.star_btn = view.findViewById(R.id.star_btn);
         }
     }

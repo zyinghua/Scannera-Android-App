@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv.setText("Product No. " + this.products.get(position).getBarcode());
+        holder.nameTv.setText("Product No. " + this.products.get(position).getBarcode());
     }
 
     @Override
@@ -43,12 +44,18 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
+        private TextView nameTv;
+        private TextView brandTv;
+        private TextView priceTv;
+        private ImageButton star_btn;
 
         public ViewHolder(View view) {
             super(view);
 
-            this.tv = view.findViewById(R.id.text);
+            this.nameTv = view.findViewById(R.id.cardview_product_name);
+            this.brandTv = view.findViewById(R.id.cardview_product_brand);
+            this.priceTv = view.findViewById(R.id.cardview_product_price);
+            this.star_btn = view.findViewById(R.id.star_btn);
         }
     }
 

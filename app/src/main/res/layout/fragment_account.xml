@@ -1,137 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AccountFragment">
-
-    <LinearLayout
-        android:id="@+id/user_info_top"
-        android:layout_width="wrap_content"
+    tools:context=".MainActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/starred_products_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/user_profile_img"
-            android:layout_width="@dimen/me_fragment_user_profile_img_size"
-            android:layout_height="@dimen/me_fragment_user_profile_img_size"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_person"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="1dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="?attr/colorPrimaryDark"
-            app:civ_shadow_radius="0dp" />
+        tools:context=".Fragments.AccountFragment">
 
         <LinearLayout
+            android:id="@+id/user_info_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/user_info_display_margin"
-            android:orientation="vertical">
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/username_display"
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/user_profile_img"
+                android:layout_width="@dimen/me_fragment_user_profile_img_size"
+                android:layout_height="@dimen/me_fragment_user_profile_img_size"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_person"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="?attr/colorPrimaryDark"
+                app:civ_shadow_radius="0dp" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_slab"
-                android:maxLength="15"
-                android:textColor="@color/black"
-                android:textSize="@dimen/small_title_text_size" />
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/user_info_display_margin"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/contribution_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/roboto_slab"
-                android:text="@string/contribution_score"
-                android:textColor="@color/black"
-                android:textSize="@dimen/small_text_size" />
+                <TextView
+                    android:id="@+id/username_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab"
+                    android:maxLength="15"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_title_text_size" />
 
+                <TextView
+                    android:id="@+id/contribution_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_slab"
+                    android:text="@string/contribution_score"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/starred_products_btn"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/user_activity_list_btn_height"
-        android:elegantTextHeight="true"
-        android:gravity="start|center_vertical"
-        android:text="@string/starred_products"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/user_activity_list_btn_text_size"
-        app:icon="@drawable/ic_star"
-        app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/starred_products_btn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_activity_list_btn_height"
+            android:elegantTextHeight="true"
+            android:gravity="start|center_vertical"
+            android:text="@string/starred_products"
+            android:layout_marginTop="36dp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_activity_list_btn_text_size"
+            app:icon="@drawable/ic_star"
+            app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_info_top" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/scan_history_btn"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/user_activity_list_btn_height"
-        android:elegantTextHeight="true"
-        android:gravity="start|center_vertical"
-        android:text="@string/scan_history"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/user_activity_list_btn_text_size"
-        app:icon="@drawable/ic_history"
-        app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/starred_products_btn" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/scan_history_btn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_activity_list_btn_height"
+            android:elegantTextHeight="true"
+            android:gravity="start|center_vertical"
+            android:text="@string/scan_history"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_activity_list_btn_text_size"
+            app:icon="@drawable/ic_history"
+            app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/starred_products_btn" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/about_us_btn"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/user_activity_list_btn_height"
-        android:elegantTextHeight="true"
-        android:gravity="start|center_vertical"
-        android:text="@string/about_us"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/user_activity_list_btn_text_size"
-        app:icon="@drawable/ic_info"
-        app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/about_us_btn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_activity_list_btn_height"
+            android:elegantTextHeight="true"
+            android:gravity="start|center_vertical"
+            android:text="@string/about_us"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_activity_list_btn_text_size"
+            app:icon="@drawable/ic_info"
+            app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.Scannera.Button"
-        android:id="@+id/log_out_btn"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_btn_height"
-        android:layout_marginStart="@dimen/general_btn_margin"
-        android:layout_marginTop="64dp"
-        app:icon="@drawable/ic_logout"
-        app:iconGravity="textStart"
-        android:gravity="center"
-        android:layout_marginEnd="@dimen/general_btn_margin"
-        android:text="@string/logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_us_btn" />
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/log_out_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/medium_btn_height"
+            android:layout_marginStart="@dimen/general_btn_margin"
+            android:layout_marginTop="64dp"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="textStart"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/general_btn_margin"
+            android:text="@string/logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/about_us_btn" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.27" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
