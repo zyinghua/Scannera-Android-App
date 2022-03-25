@@ -137,7 +137,7 @@
             <TextView
                 android:id="@+id/product_brand_input"
                 style="@style/Widget.Scannera.ProductFeedTextView"
-                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/product_feed_input_margin_start"
                 android:layout_marginEnd="5dp"
@@ -184,7 +184,7 @@
             <TextView
                 android:id="@+id/product_name_input"
                 style="@style/Widget.Scannera.ProductFeedTextView"
-                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/product_feed_input_margin_start"
                 android:layout_marginEnd="5dp"
@@ -232,7 +232,7 @@
             <TextView
                 android:id="@+id/product_price_input"
                 style="@style/Widget.Scannera.ProductFeedTextView"
-                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/product_feed_input_margin_start"
                 android:layout_marginEnd="5dp"
@@ -279,7 +279,7 @@
             <TextView
                 android:id="@+id/product_category_input"
                 style="@style/Widget.Scannera.ProductFeedTextView"
-                android:layout_width="@dimen/product_feed_input_max_width"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/product_feed_input_margin_start"
                 android:layout_marginEnd="5dp"

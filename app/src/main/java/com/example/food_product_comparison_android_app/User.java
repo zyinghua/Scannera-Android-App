@@ -2,6 +2,8 @@ package com.example.food_product_comparison_android_app;
 
 import com.facebook.AccessToken;
 
+import java.util.ArrayList;
+
 public class User {
     private AccessToken fb_access_token;
     private String id;
@@ -10,6 +12,8 @@ public class User {
     private String last_name;
     private String email;
     private String profile_img_url;
+    private ArrayList<Product> starred_products;
+    private ArrayList<Product> scanned_products;
 
     public User(String id, String username, String first_name, String last_name, String email, String profile_img_url) {
         this.fb_access_token = null;

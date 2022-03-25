@@ -8,6 +8,7 @@ public class Product {
     private String name;
     private Float Price;
     private Bitmap product_look_pic;
+    private Boolean is_starred;
 
     public Product(String barcode) {
         this.barcode = barcode;
