@@ -3,9 +3,11 @@ package com.example.food_product_comparison_android_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -53,6 +55,12 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             Product product = (Product) items.get(position);
             itemViewHolder.tv.setText(product.getBarcode());
+            itemViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // itemViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),android.R.drawable.btn_star_big_on));
+                }
+            });
         }
     }
 
@@ -73,11 +81,13 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tv;
+        private ImageButton star_btn;
 
         public ItemViewHolder(View view) {
             super(view);
 
             this.tv = view.findViewById(R.id.text);
+            this.star_btn = view.findViewById(R.id.star_btn);
         }
     }
 
