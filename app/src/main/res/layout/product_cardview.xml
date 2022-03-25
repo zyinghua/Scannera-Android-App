@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:textSize="24sp"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorPrimaryDark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/first_h_guideline"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
@@ -44,7 +44,7 @@
             android:id="@+id/cardview_product_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorPrimaryDark"
             android:layout_margin="12dp"
             android:textSize="20sp"
             app:layout_constraintTop_toTopOf="@id/first_h_guideline"
@@ -55,7 +55,7 @@
             android:id="@+id/cardview_product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorPrimaryDark"
             android:layout_margin="12dp"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/cardview_product_brand"
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_percent="0.4" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/first_h_guideline"
