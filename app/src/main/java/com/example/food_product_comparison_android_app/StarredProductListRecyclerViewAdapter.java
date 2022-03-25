@@ -29,7 +29,20 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(@NonNull StarredProductListRecyclerViewAdapter.ViewHolder holder, int position) {
         Product product = starred_products.get(position);
-        holder.nameTv.setText(product.getBarcode());
+        holder.nameTv.setText(product.getName());
+        holder.brandTv.setText(product.getBrand());
+        holder.priceTv.setText(product.getPrice() + "");
+        holder.star_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (product.getIs_starred())
+                {
+
+                } else {
+
+                }
+            }
+        });
     }
 
     @Override
