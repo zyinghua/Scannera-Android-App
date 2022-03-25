@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pc_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,45 +28,48 @@
             app:layout_constraintEnd_toEndOf="@id/lr_guideline"/>
 
         <TextView
-            style="@style/Widget.Scannera.TextView"
             android:id="@+id/cardview_product_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="32dp"
-            android:textSize="24sp"
-            android:textColor="?attr/colorPrimaryDark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/first_h_guideline"
-            app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintEnd_toStartOf="@id/star_btn"/>
-
-        <TextView
             style="@style/Widget.Scannera.TextView"
-            android:id="@+id/cardview_product_brand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimaryDark"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginTop="24dp"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="@id/first_h_guideline"
+            android:layout_marginEnd="12dp"
+            android:maxLines="3"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@id/star_btn"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintEnd_toStartOf="@id/star_btn"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/cardview_product_brand"
             style="@style/Widget.Scannera.TextView"
-            android:id="@+id/cardview_product_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimaryDark"
             android:layout_margin="12dp"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/cardview_product_brand"
+            android:maxLines="1"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintEnd_toStartOf="@id/star_btn"/>
+            app:layout_constraintTop_toBottomOf="@id/cardview_product_name"
+            tools:layout_editor_absoluteY="122dp" />
+
+        <TextView
+            android:id="@+id/cardview_product_price"
+            style="@style/Widget.Scannera.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:maxLines="1"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/lr_guideline"
+            app:layout_constraintTop_toBottomOf="@id/cardview_product_brand"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/star_btn"
@@ -86,13 +90,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.4" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/first_h_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

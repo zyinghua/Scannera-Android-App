@@ -35,7 +35,7 @@ public class StarredProductListContentFragment extends Fragment {
         ArrayList<Product> starred_products = new ArrayList<>();
 
         //******************************************************
-        starred_products.add(new Product("12431435235", "abc", "dd", 55.5f, false));
+        starred_products.add(new Product("12431435235", "abcasgagahgewheasrhsadrhsedrthsedr", "dd", 55.5f, false));
         starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f, true));
         //******************************************************
 
