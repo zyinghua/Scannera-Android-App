@@ -1,6 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class Product {
     private String barcode;
@@ -20,6 +21,14 @@ public class Product {
 
     public Product(String barcode) {
         this.barcode = barcode;
+    }
+
+    public Product(String barcode, String brand, String name, Float price, Boolean is_starred) {
+        this.barcode = barcode;
+        this.brand = brand;
+        this.name = name;
+        Price = price;
+        this.is_starred = is_starred;
     }
 
     public Product(String barcode, String brand, String name, Float price, Bitmap product_look_pic, Boolean is_starred) {

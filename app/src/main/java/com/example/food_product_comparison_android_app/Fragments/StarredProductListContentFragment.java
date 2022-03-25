@@ -35,13 +35,11 @@ public class StarredProductListContentFragment extends Fragment {
         ArrayList<Product> starred_products = new ArrayList<>();
 
         //******************************************************
-        starred_products.add(new Product("12431435235"));
-        starred_products.add(new Product("32523634"));
-        starred_products.add(new Product("1435645674456"));
-        starred_products.add(new Product("145645645646"));
+        starred_products.add(new Product("12431435235", "abc", "dd", 55.5f, false));
+        starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f, true));
         //******************************************************
 
-        StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(starred_products);
+        StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(getActivity().getApplicationContext(), starred_products);
         recyclerView.setAdapter(spAdapter);
 
         return view;

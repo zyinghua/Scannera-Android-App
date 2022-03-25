@@ -229,7 +229,7 @@ public class ProductFeedActivity extends AppCompatActivity {
 
                             // change next  button text and add an icon to it
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setText(getString(R.string.capture));
-                            ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(getDrawable(R.drawable.ic_capture_photo));
+                            ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_capture_photo));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                         }
                     } else if (nutrition_info_pic.getDrawable() == null) {

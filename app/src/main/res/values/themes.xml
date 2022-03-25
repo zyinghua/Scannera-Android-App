@@ -3,7 +3,7 @@
     <style name="Theme.Food_Product_Comparison_Android_App" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/denim</item>
-        <item name="colorPrimaryDark">@color/chathams_blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/mystic</item>
         <item name="colorOnError">@color/cardinal</item>

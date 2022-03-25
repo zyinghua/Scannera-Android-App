@@ -2,6 +2,7 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StarredProductActivity extends AppCompatActivity {
+    public Context appContext;
     private ImageButton top_back_btn;
 
     @Override
@@ -24,6 +26,7 @@ public class StarredProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_with_product_list);
 
+        appContext = getApplicationContext();
         ((TextView) findViewById(R.id.activity_title)).setText(getString(R.string.starred_products));
 
         if (savedInstanceState == null)
