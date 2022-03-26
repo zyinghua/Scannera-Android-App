@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">Scannera</string>
     <string name="app_authority">com.example.food_product_comparison_android_app</string>
-    <string name="facebook_app_id">487504102712984</string>
-    <string name="fb_login_protocol_scheme">fb487504102712984</string>
-    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
-    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
-    <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
     <string name="login">Login</string>
@@ -99,6 +94,15 @@
     </string>
     <string name="cancel">Cancel</string>
     <string name="confirm_red"><font fgcolor='#A80825'>Confirm</font></string>
+
+    <!-- THIRD_PARTY_RELATED -->
+    <string name="google_user_id_prefix">ggl_</string>
+    <string name="facebook_user_id_prefix">fb_</string>
+    <string name="facebook_app_id">487504102712984</string>
+    <string name="fb_login_protocol_scheme">fb487504102712984</string>
+    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
+    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
+    <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

@@ -94,12 +94,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
 
-            // Callback registration
+            // !<Facebook>! Callback registration
             LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
-                    user = new User(AccessToken.getCurrentAccessToken());
+                    user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
                     navigateToLandingActivity(Utils.FACEBOOK_LOGIN);
                 }
 
@@ -197,13 +197,13 @@ public class LoginActivity extends AppCompatActivity {
             String first_name = account.getGivenName();
             String last_name = account.getFamilyName();
             String email = account.getEmail();
-            String id = account.getId();
+            String id = getString(R.string.google_user_id_prefix) + account.getId();
             String img_url = null;
 
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            user = new User(id, first_name, first_name, last_name, email, img_url);
+            user = new User(Utils.GOOGLE_LOGIN, id, first_name, first_name, last_name, email, img_url);
         }
     }
 
@@ -213,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if (isLoggedIn)
-            user = new User(accessToken);
+            user = new User(Utils.FACEBOOK_LOGIN, accessToken);
 
         LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
             @Override
@@ -266,7 +266,6 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(Utils.LOGIN_OPTION_KEY, login_option);
         intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
         startActivity(intent);
     }

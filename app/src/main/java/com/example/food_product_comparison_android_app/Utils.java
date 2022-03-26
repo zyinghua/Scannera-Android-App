@@ -18,7 +18,6 @@ public class Utils {
     public static final int MAX_LEN_EMAIL = 45;
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String USER_INFO_KEY = "USER_TRANSIT_KEY";
-    public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION_KEY";
 
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;

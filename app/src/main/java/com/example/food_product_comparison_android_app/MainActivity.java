@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
     public static final String ACCOUNT_FRAG_TAG = "account_fragment";
     private GoogleSignInClient mGoogleSignInClient;
-    private int login_option;
     private String user_info;
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
@@ -69,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         this.user_info = getIntent().getStringExtra(Utils.USER_INFO_KEY);
-        this.login_option = getIntent().getIntExtra(Utils.LOGIN_OPTION_KEY, -1);
 
         this.initialiseFragments();
         if (savedInstanceState == null)
@@ -126,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
     private void initialiseFragments()
     {
         Bundle bundle = new Bundle();
-        bundle.putInt(Utils.LOGIN_OPTION_KEY, login_option);
         bundle.putString(Utils.USER_INFO_KEY, user_info);
 
         this.homeFragment = new HomeFragment();

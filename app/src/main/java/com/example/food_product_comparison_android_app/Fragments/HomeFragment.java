@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-    private int login_option;
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
@@ -52,8 +51,6 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getArguments() != null) {
-            login_option = getArguments().getInt(Utils.LOGIN_OPTION_KEY);
-
             Gson gson = new Gson();
             Type type = new TypeToken<User>() {}.getType();
             user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
@@ -103,7 +100,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (login_option == Utils.FACEBOOK_LOGIN)
+        if (user.getLogin_option() == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {

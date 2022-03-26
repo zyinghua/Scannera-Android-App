@@ -48,7 +48,6 @@ import javax.net.ssl.HttpsURLConnection;
 import com.google.gson.Gson;
 
 public class AccountFragment extends Fragment {
-    private int login_option;
     private User user;
     private MaterialButton log_out_btn;
     private CircularImageView user_profile_img;
@@ -63,8 +62,6 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            login_option = getArguments().getInt(Utils.LOGIN_OPTION_KEY);
-
             Gson gson = new Gson();
             Type type = new TypeToken<User>() {}.getType();
             user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
@@ -100,7 +97,7 @@ public class AccountFragment extends Fragment {
         log_out_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                switch(login_option)
+                switch(user.getLogin_option())
                 {
                     case Utils.FACEBOOK_LOGIN:
                         ((MainActivity) requireActivity()).facebookLogOut();
@@ -151,7 +148,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (login_option == Utils.FACEBOOK_LOGIN)
+        if (user.getLogin_option() == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {
