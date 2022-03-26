@@ -283,24 +283,12 @@ public class ProductFeedActivity extends AppCompatActivity {
 
     private void showEditDialog(TextView input, String title, boolean isNumerical)
     {
-        final Dialog dialog = new Dialog(this);
+        final EditDialog dialog = new EditDialog(this, title);
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.dialog_edit);
+        if (isNumerical)
+            dialog.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        ((TextView) dialog.findViewById(R.id.dialog_title)).setText(getString(R.string.edit) + " " + title);
-
-        dialog.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        if (isNumerical) ((TextInputEditText) dialog.findViewById(R.id.edit_et)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
-        dialog.findViewById(R.id.confirm_btn).setOnClickListener(new View.OnClickListener() {
+        dialog.setConfirmBtnOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextInputEditText edited_input_et = dialog.findViewById(R.id.edit_et);
