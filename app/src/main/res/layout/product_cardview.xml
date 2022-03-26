@@ -22,10 +22,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/lr_guideline"/>
+            app:layout_constraintEnd_toEndOf="@id/lr_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/cardview_product_name"
@@ -40,20 +40,21 @@
             android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@id/star_btn"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/mid_h_guideline" />
 
         <TextView
             android:id="@+id/cardview_product_brand"
             style="@style/Widget.Scannera.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="16dp"
             android:maxLines="1"
             android:textColor="?attr/colorPrimaryDark"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintTop_toBottomOf="@id/cardview_product_name"
+            app:layout_constraintTop_toBottomOf="@id/mid_h_guideline"
             tools:layout_editor_absoluteY="122dp" />
 
         <TextView
@@ -61,28 +62,26 @@
             style="@style/Widget.Scannera.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="16dp"
             android:maxLines="1"
             android:textColor="?attr/colorPrimaryDark"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
-            app:layout_constraintTop_toBottomOf="@id/cardview_product_brand"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@id/cardview_product_brand" />
 
         <ImageButton
             android:id="@+id/star_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/btn_star"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
+            android:background="#00ffffff"
             android:contentDescription="@string/product_star_btn_content_description"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@android:drawable/btn_star"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="#00ffffff" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/lr_guideline"
@@ -90,6 +89,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mid_h_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            card_view:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
