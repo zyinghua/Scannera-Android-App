@@ -43,7 +43,7 @@ public class User {
 
     public User(int login_option, AccessToken fb_access_token) {
         // Facebook user
-        String s = "Facebook User";
+        String s = "<Facebook User>";
 
         this.login_option = login_option;
         this.fb_access_token = fb_access_token;
