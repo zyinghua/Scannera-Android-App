@@ -143,6 +143,27 @@ public class AccountInfoActivity extends AppCompatActivity {
     {
         final EditDialog dialog = new EditDialog(this, title);
 
+        switch (field)
+        {
+            case EDIT_USERNAME:
+                dialog.setMaxInputLength(Utils.MAX_LEN_USERNAME);
+                break;
+            case EDIT_PASSWORD:
+                dialog.setMaxInputLength(Utils.MAX_LEN_PASSWORD);
+                break;
+            case EDIT_EMAIL_ADDRESS:
+                dialog.setMaxInputLength(Utils.MAX_LEN_EMAIL);
+                break;
+            case EDIT_FIRSTNAME:
+                dialog.setMaxInputLength(Utils.MAX_LEN_FIRSTNAME);
+                break;
+            case EDIT_LASTNAME:
+                dialog.setMaxInputLength(Utils.MAX_LEN_LASTNAME);
+                break;
+            default:
+                break;
+        }
+
         dialog.setConfirmBtnOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

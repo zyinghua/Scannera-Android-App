@@ -2,8 +2,10 @@ package com.example.food_product_comparison_android_app;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,5 +46,16 @@ public class EditDialog extends Dialog {
     public void setConfirmBtnOnClickListener(View.OnClickListener l)
     {
         this.findViewById(R.id.confirm_btn).setOnClickListener(l);
+    }
+
+    public void setMaxInputLength(int maxLength)
+    {
+        EditText editText = findViewById(R.id.edit_et);
+
+        InputFilter[] editFilters = editText.getFilters();
+        InputFilter[] newFilters = new InputFilter[editFilters.length + 1];
+        System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
+        newFilters[editFilters.length] = new InputFilter.LengthFilter(maxLength);
+        editText.setFilters(newFilters);
     }
 }
