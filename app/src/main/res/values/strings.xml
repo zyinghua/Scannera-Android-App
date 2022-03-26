@@ -92,6 +92,7 @@
     <string name="lastname_default">/{lastname}/</string>
     <string name="email_address_default">/{email address}/</string>
     <string name="password_default">/{password}/</string>
+    <string name="delete_account">Delete My Account</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
