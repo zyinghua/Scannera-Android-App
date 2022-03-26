@@ -34,10 +34,9 @@
         app:layout_constraintVertical_bias="0.65" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/product_brand_views"
+        android:id="@+id/username_views"
         android:layout_marginStart="@dimen/account_info_elem_se_margin"
         android:layout_marginEnd="@dimen/account_info_elem_se_margin"
         android:layout_marginTop="32dp"
@@ -49,7 +48,7 @@
             style="@style/Widget.Scannera.ProductFeedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/product_brand"
+            android:text="@string/username_label"
             android:textColor="?attr/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

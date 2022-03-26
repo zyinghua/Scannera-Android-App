@@ -23,5 +23,5 @@
     <dimen name="product_feed_text_size">17sp</dimen>
     <dimen name="product_feed_input_margin_start">20dp</dimen>
     <dimen name="product_feed_h_spacing">24dp</dimen>
-    <dimen name="account_info_elem_se_margin">24dp</dimen>
+    <dimen name="account_info_elem_se_margin">12dp</dimen>
 </resources>

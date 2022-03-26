@@ -88,11 +88,11 @@
     <string name="lastname_label">Lastname:</string>
     <string name="email_label">Email Address:</string>
     <string name="Password_label">Password:</string>
-    <string name="username_default">/{username}</string>
-    <string name="firstname_default">/{firstname}</string>
-    <string name="lastname_default">/{lastname}</string>
-    <string name="email_default">/{email address}</string>
-    <string name="password_default">/{password}</string>
+    <string name="username_default">/{username}/</string>
+    <string name="firstname_default">/{firstname}/</string>
+    <string name="lastname_default">/{lastname}/</string>
+    <string name="email_default">/{email address}/</string>
+    <string name="password_default">/{password}/</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
