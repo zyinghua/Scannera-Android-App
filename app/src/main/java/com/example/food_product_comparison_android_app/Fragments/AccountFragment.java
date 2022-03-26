@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 import com.google.gson.Gson;
@@ -102,15 +103,15 @@ public class AccountFragment extends Fragment {
                 switch(login_option)
                 {
                     case Utils.FACEBOOK_LOGIN:
-                        ((MainActivity) getActivity()).facebookLogOut();
+                        ((MainActivity) requireActivity()).facebookLogOut();
                         break;
 
                     case Utils.GOOGLE_LOGIN:
-                        ((MainActivity) getActivity()).googleLogOut();
+                        ((MainActivity) requireActivity()).googleLogOut();
                         break;
 
                     default:
-                        ((MainActivity) getActivity()).finish();
+                        ((MainActivity) requireActivity()).finish();
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
                 }

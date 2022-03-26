@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +37,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private int login_option;
@@ -78,7 +80,7 @@ public class HomeFragment extends Fragment {
             products.add(new Product(i + ""));
         }
 
-        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(getActivity().getApplicationContext(),products);
+        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
         this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
 
         return view;
@@ -139,7 +141,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.home_toolbar_menu, menu);
         super.onCreateOptionsMenu(menu, menuInflater);
     }

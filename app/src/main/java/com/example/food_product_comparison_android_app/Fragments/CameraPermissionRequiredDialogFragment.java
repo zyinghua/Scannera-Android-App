@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import com.example.food_product_comparison_android_app.R;
 
+import java.util.Objects;
+
 public class CameraPermissionRequiredDialogFragment extends DialogFragment {
     private final String app_package_name;
 
@@ -46,7 +48,7 @@ public class CameraPermissionRequiredDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.dialog_btn_reject, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        getActivity().onBackPressed();
+                        requireActivity().onBackPressed();
                     }
                 });
         // Create the AlertDialog object and return it

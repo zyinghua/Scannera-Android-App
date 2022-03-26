@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class AccountInfoActivity extends AppCompatActivity {
     private static final int EDIT_USERNAME = 0;
@@ -147,7 +148,7 @@ public class AccountInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextInputEditText edited_input_et = dialog.findViewById(R.id.edit_et);
 
-                if (edited_input_et.getText().toString().isEmpty()) {
+                if (Objects.requireNonNull(edited_input_et.getText()).toString().isEmpty()) {
                     TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
                     edit_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }

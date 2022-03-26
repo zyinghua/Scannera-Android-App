@@ -14,6 +14,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class ForgottenPasswordActivity extends AppCompatActivity {
     public static final String RESET_EMAIl_ADDRESS_KEY = "RESET_EMAIl_ADDRESS";
     private ImageButton top_back_btn;
@@ -59,7 +61,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
-                intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_input_et.getText().toString());
+                intent.putExtra(RESET_EMAIl_ADDRESS_KEY, Objects.requireNonNull(email_input_et.getText()).toString());
                 startActivity(intent);
             }
         });

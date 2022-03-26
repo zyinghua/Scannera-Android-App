@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ScanHistoryListContentFragment extends Fragment {
     @Override
@@ -38,7 +39,7 @@ public class ScanHistoryListContentFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         // -----------------------------------------------
-        SharedPreferences sp = getActivity().getSharedPreferences("ScanHistory", 0);
+        SharedPreferences sp = requireActivity().getSharedPreferences("ScanHistory", 0);
 
         Gson gson = new Gson();
         String str_products = sp.getString("ScanHistoryProducts", "");

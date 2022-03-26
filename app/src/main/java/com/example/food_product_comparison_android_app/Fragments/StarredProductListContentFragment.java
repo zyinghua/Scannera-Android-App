@@ -20,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StarredProductListContentFragment extends Fragment {
     @Override
@@ -39,7 +40,7 @@ public class StarredProductListContentFragment extends Fragment {
         starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f, true));
         //******************************************************
 
-        StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(getActivity().getApplicationContext(), starred_products);
+        StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(requireActivity().getApplicationContext(), starred_products);
         recyclerView.setAdapter(spAdapter);
 
         return view;

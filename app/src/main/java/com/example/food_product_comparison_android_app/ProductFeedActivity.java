@@ -37,6 +37,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ImageButton top_back_btn;
@@ -157,7 +158,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                 TextInputLayout input_layout = dynamic_input_prompt.findViewById(R.id.input_layout);
                 TextInputEditText input_et = dynamic_input_prompt.findViewById(R.id.input_et);
 
-                if (input_et != null && input_et.getText().toString().isEmpty()) {
+                if (input_et != null && Objects.requireNonNull(input_et.getText()).toString().isEmpty()) {
                     input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }
                 else {
@@ -293,7 +294,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextInputEditText edited_input_et = dialog.findViewById(R.id.edit_et);
 
-                if (edited_input_et.getText().toString().isEmpty()) {
+                if (Objects.requireNonNull(edited_input_et.getText()).toString().isEmpty()) {
                     TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
                     edit_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
                 }
