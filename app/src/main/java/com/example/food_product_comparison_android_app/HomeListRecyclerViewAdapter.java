@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRecyclerViewAdapter.ViewHolder> {
+    Context appContext;
     List<Product> products;
 
-    public HomeListRecyclerViewAdapter(List<Product> products)
+    public HomeListRecyclerViewAdapter(Context context, List<Product> products)
     {
+        appContext = context;
         this.products = products;
     }
 
-    public HomeListRecyclerViewAdapter()
+    public HomeListRecyclerViewAdapter(Context context)
     {
+        appContext = context;
     }
 
     @NonNull

@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import java.util.List;
 public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TITLE_VIEW_TYPE = 0;
     public static final int ITEM_VIEW_TYPE = 1;
+    Context appContext;
     List<Object> items;
 
-    public ScanHistoryListRecyclerViewAdapter(List<Object> items) {
+    public ScanHistoryListRecyclerViewAdapter(Context context, List<Object> items) {
+        this.appContext = context;
         this.items = items;
     }
 

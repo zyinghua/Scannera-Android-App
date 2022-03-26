@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
             products.add(new Product(i + ""));
         }
 
-        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(products);
+        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(getActivity().getApplicationContext(),products);
         this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
 
         return view;

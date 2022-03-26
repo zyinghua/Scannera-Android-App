@@ -46,8 +46,10 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
             public void onClick(View v) {
                 if (product.getIs_starred())
                 {
+                    // Un-star the product
                     holder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
                 } else {
+                    // Star the product
                     holder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
                 }
                 product.setIs_starred(!product.getIs_starred());

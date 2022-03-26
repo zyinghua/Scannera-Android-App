@@ -63,7 +63,7 @@ public class ScanHistoryListContentFragment extends Fragment {
         }
         // -----------------------------------------------
 
-        ScanHistoryListRecyclerViewAdapter shAdapter = new ScanHistoryListRecyclerViewAdapter(items);
+        ScanHistoryListRecyclerViewAdapter shAdapter = new ScanHistoryListRecyclerViewAdapter(getActivity().getApplicationContext(),items);
         recyclerView.setAdapter(shAdapter);
 
         return view;
