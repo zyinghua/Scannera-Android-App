@@ -22,6 +22,8 @@
     <dimen name="dialog_msg_max_width">350dp</dimen>
     <dimen name="product_feed_text_size">17sp</dimen>
     <dimen name="product_feed_input_margin_start">20dp</dimen>
+    <dimen name="product_feed_input_margin_end">5dp</dimen>
     <dimen name="product_feed_h_spacing">24dp</dimen>
-    <dimen name="account_info_elem_se_margin">12dp</dimen>
+    <dimen name="account_info_elem_margin">18dp</dimen>
+    <dimen name="account_info_value_margin_end">12dp</dimen>
 </resources>

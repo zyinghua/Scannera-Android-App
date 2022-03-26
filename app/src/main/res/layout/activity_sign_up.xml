@@ -55,7 +55,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/first_name_sign_up"
+        android:id="@+id/firstname_sign_up"
         style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,16 +66,16 @@
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/first_name_sign_up_et"
+            android:id="@+id/firstname_sign_up_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/first_name_sign_up"
+            android:hint="@string/firstname_sign_up"
             android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/last_name_sign_up"
+        android:id="@+id/lastname_sign_up"
         style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,10 +86,10 @@
         app:startIconDrawable="@drawable/ic_person_outline">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/last_name_sign_up_et"
+            android:id="@+id/lastname_sign_up_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/last_name_sign_up"
+            android:hint="@string/lastname_sign_up"
             android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -39,8 +39,8 @@ public class SignUpActivity extends AppCompatActivity {
     {
         this.top_back_button = findViewById(R.id.top_back_btn);
         this.username_input = findViewById(R.id.username_sign_up);
-        this.first_name_input = findViewById(R.id.first_name_sign_up);
-        this.last_name_input = findViewById(R.id.last_name_sign_up);
+        this.first_name_input = findViewById(R.id.firstname_sign_up);
+        this.last_name_input = findViewById(R.id.lastname_sign_up);
         this.email_input = findViewById(R.id.email_sign_up);
         this.password_input = findViewById(R.id.password_sign_up);
         this.confirm_password_input = findViewById(R.id.confirm_password_sign_up);

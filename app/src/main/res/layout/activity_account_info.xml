@@ -37,8 +37,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/username_views"
-        android:layout_marginStart="@dimen/account_info_elem_se_margin"
-        android:layout_marginEnd="@dimen/account_info_elem_se_margin"
+        android:layout_marginStart="@dimen/account_info_elem_margin"
+        android:layout_marginEnd="@dimen/account_info_elem_margin"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,41 +55,226 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ai_username_inputlayout"
-            style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
+        <TextView
+            android:id="@+id/username"
+            style="@style/Widget.Scannera.ProductFeedTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/product_feed_input_margin_start"
-            android:layout_marginEnd="5dp"
-            app:endIconMode="clear_text"
+            android:layout_marginEnd="@dimen/account_info_value_margin_end"
+            android:text="@string/username_default"
+            android:textColor="?attr/colorPrimaryDark"
+            android:gravity="end"
             app:layout_constraintEnd_toStartOf="@id/edit_username_btn"
             app:layout_constraintStart_toEndOf="@id/ai_username_label"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ai_username_et"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/username_default"
-            android:inputType="none"
-            android:textColor="?attr/colorPrimaryDark"
-            android:maxLength="20" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.Scannera.Button"
             android:id="@+id/edit_username_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signup"
+            android:textAllCaps="false"
+            android:text="@string/edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_views"
+        android:layout_margin="@dimen/account_info_elem_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username_views">
+        <TextView
+            android:id="@+id/ai_password_label"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_label"
+            android:textColor="?attr/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/password"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/account_info_value_margin_end"
+            android:text="@string/password_default"
+            android:textColor="?attr/colorPrimaryDark"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@id/edit_password_btn"
+            app:layout_constraintStart_toEndOf="@id/ai_password_label"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/edit_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstname_views"
+        android:layout_margin="@dimen/account_info_elem_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_views">
+        <TextView
+            android:id="@+id/ai_firstname_label"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/firstname_label"
+            android:textColor="?attr/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/firstname"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/account_info_value_margin_end"
+            android:text="@string/firstname_default"
+            android:textColor="?attr/colorPrimaryDark"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@id/edit_firstname_btn"
+            app:layout_constraintStart_toEndOf="@id/ai_firstname_label"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/edit_firstname_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastname_views"
+        android:layout_margin="@dimen/account_info_elem_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstname_views">
+        <TextView
+            android:id="@+id/ai_lastname_label"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lastname_label"
+            android:textColor="?attr/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/lastname"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/account_info_value_margin_end"
+            android:text="@string/lastname_default"
+            android:textColor="?attr/colorPrimaryDark"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@id/edit_lastname_btn"
+            app:layout_constraintStart_toEndOf="@id/ai_lastname_label"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/edit_lastname_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_address_views"
+        android:layout_margin="@dimen/account_info_elem_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastname_views">
+        <TextView
+            android:id="@+id/ai_email_address_label"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_address_label"
+            android:textColor="?attr/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/email"
+            style="@style/Widget.Scannera.ProductFeedTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/account_info_value_margin_end"
+            android:text="@string/email_address_default"
+            android:textColor="?attr/colorPrimaryDark"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@id/edit_email_address_btn"
+            app:layout_constraintStart_toEndOf="@id/ai_email_address_label"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/edit_email_address_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/back_btn_h_guideline"
