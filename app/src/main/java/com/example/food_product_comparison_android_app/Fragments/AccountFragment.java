@@ -62,11 +62,11 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            login_option = getArguments().getInt(LoginActivity.LOGIN_OPTION_KEY);
+            login_option = getArguments().getInt(Utils.LOGIN_OPTION_KEY);
 
             Gson gson = new Gson();
             Type type = new TypeToken<User>() {}.getType();
-            user = gson.fromJson(getArguments().getString(LoginActivity.USER_INFO_KEY), type);
+            user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
         }
     }
 
@@ -120,7 +120,9 @@ public class AccountFragment extends Fragment {
         this.account_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AccountInfoActivity.class));
+                Intent intent = new Intent(getActivity(), AccountInfoActivity.class);
+                intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(user));
+                startActivity(intent);
             }
         });
 

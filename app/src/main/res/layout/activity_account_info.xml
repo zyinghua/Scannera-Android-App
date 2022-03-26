@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/username"
+                android:id="@+id/username_tv"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/password"
+                android:id="@+id/password_tv"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/email"
+                android:id="@+id/email_address_tv"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/firstname"
+                android:id="@+id/firstname_tv"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lastname"
+                android:id="@+id/lastname_tv"
                 style="@style/Widget.Scannera.ProductFeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

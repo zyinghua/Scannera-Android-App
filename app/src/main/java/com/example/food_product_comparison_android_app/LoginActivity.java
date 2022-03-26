@@ -33,8 +33,6 @@ import com.google.gson.Gson;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String USER_INFO_KEY = "USER_INFO";
-    public static final String LOGIN_OPTION_KEY = "LOGIN_OPTION";
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout username_login_input;
@@ -268,8 +266,8 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(LOGIN_OPTION_KEY, login_option);
-        intent.putExtra(USER_INFO_KEY, gson.toJson(user));
+        intent.putExtra(Utils.LOGIN_OPTION_KEY, login_option);
+        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
         startActivity(intent);
     }
 

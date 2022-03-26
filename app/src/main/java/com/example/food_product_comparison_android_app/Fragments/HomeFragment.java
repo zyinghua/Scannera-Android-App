@@ -50,11 +50,11 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getArguments() != null) {
-            login_option = getArguments().getInt(LoginActivity.LOGIN_OPTION_KEY);
+            login_option = getArguments().getInt(Utils.LOGIN_OPTION_KEY);
 
             Gson gson = new Gson();
             Type type = new TypeToken<User>() {}.getType();
-            user = gson.fromJson(getArguments().getString(LoginActivity.USER_INFO_KEY), type);
+            user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
         }
     }
 

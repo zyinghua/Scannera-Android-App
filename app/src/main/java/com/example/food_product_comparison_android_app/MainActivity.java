@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        this.user_info = getIntent().getStringExtra(LoginActivity.USER_INFO_KEY);
-        this.login_option = getIntent().getIntExtra(LoginActivity.LOGIN_OPTION_KEY, -1);
+        this.user_info = getIntent().getStringExtra(Utils.USER_INFO_KEY);
+        this.login_option = getIntent().getIntExtra(Utils.LOGIN_OPTION_KEY, -1);
 
         this.initialiseFragments();
         if (savedInstanceState == null)
@@ -117,16 +117,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void google_revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                    }
-                });
-    }
-
     private void findViews()
     {
         this.bottomNavigationView = findViewById(R.id.main_bottom_nav);
@@ -136,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
     private void initialiseFragments()
     {
         Bundle bundle = new Bundle();
-        bundle.putInt(LoginActivity.LOGIN_OPTION_KEY, login_option);
-        bundle.putString(LoginActivity.USER_INFO_KEY, user_info);
+        bundle.putInt(Utils.LOGIN_OPTION_KEY, login_option);
+        bundle.putString(Utils.USER_INFO_KEY, user_info);
 
         this.homeFragment = new HomeFragment();
         this.accountFragment = new AccountFragment();

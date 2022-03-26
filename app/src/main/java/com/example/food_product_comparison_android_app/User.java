@@ -8,29 +8,51 @@ public class User {
     private AccessToken fb_access_token;
     private String id;
     private String username;
-    private String first_name;
-    private String last_name;
+    private String firstname;
+    private String lastname;
     private String email;
+    private String password;
     private String profile_img_url;
-    private ArrayList<Product> starred_products;
-    private ArrayList<Product> scanned_products;
 
-    public User(String id, String username, String first_name, String last_name, String email, String profile_img_url) {
+    public User(String id, String username, String firstname, String lastname, String email, String profile_img_url, String password) {
+        //Local user
         this.fb_access_token = null;
         this.id = id;
         this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.profile_img_url = profile_img_url;
+        this.password = password;
+    }
+
+    public User(String id, String username, String firstname, String lastname, String email, String profile_img_url) {
+        // Google user
+        this.fb_access_token = null;
+        this.id = id;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.profile_img_url = profile_img_url;
+        this.password = null;
     }
 
     public User(AccessToken fb_access_token) {
+        // Facebook user
         String s = "Facebook User";
 
         this.fb_access_token = fb_access_token;
-        this.id = this.username = this.first_name = this.last_name = this.email = s;
-        this.profile_img_url = null;
+        this.id = this.username = this.firstname = this.lastname = this.email = s;
+        this.profile_img_url = this.password = null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public AccessToken getFb_access_token() {
@@ -57,20 +79,20 @@ public class User {
         this.username = username;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -87,5 +109,15 @@ public class User {
 
     public void setProfile_img_url(String profile_img_url) {
         this.profile_img_url = profile_img_url;
+    }
+
+    public void updateUserInfo(String username, String firstname, String lastname, String email_address)
+    {
+        // Password should be updated directly as it won't be stored in the corresponding textview(s)
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email_address;
+        this.password = password;
     }
 }

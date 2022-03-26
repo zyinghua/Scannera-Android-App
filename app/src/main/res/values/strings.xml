@@ -131,6 +131,7 @@
 
     <!-- ERROR MESSAGES -->
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
+    <string name="email_address_invalid">Please enter a valid Email Address.</string>
 
     <!-- ACCESSIBILITY RELATED CONTENT DESCRIPTIONS -->
     <string name="content_description_start_icon">A start icon displayed</string>
