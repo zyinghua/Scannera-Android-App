@@ -31,6 +31,7 @@
     <string name="account">Account</string>
     <string name="logout">Log Out</string>
     <string name="contribution_score">Contribution: </string>
+    <string name="account_information">Account Information</string>
     <string name="starred_products">Starred Products</string>
     <string name="scan_history">Scan History</string>
     <string name="about_us">About Us</string>

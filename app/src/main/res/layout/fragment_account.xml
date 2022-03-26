@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
         tools:context=".Fragments.AccountFragment">
 
         <LinearLayout
@@ -64,6 +65,24 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/account_info_btn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_activity_list_btn_height"
+            android:elegantTextHeight="true"
+            android:gravity="start|center_vertical"
+            android:text="@string/account_information"
+            android:layout_marginTop="36dp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_activity_list_btn_text_size"
+            app:icon="@drawable/ic_person"
+            app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_info_top" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/starred_products_btn"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
@@ -71,7 +90,6 @@
             android:elegantTextHeight="true"
             android:gravity="start|center_vertical"
             android:text="@string/starred_products"
-            android:layout_marginTop="36dp"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="@dimen/user_activity_list_btn_text_size"
@@ -79,7 +97,7 @@
             app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_info_top" />
+            app:layout_constraintTop_toBottomOf="@+id/account_info_btn" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/scan_history_btn"
@@ -121,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/medium_btn_height"
             android:layout_marginStart="@dimen/general_btn_margin"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="48dp"
             app:icon="@drawable/ic_logout"
             app:iconGravity="textStart"
             android:gravity="center"
