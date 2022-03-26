@@ -93,6 +93,12 @@
     <string name="email_address_default">/{email address}/</string>
     <string name="password_default">/{password}/</string>
     <string name="delete_account">Delete My Account</string>
+    <string name="dialog_delete_account_title">Are you sure you want to delete your account?</string>
+    <string name="dialog_delete_account_msg">
+        You will lose all the data associated with your account.\n\nWarning: This cannot be undone.
+    </string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_red"><font fgcolor='#A80825'>Confirm</font></string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

@@ -2,6 +2,7 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,13 +132,8 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.delete_acc_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteUserAccount();
-
-                // Log out and start login activity without a way back
-                finish();
-                Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                DeleteAccountConfirmDialogFragment deletionConfirmDialog = new DeleteAccountConfirmDialogFragment();
+                deletionConfirmDialog.show(getSupportFragmentManager(), "Delete Account Confirm Dialog");
             }
         });
     }
@@ -177,9 +175,15 @@ public class AccountInfoActivity extends AppCompatActivity {
         }
     }
 
-    private void deleteUserAccount()
+    public void deleteUserAccount()
     {
         google_revokeAccess();
+
+        // Log out and start login activity without a way back
+        finish();
+        Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void google_revokeAccess() {
