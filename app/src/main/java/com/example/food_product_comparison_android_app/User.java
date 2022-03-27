@@ -5,7 +5,7 @@ import com.facebook.AccessToken;
 import java.util.ArrayList;
 
 public class User {
-    private int login_option;
+    private int login_flag;
     private String id;
     private String username;
     private String firstname;
@@ -15,10 +15,10 @@ public class User {
     private String profile_img_url;
     private AccessToken fb_access_token;
 
-    public User(int login_option, String id, String username, String firstname, String lastname, String email, String profile_img_url, String password) {
+    public User(int login_flag, String id, String username, String firstname, String lastname, String email, String profile_img_url, String password) {
         //Local user
         this.fb_access_token = null;
-        this.login_option = login_option;
+        this.login_flag = login_flag;
         this.id = id;
         this.username = username;
         this.firstname = firstname;
@@ -28,9 +28,9 @@ public class User {
         this.password = password;
     }
 
-    public User(int login_option, String id, String username, String firstname, String lastname, String email, String profile_img_url) {
+    public User(int login_flag, String id, String username, String firstname, String lastname, String email, String profile_img_url) {
         // Google user
-        this.login_option = login_option;
+        this.login_flag = login_flag;
         this.fb_access_token = null;
         this.id = id;
         this.username = username;
@@ -41,11 +41,11 @@ public class User {
         this.password = null;
     }
 
-    public User(int login_option, AccessToken fb_access_token) {
+    public User(int login_flag, AccessToken fb_access_token) {
         // Facebook user
         String s = "<Facebook User>";
 
-        this.login_option = login_option;
+        this.login_flag = login_flag;
         this.fb_access_token = fb_access_token;
         this.id = this.username = this.firstname = this.lastname = this.email = s;
         this.profile_img_url = this.password = null;
@@ -125,12 +125,12 @@ public class User {
         this.password = password;
     }
 
-    public int getLogin_option() {
-        return login_option;
+    public int getLogin_flag() {
+        return login_flag;
     }
 
-    public void setLogin_option(int login_option) {
-        this.login_option = login_option;
+    public void setLogin_flag(int login_flag) {
+        this.login_flag = login_flag;
     }
 
 }

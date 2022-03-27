@@ -97,7 +97,7 @@ public class AccountFragment extends Fragment {
         log_out_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                switch(user.getLogin_option())
+                switch(user.getLogin_flag())
                 {
                     case Utils.FACEBOOK_LOGIN:
                         ((MainActivity) requireActivity()).facebookLogOut();
@@ -148,7 +148,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (user.getLogin_option() == Utils.FACEBOOK_LOGIN)
+        if (user.getLogin_flag() == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {

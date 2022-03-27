@@ -78,7 +78,6 @@
         android:layout_marginEnd="@dimen/general_btn_margin"
         android:layout_marginBottom="24dp"
         android:text="@string/submit"
-        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (user.getLogin_option() == Utils.FACEBOOK_LOGIN)
+        if (user.getLogin_flag() == Utils.FACEBOOK_LOGIN)
         {
             /*Instantiate a request*/
             GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {
