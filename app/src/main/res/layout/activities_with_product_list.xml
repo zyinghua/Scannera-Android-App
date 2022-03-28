@@ -32,8 +32,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
 
-    <FrameLayout
+    <include
         android:id="@+id/content_container"
+        layout="@layout/pure_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="18dp"

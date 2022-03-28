@@ -40,7 +40,7 @@
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
     <string name="about_us_description">
         This App is built by 3 Computer Science students from Monash University as an university project.
-        It is aimed to help customers avoid their needs of reading the packages,
+        It is aimed to help Australian customers avoid their needs of reading the packages,
         and support their decisions on buying food products by providing nutritional comparisons.
         Hope you are enjoying the App!
     </string>
@@ -53,6 +53,7 @@
     <string name="feedback_empty">Please let us know what you thought by writing some feedback :D</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
     <string name="loading">Loading…</string>
+    <string name="loading_dialog_tag">Loading Dialog</string>
     <string name="product_not_found">Product Not Found</string>
     <string name="pnf_dialog_msg">
         Our apologise that it seems like this product hasn\'t been added to our database yet,
@@ -95,15 +96,6 @@
     <string name="cancel">Cancel</string>
     <string name="confirm_red"><font fgcolor='#A80825'>Confirm</font></string>
 
-    <!-- THIRD_PARTY_RELATED -->
-    <string name="google_user_id_prefix">ggl_</string>
-    <string name="facebook_user_id_prefix">fb_</string>
-    <string name="facebook_app_id">487504102712984</string>
-    <string name="fb_login_protocol_scheme">fb487504102712984</string>
-    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
-    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
-    <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
-
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
         <item>Soft Drinks</item>
@@ -138,6 +130,13 @@
         <item>Cheese</item>
         <item>Butter</item>
     </string-array>
+
+    <!-- THIRD_PARTY_RELATED -->
+    <string name="facebook_app_id">487504102712984</string>
+    <string name="fb_login_protocol_scheme">fb487504102712984</string>
+    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
+    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
+    <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>

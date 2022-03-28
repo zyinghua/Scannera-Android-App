@@ -197,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
             String first_name = account.getGivenName();
             String last_name = account.getFamilyName();
             String email = account.getEmail();
-            String id = getString(R.string.google_user_id_prefix) + account.getId();
+            String id = account.getId();
             String img_url = null;
 
             if (account.getPhotoUrl() != null)

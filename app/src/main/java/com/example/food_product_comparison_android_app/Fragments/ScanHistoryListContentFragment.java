@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.food_product_comparison_android_app.HomeListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.ScanHistoryListRecyclerViewAdapter;
@@ -20,19 +18,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class ScanHistoryListContentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pure_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.pure_recyclerview, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
