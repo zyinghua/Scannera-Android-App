@@ -146,7 +146,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(ProductFeedActivity.this, ProductComparisonsDisplayActivity.class);
+                Intent intent = new Intent(ProductFeedActivity.this, ProductComparisonsActivity.class);
                 startActivity(intent);
             }
         });

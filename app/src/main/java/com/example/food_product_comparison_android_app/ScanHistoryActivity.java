@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.food_product_comparison_android_app.Fragments.LoadingDialogFragment;
+import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,17 +39,15 @@ public class ScanHistoryActivity extends AppCompatActivity {
             }
         });
 
-        LoadingDialogFragment loading_dialog = new LoadingDialogFragment();
-        loading_dialog.show(getSupportFragmentManager(), getString(R.string.loading_dialog_tag));
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler uiHandler = new Handler(Looper.getMainLooper());
 
         executor.execute(()->{
             setUpContent();
-            uiHandler.post(()->{
-                //loading_dialog.dismiss();
-            });
+            uiHandler.post(loading_dialog::dismiss);
         });
     }
 
