@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".Fragments.LoadingFragment">
+    tools:context=".Fragments.LoadingDialogFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading_animation"

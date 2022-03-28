@@ -12,10 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.example.food_product_comparison_android_app.Fragments.LoadingDialogFragment;
-import com.example.food_product_comparison_android_app.Fragments.LoadingFragment;
-import com.example.food_product_comparison_android_app.Fragments.ScanHistoryListContentFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,7 +48,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
         executor.execute(()->{
             setUpContent();
             uiHandler.post(()->{
-                loading_dialog.dismiss();
+                //loading_dialog.dismiss();
             });
         });
     }
