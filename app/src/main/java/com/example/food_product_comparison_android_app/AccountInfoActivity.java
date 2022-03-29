@@ -36,7 +36,6 @@ public class AccountInfoActivity extends AppCompatActivity {
     private static final int EDIT_FIRSTNAME = 3;
     private static final int EDIT_LASTNAME = 4;
     private User user;
-    private Boolean isEdited;
     private MaterialButton edit_username_btn;
     private TextView username_tv;
     private TextView password_tv;
@@ -54,7 +53,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
 
-        this.isEdited = false;
         this.setUpToolbar();
         this.findViews();
         this.setUpListeners();
@@ -169,26 +167,16 @@ public class AccountInfoActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    // Send an update request to the server here...
+
+
                     input.setText(edited_input_et.getText().toString());
-                    isEdited = true;
                     dialog.dismiss();
                 }
             }
         });
 
         dialog.show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (isEdited)
-        {
-            // Send edited user account information to the server here
-            this.user.updateUserInfo(username_tv.getText().toString(), firstname_tv.getText().toString(), lastname_tv.getText().toString(), email_address_tv.getText().toString());
-
-        }
     }
 
     public void deleteUserAccount()

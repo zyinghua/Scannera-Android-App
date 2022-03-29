@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +64,7 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private CardView product_cv;
         private ImageView product_look;
         private TextView nameTv;
         private TextView brandTv;
@@ -72,6 +74,7 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
         public ViewHolder(View view) {
             super(view);
 
+            this.product_cv = view.findViewById(R.id.product_card_view);
             this.product_look = view.findViewById(R.id.cardview_product_look_pic);
             this.nameTv = view.findViewById(R.id.cardview_product_name);
             this.brandTv = view.findViewById(R.id.cardview_product_brand);

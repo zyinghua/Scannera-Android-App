@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private CardView product_cv;
         private TextView nameTv;
         private TextView brandTv;
         private TextView priceTv;
@@ -56,6 +58,7 @@ public class HomeListRecyclerViewAdapter extends RecyclerView.Adapter<HomeListRe
         public ViewHolder(View view) {
             super(view);
 
+            this.product_cv = view.findViewById(R.id.product_card_view);
             this.nameTv = view.findViewById(R.id.cardview_product_name);
             this.brandTv = view.findViewById(R.id.cardview_product_brand);
             this.priceTv = view.findViewById(R.id.cardview_product_price);

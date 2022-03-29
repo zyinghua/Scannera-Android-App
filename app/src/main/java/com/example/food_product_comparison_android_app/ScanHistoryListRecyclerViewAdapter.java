@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,6 +84,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
+        private CardView product_cv;
         private TextView nameTv;
         private TextView brandTv;
         private TextView priceTv;
@@ -91,6 +93,7 @@ public class ScanHistoryListRecyclerViewAdapter extends RecyclerView.Adapter<Rec
         public ItemViewHolder(View view) {
             super(view);
 
+            this.product_cv = view.findViewById(R.id.product_card_view);
             this.nameTv = view.findViewById(R.id.cardview_product_name);
             this.brandTv = view.findViewById(R.id.cardview_product_brand);
             this.priceTv = view.findViewById(R.id.cardview_product_price);
