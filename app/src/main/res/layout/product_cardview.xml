@@ -10,12 +10,12 @@
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="true"
     android:clickable="true"
-    card_view:cardBackgroundColor="@color/product_card_view_background_dark"
     card_view:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:background="@drawable/product_cardview_background">
 
         <ImageView
             android:id="@+id/cardview_product_look_pic"
@@ -36,7 +36,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="12dp"
             android:maxLines="3"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@id/star_btn"
             app:layout_constraintStart_toStartOf="@id/lr_guideline"
