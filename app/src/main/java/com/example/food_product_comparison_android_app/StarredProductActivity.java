@@ -1,12 +1,15 @@
 package com.example.food_product_comparison_android_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,26 +17,19 @@ import android.widget.TextView;
 import com.example.food_product_comparison_android_app.LoadingDialog;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StarredProductActivity extends AppCompatActivity {
-    private ImageButton top_back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_with_product_list);
 
+        this.setUpToolbar();
         ((TextView) findViewById(R.id.activity_title)).setText(getString(R.string.starred_products));
-
-        this.top_back_btn = findViewById(R.id.top_back_btn);
-        top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -62,5 +58,27 @@ public class StarredProductActivity extends AppCompatActivity {
 
         StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(getApplicationContext(), starred_products);
         recyclerView.setAdapter(spAdapter);
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            // This is to sync the toolbar up button with the back button
+            onBackPressed();
+            return true;
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

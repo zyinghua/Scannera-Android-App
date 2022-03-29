@@ -83,12 +83,7 @@
         <activity
             android:name=".ScanHistoryActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FeedbackActivity"
             android:exported="false"
@@ -101,12 +96,7 @@
         <activity
             android:name=".AboutUsActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ScanActivity"
             android:exported="false"

@@ -144,6 +144,7 @@
     <string name="email_address_invalid">Please enter a valid Email Address.</string>
 
     <!-- ACCESSIBILITY RELATED CONTENT DESCRIPTIONS -->
+    <string name="home_collapsing_image_content_description">An image related to this App activity</string>
     <string name="content_description_start_icon">A start icon displayed</string>
     <string name="content_description_end_icon">An end icon displayed</string>
     <string name="back_btn_content_description">A back button</string>

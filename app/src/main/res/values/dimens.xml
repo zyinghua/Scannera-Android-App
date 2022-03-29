@@ -2,7 +2,6 @@
 <resources>
     <dimen name="sv_main_padding_bottom">32dp</dimen>
     <dimen name="activity_title_text_size">28sp</dimen>
-    <dimen name="activity_title_margin_start">24dp</dimen>
     <dimen name="bottom_main_btn_margin_top">48dp</dimen>
     <dimen name="general_btn_margin">24dp</dimen>
     <dimen name="social_icons_size">42dp</dimen>

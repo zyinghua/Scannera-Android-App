@@ -22,7 +22,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/font/eb_garamond.xml" value="0.5838541666666667" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/font/fonts.xml" value="0.5287037037037037" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/font/roboto_slab.xml" value="0.5838541666666667" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activities_with_product_list.xml" value="0.2692502532928065" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activities_with_product_list.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_about_us.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_account_info.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_feedback.xml" value="0.5" />
@@ -47,7 +47,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_account.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_camera_permission_required_dialog.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_forgotten_password.xml" value="0.5390625" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home_content.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_loading.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_login.xml" value="0.5" />

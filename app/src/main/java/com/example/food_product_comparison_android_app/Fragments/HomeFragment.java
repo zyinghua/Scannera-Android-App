@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         this.findViews(view);
-        setUpToolbar(view);
+        this.setUpToolbar(view);
         this.loadUserProfile();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             activity.setSupportActionBar(toolbar);
-//            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+//            Objects.requireNonNull(activity.getSupportActionBar()).setDisplayShowTitleEnabled(false);
         }
     }
 
