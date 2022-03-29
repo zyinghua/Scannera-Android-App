@@ -52,8 +52,8 @@ public class StarredProductActivity extends AppCompatActivity {
         ArrayList<Product> starred_products = new ArrayList<>();
 
         //******************************************************
-        starred_products.add(new Product("12431435235", "abcasgagahgewheasrhsadrhsedrthsedr", "dd", 55.5f, false));
-        starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f, true));
+        starred_products.add(new Product("12431435235", "abcasgagahgewheasrhsadrhsedrthsedr", "dd", 55.5f, "I don't know", false));
+        starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f,"Energy Drink", true));
         //******************************************************
 
         StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(getApplicationContext(), starred_products);

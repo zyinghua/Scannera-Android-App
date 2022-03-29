@@ -7,7 +7,8 @@ public class Product {
     private String barcode;
     private String brand;
     private String name;
-    private Float Price;
+    private Float price;
+    private String category;
     private Bitmap product_look_pic;
     private Boolean is_starred;
 
@@ -23,19 +24,21 @@ public class Product {
         this.barcode = barcode;
     }
 
-    public Product(String barcode, String brand, String name, Float price, Boolean is_starred) {
+    public Product(String barcode, String brand, String name, Float price, String category, Boolean is_starred) {
         this.barcode = barcode;
         this.brand = brand;
         this.name = name;
-        Price = price;
+        this.price = price;
+        this.category = category;
         this.is_starred = is_starred;
     }
 
-    public Product(String barcode, String brand, String name, Float price, Bitmap product_look_pic, Boolean is_starred) {
+    public Product(String barcode, String brand, String name, Float price, String category, Bitmap product_look_pic, Boolean is_starred) {
         this.barcode = barcode;
         this.brand = brand;
         this.name = name;
-        Price = price;
+        this.price = price;
+        this.category = category;
         this.product_look_pic = product_look_pic;
         this.is_starred = is_starred;
     }
@@ -49,11 +52,11 @@ public class Product {
     }
 
     public Float getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(Float price) {
-        Price = price;
+        price = price;
     }
 
     public Bitmap getProduct_look_pic() {
@@ -78,5 +81,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
