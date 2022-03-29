@@ -2,12 +2,14 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -35,7 +37,6 @@ public class AccountInfoActivity extends AppCompatActivity {
     private static final int EDIT_LASTNAME = 4;
     private User user;
     private Boolean isEdited;
-    private ImageButton top_back_btn;
     private MaterialButton edit_username_btn;
     private TextView username_tv;
     private TextView password_tv;
@@ -54,6 +55,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_info);
 
         this.isEdited = false;
+        this.setUpToolbar();
         this.findViews();
         this.setUpListeners();
 
@@ -72,7 +74,6 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.top_back_btn = findViewById(R.id.top_back_btn);
         this.username_tv = findViewById(R.id.username_tv);
         this.password_tv = findViewById(R.id.password_tv);
         this.email_address_tv = findViewById(R.id.email_address_tv);
@@ -88,13 +89,6 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
-        this.top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
         this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,5 +216,27 @@ public class AccountInfoActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            // This is to sync the toolbar up button with the back button
+            onBackPressed();
+            return true;
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

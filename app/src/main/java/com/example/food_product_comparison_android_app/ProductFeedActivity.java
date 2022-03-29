@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.Barrier;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -40,7 +42,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ProductFeedActivity extends AppCompatActivity {
-    private ImageButton top_back_btn;
     private ConstraintLayout mainConstraintLayout;
     private ConstraintLayout dynamic_input_prompt;
     private ConstraintLayout brand_view_group;
@@ -63,13 +64,13 @@ public class ProductFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_feed);
 
+        this.setUpToolbar();
         this.findViews();
         this.setUpListeners();
     }
 
     private void findViews()
     {
-        this.top_back_btn = findViewById(R.id.top_back_btn);
         this.dynamic_input_prompt = findViewById(R.id.dynamic_input_prompt);
         this.brand_view_group = findViewById(R.id.product_brand_views);
         this.name_view_group = findViewById(R.id.product_name_views);
@@ -85,13 +86,6 @@ public class ProductFeedActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
-        this.top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
         this.brand_view_group.findViewById(R.id.product_brand_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -433,6 +427,28 @@ public class ProductFeedActivity extends AppCompatActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            // This is to sync the toolbar up button with the back button
+            onBackPressed();
+            return true;
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -11,13 +11,45 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/product_feed_constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/sv_main_padding_bottom">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@android:color/transparent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.Scannera.Toolbar"
+            android:theme="@style/Widget.Scannera.ToolbarTheme" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/contribute_new_product"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/activity_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dynamic_input_prompt"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline1"
             app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
             app:layout_constraintTop_toTopOf="@id/product_brand_views">
 
@@ -86,40 +118,13 @@
                 app:layout_constraintTop_toBottomOf="@id/input_layout"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/top_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:contentDescription="@string/back_btn_content_description"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toTopOf="@+id/back_btn_h_guideline"
-            app:layout_constraintEnd_toStartOf="@+id/back_btn_v_guideline"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/activity_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_slab"
-            android:text="@string/contribute_new_product"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="@dimen/activity_title_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_btn_h_guideline" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:visibility="invisible"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/product_brand_views"
             android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/activity_title">
             <TextView
@@ -167,7 +172,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/product_name_views"
             android:layout_marginTop="@dimen/product_feed_h_spacing"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/brand_barrier">
             <TextView
@@ -214,7 +219,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/product_price_views"
             android:layout_marginTop="@dimen/product_feed_h_spacing"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/name_barrier">
 
@@ -262,7 +267,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/product_category_views"
             android:layout_marginTop="@dimen/product_feed_h_spacing"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/price_barrier">
             <TextView
@@ -310,7 +315,7 @@
             android:id="@+id/product_nutritional_info_title_views"
             android:layout_marginTop="@dimen/product_feed_h_spacing"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/category_barrier">
             <TextView
                 android:id="@+id/product_nutritional_info_label"
@@ -343,7 +348,7 @@
             android:contentDescription="@string/nutritional_pic_content_description"
             app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline1"
             app:layout_constraintTop_toBottomOf="@id/product_nutritional_info_title_views"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -354,7 +359,7 @@
             android:id="@+id/product_look_title_views"
             android:layout_marginTop="@dimen/product_feed_h_spacing"
             app:layout_constraintEnd_toStartOf="@id/end_v_guideline2"
-            app:layout_constraintStart_toStartOf="@id/start_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline2"
             app:layout_constraintTop_toBottomOf="@id/nutritional_info_pic">
             <TextView
                 android:id="@+id/product_look_label"
@@ -387,7 +392,7 @@
             android:contentDescription="@string/product_look_content_description"
             app:layout_constraintEnd_toEndOf="@id/end_v_guideline"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/back_btn_v_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_v_guideline1"
             app:layout_constraintTop_toBottomOf="@id/product_look_title_views"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -407,21 +412,14 @@
             app:layout_constraintTop_toBottomOf="@id/product_look_pic" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/back_btn_h_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.07" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/back_btn_v_guideline"
+            android:id="@+id/start_v_guideline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/start_v_guideline"
+            android:id="@+id/start_v_guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
