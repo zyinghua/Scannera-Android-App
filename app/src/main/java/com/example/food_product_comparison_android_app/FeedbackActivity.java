@@ -1,8 +1,11 @@
 package com.example.food_product_comparison_android_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,8 +17,9 @@ import android.widget.Toast;
 
 import com.facebook.login.Login;
 
+import java.util.Objects;
+
 public class FeedbackActivity extends AppCompatActivity {
-    private ImageButton top_back_btn;
     private RatingBar rating_bar;
     private EditText feedback_et;
     private Button submit_btn;
@@ -25,14 +29,8 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        this.setUpToolbar();
         this.findViews();
-
-        top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +64,30 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.top_back_btn = findViewById(R.id.top_back_btn);
         this.rating_bar = findViewById(R.id.about_us_rating_bar);
         this.feedback_et = findViewById(R.id.feedback_et);
         this.submit_btn = findViewById(R.id.submit_btn);
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            // This is to sync the toolbar up button with the back button
+            onBackPressed();
+            return true;
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
