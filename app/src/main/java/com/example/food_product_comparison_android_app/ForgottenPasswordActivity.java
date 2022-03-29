@@ -1,6 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import java.util.Objects;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
     public static final String RESET_EMAIl_ADDRESS_KEY = "RESET_EMAIl_ADDRESS";
-    private ImageButton top_back_btn;
     private TextView activity_title;
     private LottieAnimationView forgot_password_animation;
     private MaterialButton send_email_btn;
@@ -31,6 +31,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotten_password);
 
+        this.setUpToolbar();
         this.findViews();
         this.setDefaultListeners();
         this.setAnimationsOnStart();
@@ -38,7 +39,6 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.top_back_btn = findViewById(R.id.top_back_btn);
         this.forgot_password_animation = findViewById(R.id.forgot_password_animation);
         this.send_email_btn = findViewById(R.id.send_email_btn);
         this.activity_title = findViewById(R.id.activity_title);
@@ -49,13 +49,6 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
 
     private void setDefaultListeners()
     {
-        this.top_back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
         this.send_email_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,21 +64,18 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     {
         float v = 0;
 
-        top_back_btn.setTranslationX(Utils.login_view_animation_translation);
         activity_title.setTranslationY(-Utils.login_view_animation_translation);
         forgot_password_animation.setTranslationY(-Utils.login_view_animation_translation);
         instruction.setTranslationX(Utils.login_view_animation_translation);
         email_input.setTranslationX(Utils.login_view_animation_translation);
         send_email_btn.setTranslationX(Utils.login_view_animation_translation);
 
-        top_back_btn.setAlpha(v);
         activity_title.setAlpha(v);
         forgot_password_animation.setAlpha(v);
         instruction.setAlpha(v);
         email_input.setAlpha(v);
         send_email_btn.setAlpha(v);
 
-        top_back_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         activity_title.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         forgot_password_animation.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         instruction.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
@@ -93,4 +83,11 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         send_email_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
     }
 
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
 }
