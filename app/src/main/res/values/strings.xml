@@ -37,6 +37,7 @@
     <string name="dialog_btn_reject">Reject</string>
     <string name="dialog_btn_enable">Enable</string>
     <string name="search">Search</string>
+    <string name="barcode_scanner_title">Scan Barcode</string>
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
     <string name="about_us_description">
         This App is built by 3 Computer Science students from Monash University as an university project.

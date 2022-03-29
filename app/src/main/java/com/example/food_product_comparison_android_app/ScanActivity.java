@@ -45,7 +45,7 @@ import java.util.concurrent.Executors;
 
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
-    private ImageButton close_btn;
+    private ImageButton back_btn;
     private TextView hint;
 
     @Override
@@ -93,8 +93,8 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
 
-        close_btn = findViewById(R.id.top_close_btn);
-        close_btn.setOnClickListener(new View.OnClickListener() {
+        back_btn = findViewById(R.id.top_back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
