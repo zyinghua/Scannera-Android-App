@@ -62,4 +62,10 @@
         <item name="colorControlNormal">@color/grey</item>
     </style>
 
+    <style name="Widget.Scannera.ToolbarCloseTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/grey</item>
+        <item name="homeAsUpIndicator">@drawable/ic_close</item>
+    </style>
+
 </resources>
