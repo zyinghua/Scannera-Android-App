@@ -10,8 +10,9 @@
     <color name="colorPrimaryDark">#1F4E78</color>
     <color name="colorPrimaryDarkVar">#C6285985</color>
     <color name="pinky_red">#DA688F</color>
+    <color name="grey">#7E7E7E</color>
     <color name="textInputOutlineColor">#45D5E8</color>
     <color name="rating_star_color">#F9D31E</color>
     <color name="product_cardview_background">#ECF8FA</color>
-    <color name="product_cardview_background_dark">#0C1720</color>
+    <color name="product_cardview_background_dark">#1D2325</color>
 </resources>

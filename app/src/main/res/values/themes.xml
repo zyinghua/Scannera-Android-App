@@ -50,4 +50,16 @@
         <item name="android:fontFamily">@font/roboto_slab</item>
     </style>
 
+    <style name="Widget.Scannera.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="titleTextColor">?attr/colorPrimary</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+    </style>
+
+    <style name="Widget.Scannera.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/grey</item>
+    </style>
+
 </resources>

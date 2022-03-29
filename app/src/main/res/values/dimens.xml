@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="sv_main_padding_bottom">32dp</dimen>
+    <dimen name="activity_title_margin_start">24dp</dimen>
+    <dimen name="bottom_main_btn_margin_top">48dp</dimen>
     <dimen name="general_btn_margin">24dp</dimen>
     <dimen name="social_icons_size">42dp</dimen>
     <dimen name="social_icons_margin">20dp</dimen>

@@ -285,7 +285,7 @@
             android:id="@+id/delete_acc_btn"
             style="@style/Widget.Scannera.Button"
             android:layout_width="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="@dimen/bottom_main_btn_margin_top"
             android:layout_marginStart="@dimen/general_btn_margin"
             android:layout_marginEnd="@dimen/general_btn_margin"
             android:backgroundTint="@color/red"

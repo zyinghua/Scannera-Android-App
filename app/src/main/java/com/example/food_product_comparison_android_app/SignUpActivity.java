@@ -1,16 +1,18 @@
 package com.example.food_product_comparison_android_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+import android.view.Window;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class SignUpActivity extends AppCompatActivity {
-    private ImageButton top_back_button;
     private TextInputLayout username_input;
     private TextInputLayout first_name_input;
     private TextInputLayout last_name_input;
@@ -24,20 +26,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        setUpToolbar();
         findViews();
         setAnimationsOnStart();
-
-        this.top_back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
     }
 
     private void findViews()
     {
-        this.top_back_button = findViewById(R.id.top_back_btn);
         this.username_input = findViewById(R.id.username_sign_up);
         this.first_name_input = findViewById(R.id.firstname_sign_up);
         this.last_name_input = findViewById(R.id.lastname_sign_up);
@@ -56,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         float v = 0;
 
-        top_back_button.setTranslationX(Utils.login_view_animation_translation);
         username_input.setTranslationX(Utils.login_view_animation_translation);
         first_name_input.setTranslationX(Utils.login_view_animation_translation);
         last_name_input.setTranslationX(Utils.login_view_animation_translation);
@@ -65,7 +59,6 @@ public class SignUpActivity extends AppCompatActivity {
         confirm_password_input.setTranslationX(Utils.login_view_animation_translation);
         sign_up_btn.setTranslationY(Utils.login_view_animation_translation);
 
-        top_back_button.setAlpha(v);
         username_input.setAlpha(v);
         first_name_input.setAlpha(v);
         last_name_input.setAlpha(v);
@@ -74,7 +67,6 @@ public class SignUpActivity extends AppCompatActivity {
         confirm_password_input.setAlpha(v);
         sign_up_btn.setAlpha(v);
 
-        top_back_button.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         username_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(200).start();
         first_name_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(300).start();
         last_name_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
@@ -82,5 +74,13 @@ public class SignUpActivity extends AppCompatActivity {
         password_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(600).start();
         confirm_password_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(700).start();
         sign_up_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 }
