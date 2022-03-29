@@ -38,7 +38,7 @@ public class StarredProductActivity extends AppCompatActivity {
         Handler uiHandler = new Handler(Looper.getMainLooper());
 
         executor.execute(()->{
-            setUpContent();
+            this.setUpContent();
             uiHandler.post(loading_dialog::dismiss);
         });
     }

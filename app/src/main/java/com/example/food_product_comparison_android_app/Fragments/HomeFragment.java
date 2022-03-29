@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.food_product_comparison_android_app.HomeListRecyclerViewAdapter;
+import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.R;
@@ -38,6 +41,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeFragment extends Fragment {
     private User user;
@@ -65,20 +70,19 @@ public class HomeFragment extends Fragment {
 
         this.findViews(view);
         this.setUpToolbar(view);
+
+        LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
+        loading_dialog.show();
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler uiHandler = new Handler(Looper.getMainLooper());
+
         this.loadUserProfile();
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        this.homeRecyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<Product> products = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++)
-        {
-            products.add(new Product(i + ""));
-        }
-
-        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
-        this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
+        executor.execute(()->{
+            this.setUpContent();
+            uiHandler.post(loading_dialog::dismiss);
+        });
 
         return view;
     }
@@ -135,6 +139,22 @@ public class HomeFragment extends Fragment {
 
             welcome_username_tv.setText(getString(R.string.home_greeting)+ " " + user.getUsername());
         }
+    }
+
+    private void setUpContent()
+    {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        this.homeRecyclerView.setLayoutManager(layoutManager);
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++)
+        {
+            products.add(new Product(i + ""));
+        }
+
+        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
+        this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
     }
 
     @Override
