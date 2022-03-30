@@ -10,11 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.example.food_product_comparison_android_app.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -56,7 +52,7 @@ public class StarredProductActivity extends AppCompatActivity {
         starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f,"Energy Drink", true));
         //******************************************************
 
-        StarredProductListRecyclerViewAdapter spAdapter = new StarredProductListRecyclerViewAdapter(getApplicationContext(), starred_products);
+        ProductListRecyclerViewAdapter spAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), starred_products);
         recyclerView.setAdapter(spAdapter);
     }
 

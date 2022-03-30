@@ -15,26 +15,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<StarredProductListRecyclerViewAdapter.ViewHolder> {
+public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<ProductListRecyclerViewAdapter.ViewHolder> {
     Context appContext;
-    List<Product> starred_products;
+    List<Product> products;
 
-    public StarredProductListRecyclerViewAdapter(Context context, List<Product> starred_products) {
+    public ProductListRecyclerViewAdapter(Context appContext) {
+        this.appContext = appContext;
+    }
+
+    public ProductListRecyclerViewAdapter(Context context, List<Product> products) {
         this.appContext = context;
-        this.starred_products = starred_products;
+        this.products = products;
     }
 
     @NonNull
     @Override
-    public StarredProductListRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StarredProductListRecyclerViewAdapter.ViewHolder holder, int position) {
-        Product product = starred_products.get(position);
+    public void onBindViewHolder(@NonNull ProductListRecyclerViewAdapter.ViewHolder holder, int position) {
+        Product product = products.get(position);
 
         holder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.monash_uni_img));
         holder.nameTv.setText(product.getName());
@@ -60,16 +64,16 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return starred_products == null ? 0 : starred_products.size();
+        return products == null ? 0 : products.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView product_cv;
-        private ImageView product_look;
-        private TextView nameTv;
-        private TextView brandTv;
-        private TextView priceTv;
-        private ImageButton star_btn;
+        private final CardView product_cv;
+        private final ImageView product_look;
+        private final TextView nameTv;
+        private final TextView brandTv;
+        private final TextView priceTv;
+        private final ImageButton star_btn;
 
         public ViewHolder(View view) {
             super(view);
@@ -83,7 +87,11 @@ public class StarredProductListRecyclerViewAdapter extends RecyclerView.Adapter<
         }
     }
 
-    public void setStarredProducts(List<Product> starred_products) {
-        this.starred_products = starred_products;
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

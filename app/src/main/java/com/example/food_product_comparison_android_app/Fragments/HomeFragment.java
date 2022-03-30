@@ -1,6 +1,6 @@
 package com.example.food_product_comparison_android_app.Fragments;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,10 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.food_product_comparison_android_app.HomeListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.LoadingDialog;
-import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.Product;
+import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.User;
 import com.example.food_product_comparison_android_app.Utils;
@@ -39,8 +38,6 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -103,6 +100,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void loadUserProfile() {
         if (user.getLogin_flag() == Utils.FACEBOOK_LOGIN)
         {
@@ -150,11 +148,11 @@ public class HomeFragment extends Fragment {
 
         for(int i = 0; i < 10; i++)
         {
-            products.add(new Product(i + ""));
+            products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
         }
 
-        HomeListRecyclerViewAdapter homeListRecyclerViewAdapter = new HomeListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
-        this.homeRecyclerView.setAdapter(homeListRecyclerViewAdapter);
+        ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
+        this.homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
     }
 
     @Override
