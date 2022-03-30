@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -93,6 +94,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 });
             }
             catch (NullPointerException e) {
+                Toast.makeText(activityContext, "NullPointerException: There exists product(s) not fully initialised.", Toast.LENGTH_LONG).show();
                 activityContext.onBackPressed();
             }
         }

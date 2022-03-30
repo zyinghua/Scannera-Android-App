@@ -44,23 +44,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // -----------------------------------------------
-        Gson gson = new Gson();
-        SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
-        SharedPreferences.Editor editor = sp.edit();
-        ArrayList<Product> products;
-        ArrayList<String> dates;
-        dates = new ArrayList<>();
-        dates.add("16 Mar 2022, Wednesday");
-        products = new ArrayList<>();
-        products.add(new Product("14210247109512"));
-        editor.putString("ScanHistoryProducts", gson.toJson(products));
-        editor.putString("ScanHistoryDates", gson.toJson(dates));
-        editor.apply();
-        // -----------------------------------------------
-
-        this.findViews();
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.google_client_id))
                 .requestEmail()
@@ -69,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         this.user_info = getIntent().getStringExtra(Utils.USER_INFO_KEY);
 
+        this.findViews();
         this.initialiseFragments();
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.homeFragment).commit();
