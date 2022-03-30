@@ -144,14 +144,14 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         this.homeRecyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Object> products = new ArrayList<>();
 
         for(int i = 0; i < 10; i++)
         {
             products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
         }
 
-        ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),products);
+        ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
         this.homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
     }
 

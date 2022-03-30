@@ -45,14 +45,14 @@ public class StarredProductActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Product> starred_products = new ArrayList<>();
+        ArrayList<Object> starred_products = new ArrayList<>();
 
         //******************************************************
         starred_products.add(new Product("12431435235", "abcasgagahgewheasrhsadrhsedrthsedr", "dd", 55.5f, "I don't know", false));
         starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f,"Energy Drink", true));
         //******************************************************
 
-        ProductListRecyclerViewAdapter spAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), starred_products);
+        ProductListRecyclerViewAdapter spAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), this, starred_products);
         recyclerView.setAdapter(spAdapter);
     }
 

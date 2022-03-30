@@ -1,5 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,59 +17,103 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<ProductListRecyclerViewAdapter.ViewHolder> {
-    Context appContext;
-    List<Product> products;
+public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final int TITLE_VIEW_TYPE = 0;
+    public static final int ITEM_VIEW_TYPE = 1;
+    private final Context appContext;
+    private final Activity activityContext;
+    private List<Object> items;
 
-    public ProductListRecyclerViewAdapter(Context appContext) {
+    public ProductListRecyclerViewAdapter(Context appContext, Activity activityContext) {
         this.appContext = appContext;
+        this.activityContext = activityContext;
     }
 
-    public ProductListRecyclerViewAdapter(Context context, List<Product> products) {
+    public ProductListRecyclerViewAdapter(Context context, Activity activityContext, List<Object> items) {
         this.appContext = context;
-        this.products = products;
+        this.activityContext = activityContext;
+        this.items = items;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (items.get(position) instanceof String)
+            return TITLE_VIEW_TYPE;
+        else
+            return ITEM_VIEW_TYPE;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent, false);
-
-        return new ViewHolder(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TITLE_VIEW_TYPE)
+        {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scan_history_date_title, parent, false);
+            return new TitleViewHolder(v);
+        }
+        else // actual product item
+        {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent, false);
+            return new ProductViewHolder(v);
+        }
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Override
-    public void onBindViewHolder(@NonNull ProductListRecyclerViewAdapter.ViewHolder holder, int position) {
-        Product product = products.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType() == TITLE_VIEW_TYPE) {
+            TitleViewHolder titleViewHolder = (TitleViewHolder) holder;
+            titleViewHolder.tv.setText(items.get(position).toString());
+        }
+        else
+        {
+            ProductViewHolder productViewHolder = (ProductViewHolder) holder;
+            Product product = (Product) items.get(position);
 
-        holder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.monash_uni_img));
-        holder.nameTv.setText(product.getName());
-        holder.brandTv.setText(product.getBrand());
-        holder.priceTv.setText("$ " + product.getPrice());
-        holder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext,
-                product.getIs_starred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
-        holder.star_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (product.getIs_starred())
-                {
-                    // Un-star the product
-                    holder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
-                } else {
-                    // Star the product
-                    holder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
-                }
-                product.setIs_starred(!product.getIs_starred());
+            try{
+                productViewHolder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.monash_uni_img));
+                productViewHolder.nameTv.setText(product.getName());
+                productViewHolder.brandTv.setText(product.getBrand());
+                productViewHolder.priceTv.setText("$ " + product.getPrice());
+                productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext,
+                        product.getIs_starred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
+                productViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (product.getIs_starred())
+                        {
+                            // Un-star the product
+                            productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
+                        } else {
+                            // Star the product
+                            productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
+                        }
+                        product.setIs_starred(!product.getIs_starred());
+                    }
+                });
             }
-        });
+            catch (NullPointerException e) {
+                activityContext.onBackPressed();
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
-        return products == null ? 0 : products.size();
+        return items == null ? 0 : items.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class TitleViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tv;
+
+        public TitleViewHolder(View view) {
+            super(view);
+
+            this.tv = view.findViewById(R.id.date_title_tv);
+        }
+    }
+
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
         private final CardView product_cv;
         private final ImageView product_look;
         private final TextView nameTv;
@@ -75,7 +121,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
         private final TextView priceTv;
         private final ImageButton star_btn;
 
-        public ViewHolder(View view) {
+        public ProductViewHolder(View view) {
             super(view);
 
             this.product_cv = view.findViewById(R.id.product_card_view);
@@ -87,11 +133,11 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
         }
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Object> getItems() {
+        return items;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setItems(List<Object> items) {
+        this.items = items;
     }
 }

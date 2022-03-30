@@ -79,7 +79,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
         }
         // -----------------------------------------------
 
-        ScanHistoryListRecyclerViewAdapter shAdapter = new ScanHistoryListRecyclerViewAdapter(getApplicationContext(),items);
+        ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(),this, items);
         recyclerView.setAdapter(shAdapter);
     }
 
