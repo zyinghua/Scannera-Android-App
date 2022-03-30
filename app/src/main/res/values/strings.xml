@@ -101,6 +101,7 @@
     <string name="brand">Brand:</string>
     <string name="price">Price:</string>
     <string name="nutri_info">Nutritional Information:</string>
+    <string name="similar_products">Similar Products</string>
 
 
     <!-- Category Dropdown Menu String Array -->
