@@ -96,6 +96,11 @@
     </string>
     <string name="cancel">Cancel</string>
     <string name="confirm_red"><font fgcolor='#A80825'>Confirm</font></string>
+    <string name="category">Category:</string>
+    <string name="name">Name:</string>
+    <string name="brand">Brand:</string>
+    <string name="price">Price:</string>
+
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

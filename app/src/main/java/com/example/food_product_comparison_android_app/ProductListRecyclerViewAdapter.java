@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,12 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                             productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
                         }
                         product.setIs_starred(!product.getIs_starred());
+                    }
+                });
+                productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityContext.startActivity(new Intent(activityContext, ProductComparisonsActivity.class));
                     }
                 });
             }
