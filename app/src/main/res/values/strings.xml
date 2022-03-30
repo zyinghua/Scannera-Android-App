@@ -152,7 +152,7 @@
     <string name="enter_info_hint">Please enter the information here</string>
     <string name="feedback_et_hint">Please write your feedback here</string>
     <string name="category_drop_down_menu_hint">Please select or enter a category</string>
-    <string name="sort_by_selection_hint">Please select one to sort the products</string>
+    <string name="sort_by_selection_hint">Sort the products by selecting a factor</string>
 
     <string name="login_title_image">A symbolic image of Scannera App</string>
     <string name="home_collapsing_image_content_description">A symbolic activity image related to Scannera App</string>
