@@ -47,8 +47,10 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/product_info_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_title">
@@ -97,7 +99,8 @@
             style="@style/Widget.Scannera.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
             android:text="@string/name"
             android:textColor="@color/black"
             android:textSize="@dimen/comparisons_activity_text_size"
@@ -123,7 +126,8 @@
             style="@style/Widget.Scannera.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
             android:text="@string/brand"
             android:textColor="@color/black"
             android:textSize="@dimen/comparisons_activity_text_size"
@@ -149,7 +153,8 @@
             style="@style/Widget.Scannera.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
             android:text="@string/price"
             android:textColor="@color/black"
             android:textSize="@dimen/comparisons_activity_text_size"
@@ -191,5 +196,28 @@
             app:layout_constraintGuide_percent="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/nutritional_info_label"
+        style="@style/Widget.Scannera.TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nutri_info"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/comparisons_activity_text_size"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_info_section" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nutrition_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nutritional_info_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

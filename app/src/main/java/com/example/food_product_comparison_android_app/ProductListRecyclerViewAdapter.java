@@ -55,7 +55,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
         }
         else // actual product item
         {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product, parent, false);
             return new ProductViewHolder(v);
         }
     }
