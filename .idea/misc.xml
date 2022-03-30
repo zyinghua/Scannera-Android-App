@@ -47,6 +47,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan_history.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_sign_up.xml" value="0.5" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_similar_products.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_test.xml" value="0.2692502532928065" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_nutritional_attribute.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_product.xml" value="0.5536458333333333" />
@@ -59,7 +60,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_account.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_camera_permission_required_dialog.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_forgotten_password.xml" value="0.5390625" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home_content.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_loading.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_login.xml" value="0.5" />

@@ -11,6 +11,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
@@ -22,13 +24,18 @@ import java.util.concurrent.Executors;
 
 public class SimilarProductsFragment extends Fragment {
     private RecyclerView recyclerView;
+    private AutoCompleteTextView sort_by_input;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.pure_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.activity_similar_products, container, false);
+
         this.recyclerView = view.findViewById(R.id.recyclerView);
+        this.sort_by_input = view.findViewById(R.id.sort_by_autoCompleteTv);
+        String[] attributes = new String[]{"Sugar", "Fat Total"};
+        this.setCategoryAdapter(attributes);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler uiHandler = new Handler(Looper.getMainLooper());
@@ -57,5 +64,11 @@ public class SimilarProductsFragment extends Fragment {
 
         ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
         this.recyclerView.setAdapter(productListRecyclerViewAdapter);
+    }
+
+    private void setCategoryAdapter(String[] nutritional_attributes)
+    {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, nutritional_attributes);
+        this.sort_by_input.setAdapter(arrayAdapter);
     }
 }
