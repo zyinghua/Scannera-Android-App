@@ -3,8 +3,11 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +17,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,6 +34,8 @@ public class ProductComparisonsActivity extends AppCompatActivity {
     private TextView price_tv;
     private ImageButton star_btn;
     private RecyclerView nutrition_recycler_view;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,8 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         this.price_tv = findViewById(R.id.product_price_value);
         this.star_btn = findViewById(R.id.star_btn);
         this.nutrition_recycler_view = findViewById(R.id.nutrition_recyclerView);
+        this.tabLayout = findViewById(R.id.comparisons_tab_layout);
+        this.viewPager = findViewById(R.id.comparisons_view_pager);
     }
 
     private void setUpListeners()
@@ -81,6 +91,22 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         this.price_tv.setText("$888.88");
 
         // Nutrition Recycler View Set Up
+        this.setUpNutritionRecyclerView();
+
+        //Tab Layout & ViewPager Set Up
+        this.setUpTabLayoutViewPager();
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void setUpNutritionRecyclerView()
+    {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         this.nutrition_recycler_view.setLayoutManager(layoutManager);
 
@@ -98,12 +124,14 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         this.nutrition_recycler_view.setAdapter(nuAdapter);
     }
 
-    private void setUpToolbar()
+    private void setUpTabLayoutViewPager()
     {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        this.tabLayout.setupWithViewPager(this.viewPager);
+
+        ComparisonsVPAdapter vpAdapter = new ComparisonsVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
+
+        this.viewPager.setAdapter(vpAdapter);
     }
 
     @Override
