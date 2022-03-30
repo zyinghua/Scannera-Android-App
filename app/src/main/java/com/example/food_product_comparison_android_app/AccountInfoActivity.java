@@ -184,7 +184,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         google_revokeAccess();
 
         // Log out and start login activity without a way back
-        finish();
         Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

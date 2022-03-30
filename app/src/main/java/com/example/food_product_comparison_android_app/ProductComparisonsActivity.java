@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,11 +89,13 @@ public class ProductComparisonsActivity extends AppCompatActivity {
 
     private void setUpContent()
     {
+        //******************************************************
         this.product_look.setImageDrawable(getDrawable(R.drawable.monash_uni_img));
         this.category_tv.setText("Energy Pizza");
         this.name_tv.setText("Chocolate Pizza");
         this.brand_tv.setText("Swisse");
         this.price_tv.setText("$888.88");
+        //******************************************************
 
         // Nutrition Recycler View Set Up
         this.setUpNutritionRecyclerView();
@@ -145,6 +149,13 @@ public class ProductComparisonsActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         }
+        else if (item.getItemId() == R.id.home_toolbar)
+        {
+            Intent intent = new Intent(ProductComparisonsActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
         else
         {
             return super.onOptionsItemSelected(item);
@@ -162,5 +173,11 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = this.viewPager.getLayoutParams();
         params.height = displayMetrics.heightPixels - this.tabLayout.getHeight();
         this.viewPager.setLayoutParams(params);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.comparisons_toolbar_menu, menu);
+        return true;
     }
 }
