@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.food_product_comparison_android_app.Fragments.LoginIconFragment;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -48,9 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.login_icon_fragment, new LoginIconFragment()).commit();
 
         findViews();
         setAnimationsOnStart();
