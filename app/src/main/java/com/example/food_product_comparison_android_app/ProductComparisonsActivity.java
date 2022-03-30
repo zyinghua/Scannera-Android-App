@@ -12,11 +12,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -146,5 +149,18 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        // Set up bottom View Pager's height, otherwise nothing will be shown.
+        // Allow scrolling down the outer scroll view up to the tab layout.
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ViewGroup.LayoutParams params = this.viewPager.getLayoutParams();
+        params.height = displayMetrics.heightPixels - this.tabLayout.getHeight();
+        this.viewPager.setLayoutParams(params);
     }
 }
