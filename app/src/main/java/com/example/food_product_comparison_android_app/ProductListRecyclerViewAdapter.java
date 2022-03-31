@@ -73,7 +73,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             Product product = (Product) items.get(position);
 
             try{
-                productViewHolder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.monash_uni_img));
+                productViewHolder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.product_sample));
                 productViewHolder.nameTv.setText(product.getName());
                 productViewHolder.brandTv.setText(product.getBrand());
                 productViewHolder.priceTv.setText("$ " + product.getPrice());

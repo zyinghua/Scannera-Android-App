@@ -161,4 +161,14 @@ public class SignUpActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    private boolean checkIfUsernameExists()
+    {
+        return false;
+    }
+
+    private boolean checkIfEmailExists()
+    {
+        return false;
+    }
 }

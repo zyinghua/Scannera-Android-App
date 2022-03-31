@@ -20,6 +20,6 @@ public class EnlargedImageDialog extends Dialog {
         this.setContentView(R.layout.dialog_enlarged_image);
 
         ImageView image = findViewById(R.id.enlarged_image);
-        image.setImageDrawable(context.getDrawable(R.drawable.monash_uni_img));
+        image.setImageDrawable(context.getDrawable(R.drawable.product_sample));
     }
 }

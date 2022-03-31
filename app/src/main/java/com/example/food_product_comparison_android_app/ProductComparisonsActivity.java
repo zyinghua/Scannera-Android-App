@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +58,7 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler uiHandler = new Handler(Looper.getMainLooper());
 
+        this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
         executor.execute(()->{
             setUpContent();
             uiHandler.post(loading_dialog::dismiss);
@@ -90,7 +92,6 @@ public class ProductComparisonsActivity extends AppCompatActivity {
     private void setUpContent()
     {
         //******************************************************
-        this.product_look.setImageDrawable(getDrawable(R.drawable.monash_uni_img));
         this.category_tv.setText("Energy Pizza");
         this.name_tv.setText("Chocolate Pizza");
         this.brand_tv.setText("Swisse");
