@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/username_sign_up"
-                android:maxLength="20" />
+                android:maxLength="10" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -16,7 +16,7 @@ public class User {
     private AccessToken fb_access_token;
 
     public User(int login_flag, String id, String username, String firstname, String lastname, String email, String profile_img_url, String password) {
-        //Local user
+        // Local user
         this.fb_access_token = null;
         this.login_flag = login_flag;
         this.id = id;
