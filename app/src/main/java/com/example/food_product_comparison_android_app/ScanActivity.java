@@ -148,24 +148,6 @@ public class ScanActivity extends AppCompatActivity {
 
     private void recordScan(Result result)
     {
-        SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
-        SharedPreferences.Editor editor = sp.edit();
-
-        Gson gson = new Gson();
-        String str_products = sp.getString("ScanHistoryProducts", "");
-        String str_dates = sp.getString("ScanHistoryDates", "");
-        Type ptype = new TypeToken<ArrayList<Product>>() {}.getType();
-        Type dtype = new TypeToken<ArrayList<String>>() {}.getType();
-
-        ArrayList<Product> products = gson.fromJson(str_products, ptype);
-        ArrayList<String> dates = gson.fromJson(str_dates, dtype);
-
-        products.add(new Product(result.getText()));
-        dates.add(new SimpleDateFormat("d MMM yyyy, EEEE", Locale.getDefault()).format(new Date()));
-        editor.putString("ScanHistoryProducts", gson.toJson(products));
-        editor.putString("ScanHistoryDates", gson.toJson(dates));
-
-        editor.apply();
     }
 
     private void showPNFDialog()
