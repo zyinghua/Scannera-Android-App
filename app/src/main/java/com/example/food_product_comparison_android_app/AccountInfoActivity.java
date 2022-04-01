@@ -43,7 +43,6 @@ public class AccountInfoActivity extends AppCompatActivity {
     private TextView firstname_tv;
     private TextView lastname_tv;
     private MaterialButton edit_password_btn;
-    private MaterialButton edit_email_address_btn;
     private MaterialButton edit_firstname_btn;
     private MaterialButton edit_lastname_btn;
     private MaterialButton delete_acc_btn;
@@ -79,7 +78,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.lastname_tv = findViewById(R.id.lastname_tv);
         this.edit_username_btn = findViewById(R.id.edit_username_btn);
         this.edit_password_btn = findViewById(R.id.edit_password_btn);
-        this.edit_email_address_btn = findViewById(R.id.edit_email_address_btn);
         this.edit_firstname_btn = findViewById(R.id.edit_firstname_btn);
         this.edit_lastname_btn = findViewById(R.id.edit_lastname_btn);
         this.delete_acc_btn = findViewById(R.id.delete_acc_btn);
@@ -98,13 +96,6 @@ public class AccountInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showEditDialog(password_tv, getString(R.string.password_label), EDIT_PASSWORD);
-            }
-        });
-
-        this.edit_email_address_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEditDialog(email_address_tv, getString(R.string.email_address_label), EDIT_EMAIL_ADDRESS);
             }
         });
 

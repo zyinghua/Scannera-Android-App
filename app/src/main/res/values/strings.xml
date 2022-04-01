@@ -27,8 +27,7 @@
         2. Click \"Account\" at the bottom.\n
         3. Click \"Account Information\".\n
         4. Click \"Edit\" that aligns with \"Password\" to enter your own new password.\n\nPlease reset your password as soon as possible, thank you.
-        \n\nYour temporary password: %1$s\n\nIf you did not initiate this request, please contact us immediately at this email.\n\n\n
-        Thanks,\nThe Scannera Team
+        \n\nYour temporary password: %1$s\n\nIf you did not initiate this request, please contact us immediately at this email.\n\n\nThanks,\nThe Scannera Team
     </string>
     <string name="email_sent">Email has been sent!</string>
     <string name="password_reset_email_sent_description">Please check your inbox and follow the instruction to reset your password.</string>

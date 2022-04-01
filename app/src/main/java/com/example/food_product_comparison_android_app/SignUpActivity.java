@@ -15,6 +15,10 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout username_input_layout;
     private TextInputLayout firstname_input_layout;
@@ -156,7 +160,7 @@ public class SignUpActivity extends AppCompatActivity {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
             return false;
         } else {
-//            createUserOnChecked(username, firstname, lastname, email, password);
+            createUserOnChecked(username, firstname, lastname, email, password);
             return true;
         }
     }
@@ -171,9 +175,27 @@ public class SignUpActivity extends AppCompatActivity {
         return false;
     }
 
-//    private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
-//    {
-//        //Send a POST request to the server to create the user instance
-//        void call = ServerAPI.createUser()
-//    }
+    private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
+    {
+        //Send a POST request to the server to create the user instance
+        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
 }

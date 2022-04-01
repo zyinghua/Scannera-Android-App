@@ -174,11 +174,16 @@ public class Utils {
         });
     }
 
-    public Retrofit getRetrofit(Context context)
+    public static Retrofit getRetrofit(Context context)
     {
         return new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.server_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    public static ServerAPI getServerAPI(Context context)
+    {
+        return getRetrofit(context).create(ServerAPI.class);
     }
 }
