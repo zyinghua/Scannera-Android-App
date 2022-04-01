@@ -22,11 +22,11 @@
     <string name="forgotten_password_instruction">Please enter the email associated with your account, and we will send you an email with the password reset instruction.</string>
     <string name="password_reset_email_subejct">Scannera Password Reset Instruction</string>
     <string name="password_reset_email_content">Dear user,
-        \n\nA request has been received to reset your password for your Scannera account.\n\nPlease find your temporary password below, and follow this instruction:\n
+        \n\nA request has been received to reset your password for your Scannera account.\n\nPlease find your temporary password below, and follow this instruction:\n\n
         1. Log in to the Scannera app with the temporary password below.\n
-        2. Click "Account" at the bottom.\n
-        3. Click "Account Information".\n
-        4. Click "Edit" that aligns with "Password" to enter your own new password.\n\nPlease reset your password as soon as possible, thank you.
+        2. Click \"Account\" at the bottom.\n
+        3. Click \"Account Information\".\n
+        4. Click \"Edit\" that aligns with \"Password\" to enter your own new password.\n\nPlease reset your password as soon as possible, thank you.
         \n\nYour temporary password: %1$s\n\nIf you did not initiate this request, please contact us immediately at this email.\n\n\n
         Thanks,\nThe Scannera Team
     </string>
