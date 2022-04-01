@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Scannera</string>
+    <string name="app_email_address">scannera.customerservice@gmail.com</string>
+    <string name="app_email_address_password">fit3162scannera</string>
     <string name="app_authority">com.example.food_product_comparison_android_app</string>
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
@@ -18,9 +20,20 @@
     <string name="send_email">Send Email</string>
     <string name="forgot_your_password_title">Forgot your password?</string>
     <string name="forgotten_password_instruction">Please enter the email associated with your account, and we will send you an email with the password reset instruction.</string>
+    <string name="password_reset_email_subejct">Scannera Password Reset Instruction</string>
+    <string name="password_reset_email_content">Dear user,
+        \n\nA request has been received to reset your password for your Scannera account.\n\nPlease find your temporary password below, and follow this instruction:\n
+        1. Log in to the Scannera app with the temporary password below.\n
+        2. Click "Account" at the bottom.\n
+        3. Click "Account Information".\n
+        4. Click "Edit" that aligns with "Password" to enter your own new password.\n\nPlease reset your password as soon as possible, thank you.
+        \n\nYour temporary password: %1$s\n\nIf you did not initiate this request, please contact us immediately at this email.\n\n\n
+        Thanks,\nThe Scannera Team
+    </string>
     <string name="email_sent">Email has been sent!</string>
     <string name="password_reset_email_sent_description">Please check your inbox and follow the instruction to reset your password.</string>
     <string name="didnt_receive_email">Didn\'t receive the email?</string>
+    <string name="check_spam_msg">Please check your spam, or:</string>
     <string name="resend"><u>Resend</u></string>
     <string name="home">Home</string>
     <string name="account">Account</string>
@@ -146,7 +159,14 @@
 
     <!-- ERROR MESSAGES -->
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
-    <string name="email_address_invalid">Please enter a valid Email Address.</string>
+    <string name="email_input_error">Invalid email address format, please check again.</string>
+    <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
+    <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
+    <string name="password_input_no_lowercase_error">Sorry, password must contain at least one lowercase character.</string>
+    <string name="password_input_no_uppercase_error">Sorry, password must contain at least one uppercase character.</string>
+    <string name="flname_input_error">Sorry, this field must only contain English characters.</string>
+    <string name="confirm_password_not_match_error">Passwords do not match.</string>
+    <string name="valid_user_input">success</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

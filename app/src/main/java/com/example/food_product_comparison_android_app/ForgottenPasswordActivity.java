@@ -3,8 +3,16 @@ package com.example.food_product_comparison_android_app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,6 +24,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
+import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
     public static final String RESET_EMAIl_ADDRESS_KEY = "RESET_EMAIl_ADDRESS";
@@ -23,8 +34,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     private LottieAnimationView forgot_password_animation;
     private MaterialButton send_email_btn;
     private TextView instruction;
-    private TextInputLayout email_input;
-    private TextInputEditText email_input_et;
+    private TextInputLayout email_address_input_layout;
+    private TextInputEditText email_address_input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +54,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         this.send_email_btn = findViewById(R.id.send_email_btn);
         this.activity_title = findViewById(R.id.activity_title);
         this.instruction = findViewById(R.id.forgotten_password_instruction);
-        this.email_input = findViewById(R.id.email_input);
-        this.email_input_et = findViewById(R.id.email_input_et);
+        this.email_address_input_layout = findViewById(R.id.email_address_input_layout);
+        this.email_address_input = findViewById(R.id.email_address_input_et);
     }
 
     private void setDefaultListeners()
@@ -52,10 +63,23 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         this.send_email_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
-                intent.putExtra(RESET_EMAIl_ADDRESS_KEY, Objects.requireNonNull(email_input_et.getText()).toString());
-                startActivity(intent);
+                email_address_input_layout.setError(null);
+
+                String email_address = Objects.requireNonNull(email_address_input.getText()).toString();
+                String email_address_validation_result = Utils.validateUserInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
+                if(email_address_validation_result.equals(getString(R.string.valid_user_input)))
+                {
+                    // Send request to the server here to check the existence of the email and send if exists
+                    Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address);
+
+                    finish();
+                    Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
+                    intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
+                    startActivity(intent);
+                }
+                else
+                    email_address_input_layout.setError(email_address_validation_result);
+
             }
         });
     }
@@ -67,19 +91,19 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         activity_title.setTranslationY(-Utils.login_view_animation_translation);
         forgot_password_animation.setTranslationY(-Utils.login_view_animation_translation);
         instruction.setTranslationX(Utils.login_view_animation_translation);
-        email_input.setTranslationX(Utils.login_view_animation_translation);
+        email_address_input_layout.setTranslationX(Utils.login_view_animation_translation);
         send_email_btn.setTranslationX(Utils.login_view_animation_translation);
 
         activity_title.setAlpha(v);
         forgot_password_animation.setAlpha(v);
         instruction.setAlpha(v);
-        email_input.setAlpha(v);
+        email_address_input_layout.setAlpha(v);
         send_email_btn.setAlpha(v);
 
         activity_title.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         forgot_password_animation.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         instruction.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        email_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
+        email_address_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
         send_email_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
     }
 

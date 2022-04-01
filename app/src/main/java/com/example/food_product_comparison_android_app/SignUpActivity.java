@@ -130,31 +130,31 @@ public class SignUpActivity extends AppCompatActivity {
         String email = Objects.requireNonNull(this.email_input.getText()).toString();
         String password = Objects.requireNonNull(this.password_input.getText()).toString();
 
-        String username_result = Utils.validateUserInput(username, Utils.USERNAME_INPUT);
-        String firstname_result = Utils.validateUserInput(firstname, Utils.FLNAME_INPUT);
-        String lastname_result = Utils.validateUserInput(lastname, Utils.FLNAME_INPUT);
-        String email_result = Utils.validateUserInput(email, Utils.EMAIL_INPUT);
-        String password_result = Utils.validateUserInput(password, Utils.PASSWORD_INPUT);
+        String username_result = Utils.validateUserInput(this, username, Utils.USERNAME_INPUT);
+        String firstname_result = Utils.validateUserInput(this, firstname, Utils.FLNAME_INPUT);
+        String lastname_result = Utils.validateUserInput(this, lastname, Utils.FLNAME_INPUT);
+        String email_result = Utils.validateUserInput(this, email, Utils.EMAIL_INPUT);
+        String password_result = Utils.validateUserInput(this, password, Utils.PASSWORD_INPUT);
         String confirm_password = Objects.requireNonNull(this.confirm_password_input.getText()).toString();
 
-        if (!username_result.equals(Utils.USER_INPUT_VALID))
+        if (!username_result.equals(getString(R.string.valid_user_input)))
         {
             this.username_input_layout.setError(username_result);
             return false;
-        } else if (!firstname_result.equals(Utils.USER_INPUT_VALID)){
+        } else if (!firstname_result.equals(getString(R.string.valid_user_input))){
             this.firstname_input_layout.setError(firstname_result);
             return false;
-        } else if (!lastname_result.equals(Utils.USER_INPUT_VALID)) {
+        } else if (!lastname_result.equals(getString(R.string.valid_user_input))) {
             this.lastname_input_layout.setError(lastname_result);
             return false;
-        } else if(!email_result.equals(Utils.USER_INPUT_VALID)) {
+        } else if(!email_result.equals(getString(R.string.valid_user_input))) {
             this.email_input_layout.setError(email_result);
             return false;
-        } else if (!password_result.equals(Utils.USER_INPUT_VALID)) {
+        } else if (!password_result.equals(getString(R.string.valid_user_input))) {
             this.password_input_layout.setError(password_result);
             return false;
         } else if (!confirm_password.equals(password)) {
-            this.confirm_password_input_layout.setError(Utils.CONFIRM_PASSWORD_NOT_MATCH_ERROR);
+            this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
             return false;
         } else {
             this.user = new User(Utils.LOCAL_LOGIN, "", username, firstname, lastname, email, null, password);

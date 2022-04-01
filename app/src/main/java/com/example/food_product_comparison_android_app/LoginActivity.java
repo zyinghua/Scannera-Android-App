@@ -28,15 +28,19 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
-    private TextInputLayout username_login_input;
-    private TextInputLayout password_login_input;
+    private TextInputLayout username_login_input_layout;
+    private TextInputLayout password_login_input_layout;
+    private TextInputEditText username_login_input;
+    private TextInputEditText password_login_input;
     private TextView forgotten_password_tv;
     private ImageView facebook_login_btn;
     private ImageView google_login_btn;
@@ -135,9 +139,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
+    private boolean checkUserInput()
+    {
+        
+
+        // Send API request to the server here for username/email and password match
+        return true;
     }
 
     @Override
@@ -156,8 +163,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.username_login_input = findViewById(R.id.username_login);
-        this.password_login_input = findViewById(R.id.password_login);
+        this.username_login_input_layout = findViewById(R.id.username_login);
+        this.password_login_input_layout = findViewById(R.id.password_login);
+        this.username_login_input = findViewById(R.id.username_login_et);
+        this.password_login_input = findViewById(R.id.password_login_et);
         this.forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
         this.facebook_login_btn = findViewById(R.id.fb_login_button);
         this.google_login_btn = findViewById(R.id.google_login_button);
@@ -276,24 +285,24 @@ public class LoginActivity extends AppCompatActivity {
 
         float v = 0;
 
-        username_login_input.setTranslationX(Utils.login_view_animation_translation);
-        password_login_input.setTranslationX(Utils.login_view_animation_translation);
+        username_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
+        password_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
         login_btn.setTranslationX(Utils.login_view_animation_translation);
         forgotten_password_tv.setTranslationX(-Utils.login_view_animation_translation);
         facebook_login_btn.setTranslationY(Utils.login_view_animation_translation);
         google_login_btn.setTranslationY(Utils.login_view_animation_translation);
         sign_up_btn.setTranslationY(Utils.login_view_animation_translation);
 
-        username_login_input.setAlpha(v);
-        password_login_input.setAlpha(v);
+        username_login_input_layout.setAlpha(v);
+        password_login_input_layout.setAlpha(v);
         login_btn.setAlpha(v);
         forgotten_password_tv.setAlpha(v);
         facebook_login_btn.setAlpha(v);
         google_login_btn.setAlpha(v);
         sign_up_btn.setAlpha(v);
 
-        username_login_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        password_login_input.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
+        username_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        password_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
         login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(600).start();
         forgotten_password_tv.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         facebook_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
