@@ -17,7 +17,6 @@ public class User {
 
     public User(int login_flag, String id, String username, String firstname, String lastname, String email, String profile_img_url, String password) {
         // Local user
-        this.fb_access_token = null;
         this.login_flag = login_flag;
         this.id = id;
         this.username = username;
@@ -28,17 +27,14 @@ public class User {
         this.password = password;
     }
 
-    public User(int login_flag, String id, String username, String firstname, String lastname, String email, String profile_img_url) {
-        // Google user
+    public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url) {
         this.login_flag = login_flag;
-        this.fb_access_token = null;
-        this.id = id;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.password = password;
         this.profile_img_url = profile_img_url;
-        this.password = null;
     }
 
     public User(int login_flag, AccessToken fb_access_token) {
@@ -48,7 +44,6 @@ public class User {
         this.login_flag = login_flag;
         this.fb_access_token = fb_access_token;
         this.id = this.username = this.firstname = this.lastname = this.email = s;
-        this.profile_img_url = this.password = null;
     }
 
     public String getPassword() {

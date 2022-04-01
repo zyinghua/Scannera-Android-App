@@ -5,6 +5,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,6 +20,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Utils {
     // This class is for general, common data that is being shared among multiple units
@@ -166,5 +172,13 @@ public class Utils {
                 });
             }
         });
+    }
+
+    public Retrofit getRetrofit(Context context)
+    {
+        return new Retrofit.Builder()
+                .baseUrl(context.getString(R.string.server_base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 }

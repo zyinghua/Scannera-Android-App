@@ -185,4 +185,7 @@
     <string name="nutritional_pic_content_description">A picture of the product\'s nutritional table taken by the user.</string>
     <string name="product_look_content_description">A picture of the product look taken by the user.</string>
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
+
+    <!-- ONLINE SERVER RELATED -->
+    <string name="server_base_url">https://fit3162-flask-app.herokuapp.com/</string>
 </resources>

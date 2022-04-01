@@ -29,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText password_input;
     private TextInputEditText confirm_password_input;
     private MaterialButton sign_up_btn;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +156,7 @@ public class SignUpActivity extends AppCompatActivity {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
             return false;
         } else {
-            this.user = new User(Utils.LOCAL_LOGIN, "", username, firstname, lastname, email, null, password);
+//            createUserOnChecked(username, firstname, lastname, email, password);
             return true;
         }
     }
@@ -171,4 +170,10 @@ public class SignUpActivity extends AppCompatActivity {
     {
         return false;
     }
+
+//    private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
+//    {
+//        //Send a POST request to the server to create the user instance
+//        void call = ServerAPI.createUser()
+//    }
 }

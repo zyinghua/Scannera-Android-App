@@ -246,7 +246,7 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            user = new User(Utils.GOOGLE_LOGIN, id, first_name, first_name, last_name, email, img_url);
+            user = new User(Utils.GOOGLE_LOGIN, id, first_name, first_name, last_name, email, img_url, "");
         }
     }
 
