@@ -48,7 +48,7 @@
             app:layout_constraintGuide_percent="0.3" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/username_login"
+            android:id="@+id/login_acc_input_layout"
             style="@style/Widget.Scannera.TextInputLayout.OutlineBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:startIconDrawable="@drawable/ic_person">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_login_et"
+                android:id="@+id/login_acc_input_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username_login"
@@ -75,7 +75,7 @@
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username_login"
+            app:layout_constraintTop_toBottomOf="@id/login_acc_input_layout"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText

@@ -37,9 +37,9 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
-    private TextInputLayout username_login_input_layout;
+    private TextInputLayout login_acc_input_layout;
     private TextInputLayout password_login_input_layout;
-    private TextInputEditText username_login_input;
+    private TextInputEditText login_acc_input;
     private TextInputEditText password_login_input;
     private TextView forgotten_password_tv;
     private ImageView facebook_login_btn;
@@ -131,6 +131,16 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, getString(R.string.google_ps_missing_msg), Toast.LENGTH_LONG).show();
                 }
             });
+
+            login_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login_acc_input_layout.setError(null);
+                    password_login_input_layout.setError(null);
+
+                    checkLocalLoginInput();
+                }
+            });
         }
         else
         {
@@ -139,11 +149,38 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkUserInput()
+    private boolean checkLocalLoginInput()
     {
-        
+        String login_acc = Objects.requireNonNull(this.login_acc_input.getText()).toString();
+        String password = Objects.requireNonNull(this.password_login_input.getText()).toString();
+        boolean isEmail;
+
+        if(login_acc.isEmpty())
+        {
+            this.login_acc_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
+            return false;
+        }
+        else if(password.isEmpty())
+        {
+            this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
+            return false;
+        }
+
+        if(Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input)))
+            isEmail = true;
+        else if(Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
+            isEmail = false;
+        else
+        {
+            this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
+            return false; // Not valid username or email input
+        }
+
+
 
         // Send API request to the server here for username/email and password match
+
+
         return true;
     }
 
@@ -163,9 +200,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.username_login_input_layout = findViewById(R.id.username_login);
+        this.login_acc_input_layout = findViewById(R.id.login_acc_input_layout);
         this.password_login_input_layout = findViewById(R.id.password_login);
-        this.username_login_input = findViewById(R.id.username_login_et);
+        this.login_acc_input = findViewById(R.id.login_acc_input_et);
         this.password_login_input = findViewById(R.id.password_login_et);
         this.forgotten_password_tv = findViewById(R.id.forgotten_password_tv);
         this.facebook_login_btn = findViewById(R.id.fb_login_button);
@@ -285,7 +322,7 @@ public class LoginActivity extends AppCompatActivity {
 
         float v = 0;
 
-        username_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
+        login_acc_input_layout.setTranslationX(Utils.login_view_animation_translation);
         password_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
         login_btn.setTranslationX(Utils.login_view_animation_translation);
         forgotten_password_tv.setTranslationX(-Utils.login_view_animation_translation);
@@ -293,7 +330,7 @@ public class LoginActivity extends AppCompatActivity {
         google_login_btn.setTranslationY(Utils.login_view_animation_translation);
         sign_up_btn.setTranslationY(Utils.login_view_animation_translation);
 
-        username_login_input_layout.setAlpha(v);
+        login_acc_input_layout.setAlpha(v);
         password_login_input_layout.setAlpha(v);
         login_btn.setAlpha(v);
         forgotten_password_tv.setAlpha(v);
@@ -301,12 +338,19 @@ public class LoginActivity extends AppCompatActivity {
         google_login_btn.setAlpha(v);
         sign_up_btn.setAlpha(v);
 
-        username_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        login_acc_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         password_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
         login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(600).start();
         forgotten_password_tv.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         facebook_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         google_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
         sign_up_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        login_acc_input_layout.setError(null);
+        password_login_input_layout.setError(null);
     }
 }

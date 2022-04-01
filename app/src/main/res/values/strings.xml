@@ -167,6 +167,7 @@
     <string name="flname_input_error">Sorry, this field must only contain English characters.</string>
     <string name="confirm_password_not_match_error">Passwords do not match.</string>
     <string name="valid_user_input">success</string>
+    <string name="invalid_username_or_email">Invalid Username or Email, please check again.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
