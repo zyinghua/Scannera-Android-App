@@ -13,6 +13,8 @@ public class User {
     private String email;
     private String password;
     private String profile_img_url;
+    private int contribution_score;
+
     private AccessToken fb_access_token;
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
@@ -22,6 +24,17 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.contribution_score = 0;
+    }
+
+    public User(int login_flag, String username, String firstname, String lastname, String email, String password, int contribution_score) {
+        this.login_flag = login_flag;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.contribution_score = contribution_score;
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url) {
@@ -32,6 +45,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.profile_img_url = profile_img_url;
+        this.contribution_score = 0;
+    }
+
+    public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url, int contribution_score) {
+        this.login_flag = login_flag;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.profile_img_url = profile_img_url;
+        this.contribution_score = contribution_score;
     }
 
     public User(int login_flag, AccessToken fb_access_token) {
@@ -124,5 +149,14 @@ public class User {
     public void setLogin_flag(int login_flag) {
         this.login_flag = login_flag;
     }
+
+    public int getContribution_score() {
+        return contribution_score;
+    }
+
+    public void setContribution_score(int contribution_score) {
+        this.contribution_score = contribution_score;
+    }
+
 
 }

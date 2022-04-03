@@ -153,41 +153,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkLocalLoginInput()
-    {
-        String login_acc = Objects.requireNonNull(this.login_acc_input.getText()).toString();
-        String password = Objects.requireNonNull(this.password_login_input.getText()).toString();
-        boolean isEmail;
-
-        if(login_acc.isEmpty())
-        {
-            this.login_acc_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
-            return false;
-        }
-        else if(password.isEmpty())
-        {
-            this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
-            return false;
-        }
-
-        if(Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input)))
-            isEmail = true;
-        else if(Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
-            isEmail = false;
-        else
-        {
-            this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
-            return false; // Not valid username or email input
-        }
-
-
-
-        // Send API request to the server here for username/email and password match
-
-
-        return true;
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -355,6 +320,41 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         login_acc_input_layout.setError(null);
         password_login_input_layout.setError(null);
+    }
+
+    private boolean checkLocalLoginInput()
+    {
+        String login_acc = Objects.requireNonNull(this.login_acc_input.getText()).toString();
+        String password = Objects.requireNonNull(this.password_login_input.getText()).toString();
+        boolean isEmail;
+
+        if(login_acc.isEmpty())
+        {
+            this.login_acc_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
+            return false;
+        }
+        else if(password.isEmpty())
+        {
+            this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
+            return false;
+        }
+
+        if(Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input)))
+            isEmail = true;
+        else if(Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
+            isEmail = false;
+        else
+        {
+            this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
+            return false; // Not valid username or email input
+        }
+
+
+
+        // Send API request to the server here for username/email and password match
+
+
+        return true;
     }
 
     private void getUser(String email)

@@ -52,7 +52,7 @@ public class AccountFragment extends Fragment {
     private MaterialButton log_out_btn;
     private CircularImageView user_profile_img;
     private TextView username_tv;
-    private TextView contribution_score;
+    private TextView contribution_score_tv;
     private MaterialButton account_info_btn;
     private MaterialButton starred_products_btn;
     private MaterialButton scan_history_btn;
@@ -85,7 +85,7 @@ public class AccountFragment extends Fragment {
         this.log_out_btn = view.findViewById(R.id.log_out_btn);
         this.user_profile_img = view.findViewById(R.id.user_profile_img);
         this.username_tv = view.findViewById(R.id.username_display);
-        this.contribution_score = view.findViewById(R.id.contribution_score);
+        this.contribution_score_tv = view.findViewById(R.id.contribution_score);
         this.account_info_btn = view.findViewById(R.id.account_info_btn);
         this.starred_products_btn = view.findViewById(R.id.starred_products_btn);
         this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
@@ -163,6 +163,7 @@ public class AccountFragment extends Fragment {
 
                         Picasso.get().load(img_url).into(user_profile_img);
                         username_tv.setText(first_name);
+                        contribution_score_tv.setText(getString(R.string.contribution_score) + "0");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -180,6 +181,7 @@ public class AccountFragment extends Fragment {
             if (user.getProfile_img_url() != null)
                 Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
             username_tv.setText(user.getUsername());
+            contribution_score_tv.setText(getString(R.string.contribution_score) + user.getContribution_score());
         }
     }
 }

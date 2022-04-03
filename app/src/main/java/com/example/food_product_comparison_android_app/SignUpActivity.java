@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,8 +47,9 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 clearFieldErrors();
 
-                if (checkUserInput())
+                if (!checkUserInput())
                 {
+                    Toast.makeText(SignUpActivity.this, "Sorry, user create error.", Toast.LENGTH_LONG).show();
                 }
             }
         });

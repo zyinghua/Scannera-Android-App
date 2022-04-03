@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
                         String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
                         Picasso.get().load(img_url).into(home_user_img);
-                        welcome_username_tv.setText(getString(R.string.home_greeting) + " " + first_name);
+                        welcome_username_tv.setText(getString(R.string.home_greeting) + first_name);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment {
             if (user.getProfile_img_url() != null)
                 Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
 
-            welcome_username_tv.setText(getString(R.string.home_greeting)+ " " + user.getUsername());
+            welcome_username_tv.setText(getString(R.string.home_greeting)+ user.getUsername());
         }
     }
 
