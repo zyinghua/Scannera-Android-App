@@ -15,14 +15,6 @@ public class User {
     private String profile_img_url;
     private AccessToken fb_access_token;
 
-    public User(String username, String firstname, String lastname, String email, String password) {
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-    }
-
     public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
         this.login_flag = login_flag;
         this.username = username;

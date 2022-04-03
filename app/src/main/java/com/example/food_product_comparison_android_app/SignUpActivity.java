@@ -2,11 +2,15 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+
 import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (checkUserInput())
                 {
-                    // Send request to the server (i.e., create a new user instance)
                 }
             }
         });
@@ -178,7 +181,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful())
                 {
-
+                    User user = new User(Utils.LOCAL_LOGIN, username, firstname, lastname, email, password);
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(user));
+                    startActivity(intent);
                 }
                 else
                 {
@@ -191,5 +198,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }

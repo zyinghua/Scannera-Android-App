@@ -34,6 +34,10 @@ import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
@@ -222,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             if (account != null) {
-                loadGoogleUserProfile(account);
+                loadGoogleUserInfo(account);
                 navigateToLandingActivity(Utils.GOOGLE_LOGIN);
             }
 
@@ -233,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void loadGoogleUserProfile(GoogleSignInAccount account)
+    private void loadGoogleUserInfo(GoogleSignInAccount account)
     {
         if (account != null)
         {
@@ -282,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        loadGoogleUserProfile(account);
+        loadGoogleUserInfo(account);
 
         return account != null;
     }
@@ -351,5 +355,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         login_acc_input_layout.setError(null);
         password_login_input_layout.setError(null);
+    }
+
+    private void getUser(String email)
+    {
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail();
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 }
