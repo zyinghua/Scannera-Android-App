@@ -1,18 +1,31 @@
 package com.example.food_product_comparison_android_app;
 
 import com.facebook.AccessToken;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public class User {
     private int login_flag;
     private String id;
+
+    @SerializedName("user_userName")
     private String username;
+
+    @SerializedName("user_fName")
     private String firstname;
+
+    @SerializedName("user_lName")
     private String lastname;
+
+    @SerializedName("user_email")
     private String email;
+
+    @SerializedName("user_password")
     private String password;
     private String profile_img_url;
+
+    @SerializedName("user_contributionScore")
     private int contribution_score;
 
     private AccessToken fb_access_token;

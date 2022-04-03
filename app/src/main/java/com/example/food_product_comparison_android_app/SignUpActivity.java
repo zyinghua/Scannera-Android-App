@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,10 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 clearFieldErrors();
 
-                if (!checkUserInput())
-                {
-                    Toast.makeText(SignUpActivity.this, "Sorry, user create error.", Toast.LENGTH_LONG).show();
-                }
+                checkUserInput();
             }
         });
     }
@@ -177,7 +175,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
     {
         //Send a POST request to the server to create the user instance
-        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
+        Call<Void> call = Utils.getServerAPI(this).createUser(firstname, username, lastname, email, password);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -192,7 +190,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else
                 {
-
+                    Log.d("DEBUG", response.code() + "");
                 }
             }
 
