@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
                     user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
-                    navigateToLandingActivity(Utils.FACEBOOK_LOGIN);
+                    navigateToLandingActivity();
                 }
 
                 @Override
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
             // User have signed in successfully
-            this.navigateToLandingActivity(login_status);
+            this.navigateToLandingActivity();
         }
     }
 
@@ -227,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (account != null) {
                 loadGoogleUserInfo(account);
-                navigateToLandingActivity(Utils.GOOGLE_LOGIN);
+                navigateToLandingActivity();
             }
 
         } catch (ApiException e) {
@@ -307,7 +307,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void navigateToLandingActivity(int login_option)
+    private void navigateToLandingActivity()
     {
         Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
