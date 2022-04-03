@@ -159,6 +159,7 @@
     <!-- ERROR MESSAGES -->
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
     <string name="email_input_error">Invalid email address format, please check again.</string>
+    <string name="email_address_taken_error">This email address has already been registered.</string>
     <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
     <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
     <string name="password_input_no_lowercase_error">Sorry, password must contain at least one lowercase character.</string>
@@ -186,5 +187,5 @@
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
 
     <!-- ONLINE SERVER RELATED -->
-    <string name="server_base_url">https://fit3162-flask-app.herokuapp.com/</string>
+    <string name="server_base_url">https://fit3162-team7-scannera.herokuapp.com/</string>
 </resources>

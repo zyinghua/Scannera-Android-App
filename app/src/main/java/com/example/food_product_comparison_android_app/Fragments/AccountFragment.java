@@ -159,7 +159,6 @@ public class AccountFragment extends Fragment {
                         String first_name = jsonObject.getString("first_name");
                         String last_name = jsonObject.getString("last_name");
                         String email = jsonObject.getString("email");
-                        String id = jsonObject.getString("id");
                         String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
                         Picasso.get().load(img_url).into(user_profile_img);

@@ -2,19 +2,12 @@ package com.example.food_product_comparison_android_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.Toast;
-
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -178,12 +171,13 @@ public class SignUpActivity extends AppCompatActivity {
     private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
     {
         //Send a POST request to the server to create the user instance
-        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
+        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
 
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful())
+                {
 
                 }
                 else
@@ -193,7 +187,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
