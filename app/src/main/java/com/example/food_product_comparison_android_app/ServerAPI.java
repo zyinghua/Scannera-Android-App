@@ -13,8 +13,8 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST("api/user/add")
     Call<Void> createUser(
-            @Field("user_firstname") String firstname,
             @Field("user_username") String username,
+            @Field("user_firstname") String firstname,
             @Field("user_lastname") String lastname,
             @Field("user_email") String email,
             @Field("user_password") String password

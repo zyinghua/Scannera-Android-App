@@ -206,7 +206,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
     {
         //Send a POST request to the server to create the user instance
-        Call<Void> call = Utils.getServerAPI(this).createUser(firstname, username, lastname, email, password);
+        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
 
         call.enqueue(new Callback<Void>() {
             @Override
