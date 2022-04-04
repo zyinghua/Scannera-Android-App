@@ -7,15 +7,17 @@ import java.util.ArrayList;
 
 public class User {
     private int login_flag;
+
+    @SerializedName("user_id")
     private String id;
 
-    @SerializedName("user_userName")
+    @SerializedName("user_username")
     private String username;
 
-    @SerializedName("user_fName")
+    @SerializedName("user_firstname")
     private String firstname;
 
-    @SerializedName("user_lName")
+    @SerializedName("user_lastname")
     private String lastname;
 
     @SerializedName("user_email")
@@ -23,9 +25,11 @@ public class User {
 
     @SerializedName("user_password")
     private String password;
+
+    @SerializedName("user_pimg_url")
     private String profile_img_url;
 
-    @SerializedName("user_contributionScore")
+    @SerializedName("user_contribution_score")
     private int contribution_score;
 
     private AccessToken fb_access_token;

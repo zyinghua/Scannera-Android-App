@@ -7,26 +7,22 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ServerAPI {
     @FormUrlEncoded
     @POST("api/user/add")
     Call<Void> createUser(
-            @Field("fname") String firstname,
-            @Field("userName") String username,
-            @Field("lname") String lastname,
-            @Field("email") String email,
-            @Field("password") String password
+            @Field("user_firstname") String firstname,
+            @Field("user_username") String username,
+            @Field("user_lastname") String lastname,
+            @Field("user_email") String email,
+            @Field("user_password") String password
     );
 
-    @PATCH
-    Call<Void> patchUserPassword(
+    @PATCH("api/user/patchbyEmail/{email}")
+    Call<Void> patchUserPasswordByEmail(@Path("email") String email);
 
-    );
-
-    @GET
-    Call<String> getUserPassword();
-
-    @GET
-    Call<User> getUserByEmail();
+    @GET("api/user/getbyEmail/{email}")
+    Call<User> getUserByEmail(@Path("email") String email);
 }

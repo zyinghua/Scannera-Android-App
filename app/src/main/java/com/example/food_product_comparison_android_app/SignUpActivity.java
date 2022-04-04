@@ -5,7 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -122,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.confirm_password_input_layout.setError(null);
     }
 
-    private boolean checkUserInput()
+    private void checkUserInput()
     {
         String username = Objects.requireNonNull(this.username_input.getText()).toString();
         String firstname = Objects.requireNonNull(this.firstname_input.getText()).toString();
@@ -140,36 +141,66 @@ public class SignUpActivity extends AppCompatActivity {
         if (!username_result.equals(getString(R.string.valid_user_input)))
         {
             this.username_input_layout.setError(username_result);
-            return false;
         } else if (!firstname_result.equals(getString(R.string.valid_user_input))){
             this.firstname_input_layout.setError(firstname_result);
-            return false;
         } else if (!lastname_result.equals(getString(R.string.valid_user_input))) {
             this.lastname_input_layout.setError(lastname_result);
-            return false;
         } else if(!email_result.equals(getString(R.string.valid_user_input))) {
             this.email_input_layout.setError(email_result);
-            return false;
         } else if (!password_result.equals(getString(R.string.valid_user_input))) {
             this.password_input_layout.setError(password_result);
-            return false;
         } else if (!confirm_password.equals(password)) {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
-            return false;
-        } else {
-            createUserOnChecked(username, firstname, lastname, email, password);
-            return true;
+        }
+        else {
+            if (!checkIfEmailExists(email) && !checkIfUsernameExists(username))
+                createUserOnChecked(username, firstname, lastname, email, password);
         }
     }
 
-    private boolean checkIfUsernameExists()
+    private boolean checkIfUsernameExists(String username)
     {
         return false;
     }
 
-    private boolean checkIfEmailExists()
+    private boolean checkIfEmailExists(String email)
     {
-        return false;
+        final boolean[] result = new boolean[1];
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful())
+                {
+                    User userResponse = response.body();
+
+                    if(userResponse == null)
+                    {
+                        result[0] = false;
+                    }
+                    else
+                    {
+                        result[0] = true;
+                        email_input_layout.setError(getString(R.string.email_address_taken_error));
+                    }
+                }
+                else
+                {
+                    checkIfEmailExists(email);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                    Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
+
+        return result[0];
     }
 
     private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
@@ -190,15 +221,18 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Log.d("DEBUG", response.code() + "");
+                    createUserOnChecked(username, firstname, lastname, email, password);
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                    Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
             }
         });
-
     }
+
 }

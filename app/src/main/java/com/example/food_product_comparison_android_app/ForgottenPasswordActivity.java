@@ -28,6 +28,10 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ForgottenPasswordActivity extends AppCompatActivity {
     public static final String RESET_EMAIl_ADDRESS_KEY = "RESET_EMAIl_ADDRESS";
     private TextView activity_title;
@@ -69,17 +73,10 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 String email_address_validation_result = Utils.validateUserInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
                 if(email_address_validation_result.equals(getString(R.string.valid_user_input)))
                 {
-                    // Send request to the server here to check the existence of the email and send if exists
-                    Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address);
-
-                    finish();
-                    Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
-                    intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
-                    startActivity(intent);
+                    checkIfUserExists(email_address);
                 }
                 else
                     email_address_input_layout.setError(email_address_validation_result);
-
             }
         });
     }
@@ -113,5 +110,47 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void checkIfUserExists(String email_address)
+    {
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email_address);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful())
+                {
+                    User userResponse = response.body();
+
+                    if(userResponse == null)
+                    {
+                        email_address_input_layout.setError(getString(R.string.email_user_not_registered_error));
+                    }
+                    else
+                    {
+                        // Send the automatic email which includes the temporary password to the user
+                        Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address);
+
+                        finish();
+                        Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
+                        intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
+                        startActivity(intent);
+                    }
+                }
+                else
+                {
+                    checkIfUserExists(email_address);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                   Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
     }
 }

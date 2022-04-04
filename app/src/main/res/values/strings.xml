@@ -157,9 +157,11 @@
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
+    <string name="server_error">Sorry, it seems like the request is not success due to a server error, please try again later.</string>
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
     <string name="email_input_error">Invalid email address format, please check again.</string>
     <string name="email_address_taken_error">This email address has already been registered.</string>
+    <string name="email_user_not_registered_error">This email address hasn\'t been registered yet, please register first.</string>
     <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
     <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
     <string name="password_input_no_lowercase_error">Sorry, password must contain at least one lowercase character.</string>
@@ -168,6 +170,7 @@
     <string name="confirm_password_not_match_error">Passwords do not match.</string>
     <string name="valid_user_input">success</string>
     <string name="invalid_username_or_email">Invalid Username or Email, please check again.</string>
+    <string name="user_acc_password_not_match_error">Incorrect username/email or password, please check again.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

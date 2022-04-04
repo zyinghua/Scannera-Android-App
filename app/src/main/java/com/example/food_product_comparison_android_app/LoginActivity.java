@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -281,6 +283,15 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void navigateToLandingActivity(User user)
+    {
+        Gson gson = new Gson();
+        finish(); // Avoid the users being able to navigate back to this login activity
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
+        startActivity(intent);
+    }
+
     private void setAnimationsOnStart()
     {
         // Basically the idea is set the views to positions
@@ -349,27 +360,52 @@ public class LoginActivity extends AppCompatActivity {
             return false; // Not valid username or email input
         }
 
-
-
         // Send API request to the server here for username/email and password match
-
+        checkUserByEmailViaAPIRequest(login_acc, password);
 
         return true;
     }
 
-    private void getUser(String email)
+    private void checkUserByEmailViaAPIRequest(String email, String password)
     {
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail();
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful())
+                {
+                    User userResponse = response.body();
 
+                    if(userResponse == null)
+                    {
+                        login_acc_input_layout.setError(getString(R.string.email_user_not_registered_error));
+                    }
+                    else
+                    {
+                        if(password.equals(userResponse.getPassword()))
+                        {
+                            user = userResponse;
+                            navigateToLandingActivity();
+                        }
+                        else
+                        {
+                            password_login_input_layout.setError(getString(R.string.user_acc_password_not_match_error));
+                        }
+                    }
+                }
+                else
+                {
+                    checkUserByEmailViaAPIRequest(email, password);
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
             }
         });
     }
