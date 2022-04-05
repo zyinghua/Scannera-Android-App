@@ -222,8 +222,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    //createUserOnChecked(username, firstname, lastname, email, password);
-                    Log.d("DEBUG", response.code() + "");
+                    createUserOnChecked(username, firstname, lastname, email, password);
+                    Log.e("DEBUG", response.code() + "");
                 }
             }
 

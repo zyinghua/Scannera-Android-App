@@ -73,7 +73,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 String email_address_validation_result = Utils.validateUserInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
                 if(email_address_validation_result.equals(getString(R.string.valid_user_input)))
                 {
-                    checkIfUserExists(email_address);
+                    handleOnUserExistence(email_address);
                 }
                 else
                     email_address_input_layout.setError(email_address_validation_result);
@@ -112,7 +112,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
-    private void checkIfUserExists(String email_address)
+    private void handleOnUserExistence(String email_address)
     {
         Call<User> call = Utils.getServerAPI(this).getUserByEmail(email_address);
 
@@ -130,7 +130,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                     else
                     {
                         // Send the automatic email which includes the temporary password to the user
-                        Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address);
+                        String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
+                        Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address, new_password);
 
                         finish();
                         Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
@@ -140,7 +141,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    checkIfUserExists(email_address);
+                    handleOnUserExistence(email_address);
                 }
             }
 

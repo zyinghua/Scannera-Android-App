@@ -137,7 +137,7 @@ public class Utils {
         return sb.toString();
     }
 
-    public static void sendPasswordResetEmailToTargetAddress(Context context, String email_address)
+    public static void sendPasswordResetEmailToTargetAddress(Context context, String email_address, String new_password)
     {
         // email_address must be guaranteed to be valid before executing this method.
 
@@ -146,8 +146,7 @@ public class Utils {
         executor.execute(() -> {
             final String sender = context.getString(R.string.app_email_address);
             final String sender_password = context.getString(R.string.app_email_address_password);
-            String temp_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
-            String email_msg = String.format(context.getString(R.string.password_reset_email_content), temp_password);
+            String email_msg = String.format(context.getString(R.string.password_reset_email_content), new_password);
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");

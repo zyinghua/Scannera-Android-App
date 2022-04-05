@@ -53,7 +53,8 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
         this.resend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.sendPasswordResetEmailToTargetAddress(PasswordEmailSentActivity.this, target_email);
+                String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
+                Utils.sendPasswordResetEmailToTargetAddress(PasswordEmailSentActivity.this, target_email, new_password);
 
                 finish();
                 Intent intent = new Intent(PasswordEmailSentActivity.this, PasswordEmailSentActivity.class);

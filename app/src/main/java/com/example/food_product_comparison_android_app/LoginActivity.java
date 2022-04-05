@@ -231,7 +231,8 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            this.createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
+            //this.createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
+            user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, img_url);
         }
     }
 
@@ -346,14 +347,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void navigateToLandingActivity(User user)
-    {
-        finish(); // Avoid the users being able to navigate back to this login activity
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
-        startActivity(intent);
-    }
-
     private void setAnimationsOnStart()
     {
         // Basically the idea is set the views to positions
@@ -460,6 +453,7 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     checkUserByEmailViaAPIRequest(email, password);
+                    Log.e("DEBUG", response.code() + "");
                 }
             }
 
@@ -483,7 +477,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful())
                 {
-                    user = new User(Utils.LOCAL_LOGIN, username, firstname, lastname, email, null, profile_img_url);
+                    user = new User(Utils.GOOGLE_LOGIN, username, firstname, lastname, email, null, profile_img_url);
                     Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
                 }
                 else

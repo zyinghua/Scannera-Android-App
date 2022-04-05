@@ -29,8 +29,11 @@ public interface ServerAPI {
             @Field("password") String password
     );
 
-    @GET("api/user/getbyEmail/{email}")
+    @GET("api/user/getByEmail/{email}")
     Call<User> getUserByEmail(@Path("email") String email);
+
+    @GET("api/user/getByUsername/{username}")
+    Call<User> getUserByUsername(@Path("username") String username);
 
     @DELETE("api/user/delete/{user_id}")
     Call<Void> deleteUserById(@Path("user_id") String user_id);
