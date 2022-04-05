@@ -154,7 +154,7 @@
     <string name="facebook_app_id">487504102712984</string>
     <string name="fb_login_protocol_scheme">fb487504102712984</string>
     <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
-    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
+    <string name="google_client_id">6808559454-jrgfmuhbp7gfs68ij7ht4eu156lbac4p.apps.googleusercontent.com</string>
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
