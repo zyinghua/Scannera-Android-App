@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -206,7 +207,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
     {
         //Send a POST request to the server to create the user instance
-        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password);
+        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password, null);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -221,7 +222,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    createUserOnChecked(username, firstname, lastname, email, password);
+                    //createUserOnChecked(username, firstname, lastname, email, password);
+                    Log.d("DEBUG", response.code() + "");
                 }
             }
 
