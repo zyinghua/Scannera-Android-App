@@ -191,5 +191,5 @@
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
 
     <!-- ONLINE SERVER RELATED -->
-    <string name="server_base_url">https://fit3162-team7-scannera.herokuapp.com/</string>
+    <string name="server_base_url">https://fit3162-app-group7.herokuapp.com/</string>
 </resources>
