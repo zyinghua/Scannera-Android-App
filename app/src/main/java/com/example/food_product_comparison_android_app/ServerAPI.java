@@ -29,7 +29,7 @@ public interface ServerAPI {
             @Field("password") String password
     );
 
-    @GET("api/user/getByEmail/{email}")
+    @GET("api/user/get/{email}")
     Call<User> getUserByEmail(@Path("email") String email);
 
     @GET("api/user/getByUsername/{username}")

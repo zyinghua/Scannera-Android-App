@@ -158,12 +158,13 @@
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
-    <string name="server_error">Sorry, it seems like the request is not success due to a server error, please try again.</string>
+    <string name="server_error">Sorry, it seems like there was a server error with the request, please try again.</string>
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
     <string name="email_input_error">Invalid email address format, please check again.</string>
     <string name="email_address_taken_error">This email address has already been registered.</string>
     <string name="email_user_not_registered_error">This email address hasn\'t been registered yet, please register first.</string>
     <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
+    <string name="username_taken_error">This username has already been registered.</string>
     <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
     <string name="password_input_no_lowercase_error">Sorry, password must contain at least one lowercase character.</string>
     <string name="password_input_no_uppercase_error">Sorry, password must contain at least one uppercase character.</string>

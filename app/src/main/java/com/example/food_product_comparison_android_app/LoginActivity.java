@@ -393,7 +393,6 @@ public class LoginActivity extends AppCompatActivity {
     {
         String login_acc = Objects.requireNonNull(this.login_acc_input.getText()).toString();
         String password = Objects.requireNonNull(this.password_login_input.getText()).toString();
-        boolean isEmail;
 
         if(login_acc.isEmpty())
         {
@@ -406,25 +405,22 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
-        if(Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input)))
-            isEmail = true;
-        else if(Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
-            isEmail = false;
-        else
+        if (!Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
+        && !Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
         {
             this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
             return false; // Not valid username or email input
         }
 
         // Send API request to the server here for username/email and password match
-        checkUserByEmailViaAPIRequest(login_acc, password);
+        checkUserInput(login_acc, password);
 
         return true;
     }
 
-    private void checkUserByEmailViaAPIRequest(String email, String password)
+    private void checkUserInput(String login_acc, String password)
     {
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail(login_acc);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -452,7 +448,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    checkUserByEmailViaAPIRequest(email, password);
+                    checkUserInput(login_acc, password);
                     Log.e("DEBUG", response.code() + "");
                 }
             }

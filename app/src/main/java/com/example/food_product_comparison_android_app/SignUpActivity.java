@@ -154,20 +154,15 @@ public class SignUpActivity extends AppCompatActivity {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
         }
         else {
-            if (!checkIfEmailExists(email) && !checkIfUsernameExists(username))
+            if (!checkIfUserInfoExists(email, true) && !checkIfUserInfoExists(username, false))
                 createUserOnChecked(username, firstname, lastname, email, password);
         }
     }
 
-    private boolean checkIfUsernameExists(String username)
-    {
-        return false;
-    }
-
-    private boolean checkIfEmailExists(String email)
+    private boolean checkIfUserInfoExists(String user_input, boolean isEmail)
     {
         final boolean[] result = new boolean[1];
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmail(user_input);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -183,12 +178,16 @@ public class SignUpActivity extends AppCompatActivity {
                     else
                     {
                         result[0] = true;
-                        email_input_layout.setError(getString(R.string.email_address_taken_error));
+
+                        if (isEmail)
+                            email_input_layout.setError(getString(R.string.email_address_taken_error));
+                        else
+                            username_input_layout.setError(getString(R.string.username_taken_error));
                     }
                 }
                 else
                 {
-                    checkIfEmailExists(email);
+                    checkIfUserInfoExists(user_input, isEmail);
                 }
             }
 

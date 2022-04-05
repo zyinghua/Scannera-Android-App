@@ -133,6 +133,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
                         Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address, new_password);
 
+
                         finish();
                         Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
                         intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
@@ -153,5 +154,10 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void updateUserPassword()
+    {
+
     }
 }
