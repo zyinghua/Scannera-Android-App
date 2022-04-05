@@ -1,6 +1,7 @@
 package com.example.food_product_comparison_android_app.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -99,17 +100,18 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 switch(user.getLogin_flag())
                 {
+                    case Utils.LOCAL_LOGIN:
+                        removeLocalUserLoginStatus();
+                        requireActivity().finish();
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        break;
+
                     case Utils.FACEBOOK_LOGIN:
                         ((MainActivity) requireActivity()).facebookLogOut();
                         break;
 
                     case Utils.GOOGLE_LOGIN:
                         ((MainActivity) requireActivity()).googleLogOut();
-                        break;
-
-                    default:
-                        ((MainActivity) requireActivity()).finish();
-                        startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
                 }
             }
@@ -183,5 +185,15 @@ public class AccountFragment extends Fragment {
             username_tv.setText(user.getUsername());
             contribution_score_tv.setText(getString(R.string.contribution_score) + user.getContribution_score());
         }
+    }
+
+    private void removeLocalUserLoginStatus()
+    {
+        SharedPreferences sp = requireActivity().getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+        SharedPreferences.Editor sp_editor = sp.edit();
+
+        sp_editor.remove(Utils.LOCAL_LOGGED_USER);
+
+        sp_editor.apply();
     }
 }

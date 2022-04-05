@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,8 +16,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.Objects;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -154,80 +158,46 @@ public class SignUpActivity extends AppCompatActivity {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
         }
         else {
-            if (!checkIfUserInfoExists(email, true) && !checkIfUserInfoExists(username, false))
-                createUserOnChecked(username, firstname, lastname, email, password);
+            attemptToCreateUser(username, firstname, lastname, email, password);
         }
     }
 
-    private boolean checkIfUserInfoExists(String user_input, boolean isEmail)
+    private void attemptToCreateUser(String username, String firstname, String lastname, String email, String password)
     {
-        final boolean[] result = new boolean[1];
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail(user_input);
+        //Send a POST request to the server to create the user instance
+        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password, null);
 
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful())
                 {
                     User userResponse = response.body();
+                    userResponse.setLogin_flag(Utils.LOCAL_LOGIN);
 
-                    if(userResponse == null)
-                    {
-                        result[0] = false;
-                    }
-                    else
-                    {
-                        result[0] = true;
-
-                        if (isEmail)
-                            email_input_layout.setError(getString(R.string.email_address_taken_error));
-                        else
-                            username_input_layout.setError(getString(R.string.username_taken_error));
-                    }
-                }
-                else
-                {
-                    checkIfUserInfoExists(user_input, isEmail);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
-            }
-        });
-
-        return result[0];
-    }
-
-    private void createUserOnChecked(String username, String firstname, String lastname, String email, String password)
-    {
-        //Send a POST request to the server to create the user instance
-        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password, null);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful())
-                {
-                    User user = new User(Utils.LOCAL_LOGIN, username, firstname, lastname, email, password);
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(user));
+                    intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(userResponse));
                     startActivity(intent);
                 }
-                else
+                else if(response.code() == 405)
                 {
-                    createUserOnChecked(username, firstname, lastname, email, password);
+                    // Username already exists
+                    username_input_layout.setError(getString(R.string.username_taken_error));
+
+                } else if (response.code() == 406)
+                {
+                    // Email already exists
+                    email_input_layout.setError(getString(R.string.email_address_taken_error));
+
+                } else {
+                    attemptToCreateUser(username, firstname, lastname, email, password);
                     Log.e("DEBUG", response.code() + "");
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
                     Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();

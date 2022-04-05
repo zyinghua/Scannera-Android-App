@@ -203,7 +203,7 @@
             style="@style/Widget.Scannera.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/nutri_info"
+            android:text="@string/nutri_info_with_units"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/comparisons_activity_text_size"

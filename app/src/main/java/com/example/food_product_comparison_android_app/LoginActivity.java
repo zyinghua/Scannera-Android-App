@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,7 +38,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -208,8 +206,7 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             if (account != null) {
-                loadGoogleUserInfo(account);
-                navigateToLandingActivity();
+                loginWithGoogleUserInfo(account);
             }
 
         } catch (ApiException e) {
@@ -219,24 +216,25 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void loadGoogleUserInfo(GoogleSignInAccount account)
+    private void loginWithGoogleUserInfo(GoogleSignInAccount account)
     {
         if (account != null)
         {
             String first_name = account.getGivenName();
             String last_name = account.getFamilyName();
             String email = account.getEmail();
+            String id = account.getId();
             String img_url = null;
 
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            //this.createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
-            user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, img_url);
+            handleThirdPartyUser(Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
+            //user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url);
         }
     }
 
-    private void loadFacebookUserInfo(AccessToken accessToken)
+    private void loginWithFacebookUserInfo(AccessToken accessToken)
     {
         /*Instantiate a request*/
         GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
@@ -246,10 +244,11 @@ public class LoginActivity extends AppCompatActivity {
                     assert jsonObject != null;
                     String first_name = jsonObject.getString("first_name");
                     String last_name = jsonObject.getString("last_name");
+                    String id = jsonObject.getString("id");
                     String email = jsonObject.getString("email");
                     String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                    createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
+                    handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -296,7 +295,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        loadGoogleUserInfo(account);
+        loginWithGoogleUserInfo(account);
 
         return account != null;
     }
@@ -389,7 +388,7 @@ public class LoginActivity extends AppCompatActivity {
         password_login_input_layout.setError(null);
     }
 
-    private boolean checkLocalLoginInput()
+    private void checkLocalLoginInput()
     {
         String login_acc = Objects.requireNonNull(this.login_acc_input.getText()).toString();
         String password = Objects.requireNonNull(this.password_login_input.getText()).toString();
@@ -397,30 +396,25 @@ public class LoginActivity extends AppCompatActivity {
         if(login_acc.isEmpty())
         {
             this.login_acc_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
-            return false;
         }
         else if(password.isEmpty())
         {
             this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
-            return false;
         }
 
         if (!Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
         && !Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
         {
             this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
-            return false; // Not valid username or email input
         }
 
         // Send API request to the server here for username/email and password match
         checkUserInput(login_acc, password);
-
-        return true;
     }
 
     private void checkUserInput(String login_acc, String password)
     {
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail(login_acc);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(login_acc);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -437,7 +431,10 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         if(password.equals(userResponse.getPassword()))
                         {
+                            // Log the user in
                             user = userResponse;
+                            user.setLogin_flag(Utils.LOCAL_LOGIN);
+                            saveLocalUserLoginStatus(user);
                             navigateToLandingActivity();
                         }
                         else
@@ -463,32 +460,88 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void createNewUserFromThirdParty(String username, String firstname, String lastname, String email, String profile_img_url)
+    private void handleThirdPartyUser(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
-        //Send a POST request to the server to create the user instance
-        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email);
 
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful())
                 {
-                    user = new User(Utils.GOOGLE_LOGIN, username, firstname, lastname, email, null, profile_img_url);
-                    Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
+                    User userResponse = response.body();
+
+                    if(userResponse == null)
+                    {
+                        // Create a new user
+                        createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
+                        Log.d("DEBUG", "creating new user");
+                    }
+                    else
+                    {
+                        user = userResponse;
+                        user.setLogin_flag(login_flag);
+                        navigateToLandingActivity();
+                        Log.d("DEBUG", "User exists, navigate to landing page");
+                    }
                 }
                 else
                 {
-                    createNewUserFromThirdParty(username, firstname, lastname, email, profile_img_url);
+                    handleThirdPartyUser(login_flag, username, firstname, lastname, email, profile_img_url);
+                    Log.e("DEBUG", response.code() + "");
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }
         });
+    }
+
+    private void createNewUserFromThirdParty(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
+    {
+        //Send a POST request to the server to create the user instance
+        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful())
+                {
+                    user = response.body();
+                    user.setLogin_flag(login_flag);
+                    Log.d("DEBUG", "User id:" + user.getId() + " User firstname:" + user.getFirstname() + " Profile img: " + user.getProfile_img_url());
+                    navigateToLandingActivity();
+
+                    Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
+                }
+                else
+                {
+                    createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
+    }
+
+    private void saveLocalUserLoginStatus(User user)
+    {
+        SharedPreferences sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+        SharedPreferences.Editor sp_editor = sp.edit();
+
+        sp_editor.putString(Utils.LOCAL_LOGGED_USER, gson.toJson(user));
+
+        sp_editor.apply();
     }
 }

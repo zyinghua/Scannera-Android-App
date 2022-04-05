@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -21,6 +22,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -191,5 +195,26 @@ public class Utils {
     public static void displayWelcomeToast(Context context, String firstname, String lastname)
     {
         Toast.makeText(context, String.format(context.getString(R.string.welcome_to_scannera), firstname + " " + lastname), Toast.LENGTH_LONG).show();
+    }
+
+    public static void updateUserPassword(Context context, String userId, String password)
+    {
+        Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, password);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(!response.isSuccessful())
+                {
+                    updateUserPassword(context, userId, password);
+                    Log.e("DEBUG", "Response code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 }

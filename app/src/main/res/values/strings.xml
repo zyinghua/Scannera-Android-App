@@ -110,7 +110,7 @@
     <string name="name">Name:</string>
     <string name="brand">Brand:</string>
     <string name="price">Price:</string>
-    <string name="nutri_info">Nutritional Information:</string>
+    <string name="nutri_info_with_units">Nutritional Information:\n(Per 100 g/mL)</string>
     <string name="similar_products">Similar Products</string>
     <string name="sort_by">Sort by:</string>
 

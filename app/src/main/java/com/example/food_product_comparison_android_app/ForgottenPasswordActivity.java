@@ -114,7 +114,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
 
     private void handleOnUserExistence(String email_address)
     {
-        Call<User> call = Utils.getServerAPI(this).getUserByEmail(email_address);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email_address);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -133,6 +133,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
                         Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address, new_password);
 
+                        // Send a server request to update the user password
+                        Utils.updateUserPassword(ForgottenPasswordActivity.this, userResponse.getId(), new_password);
 
                         finish();
                         Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
@@ -156,8 +158,24 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUserPassword()
+    private void updateUserPassword(String userId, String password)
     {
+        Call<Void> call = Utils.getServerAPI(this).updateUserPasswordById(userId, password);
 
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(!response.isSuccessful())
+                {
+                    updateUserPassword(userId, password);
+                    Log.e("DEBUG", "Response code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 }
