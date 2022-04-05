@@ -104,40 +104,10 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void loadUserProfile() {
-        if (user.getLogin_flag() == Utils.FACEBOOK_LOGIN)
-        {
-            /*Instantiate a request*/
-            GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {
-                @Override
-                public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
-                    try {
-                        assert jsonObject != null;
-                        String first_name = jsonObject.getString("first_name");
-                        String last_name = jsonObject.getString("last_name");
-                        String email = jsonObject.getString("email");
-                        String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
+        if (user.getProfile_img_url() != null)
+            Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
 
-                        Picasso.get().load(img_url).into(home_user_img);
-                        welcome_username_tv.setText(getString(R.string.home_greeting) + first_name);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            Bundle parameters = new Bundle();
-            parameters.putString("fields", "first_name, last_name, email, id");
-            request.setParameters(parameters);
-            request.executeAsync(); // Now execute the request with the parameters
-        }
-        else
-        {
-            if (user.getProfile_img_url() != null)
-                Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
-
-            welcome_username_tv.setText(getString(R.string.home_greeting)+ user.getUsername());
-        }
+        welcome_username_tv.setText(getString(R.string.home_greeting)+ user.getUsername());
     }
 
     private void setUpContent()

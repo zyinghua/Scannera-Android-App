@@ -40,6 +40,8 @@ public class Utils {
     public static final int MAX_LEN_EMAIL = 45;
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String USER_INFO_KEY = "USER_TRANSIT_KEY";
+    public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
+    public static final String LOCAL_LOGGED_USER = "LOCAL LOGGED USER";
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
@@ -185,5 +187,10 @@ public class Utils {
     public static ServerAPI getServerAPI(Context context)
     {
         return getRetrofit(context).create(ServerAPI.class);
+    }
+
+    public static void displayWelcomeToast(Context context, String firstname, String lastname)
+    {
+        Toast.makeText(context, String.format(context.getString(R.string.welcome_to_scannera), firstname + " " + lastname), Toast.LENGTH_LONG).show();
     }
 }

@@ -3,7 +3,10 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +21,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.LoginStatusCallback;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -33,6 +38,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -41,6 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    private Gson gson;
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout login_acc_input_layout;
@@ -61,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
 
         findViews();
         setAnimationsOnStart();
+
+        this.gson = new Gson();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -216,8 +231,35 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, "", img_url);
+            this.createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
         }
+    }
+
+    private void loadFacebookUserInfo(AccessToken accessToken)
+    {
+        /*Instantiate a request*/
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
+                try {
+                    assert jsonObject != null;
+                    String first_name = jsonObject.getString("first_name");
+                    String last_name = jsonObject.getString("last_name");
+                    String email = jsonObject.getString("email");
+                    String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
+
+                    createNewUserFromThirdParty(first_name, first_name, last_name, email, img_url);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name, last_name, email, id");
+        request.setParameters(parameters);
+        request.executeAsync(); // Now execute the request with the parameters
     }
 
     private boolean checkFBLoginStatus()
@@ -258,9 +300,31 @@ public class LoginActivity extends AppCompatActivity {
         return account != null;
     }
 
+    private boolean checkLocalLoginStatus()
+    {
+        SharedPreferences app_sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+
+        String logged_user = app_sp.getString(Utils.LOCAL_LOGGED_USER, null);
+
+        if (logged_user == null)
+        {
+            return false;
+        }
+        else {
+            Type type = new TypeToken<User>() {}.getType();
+            user = gson.fromJson(logged_user, type);
+
+            return true;
+        }
+    }
+
     private int checkLoginStatus()
     {
-        if (checkFBLoginStatus())
+        if(checkLocalLoginStatus())
+        {
+            return Utils.LOCAL_LOGIN;
+        }
+        else if (checkFBLoginStatus())
         {
             return Utils.FACEBOOK_LOGIN;
         }
@@ -276,7 +340,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToLandingActivity()
     {
-        Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
@@ -285,7 +348,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToLandingActivity(User user)
     {
-        Gson gson = new Gson();
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
@@ -329,6 +391,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
         login_acc_input_layout.setError(null);
         password_login_input_layout.setError(null);
     }
@@ -402,6 +465,35 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(() -> {
+                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
+    }
+
+    private void createNewUserFromThirdParty(String username, String firstname, String lastname, String email, String profile_img_url)
+    {
+        //Send a POST request to the server to create the user instance
+        Call<Void> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful())
+                {
+                    user = new User(Utils.LOCAL_LOGIN, username, firstname, lastname, email, null, profile_img_url);
+                    Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
+                }
+                else
+                {
+                    createNewUserFromThirdParty(username, firstname, lastname, email, profile_img_url);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();

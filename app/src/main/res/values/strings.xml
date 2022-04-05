@@ -3,6 +3,7 @@
     <string name="app_email_address">scannera.customerservice@gmail.com</string>
     <string name="app_email_address_password">fit3162scannera</string>
     <string name="app_authority">com.example.food_product_comparison_android_app</string>
+    <string name="welcome_to_scannera">Hi %1$s, welcome to Scannera!</string>
     <string name="username_login">Username or Email</string>
     <string name="password_login">Password</string>
     <string name="login">Login</string>
