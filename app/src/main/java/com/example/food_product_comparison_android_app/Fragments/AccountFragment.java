@@ -101,7 +101,7 @@ public class AccountFragment extends Fragment {
                 switch(user.getLogin_flag())
                 {
                     case Utils.LOCAL_LOGIN:
-                        removeLocalUserLoginStatus();
+                        ((MainActivity) requireActivity()).removeUserLoginStatus();
                         requireActivity().finish();
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
@@ -150,50 +150,9 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (user.getLogin_flag() == Utils.FACEBOOK_LOGIN)
-        {
-            /*Instantiate a request*/
-            GraphRequest request = GraphRequest.newMeRequest(user.getFb_access_token(), new GraphRequest.GraphJSONObjectCallback() {
-                @Override
-                public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
-                    try {
-                        assert jsonObject != null;
-                        String first_name = jsonObject.getString("first_name");
-                        String last_name = jsonObject.getString("last_name");
-                        String email = jsonObject.getString("email");
-                        String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
-
-                        Picasso.get().load(img_url).into(user_profile_img);
-                        username_tv.setText(first_name);
-                        contribution_score_tv.setText(getString(R.string.contribution_score) + "0");
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            Bundle parameters = new Bundle();
-            parameters.putString("fields", "first_name, last_name, email, id");
-            request.setParameters(parameters);
-            request.executeAsync(); // Now execute the request with the parameters
-        }
-        else
-        {
-            if (user.getProfile_img_url() != null)
-                Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
-            username_tv.setText(user.getUsername());
-            contribution_score_tv.setText(getString(R.string.contribution_score) + user.getContribution_score());
-        }
-    }
-
-    private void removeLocalUserLoginStatus()
-    {
-        SharedPreferences sp = requireActivity().getSharedPreferences(Utils.APP_LOCAL_SP, 0);
-        SharedPreferences.Editor sp_editor = sp.edit();
-
-        sp_editor.remove(Utils.LOCAL_LOGGED_USER);
-
-        sp_editor.apply();
+        if (user.getProfile_img_url() != null)
+            Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
+        username_tv.setText(user.getUsername());
+        contribution_score_tv.setText(getString(R.string.contribution_score) + user.getContribution_score());
     }
 }

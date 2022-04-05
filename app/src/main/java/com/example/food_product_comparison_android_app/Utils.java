@@ -45,7 +45,7 @@ public class Utils {
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String USER_INFO_KEY = "USER_TRANSIT_KEY";
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
-    public static final String LOCAL_LOGGED_USER = "LOCAL LOGGED USER";
+    public static final String LOGGED_USER = "LOGGED USER";
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";

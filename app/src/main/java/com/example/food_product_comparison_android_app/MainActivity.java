@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        removeUserLoginStatus();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         finish();
                     }
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void facebookLogOut() {
         LoginManager.getInstance().logOut();
+        removeUserLoginStatus();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
     }
@@ -139,5 +141,15 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         current_frag = current_frag == HOME_FRAG ? ACCOUNT_FRAG : HOME_FRAG;
         this.bottomNavigationView.setSelectedItemId(current_frag == HOME_FRAG ? R.id.home : R.id.account);
+    }
+
+    public void removeUserLoginStatus()
+    {
+        SharedPreferences sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+        SharedPreferences.Editor sp_editor = sp.edit();
+
+        sp_editor.remove(Utils.LOGGED_USER);
+
+        sp_editor.apply();
     }
 }

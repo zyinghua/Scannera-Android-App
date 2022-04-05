@@ -92,9 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        int login_status = checkLoginStatus();
-
-        if (login_status == Utils.NOT_LOGGED_IN)
+        if (!this.checkLoginStatus())
         {
             // Not signed in, initialise all the necessary components for
             // the login activity.
@@ -119,8 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
-                    user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
-                    navigateToLandingActivity();
+                    // user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
+                    // navigateToLandingActivity();
+                    loginWithFacebookUserInfo(AccessToken.getCurrentAccessToken());
                 }
 
                 @Override
@@ -248,7 +247,10 @@ public class LoginActivity extends AppCompatActivity {
                     String email = jsonObject.getString("email");
                     String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                    handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
+                    // handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
+                    User fbUser = new User(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, null, img_url);
+                    saveUserLoginStatus(fbUser);
+                    navigateToLandingActivity(fbUser);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -262,49 +264,49 @@ public class LoginActivity extends AppCompatActivity {
         request.executeAsync(); // Now execute the request with the parameters
     }
 
-    private boolean checkFBLoginStatus()
-    {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+//    private boolean checkFBLoginStatus()
+//    {
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+//
+//        if (isLoggedIn)
+//            user = new User(Utils.FACEBOOK_LOGIN, accessToken);
+//
+//        LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
+//            @Override
+//            public void onCompleted(@NonNull AccessToken accessToken) {
+//                // User was previously logged in, can log them in directly here.
+//                // If this callback is called, a popup notification appears that says
+//                // "Logged in as <User Name>"
+//            }
+//            @Override
+//            public void onFailure() {
+//                // No access token could be retrieved for the user
+//            }
+//            @Override
+//            public void onError(@NonNull Exception exception) {
+//                // An error occurred
+//            }
+//        });
+//
+//        return isLoggedIn;
+//    }
 
-        if (isLoggedIn)
-            user = new User(Utils.FACEBOOK_LOGIN, accessToken);
+//    private boolean checkGoogleLoginStatus()
+//    {
+//        // Check for existing Google Sign In account, if the user is already signed in
+//        // the GoogleSignInAccount will be non-null.
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        loginWithGoogleUserInfo(account);
+//
+//        return account != null;
+//    }
 
-        LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
-            @Override
-            public void onCompleted(@NonNull AccessToken accessToken) {
-                // User was previously logged in, can log them in directly here.
-                // If this callback is called, a popup notification appears that says
-                // "Logged in as <User Name>"
-            }
-            @Override
-            public void onFailure() {
-                // No access token could be retrieved for the user
-            }
-            @Override
-            public void onError(@NonNull Exception exception) {
-                // An error occurred
-            }
-        });
-
-        return isLoggedIn;
-    }
-
-    private boolean checkGoogleLoginStatus()
-    {
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        loginWithGoogleUserInfo(account);
-
-        return account != null;
-    }
-
-    private boolean checkLocalLoginStatus()
+    private boolean checkLoginStatus()
     {
         SharedPreferences app_sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
 
-        String logged_user = app_sp.getString(Utils.LOCAL_LOGGED_USER, null);
+        String logged_user = app_sp.getString(Utils.LOGGED_USER, null);
 
         if (logged_user == null)
         {
@@ -318,31 +320,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private int checkLoginStatus()
-    {
-        if(checkLocalLoginStatus())
-        {
-            return Utils.LOCAL_LOGIN;
-        }
-        else if (checkFBLoginStatus())
-        {
-            return Utils.FACEBOOK_LOGIN;
-        }
-        else if(checkGoogleLoginStatus())
-        {
-            return Utils.GOOGLE_LOGIN;
-        }
-        else
-        {
-            return Utils.NOT_LOGGED_IN;
-        }
-    }
-
     private void navigateToLandingActivity()
     {
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
+        startActivity(intent);
+    }
+
+    private void navigateToLandingActivity(User fbUser)
+    {
+        finish(); // Avoid the users being able to navigate back to this login activity
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(fbUser));
         startActivity(intent);
     }
 
@@ -434,7 +424,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Log the user in
                             user = userResponse;
                             user.setLogin_flag(Utils.LOCAL_LOGIN);
-                            saveLocalUserLoginStatus(user);
+                            saveUserLoginStatus(user);
                             navigateToLandingActivity();
                         }
                         else
@@ -481,6 +471,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         user = userResponse;
                         user.setLogin_flag(login_flag);
+                        saveUserLoginStatus(user);
                         navigateToLandingActivity();
                         Log.d("DEBUG", "User exists, navigate to landing page");
                     }
@@ -514,6 +505,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     user = response.body();
                     user.setLogin_flag(login_flag);
+                    saveUserLoginStatus(user);
                     Log.d("DEBUG", "User id:" + user.getId() + " User firstname:" + user.getFirstname() + " Profile img: " + user.getProfile_img_url());
                     navigateToLandingActivity();
 
@@ -535,12 +527,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLocalUserLoginStatus(User user)
+    private void saveUserLoginStatus(User user)
     {
         SharedPreferences sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
         SharedPreferences.Editor sp_editor = sp.edit();
 
-        sp_editor.putString(Utils.LOCAL_LOGGED_USER, gson.toJson(user));
+        sp_editor.putString(Utils.LOGGED_USER, gson.toJson(user));
 
         sp_editor.apply();
     }
