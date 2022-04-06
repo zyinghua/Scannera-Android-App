@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView google_login_btn;
     private MaterialButton login_btn;
     private Button sign_up_btn;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     // Successful Facebook login
-                    // user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
-                    // navigateToLandingActivity();
+                    // User user = new User(Utils.FACEBOOK_LOGIN, AccessToken.getCurrentAccessToken());
+                    // navigateToLandingActivity(user);
                     loginWithFacebookUserInfo(AccessToken.getCurrentAccessToken());
                 }
 
@@ -159,11 +158,6 @@ public class LoginActivity extends AppCompatActivity {
                     checkLocalLoginInput();
                 }
             });
-        }
-        else
-        {
-            // User have signed in successfully
-            this.navigateToLandingActivity();
         }
     }
 
@@ -314,18 +308,12 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             Type type = new TypeToken<User>() {}.getType();
-            user = gson.fromJson(logged_user, type);
+            User user = gson.fromJson(logged_user, type);
+
+            navigateToLandingActivity(user);
 
             return true;
         }
-    }
-
-    private void navigateToLandingActivity()
-    {
-        finish(); // Avoid the users being able to navigate back to this login activity
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(user));
-        startActivity(intent);
     }
 
     private void navigateToLandingActivity(User fbUser)
@@ -422,10 +410,9 @@ public class LoginActivity extends AppCompatActivity {
                         if(password.equals(userResponse.getPassword()))
                         {
                             // Log the user in
-                            user = userResponse;
-                            user.setLogin_flag(Utils.LOCAL_LOGIN);
-                            saveUserLoginStatus(user);
-                            navigateToLandingActivity();
+                            userResponse.setLogin_flag(Utils.LOCAL_LOGIN);
+                            saveUserLoginStatus(userResponse);
+                            navigateToLandingActivity(userResponse);
                         }
                         else
                         {
@@ -469,10 +456,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        user = userResponse;
-                        user.setLogin_flag(login_flag);
-                        saveUserLoginStatus(user);
-                        navigateToLandingActivity();
+                        userResponse.setLogin_flag(login_flag);
+                        saveUserLoginStatus(userResponse);
+                        navigateToLandingActivity(userResponse);
                         Log.d("DEBUG", "User exists, navigate to landing page");
                     }
                 }
@@ -500,14 +486,14 @@ public class LoginActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful())
                 {
-                    user = response.body();
+                    User user = response.body();
                     user.setLogin_flag(login_flag);
                     saveUserLoginStatus(user);
                     Log.d("DEBUG", "User id:" + user.getId() + " User firstname:" + user.getFirstname() + " Profile img: " + user.getProfile_img_url());
-                    navigateToLandingActivity();
+                    navigateToLandingActivity(user);
 
                     Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
                 }
