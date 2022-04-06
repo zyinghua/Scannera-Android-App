@@ -159,6 +159,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+        else
+        {
+            // This block should never be reached regardless of the parallel execution
+        }
     }
 
     @Override
@@ -241,10 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                     String email = jsonObject.getString("email");
                     String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                    // handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
-                    User fbUser = new User(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, null, img_url);
-                    saveUserLoginStatus(fbUser);
-                    navigateToLandingActivity(fbUser);
+                    handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -258,44 +259,6 @@ public class LoginActivity extends AppCompatActivity {
         request.executeAsync(); // Now execute the request with the parameters
     }
 
-//    private boolean checkFBLoginStatus()
-//    {
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-//
-//        if (isLoggedIn)
-//            user = new User(Utils.FACEBOOK_LOGIN, accessToken);
-//
-//        LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
-//            @Override
-//            public void onCompleted(@NonNull AccessToken accessToken) {
-//                // User was previously logged in, can log them in directly here.
-//                // If this callback is called, a popup notification appears that says
-//                // "Logged in as <User Name>"
-//            }
-//            @Override
-//            public void onFailure() {
-//                // No access token could be retrieved for the user
-//            }
-//            @Override
-//            public void onError(@NonNull Exception exception) {
-//                // An error occurred
-//            }
-//        });
-//
-//        return isLoggedIn;
-//    }
-
-//    private boolean checkGoogleLoginStatus()
-//    {
-//        // Check for existing Google Sign In account, if the user is already signed in
-//        // the GoogleSignInAccount will be non-null.
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        loginWithGoogleUserInfo(account);
-//
-//        return account != null;
-//    }
-
     private boolean checkLoginStatus()
     {
         SharedPreferences app_sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
@@ -304,6 +267,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if (logged_user == null)
         {
+            // the third party records sync with the shared preferences, if sp is modified manually in device.
+            if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired())
+            {
+                LoginManager.getInstance().logOut();
+            }
+            else if(GoogleSignIn.getLastSignedInAccount(this) != null)
+            {
+                mGoogleSignInClient.signOut();
+            }
+
             return false;
         }
         else {
@@ -324,39 +297,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setAnimationsOnStart()
-    {
-        // Basically the idea is set the views to positions
-        // that is away from the positions they are meant to be.
-        // Then transit them back using animate() with the
-        // associated duration, etc...
 
-        float v = 0;
-
-        login_acc_input_layout.setTranslationX(Utils.login_view_animation_translation);
-        password_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
-        login_btn.setTranslationX(Utils.login_view_animation_translation);
-        forgotten_password_tv.setTranslationX(-Utils.login_view_animation_translation);
-        facebook_login_btn.setTranslationY(Utils.login_view_animation_translation);
-        google_login_btn.setTranslationY(Utils.login_view_animation_translation);
-        sign_up_btn.setTranslationY(Utils.login_view_animation_translation);
-
-        login_acc_input_layout.setAlpha(v);
-        password_login_input_layout.setAlpha(v);
-        login_btn.setAlpha(v);
-        forgotten_password_tv.setAlpha(v);
-        facebook_login_btn.setAlpha(v);
-        google_login_btn.setAlpha(v);
-        sign_up_btn.setAlpha(v);
-
-        login_acc_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        password_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
-        login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(600).start();
-        forgotten_password_tv.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        facebook_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        google_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
-        sign_up_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
-    }
 
     @Override
     protected void onStop() {
@@ -396,7 +337,7 @@ public class LoginActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful())
                 {
                     User userResponse = response.body();
@@ -428,7 +369,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
@@ -482,7 +423,7 @@ public class LoginActivity extends AppCompatActivity {
     private void createNewUserFromThirdParty(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
         //Send a POST request to the server to create the user instance
-        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
+        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, "abcdefgAH", profile_img_url);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -504,7 +445,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
@@ -521,5 +462,39 @@ public class LoginActivity extends AppCompatActivity {
         sp_editor.putString(Utils.LOGGED_USER, gson.toJson(user));
 
         sp_editor.apply();
+    }
+
+    private void setAnimationsOnStart()
+    {
+        // Basically the idea is set the views to positions
+        // that is away from the positions they are meant to be.
+        // Then transit them back using animate() with the
+        // associated duration, etc...
+
+        float v = 0;
+
+        login_acc_input_layout.setTranslationX(Utils.login_view_animation_translation);
+        password_login_input_layout.setTranslationX(Utils.login_view_animation_translation);
+        login_btn.setTranslationX(Utils.login_view_animation_translation);
+        forgotten_password_tv.setTranslationX(-Utils.login_view_animation_translation);
+        facebook_login_btn.setTranslationY(Utils.login_view_animation_translation);
+        google_login_btn.setTranslationY(Utils.login_view_animation_translation);
+        sign_up_btn.setTranslationY(Utils.login_view_animation_translation);
+
+        login_acc_input_layout.setAlpha(v);
+        password_login_input_layout.setAlpha(v);
+        login_btn.setAlpha(v);
+        forgotten_password_tv.setAlpha(v);
+        facebook_login_btn.setAlpha(v);
+        google_login_btn.setAlpha(v);
+        sign_up_btn.setAlpha(v);
+
+        login_acc_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        password_login_input_layout.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
+        login_btn.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(600).start();
+        forgotten_password_tv.animate().translationX(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        facebook_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        google_login_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(400).start();
+        sign_up_btn.animate().translationY(0).alpha(1).setDuration(Utils.login_view_animation_duration).setStartDelay(500).start();
     }
 }

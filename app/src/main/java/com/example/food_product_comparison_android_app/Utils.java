@@ -1,13 +1,13 @@
 package com.example.food_product_comparison_android_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.facebook.login.LoginManager;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -197,16 +197,20 @@ public class Utils {
         Toast.makeText(context, String.format(context.getString(R.string.welcome_to_scannera), firstname + " " + lastname), Toast.LENGTH_LONG).show();
     }
 
-    public static void updateUserPassword(Context context, String userId, String password)
+    public static void updateUserPassword(Context context, String email_address, String userId)
     {
-        Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, password);
+        // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
+        String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
+        Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
+
+        Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, new_password);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(!response.isSuccessful())
                 {
-                    updateUserPassword(context, userId, password);
+                    updateUserPassword(context, email_address, userId);
                     Log.e("DEBUG", "Response code: " + response.code());
                 }
             }

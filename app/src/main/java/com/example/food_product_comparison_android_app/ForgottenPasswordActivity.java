@@ -34,6 +34,7 @@ import retrofit2.Response;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
     public static final String RESET_EMAIl_ADDRESS_KEY = "RESET_EMAIl_ADDRESS";
+    public static final String RESET_USER_ID = "RESET_USER_ID";
     private TextView activity_title;
     private LottieAnimationView forgot_password_animation;
     private MaterialButton send_email_btn;
@@ -129,16 +130,14 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        // Send the automatic email which includes the temporary password to the user
-                        String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
-                        Utils.sendPasswordResetEmailToTargetAddress(ForgottenPasswordActivity.this, email_address, new_password);
-
-                        // Send a server request to update the user password
-                        Utils.updateUserPassword(ForgottenPasswordActivity.this, userResponse.getId(), new_password);
+                        // Send an email to user with randomly generated new password &
+                        // a server request to update the user password.
+                        Utils.updateUserPassword(ForgottenPasswordActivity.this, email_address, userResponse.getId());
 
                         finish();
                         Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
                         intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
+                        intent.putExtra(RESET_USER_ID, userResponse.getId());
                         startActivity(intent);
                     }
                 }
@@ -154,27 +153,6 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 uiHandler.post(() -> {
                    Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
-            }
-        });
-    }
-
-    private void updateUserPassword(String userId, String password)
-    {
-        Call<Void> call = Utils.getServerAPI(this).updateUserPasswordById(userId, password);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(!response.isSuccessful())
-                {
-                    updateUserPassword(userId, password);
-                    Log.e("DEBUG", "Response code: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
             }
         });
     }

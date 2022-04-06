@@ -20,6 +20,7 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
     private MaterialButton login_btn;
     private TextView resend_btn;
     private String target_email;
+    private String target_user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
         this.setAnimationsOnStart();
 
         this.target_email = getIntent().getStringExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY);
+        this.target_user_id = getIntent().getStringExtra(ForgottenPasswordActivity.RESET_USER_ID);
     }
 
     private void findViews()
@@ -53,12 +55,12 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
         this.resend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
-                Utils.sendPasswordResetEmailToTargetAddress(PasswordEmailSentActivity.this, target_email, new_password);
+                Utils.updateUserPassword(PasswordEmailSentActivity.this, target_email, target_user_id);
 
                 finish();
                 Intent intent = new Intent(PasswordEmailSentActivity.this, PasswordEmailSentActivity.class);
                 intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, target_email);
+                intent.putExtra(ForgottenPasswordActivity.RESET_USER_ID, target_user_id);
                 startActivity(intent);
             }
         });

@@ -38,7 +38,7 @@
     <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="logout">Log Out</string>
-    <string name="contribution_score">Contribution:&#160;</string>
+    <string name="contribution_score">Contribution:&#160;%1$d</string>
     <string name="account_information">Account Information</string>
     <string name="starred_products">Starred Products</string>
     <string name="scan_history">Scan History</string>

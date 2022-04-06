@@ -32,8 +32,6 @@ public class User {
     @SerializedName("user_contribution_score")
     private int contribution_score;
 
-    private AccessToken fb_access_token;
-
     public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
         this.login_flag = login_flag;
         this.username = username;
@@ -76,29 +74,12 @@ public class User {
         this.contribution_score = contribution_score;
     }
 
-    public User(int login_flag, AccessToken fb_access_token) {
-        // Facebook user
-        String s = "<Facebook User>";
-
-        this.login_flag = login_flag;
-        this.fb_access_token = fb_access_token;
-        this.id = this.username = this.firstname = this.lastname = this.email = s;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public AccessToken getFb_access_token() {
-        return fb_access_token;
-    }
-
-    public void setFb_access_token(AccessToken fb_access_token) {
-        this.fb_access_token = fb_access_token;
     }
 
     public String getId() {
@@ -149,16 +130,6 @@ public class User {
         this.profile_img_url = profile_img_url;
     }
 
-    public void updateUserInfo(String username, String firstname, String lastname, String email_address)
-    {
-        // Password should be updated directly as it won't be stored in the corresponding textview(s)
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email_address;
-        this.password = password;
-    }
-
     public int getLogin_flag() {
         return login_flag;
     }
@@ -174,6 +145,4 @@ public class User {
     public void setContribution_score(int contribution_score) {
         this.contribution_score = contribution_score;
     }
-
-
 }

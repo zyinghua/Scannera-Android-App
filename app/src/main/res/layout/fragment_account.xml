@@ -47,7 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_slab"
-                    android:maxLength="15"
+                    android:maxLength="8"
+                    android:ellipsize="end"
                     android:textColor="@color/black"
                     android:textSize="@dimen/activity_title_text_size" />
 
@@ -57,7 +58,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/roboto_slab"
-                    android:text="@string/contribution_score"
                     android:textColor="@color/black"
                     android:textSize="@dimen/small_text_size" />
 
