@@ -328,11 +328,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Send API request to the server here for username/email and password match
-        checkUserInput(login_acc, password);
+        checkLocalUserInput(login_acc, password);
     }
 
-    private void checkUserInput(String login_acc, String password)
+    private void checkLocalUserInput(String login_acc, String password)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(login_acc);
 
         call.enqueue(new Callback<User>() {
@@ -363,15 +366,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    checkUserInput(login_acc, password);
+                    checkLocalUserInput(login_acc, password);
                     Log.e("DEBUG", response.code() + "");
                 }
+
+                loading_dialog.dismiss();
             }
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
+                    loading_dialog.dismiss();
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }
@@ -380,6 +386,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleThirdPartyUser(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email);
 
         call.enqueue(new Callback<User>() {
@@ -408,12 +417,15 @@ public class LoginActivity extends AppCompatActivity {
                     handleThirdPartyUser(login_flag, username, firstname, lastname, email, profile_img_url);
                     Log.e("DEBUG", response.code() + "");
                 }
+
+                loading_dialog.dismiss();
             }
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
+                    loading_dialog.dismiss();
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }
