@@ -159,10 +159,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-        {
-            // This block should never be reached regardless of the parallel execution
-        }
     }
 
     @Override
@@ -297,8 +293,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -402,14 +396,12 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         // Create a new user
                         createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
-                        Log.d("DEBUG", "creating new user");
                     }
                     else
                     {
                         userResponse.setLogin_flag(login_flag);
                         saveUserLoginStatus(userResponse);
                         navigateToLandingActivity(userResponse);
-                        Log.d("DEBUG", "User exists, navigate to landing page");
                     }
                 }
                 else
@@ -434,8 +426,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void createNewUserFromThirdParty(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         //Send a POST request to the server to create the user instance
-        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, "abcdefgAH", profile_img_url);
+        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -445,7 +440,6 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     user.setLogin_flag(login_flag);
                     saveUserLoginStatus(user);
-                    Log.d("DEBUG", "User id:" + user.getId() + " User firstname:" + user.getFirstname() + " Profile img: " + user.getProfile_img_url());
                     navigateToLandingActivity(user);
 
                     Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
@@ -453,13 +447,17 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
+                    Log.e("DEBUG", response.code() + "");
                 }
+
+                loading_dialog.dismiss();
             }
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
+                    loading_dialog.dismiss();
                     Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }

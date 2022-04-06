@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:fontFamily="@font/roboto_slab"
-        android:maxLength="12"
+        android:maxLength="14"
         android:textColor="@color/black"
         android:ellipsize="end"
         android:textSize="@dimen/activity_title_text_size"
