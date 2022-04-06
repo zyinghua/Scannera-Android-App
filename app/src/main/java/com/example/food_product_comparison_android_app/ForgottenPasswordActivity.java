@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -115,11 +116,14 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
 
     private void handleOnUserExistence(String email_address)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email_address);
 
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful())
                 {
                     User userResponse = response.body();
@@ -145,13 +149,16 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 {
                     handleOnUserExistence(email_address);
                 }
+
+                loading_dialog.dismiss();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
-                   Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    loading_dialog.dismiss();
+                    Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }
         });

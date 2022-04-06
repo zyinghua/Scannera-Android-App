@@ -164,6 +164,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void attemptToCreateUser(String username, String firstname, String lastname, String email, String password)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         //Send a POST request to the server to create the user instance
         Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password, null);
 
@@ -194,12 +197,15 @@ public class SignUpActivity extends AppCompatActivity {
                     attemptToCreateUser(username, firstname, lastname, email, password);
                     Log.e("DEBUG", response.code() + "");
                 }
+
+                loading_dialog.dismiss();
             }
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Handler uiHandler = new Handler(Looper.getMainLooper());
                 uiHandler.post(() -> {
+                    loading_dialog.dismiss();
                     Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                 });
             }

@@ -158,7 +158,7 @@
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
-    <string name="server_error">Sorry, it seems like there was a server error with the request, please try again.</string>
+    <string name="server_error">Sorry, it seems like the request was not successful due to a server error, please try again.</string>
     <string name="error_input_cannot_be_empty">This field cannot be empty.</string>
     <string name="email_input_error">Invalid email address format, please check again.</string>
     <string name="email_address_taken_error">This email address has already been registered.</string>
