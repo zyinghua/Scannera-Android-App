@@ -314,15 +314,15 @@ public class LoginActivity extends AppCompatActivity {
         {
             this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
         }
-
-        if (!Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
+        else if (!Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
         && !Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
         {
             this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
         }
-
-        // Send API request to the server here for username/email and password match
-        checkLocalUserInput(login_acc, password);
+        else {
+            // Send API request to the server here for username/email and password match
+            checkLocalUserInput(login_acc, password);
+        }
     }
 
     private void checkLocalUserInput(String login_acc, String password)
