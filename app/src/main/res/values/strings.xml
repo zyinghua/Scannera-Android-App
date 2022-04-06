@@ -4,8 +4,8 @@
     <string name="app_email_address_password">fit3162scannera</string>
     <string name="app_authority">com.example.food_product_comparison_android_app</string>
     <string name="welcome_to_scannera">Hi %1$s, welcome to Scannera!</string>
-    <string name="username_login">Username or Email</string>
-    <string name="password_login">Password</string>
+    <string name="username_or_email_login">Username or Email</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="or_login_with">Or login with</string>
     <string name="signup">Sign Up</string>
@@ -16,7 +16,6 @@
     <string name="firstname_sign_up">First Name</string>
     <string name="lastname_sign_up">Last Name</string>
     <string name="email_sign_up">Email Address</string>
-    <string name="password_sign_up">Password</string>
     <string name="confirm_password_sign_up">Confirm Password</string>
     <string name="send_email">Send Email</string>
     <string name="forgot_your_password_title">Forgot your password?</string>
@@ -122,21 +121,17 @@
         <item>Energy Drinks</item>
         <item>Juice</item>
         <item>Coffee</item>
-        <item>Longlife Milk</item>
+        <item>Milk</item>
         <item>Iced Tea</item>
         <item>Health Products</item>
-        <item>Cordial</item>
         <item>Cereal</item>
-        <item>Spreads</item>
-        <item>Wraps</item>
-        <item>Food Wraps &amp; Bags</item>
         <item>Bread</item>
+        <item>Cake</item>
         <item>Muesli Bars</item>
         <item>Granola &amp; Muesli</item>
         <item>Canned Fruit</item>
         <item>Biscuits</item>
         <item>Crispbread</item>
-        <item>Chocolate Biscuits</item>
         <item>Gum &amp; Mints</item>
         <item>Chocolate</item>
         <item>Lollies</item>
@@ -148,6 +143,7 @@
         <item>Soup</item>
         <item>Cheese</item>
         <item>Butter</item>
+        <item>Snacks</item>
     </string-array>
 
     <!-- THIRD_PARTY_RELATED -->

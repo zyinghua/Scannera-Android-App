@@ -62,7 +62,7 @@
                 android:id="@+id/login_acc_input_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username_login"
+                android:hint="@string/username_or_email_login"
                 android:maxLength="45" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/password_login"
+                android:hint="@string/password"
                 android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:hint="@string/password_sign_up"
+                android:hint="@string/password"
                 android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>

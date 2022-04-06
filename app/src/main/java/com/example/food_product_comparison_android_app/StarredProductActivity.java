@@ -48,7 +48,7 @@ public class StarredProductActivity extends AppCompatActivity {
         ArrayList<Object> starred_products = new ArrayList<>();
 
         //******************************************************
-        starred_products.add(new Product("12431435235", "abcasgagahgewheasrhsadrhsedrthsedr", "dd", 55.5f, "I don't know", false));
+        starred_products.add(new Product("12431435235", "Monash", "FIT3161 Hamburger", 55.5f, "Bread", false));
         starred_products.add(new Product("12342342334","Monash", "Cokecola chocolate milk balala", 66.6f,"Energy Drink", true));
         //******************************************************
 

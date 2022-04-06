@@ -1,0 +1,187 @@
+<resources>
+    <string name="app_name">Scannera</string>
+    <string name="app_email_address">scannera.customerservice@gmail.com</string>
+    <string name="app_email_address_password">fit3162scannera</string>
+    <string name="app_authority">com.example.food_product_comparison_android_app</string>
+    <string name="welcome_to_scannera">您好 %1$s, 欢迎来到Scannera!</string>
+    <string name="username_or_email_login">用户名 或 电子邮箱</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="or_login_with">或者</string>
+    <string name="signup">注册</string>
+    <string name="forgotten_password"><u>忘记密码？</u></string>
+    <string name="dont_have_an_acc_tv">还没有账号？</string>
+    <string name="create_account">创建账号</string>
+    <string name="username_sign_up">用户名</string>
+    <string name="firstname_sign_up">名</string>
+    <string name="lastname_sign_up">姓氏</string>
+    <string name="email_sign_up">电子邮箱</string>
+    <string name="confirm_password_sign_up">确认密码</string>
+    <string name="send_email">发送邮件</string>
+    <string name="forgot_your_password_title">忘记了您的密码？</string>
+    <string name="forgotten_password_instruction">请输入您的账号绑定的电子邮箱，我们会发送一封密码重置操作说明给您。</string>
+    <string name="password_reset_email_subejct">Scannera密码重置操作说明</string>
+    <string name="password_reset_email_content">尊敬的用户，
+        \n\n一个重置您的 Scannera 账号密码的请求已被收到。\n\n请在下方找到您的临时密码，然后按照以下说明操作：\n\n
+        1. 使用下面的临时密码登录 Scannera 应用程序。\n
+        2. 点击底部的“账户”。\n
+        3. 点击“帐号信息”。\n
+        4. 单击与“密码”对齐的“编辑”，然后输入您自己的新密码。\n\n请尽快重设您的密码，谢谢。
+        \n\n您的临时密码： %1$s\n\n如果您没有发起此请求，请立即通过此电子邮件与我们联系。\n\n\n此致敬礼，\nScannera团队
+    </string>
+    <string name="email_sent">邮件已发送！</string>
+    <string name="password_reset_email_sent_description">请查看您的收件箱并按照说明以重置您的密码。</string>
+    <string name="didnt_receive_email">还没有收到邮件？</string>
+    <string name="check_spam_msg">请查看您的垃圾箱，或者：</string>
+    <string name="resend"><u>重新发送</u></string>
+    <string name="home">主页</string>
+    <string name="account">账号</string>
+    <string name="logout">登出</string>
+    <string name="contribution_score">贡献值：&#160;%1$d</string>
+    <string name="account_information">账号信息</string>
+    <string name="starred_products">产品收藏</string>
+    <string name="scan_history">扫描记录</string>
+    <string name="about_us">关于我们</string>
+    <string name="scan_a_barcode">扫描二维码</string>
+    <string name="home_greeting">您好，&#160;</string>
+    <string name="home_recommendation_title">您可能喜欢的产品：</string>
+    <string name="dialog_camera_permission_title">摄像头访问未启用</string>
+    <string name="dialog_camera_permission_msg">此活动需要相机权限才能进行，请通过”设置“ -> "应用信息" -> "Scannera" 来开启权限.</string>
+    <string name="dialog_btn_reject">拒绝</string>
+    <string name="dialog_btn_enable">开启</string>
+    <string name="search">搜索</string>
+    <string name="barcode_scanner_title">扫描二维码</string>
+    <string name="about_us_description">
+        这个应用程序是由莫纳什大学的3名计算机科学专业的学生作为大学项目构建的。旨在帮助澳大利亚客户避免阅读食物产品包装信息的需求，并通过提供营养信息及比较来帮助他们购买食品时的决定。希望您喜欢这个应用程序！
+    </string>
+    <string name="provide_feedback">提供反馈信息</string>
+    <string name="rating_feedback_prompt">如果您感兴趣，请给予我们评价，以让我们知道我们的产品质量。我们一直在努力改进，您的反馈将会非常宝贵！</string>
+    <string name="feedback">反馈</string>
+    <string name="submit">提交</string>
+    <string name="rating_empty">请给我们打个分 :D</string>
+    <string name="feedback_empty">请麻烦以写一些反馈来让我们知道您的想法 :D</string>
+    <string name="feedback_success">提交成功！非常感谢您的反馈！</string>
+    <string name="loading">加载中…</string>
+    <string name="loading_dialog_tag">Loading Dialog</string>
+    <string name="product_not_found">未找到产品</string>
+    <string name="pnf_dialog_msg">很抱歉，该产品似乎尚未添加到我们的数据库中，您愿意手动贡献产品信息吗？</string>
+    <string name="not_now">下次再说</string>
+    <string name="sure">当然</string>
+    <string name="contribute_new_product">贡献一个新产品</string>
+    <string name="product_brand">产品品牌：</string>
+    <string name="product_name">产品名称：</string>
+    <string name="product_price">产品原价格：</string>
+    <string name="product_category">产品类别：</string>
+    <string name="product_nutritional_info">产品营养表信息照：</string>
+    <string name="product_look">产品外观照：</string>
+    <string name="retake_tvbtn"><u>重新拍摄</u></string>
+    <string name="edit_tvbtn"><u>编辑</u></string>
+    <string name="close">关闭</string>
+    <string name="confirm">确认</string>
+    <string name="edit">编辑</string>
+    <string name="edit_category">编辑产品类别：</string>
+    <string name="next">下一个</string>
+    <string name="capture">拍照</string>
+    <string name="product_comparisons">产品信息与对比</string>
+    <string name="username_label">用户名：</string>
+    <string name="firstname_label">名：</string>
+    <string name="lastname_label">姓氏：</string>
+    <string name="email_address_label">电子邮箱：</string>
+    <string name="password_label">密码：</string>
+    <string name="username_default">/{用户名}/</string>
+    <string name="firstname_default">/{名}/</string>
+    <string name="lastname_default">/{姓氏}/</string>
+    <string name="email_address_default">/{电子邮箱}/</string>
+    <string name="password_default">/{密码}/</string>
+    <string name="delete_account">删除我的账号</string>
+    <string name="dialog_delete_account_title">您确定要删除您的帐户吗？</string>
+    <string name="dialog_delete_account_msg">
+        您将丢失与您的帐户关联的所有数据。\n\n提示：这无法撤消。
+    </string>
+    <string name="cancel">取消</string>
+    <string name="confirm_red"><font fgcolor='#A80825'>确定</font></string>
+    <string name="category">类别：</string>
+    <string name="name">名称：</string>
+    <string name="brand">品牌：</string>
+    <string name="price">原价格：</string>
+    <string name="nutri_info_with_units">营养信息：\n（每 100 克/毫升）</string>
+    <string name="similar_products">相似产品</string>
+    <string name="sort_by">排序方式：</string>
+
+
+    <!-- Category Dropdown Menu String Array -->
+    <string-array name="categories">
+        <item>软饮</item>
+        <item>软饮（灌装）</item>
+        <item>能量饮品</item>
+        <item>果汁</item>
+        <item>咖啡</item>
+        <item>牛奶</item>
+        <item>冰茶</item>
+        <item>保健品</item>
+        <item>谷物</item>
+        <item>面包</item>
+        <item>蛋糕</item>
+        <item>麦片棒</item>
+        <item>格兰诺拉麦片和其他麦片</item>
+        <item>水果罐头</item>
+        <item>饼干</item>
+        <item>薄脆饼干</item>
+        <item>口香糖和薄荷糖</item>
+        <item>巧克力</item>
+        <item>棒棒糖</item>
+        <item>Popcorn</item>
+        <item>薯条/薯片</item>
+        <item>面条</item>
+        <item>酱汁</item>
+        <item>调味品和泡菜</item>
+        <item>汤</item>
+        <item>起司</item>
+        <item>黄油</item>
+        <item>零食</item>
+    </string-array>
+
+    <!-- THIRD_PARTY_RELATED -->
+    <string name="facebook_app_id">487504102712984</string>
+    <string name="fb_login_protocol_scheme">fb487504102712984</string>
+    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
+    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
+    <string name="google_ps_missing_msg">谷歌登录需要谷歌Play商店, 但其无法被找到。</string>
+
+    <!-- ERROR MESSAGES -->
+    <string name="server_error">抱歉，由于服务器错误，请求未成功，请重试。</string>
+    <string name="error_input_cannot_be_empty">这一栏不能为空。</string>
+    <string name="email_input_error">电子邮件地址格式无效，请重新检查。</string>
+    <string name="email_address_taken_error">此电子邮箱已被注册。</string>
+    <string name="email_user_not_registered_error">此电子邮箱尚未注册，请先注册。</string>
+    <string name="username_input_error">抱歉，用户名不应包含任何特殊字符（比如, !@#$%^&amp;*）。</string>
+    <string name="username_taken_error">此用户名已注册。</string>
+    <string name="password_input_too_short_error">抱歉,密码必须至少包含%1$d位数。</string>
+    <string name="password_input_no_lowercase_error">抱歉，密码必须至少包含一个小写字符。</string>
+    <string name="password_input_no_uppercase_error">抱歉，密码必须至少包含一个大写字符。</string>
+    <string name="flname_input_error">抱歉，此字段只能包含英文字符。</string>
+    <string name="confirm_password_not_match_error">密码不匹配。</string>
+    <string name="valid_user_input">成功</string>
+    <string name="invalid_username_or_email">无效的用户名或电子邮件，请重新检查。</string>
+    <string name="user_acc_password_not_match_error">用户名/电子邮箱或密码不正确，请重新检查。</string>
+
+    <!-- ACCESSIBILITY RELATED -->
+    <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>
+    <string name="enter_info_hint">请在此处输入信息</string>
+    <string name="feedback_et_hint">请在此处输入您的反馈</string>
+    <string name="category_drop_down_menu_hint">请选择或输入类别</string>
+    <string name="sort_by_selection_hint">通过选择一个选项对产品进行排序</string>
+
+    <string name="login_title_image">Scannera应用程序的象征性图片</string>
+    <string name="home_collapsing_image_content_description">与Scannera应用程序相关的象征性活动图像</string>
+    <string name="content_description_start_icon">显示了一个开始图标</string>
+    <string name="content_description_end_icon">显示了一个结束图标</string>
+    <string name="back_btn_content_description">一个后退按钮</string>
+    <string name="close_btn_content_description">一个关闭按钮</string>
+    <string name="nutritional_pic_content_description">用户拍摄的产品营养表图片。</string>
+    <string name="product_look_content_description">用户拍摄的产品外观图片。</string>
+    <string name="product_star_btn_content_description">用于收藏此产品的星型按钮。</string>
+
+    <!-- ONLINE SERVER RELATED -->
+    <string name="server_base_url">https://fit3162-app-group7.herokuapp.com/</string>
+</resources>

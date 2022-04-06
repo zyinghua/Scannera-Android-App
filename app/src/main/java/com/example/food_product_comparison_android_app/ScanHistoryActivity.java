@@ -54,17 +54,14 @@ public class ScanHistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // -----------------------------------------------
-        SharedPreferences sp = getSharedPreferences("ScanHistory", 0);
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product("37766544", "Monash", "FIT3162 Pizza", 33.7f, "Pizza", false));
+        products.add(new Product("37766554", "Monash", "FIT3162 Rice", 16.8f, "Rice", true));
 
-        Gson gson = new Gson();
-        String str_products = sp.getString("ScanHistoryProducts", "");
-        String str_dates = sp.getString("ScanHistoryDates", "");
+        ArrayList<String> dates = new ArrayList<>();
+        dates.add("16 Mar 2022, Wednesday");
+        dates.add("5 Apr 2022, Tuesday");
 
-        Type ptype = new TypeToken<ArrayList<Product>>() {}.getType();
-        Type dtype = new TypeToken<ArrayList<String>>() {}.getType();
-
-        ArrayList<Product> products = gson.fromJson(str_products, ptype);
-        ArrayList<String> dates = gson.fromJson(str_dates, dtype);
         ArrayList<Object> items = new ArrayList<>();
         // -----------------------------------------------
 
