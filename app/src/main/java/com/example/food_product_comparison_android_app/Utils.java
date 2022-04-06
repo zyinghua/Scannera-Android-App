@@ -201,14 +201,17 @@ public class Utils {
     {
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
-        Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
 
         Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, new_password);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(!response.isSuccessful())
+                if(response.isSuccessful())
+                {
+                    Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
+                }
+                else
                 {
                     updateUserPassword(context, email_address, userId);
                     Log.e("DEBUG", "Response code: " + response.code());
