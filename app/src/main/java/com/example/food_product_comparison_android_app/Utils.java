@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -197,7 +198,7 @@ public class Utils {
         Toast.makeText(context, String.format(context.getString(R.string.welcome_to_scannera), firstname + " " + lastname), Toast.LENGTH_LONG).show();
     }
 
-    public static void updateUserPassword(Context context, String email_address, String userId)
+    public static void updateUserPasswordAndActivity(Context context, String email_address, String userId)
     {
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
@@ -210,10 +211,17 @@ public class Utils {
                 if(response.isSuccessful())
                 {
                     Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
+
+                    // Navigate to the email sent activity once sent
+                    ((Activity) context).finish();
+                    Intent intent = new Intent(context, PasswordEmailSentActivity.class);
+                    intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, email_address);
+                    intent.putExtra(ForgottenPasswordActivity.RESET_USER_ID, userId);
+                    context.startActivity(intent);
                 }
                 else
                 {
-                    updateUserPassword(context, email_address, userId);
+                    updateUserPasswordAndActivity(context, email_address, userId);
                     Log.e("DEBUG", "Response code: " + response.code());
                 }
             }

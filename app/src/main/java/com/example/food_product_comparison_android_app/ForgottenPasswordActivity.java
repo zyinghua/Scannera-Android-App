@@ -136,13 +136,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                     {
                         // Send an email to user with randomly generated new password &
                         // a server request to update the user password.
-                        Utils.updateUserPassword(ForgottenPasswordActivity.this, email_address, userResponse.getId());
-
-                        finish();
-                        Intent intent = new Intent(ForgottenPasswordActivity.this, PasswordEmailSentActivity.class);
-                        intent.putExtra(RESET_EMAIl_ADDRESS_KEY, email_address);
-                        intent.putExtra(RESET_USER_ID, userResponse.getId());
-                        startActivity(intent);
+                        Utils.updateUserPasswordAndActivity(ForgottenPasswordActivity.this, email_address, userResponse.getId());
                     }
                 }
                 else

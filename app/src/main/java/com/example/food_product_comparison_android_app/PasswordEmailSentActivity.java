@@ -55,13 +55,7 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
         this.resend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.updateUserPassword(PasswordEmailSentActivity.this, target_email, target_user_id);
-
-                finish();
-                Intent intent = new Intent(PasswordEmailSentActivity.this, PasswordEmailSentActivity.class);
-                intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, target_email);
-                intent.putExtra(ForgottenPasswordActivity.RESET_USER_ID, target_user_id);
-                startActivity(intent);
+                Utils.updateUserPasswordAndActivity(PasswordEmailSentActivity.this, target_email, target_user_id);
             }
         });
     }
