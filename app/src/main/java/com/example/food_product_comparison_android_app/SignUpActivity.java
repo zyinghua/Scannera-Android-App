@@ -6,8 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -158,11 +156,11 @@ public class SignUpActivity extends AppCompatActivity {
             this.confirm_password_input_layout.setError(getString(R.string.confirm_password_not_match_error));
         }
         else {
-            attemptToCreateUser(username, firstname, lastname, email, password);
+            attemptToCreateUser(System.currentTimeMillis(), username, firstname, lastname, email, password);
         }
     }
 
-    private void attemptToCreateUser(String username, String firstname, String lastname, String email, String password)
+    private void attemptToCreateUser(Long init_time, String username, String firstname, String lastname, String email, String password)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -194,8 +192,15 @@ public class SignUpActivity extends AppCompatActivity {
                     email_input_layout.setError(getString(R.string.email_address_taken_error));
 
                 } else {
-                    attemptToCreateUser(username, firstname, lastname, email, password);
-                    Log.e("DEBUG", response.code() + "");
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        attemptToCreateUser(init_time, username, firstname, lastname, email, password);
+                        Log.e("DEBUG", response.code() + "");
+                    }
+                    else
+                    {
+                        Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 loading_dialog.dismiss();
@@ -203,11 +208,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    loading_dialog.dismiss();
-                    Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
+                loading_dialog.dismiss();
+                Toast.makeText(SignUpActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +37,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.harmony.misc.SystemUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -222,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            handleThirdPartyUser(Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
+            handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
             //user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url);
         }
     }
@@ -241,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                     String email = jsonObject.getString("email");
                     String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                    handleThirdPartyUser(Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
+                    handleThirdPartyUser(System.currentTimeMillis(), Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -263,7 +262,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (logged_user == null)
         {
-            // the third party records sync with the shared preferences, if sp is modified manually in device.
+            // The third party records should sync with the shared preferences, if sp is modified manually in device.
             if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired())
             {
                 LoginManager.getInstance().logOut();
@@ -321,11 +320,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             // Send API request to the server here for username/email and password match
-            checkLocalUserInput(login_acc, password);
+            checkLocalUserInput(System.currentTimeMillis(), login_acc, password);
         }
     }
 
-    private void checkLocalUserInput(String login_acc, String password)
+    private void checkLocalUserInput(Long init_time, String login_acc, String password)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -360,8 +359,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    checkLocalUserInput(login_acc, password);
-                    Log.e("DEBUG", response.code() + "");
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        checkLocalUserInput(init_time, login_acc, password);
+                        Log.e("DEBUG", response.code() + "");
+                    } else {
+                        Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 loading_dialog.dismiss();
@@ -369,16 +372,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    loading_dialog.dismiss();
-                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
+                loading_dialog.dismiss();
+                Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void handleThirdPartyUser(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
+    private void handleThirdPartyUser(Long init_time, int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -395,7 +395,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(userResponse == null)
                     {
                         // Create a new user
-                        createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
+                        createNewUserFromThirdParty(System.currentTimeMillis(), login_flag, username, firstname, lastname, email, profile_img_url);
                     }
                     else
                     {
@@ -406,8 +406,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    handleThirdPartyUser(login_flag, username, firstname, lastname, email, profile_img_url);
-                    Log.e("DEBUG", response.code() + "");
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        handleThirdPartyUser(init_time, login_flag, username, firstname, lastname, email, profile_img_url);
+                        Log.e("DEBUG", response.code() + "");
+                    } else {
+                        Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 loading_dialog.dismiss();
@@ -415,16 +419,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    loading_dialog.dismiss();
-                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
+                loading_dialog.dismiss();
+                Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void createNewUserFromThirdParty(int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
+    private void createNewUserFromThirdParty(Long init_time, int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -446,8 +447,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    createNewUserFromThirdParty(login_flag, username, firstname, lastname, email, profile_img_url);
-                    Log.e("DEBUG", response.code() + "");
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        createNewUserFromThirdParty(init_time, login_flag, username, firstname, lastname, email, profile_img_url);
+                        Log.e("DEBUG", response.code() + "");
+                    } else {
+                        Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 loading_dialog.dismiss();
@@ -455,11 +460,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    loading_dialog.dismiss();
-                    Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
+                loading_dialog.dismiss();
+                Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }

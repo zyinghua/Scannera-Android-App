@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.login.LoginManager;
 
 import java.util.*;
@@ -35,7 +37,6 @@ public class Utils {
     public static final int NUTRITION_TABLE_PIC_REQUEST = 57219432;
     public static final int PRODUCT_LOOK_PIC_REQUEST = 307188697;
     public static final int RC_SIGN_IN = 900914;
-    public static final int NOT_LOGGED_IN = 0;
     public static final int LOCAL_LOGIN = 1;
     public static final int FACEBOOK_LOGIN = 2;
     public static final int GOOGLE_LOGIN = 3;
@@ -47,6 +48,7 @@ public class Utils {
     public static final String USER_INFO_KEY = "USER_TRANSIT_KEY";
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
+    public static final int MAX_SERVER_RESPOND_SEC = 5;
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
@@ -198,8 +200,11 @@ public class Utils {
         Toast.makeText(context, String.format(context.getString(R.string.welcome_to_scannera), firstname + " " + lastname), Toast.LENGTH_LONG).show();
     }
 
-    public static void updateUserPasswordAndActivity(Context context, String email_address, String userId)
+    public static void updateUserPasswordAndActivity(Long init_time, Context context, String email_address, String userId)
     {
+        LoadingDialog loading_dialog = new LoadingDialog(context);
+        loading_dialog.show();
+
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
 
@@ -207,7 +212,7 @@ public class Utils {
 
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if(response.isSuccessful())
                 {
                     Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
@@ -221,14 +226,20 @@ public class Utils {
                 }
                 else
                 {
-                    updateUserPasswordAndActivity(context, email_address, userId);
-                    Log.e("DEBUG", "Response code: " + response.code());
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        updateUserPasswordAndActivity(init_time, context, email_address, userId);
+                        Log.e("DEBUG", "Update Password Response code: " + response.code());
+                    }
+                    else {
+                        Toast.makeText(context, context.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(context, context.getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }

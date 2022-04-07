@@ -4,18 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +13,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.Objects;
-import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +60,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 String email_address_validation_result = Utils.validateUserInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
                 if(email_address_validation_result.equals(getString(R.string.valid_user_input)))
                 {
-                    handleOnUserExistence(email_address);
+                    handleOnUserExistence(System.currentTimeMillis(), email_address);
                 }
                 else
                     email_address_input_layout.setError(email_address_validation_result);
@@ -114,7 +99,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
-    private void handleOnUserExistence(String email_address)
+    private void handleOnUserExistence(Long init_time, String email_address)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -136,12 +121,16 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                     {
                         // Send an email to user with randomly generated new password &
                         // a server request to update the user password.
-                        Utils.updateUserPasswordAndActivity(ForgottenPasswordActivity.this, email_address, userResponse.getId());
+                        Utils.updateUserPasswordAndActivity(System.currentTimeMillis(),ForgottenPasswordActivity.this, email_address, userResponse.getId());
                     }
                 }
                 else
                 {
-                    handleOnUserExistence(email_address);
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        handleOnUserExistence(init_time, email_address);
+                    } else {
+                        Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 loading_dialog.dismiss();
@@ -149,11 +138,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(() -> {
-                    loading_dialog.dismiss();
-                    Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                });
+                loading_dialog.dismiss();
+                Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
