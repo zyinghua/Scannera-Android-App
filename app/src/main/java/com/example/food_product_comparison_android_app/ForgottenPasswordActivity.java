@@ -109,6 +109,8 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                loading_dialog.dismiss();
+
                 if (response.isSuccessful())
                 {
                     User userResponse = response.body();
@@ -132,8 +134,6 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                         Toast.makeText(ForgottenPasswordActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     }
                 }
-
-                loading_dialog.dismiss();
             }
 
             @Override

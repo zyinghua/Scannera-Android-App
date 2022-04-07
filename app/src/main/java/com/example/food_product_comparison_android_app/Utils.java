@@ -213,6 +213,8 @@ public class Utils {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
                 if(response.isSuccessful())
                 {
                     Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
