@@ -29,7 +29,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ProductComparisonsActivity extends AppCompatActivity {
+public class ProductInformationActivity extends AppCompatActivity {
     private ImageView product_look;
     private TextView category_tv;
     private TextView name_tv;
@@ -43,7 +43,7 @@ public class ProductComparisonsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_comparisons);
+        setContentView(R.layout.activity_product_information);
 
         this.setUpToolbar();
         this.findViews();
@@ -80,7 +80,7 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         this.product_look.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EnlargedImageDialog image_dialog = new EnlargedImageDialog(ProductComparisonsActivity.this);
+                final EnlargedImageDialog image_dialog = new EnlargedImageDialog(ProductInformationActivity.this);
                 image_dialog.show();
             }
         });
@@ -149,7 +149,7 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         }
         else if (item.getItemId() == R.id.home_toolbar)
         {
-            Intent intent = new Intent(ProductComparisonsActivity.this, LoginActivity.class);
+            Intent intent = new Intent(ProductInformationActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             return true;

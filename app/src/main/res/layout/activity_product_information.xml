@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductComparisonsActivity">
+    tools:context=".ProductInformationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab"
             android:textColor="?attr/colorPrimary"
-            android:text="@string/product_comparisons"
+            android:text="@string/product_information"
             android:textSize="@dimen/activity_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -42,6 +42,7 @@
     <string name="starred_products">Starred Products</string>
     <string name="scan_history">Scan History</string>
     <string name="about_us">About Us</string>
+    <string name="app_guide">App Guide</string>
     <string name="scan_a_barcode">Scan a barcode</string>
     <string name="home_greeting">Hi,&#160;</string>
     <string name="home_recommendation_title">Products you may like:</string>
@@ -87,7 +88,7 @@
     <string name="edit_category">Edit Product Category:</string>
     <string name="next">Next</string>
     <string name="capture">Capture</string>
-    <string name="product_comparisons">Product Comparisons</string>
+    <string name="product_information">Product Information</string>
     <string name="username_label">Username:</string>
     <string name="firstname_label">Firstname:</string>
     <string name="lastname_label">Lastname:</string>

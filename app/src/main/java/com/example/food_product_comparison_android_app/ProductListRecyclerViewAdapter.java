@@ -96,7 +96,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        activityContext.startActivity(new Intent(activityContext, ProductComparisonsActivity.class));
+                        activityContext.startActivity(new Intent(activityContext, ProductInformationActivity.class));
                     }
                 });
             }

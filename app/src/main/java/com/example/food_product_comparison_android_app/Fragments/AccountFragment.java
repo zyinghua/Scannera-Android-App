@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.AboutUsActivity;
 import com.example.food_product_comparison_android_app.AccountInfoActivity;
+import com.example.food_product_comparison_android_app.AppGuideActivity;
 import com.example.food_product_comparison_android_app.LoginActivity;
 import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
@@ -57,6 +58,7 @@ public class AccountFragment extends Fragment {
     private MaterialButton account_info_btn;
     private MaterialButton starred_products_btn;
     private MaterialButton scan_history_btn;
+    private MaterialButton app_guide_btn;
     private MaterialButton about_us_btn;
 
     @Override
@@ -87,6 +89,7 @@ public class AccountFragment extends Fragment {
         this.account_info_btn = view.findViewById(R.id.account_info_btn);
         this.starred_products_btn = view.findViewById(R.id.starred_products_btn);
         this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
+        this.app_guide_btn = view.findViewById(R.id.app_guide_btn);
         this.about_us_btn = view.findViewById(R.id.about_us_btn);
     }
 
@@ -133,6 +136,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ScanHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        this.app_guide_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AppGuideActivity.class);
                 startActivity(intent);
             }
         });

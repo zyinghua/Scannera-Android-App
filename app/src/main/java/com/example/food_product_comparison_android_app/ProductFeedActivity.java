@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -140,7 +139,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(ProductFeedActivity.this, ProductComparisonsActivity.class);
+                Intent intent = new Intent(ProductFeedActivity.this, ProductInformationActivity.class);
                 startActivity(intent);
             }
         });

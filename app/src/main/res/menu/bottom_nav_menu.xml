@@ -10,5 +10,4 @@
         android:id="@+id/account"
         android:icon="@drawable/ic_person_outline"
         android:title="@string/account"/>
-
 </menu>

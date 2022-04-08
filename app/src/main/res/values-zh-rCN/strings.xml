@@ -39,6 +39,7 @@
     <string name="starred_products">产品收藏</string>
     <string name="scan_history">扫描记录</string>
     <string name="about_us">关于我们</string>
+    <string name="app_guide">应用程序指南</string>
     <string name="scan_a_barcode">扫描二维码</string>
     <string name="home_greeting">您好，&#160;</string>
     <string name="home_recommendation_title">您可能喜欢的产品：</string>
@@ -79,7 +80,7 @@
     <string name="edit_category">编辑产品类别：</string>
     <string name="next">下一个</string>
     <string name="capture">拍照</string>
-    <string name="product_comparisons">产品信息与对比</string>
+    <string name="product_information">产品信息</string>
     <string name="username_label">用户名：</string>
     <string name="firstname_label">名：</string>
     <string name="lastname_label">姓氏：</string>

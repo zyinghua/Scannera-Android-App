@@ -17,6 +17,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_phone_android.xml" value="0.2875" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_scannera_text.xml" value="0.512962962962963" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_star.xml" value="0.327" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_tutorial.xml" value="0.2895" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/image_btn_round_background.xml" value="0.327" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/lines_around.xml" value="0.2365" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/nutritional_attribute_background.xml" value="0.2365" />
@@ -34,6 +35,8 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activities_with_product_list.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_about_us.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_account_info.xml" value="0.5" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_app_guide.xml" value="0.49413735343383586" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_app_guide_content.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_feedback.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_forgotten_password.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_login.xml" value="0.43148148148148147" />
@@ -44,6 +47,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_comparisons.xml" value="0.4639865996649916" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_comparisons_display.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_feed.xml" value="0.5" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_product_information.xml" value="0.49413735343383586" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_scan_history.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_sign_up.xml" value="0.5" />
@@ -61,7 +65,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_camera_permission_required_dialog.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_forgotten_password.xml" value="0.5390625" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.5" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home_content.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home_content.xml" value="0.5239786856127886" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_loading.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_login_icon.xml" value="0.39028475711892796" />

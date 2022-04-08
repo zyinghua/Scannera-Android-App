@@ -17,6 +17,7 @@
     <dimen name="user_activity_list_btn_text_size">17sp</dimen>
     <dimen name="user_activity_list_btn_icon_padding">24dp</dimen>
     <dimen name="acc_frag_user_profile_img_size">100dp</dimen>
+    <dimen name="home_welcome_text_start_margin">24dp</dimen>
     <dimen name="home_fragment_user_img_size">40dp</dimen>
     <dimen name="dialog_msg_max_width">350dp</dimen>
     <dimen name="product_feed_text_size">17sp</dimen>
@@ -26,4 +27,5 @@
     <dimen name="account_info_elem_margin">24dp</dimen>
     <dimen name="account_info_value_margin_end">12dp</dimen>
     <dimen name="comparisons_activity_text_size">16sp</dimen>
+    <dimen name="app_collapsing_appbar_height">300dp</dimen>
 </resources>
