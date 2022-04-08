@@ -3,13 +3,11 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -118,14 +115,14 @@ public class ProductComparisonsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         this.nutrition_recycler_view.setLayoutManager(layoutManager);
 
-        ArrayList<NutritionalAttribute> nutritional_attributes = new ArrayList<>();
+        ArrayList<NutritionAttribute> nutritional_attributes = new ArrayList<>();
 
         //******************************************************
-        nutritional_attributes.add(new NutritionalAttribute("Energy", "100 kJ"));
-        nutritional_attributes.add(new NutritionalAttribute("Sugar", "0.5g"));
-        nutritional_attributes.add(new NutritionalAttribute("Fat Total", "0.5g"));
-        nutritional_attributes.add(new NutritionalAttribute("Sodium", "600mg"));
-        nutritional_attributes.add(new NutritionalAttribute("Dietary Fibre", "40g"));
+        nutritional_attributes.add(new NutritionAttribute("Energy", "100 kJ"));
+        nutritional_attributes.add(new NutritionAttribute("Sugar", "0.5g"));
+        nutritional_attributes.add(new NutritionAttribute("Fat Total", "0.5g"));
+        nutritional_attributes.add(new NutritionAttribute("Sodium", "600mg"));
+        nutritional_attributes.add(new NutritionAttribute("Dietary Fibre", "40g"));
         //******************************************************
 
         NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(nutritional_attributes);

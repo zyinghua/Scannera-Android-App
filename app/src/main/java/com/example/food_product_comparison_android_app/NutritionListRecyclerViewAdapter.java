@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class NutritionListRecyclerViewAdapter extends RecyclerView.Adapter<NutritionListRecyclerViewAdapter.ViewHolder> {
-    private List<NutritionalAttribute> attributes;
+    private List<NutritionAttribute> attributes;
 
-    public NutritionListRecyclerViewAdapter(List<NutritionalAttribute> attributes) {
+    public NutritionListRecyclerViewAdapter(List<NutritionAttribute> attributes) {
         this.attributes = attributes;
     }
 
@@ -48,11 +48,11 @@ public class NutritionListRecyclerViewAdapter extends RecyclerView.Adapter<Nutri
         }
     }
 
-    public List<NutritionalAttribute> getAttributes() {
+    public List<NutritionAttribute> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(List<NutritionalAttribute> attributes) {
+    public void setAttributes(List<NutritionAttribute> attributes) {
         this.attributes = attributes;
     }
 }

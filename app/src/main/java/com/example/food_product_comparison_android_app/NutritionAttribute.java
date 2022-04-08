@@ -1,10 +1,10 @@
 package com.example.food_product_comparison_android_app;
 
-public class NutritionalAttribute {
+public class NutritionAttribute {
     private String attribute_name;
     private String attribute_value;
 
-    public NutritionalAttribute(String attribute_name, String attribute_value) {
+    public NutritionAttribute(String attribute_name, String attribute_value) {
         this.attribute_name = attribute_name;
         this.attribute_value = attribute_value;
     }
