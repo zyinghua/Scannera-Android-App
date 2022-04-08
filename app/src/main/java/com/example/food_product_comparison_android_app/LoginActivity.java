@@ -39,8 +39,6 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -221,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
                 img_url = account.getPhotoUrl().toString();
 
             //handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
-            saveUserLoginStatus(new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url));
+            Utils.updateUserLoginStatus(LoginActivity.this, new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url));
             navigateToLandingActivity();
         }
     }
@@ -308,8 +306,8 @@ public class LoginActivity extends AppCompatActivity {
         {
             this.password_login_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
         }
-        else if (!Utils.validateUserInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
-        && !Utils.validateUserInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
+        else if (!Utils.validateUserInfoInput(this, login_acc, Utils.EMAIL_INPUT).equals(getString(R.string.valid_user_input))
+        && !Utils.validateUserInfoInput(this, login_acc, Utils.USERNAME_INPUT).equals(getString(R.string.valid_user_input)))
         {
             this.login_acc_input_layout.setError(getString(R.string.invalid_username_or_email));
         }
@@ -345,7 +343,7 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             // Log the user in
                             userResponse.setLoginFlag(Utils.LOCAL_LOGIN);
-                            saveUserLoginStatus(userResponse);
+                            Utils.updateUserLoginStatus(LoginActivity.this, userResponse);
                             navigateToLandingActivity();
                         }
                         else
@@ -397,7 +395,7 @@ public class LoginActivity extends AppCompatActivity {
                     else
                     {
                         userResponse.setLoginFlag(login_flag);
-                        saveUserLoginStatus(userResponse);
+                        Utils.updateUserLoginStatus(LoginActivity.this, userResponse);
                         navigateToLandingActivity();
                     }
                 }
@@ -437,7 +435,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     User user = response.body();
                     user.setLoginFlag(login_flag);
-                    saveUserLoginStatus(user);
+                    Utils.updateUserLoginStatus(LoginActivity.this, user);
                     navigateToLandingActivity();
 
                     Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
@@ -459,16 +457,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void saveUserLoginStatus(User user)
-    {
-        SharedPreferences sp = getSharedPreferences(Utils.APP_LOCAL_SP, 0);
-        SharedPreferences.Editor sp_editor = sp.edit();
-
-        sp_editor.putString(Utils.LOGGED_USER, gson.toJson(user));
-
-        sp_editor.apply();
     }
 
     private void setAnimationsOnStart()

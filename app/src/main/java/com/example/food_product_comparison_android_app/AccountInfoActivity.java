@@ -3,23 +3,17 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,23 +24,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AccountInfoActivity extends AppCompatActivity {
-    private static final int EDIT_USERNAME = 0;
-    private static final int EDIT_PASSWORD = 1;
-    private static final int EDIT_FIRSTNAME = 2;
-    private static final int EDIT_LASTNAME = 3;
     private User user;
-    private MaterialButton edit_username_btn;
+    //private MaterialButton edit_username_btn;
     private TextView username_tv;
     private TextView password_tv;
     private TextView email_address_tv;
@@ -62,19 +47,13 @@ public class AccountInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
 
-        this.setUpToolbar();
-        this.findViews();
-        this.setUpListeners();
-
         // Get user information
         user = Utils.getLoggedUser(this);
 
-        // Populate user information to views
-        this.username_tv.setText(this.user.getUsername());
-        this.password_tv.setText(this.user.getPassword() == null ? "" : new String(new char[this.user.getPassword().length()]).replace("\0", "*"));
-        this.email_address_tv.setText(this.user.getEmail());
-        this.firstname_tv.setText(this.user.getFirstname());
-        this.lastname_tv.setText(this.user.getLastname());
+        this.setUpToolbar();
+        this.findViews();
+        this.setUpListeners();
+        this.populateWithUserData();
     }
 
     private void findViews()
@@ -84,7 +63,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.email_address_tv = findViewById(R.id.email_address_tv);
         this.firstname_tv = findViewById(R.id.firstname_tv);
         this.lastname_tv = findViewById(R.id.lastname_tv);
-        this.edit_username_btn = findViewById(R.id.edit_username_btn);
+        //this.edit_username_btn = findViewById(R.id.edit_username_btn);
         this.edit_password_btn = findViewById(R.id.edit_password_btn);
         this.edit_firstname_btn = findViewById(R.id.edit_firstname_btn);
         this.edit_lastname_btn = findViewById(R.id.edit_lastname_btn);
@@ -93,31 +72,31 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
-        this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEditDialog(username_tv, getString(R.string.username_label), EDIT_USERNAME);
-            }
-        });
+//        this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showEditDialog(getString(R.string.username_label), Utils.USERNAME_INPUT);
+//            }
+//        });
 
         this.edit_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(password_tv, getString(R.string.password_label), EDIT_PASSWORD);
+                showEditDialog(getString(R.string.password_label), Utils.PASSWORD_INPUT);
             }
         });
 
         this.edit_firstname_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(firstname_tv, getString(R.string.firstname_label), EDIT_FIRSTNAME);
+                showEditDialog(getString(R.string.firstname_label), Utils.FIRSTNAME_INPUT);
             }
         });
 
         this.edit_lastname_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(lastname_tv, getString(R.string.lastname_label), EDIT_LASTNAME);
+                showEditDialog(getString(R.string.lastname_label), Utils.LASTNAME_INPUT);
             }
         });
 
@@ -130,22 +109,31 @@ public class AccountInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void showEditDialog(TextView input, String title, int field)
+    private void populateWithUserData()
+    {
+        this.username_tv.setText(this.user.getUsername());
+        this.password_tv.setText(this.user.getPassword() == null ? "" : new String(new char[this.user.getPassword().length()]).replace("\0", "*"));
+        this.email_address_tv.setText(this.user.getEmail());
+        this.firstname_tv.setText(this.user.getFirstname());
+        this.lastname_tv.setText(this.user.getLastname());
+    }
+
+    private void showEditDialog(String title, int field)
     {
         final EditDialog dialog = new EditDialog(this, title);
 
         switch (field)
         {
-            case EDIT_USERNAME:
+            case Utils.USERNAME_INPUT:
                 dialog.setMaxInputLength(Utils.MAX_LEN_USERNAME);
                 break;
-            case EDIT_PASSWORD:
+            case Utils.PASSWORD_INPUT:
                 dialog.setMaxInputLength(Utils.MAX_LEN_PASSWORD);
                 break;
-            case EDIT_FIRSTNAME:
+            case Utils.FIRSTNAME_INPUT:
                 dialog.setMaxInputLength(Utils.MAX_LEN_FIRSTNAME);
                 break;
-            case EDIT_LASTNAME:
+            case Utils.LASTNAME_INPUT:
                 dialog.setMaxInputLength(Utils.MAX_LEN_LASTNAME);
                 break;
             default:
@@ -156,18 +144,19 @@ public class AccountInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextInputEditText edited_input_et = dialog.findViewById(R.id.edit_et);
+                TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
+                String new_data = Objects.requireNonNull(edited_input_et.getText()).toString();
+                edit_input_layout.setError(null);
+                String result = Utils.validateUserInfoInput(AccountInfoActivity.this, new_data, field);
 
-                if (Objects.requireNonNull(edited_input_et.getText()).toString().isEmpty()) {
-                    TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
-                    edit_input_layout.setError(getString(R.string.error_input_cannot_be_empty));
+                if (!result.equals(getString(R.string.valid_user_input))) {
+                    // If input not valid, checked locally.
+                    edit_input_layout.setError(result);
                 }
                 else
                 {
                     // Send an update request to the server here...
-
-
-                    input.setText(edited_input_et.getText().toString());
-                    dialog.dismiss();
+                    updateUserInfo(System.currentTimeMillis(), new_data, field, dialog);
                 }
             }
         });
@@ -233,6 +222,73 @@ public class AccountInfoActivity extends AppCompatActivity {
         }
     }
 
+    private void updateUserInfo(Long init_time, String new_data, int field, EditDialog dialog)
+    {
+        String attribute;
+        TextView field_tv;
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
+        if (field == Utils.USERNAME_INPUT)
+        {
+            attribute = ServerAPI.USERNAME_SERVER;
+            field_tv = username_tv;
+        }
+        else if(field == Utils.PASSWORD_INPUT)
+        {
+            attribute = ServerAPI.PASSWORD_SERVER;
+            field_tv = password_tv;
+        }
+        else if(field == Utils.FIRSTNAME_INPUT)
+        {
+            attribute = ServerAPI.FIRSTNAME_SERVER;
+            field_tv = firstname_tv;
+        }
+        else {
+            attribute = ServerAPI.LASTNAME_SERVER;
+            field_tv = lastname_tv;
+        }
+
+        Call<Void> call = Utils.getServerAPI(this).updateUserInfoById(attribute, this.user.getId(), new_data);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
+                if(response.isSuccessful())
+                {
+                    if (field == Utils.USERNAME_INPUT)
+                        user.setUsername(new_data);
+                    else if(field == Utils.PASSWORD_INPUT)
+                        user.setPassword(new_data);
+                    else if(field == Utils.FIRSTNAME_INPUT)
+                        user.setFirstname(new_data);
+                    else user.setLastname(new_data); // Smart Android IDE
+
+                    field_tv.setText(new_data);
+                    dialog.dismiss();
+                } else {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        updateUserInfo(init_time, new_data, field, dialog);
+                        Log.e("DEBUG", response.code() + "");
+                    }
+                    else
+                    {
+                        Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void deleteUserAccount(Long init_time)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
@@ -283,5 +339,12 @@ public class AccountInfoActivity extends AppCompatActivity {
                 Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Utils.updateUserLoginStatus(this, this.user);
     }
 }

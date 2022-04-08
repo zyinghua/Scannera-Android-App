@@ -134,11 +134,11 @@ public class SignUpActivity extends AppCompatActivity {
         String email = Objects.requireNonNull(this.email_input.getText()).toString();
         String password = Objects.requireNonNull(this.password_input.getText()).toString();
 
-        String username_result = Utils.validateUserInput(this, username, Utils.USERNAME_INPUT);
-        String firstname_result = Utils.validateUserInput(this, firstname, Utils.FLNAME_INPUT);
-        String lastname_result = Utils.validateUserInput(this, lastname, Utils.FLNAME_INPUT);
-        String email_result = Utils.validateUserInput(this, email, Utils.EMAIL_INPUT);
-        String password_result = Utils.validateUserInput(this, password, Utils.PASSWORD_INPUT);
+        String username_result = Utils.validateUserInfoInput(this, username, Utils.USERNAME_INPUT);
+        String firstname_result = Utils.validateUserInfoInput(this, firstname, Utils.FIRSTNAME_INPUT);
+        String lastname_result = Utils.validateUserInfoInput(this, lastname, Utils.LASTNAME_INPUT);
+        String email_result = Utils.validateUserInfoInput(this, email, Utils.EMAIL_INPUT);
+        String password_result = Utils.validateUserInfoInput(this, password, Utils.PASSWORD_INPUT);
         String confirm_password = Objects.requireNonNull(this.confirm_password_input.getText()).toString();
 
         if (!username_result.equals(getString(R.string.valid_user_input)))

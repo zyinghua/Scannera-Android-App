@@ -1,5 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
+import java.io.File;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -33,9 +35,17 @@ public interface ServerAPI {
 
     @FormUrlEncoded
     @PUT("api/user/update")
-    Call<Void> updateUserInfoById(
+    Call<Void> updateUserPasswordById(
             @Field(USER_ID_SERVER) String userId,
             @Field(PASSWORD_SERVER) String password
+    );
+
+    @FormUrlEncoded
+    @PUT("api/user/update/{attribute}")
+    Call<Void> updateUserInfoById(
+            @Path("attribute") String attribute,
+            @Field(USER_ID_SERVER) String userId,
+            @Field(PASSWORD_SERVER) String replacement
     );
 
     @GET("api/user/getBy/{acc_title}")

@@ -57,7 +57,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                 email_address_input_layout.setError(null);
 
                 String email_address = Objects.requireNonNull(email_address_input.getText()).toString();
-                String email_address_validation_result = Utils.validateUserInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
+                String email_address_validation_result = Utils.validateUserInfoInput(ForgottenPasswordActivity.this, email_address, Utils.EMAIL_INPUT);
                 if(email_address_validation_result.equals(getString(R.string.valid_user_input)))
                 {
                     handleOnUserExistence(System.currentTimeMillis(), email_address);

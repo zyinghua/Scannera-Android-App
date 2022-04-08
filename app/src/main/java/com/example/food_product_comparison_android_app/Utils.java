@@ -57,14 +57,15 @@ public class Utils {
     public static final int EMAIL_INPUT = 0;
     public static final int USERNAME_INPUT = 1;
     public static final int PASSWORD_INPUT = 2;
-    public static final int FLNAME_INPUT = 3;
+    public static final int FIRSTNAME_INPUT = 3;
+    public static final int LASTNAME_INPUT = 4;
     public static final int MIN_PASSWORD_LENGTH = 8;
 
     // Animations
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;
 
-    public static String validateUserInput(Context context, String input, int input_type)
+    public static String validateUserInfoInput(Context context, String input, int input_type)
     {
         if (input.isEmpty())
             return context.getString(R.string.error_input_cannot_be_empty);
@@ -102,7 +103,8 @@ public class Utils {
                 }
                 else
                     break;
-            case FLNAME_INPUT:
+            case FIRSTNAME_INPUT:
+            case LASTNAME_INPUT:
                 regexPattern = "^[a-zA-Z]*$";
                 if (!patternMatches(input, regexPattern))
                     return context.getString(R.string.flname_input_error);
@@ -194,6 +196,16 @@ public class Utils {
         return user != null ? user : new User();
     }
 
+    public static void updateUserLoginStatus(Context context, User user)
+    {
+        SharedPreferences sp = context.getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+        SharedPreferences.Editor sp_editor = sp.edit();
+
+        sp_editor.putString(Utils.LOGGED_USER, new Gson().toJson(user));
+
+        sp_editor.apply();
+    }
+
     public static void removeUserLoginStatus(Context context)
     {
         SharedPreferences sp = context.getSharedPreferences(Utils.APP_LOCAL_SP, 0);
@@ -230,7 +242,7 @@ public class Utils {
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
 
-        Call<Void> call = Utils.getServerAPI(context).updateUserInfoById(userId, new_password);
+        Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, new_password);
 
         call.enqueue(new Callback<Void>() {
             @Override
