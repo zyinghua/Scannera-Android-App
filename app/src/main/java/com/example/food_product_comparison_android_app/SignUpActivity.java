@@ -187,7 +187,8 @@ public class SignUpActivity extends AppCompatActivity {
                     // Username already exists
                     username_input_layout.setError(getString(R.string.username_taken_error));
 
-                } else if (response.code() == 406)
+                }
+                else if (response.code() == 406)
                 {
                     // Email already exists
                     email_input_layout.setError(getString(R.string.email_address_taken_error));

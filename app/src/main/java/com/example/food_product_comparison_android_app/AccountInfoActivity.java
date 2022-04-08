@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ import retrofit2.Response;
 
 public class AccountInfoActivity extends AppCompatActivity {
     private User user;
-    //private MaterialButton edit_username_btn;
+    private MaterialButton edit_username_btn;
     private TextView username_tv;
     private TextView password_tv;
     private TextView email_address_tv;
@@ -63,7 +62,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.email_address_tv = findViewById(R.id.email_address_tv);
         this.firstname_tv = findViewById(R.id.firstname_tv);
         this.lastname_tv = findViewById(R.id.lastname_tv);
-        //this.edit_username_btn = findViewById(R.id.edit_username_btn);
+        this.edit_username_btn = findViewById(R.id.edit_username_btn);
         this.edit_password_btn = findViewById(R.id.edit_password_btn);
         this.edit_firstname_btn = findViewById(R.id.edit_firstname_btn);
         this.edit_lastname_btn = findViewById(R.id.edit_lastname_btn);
@@ -72,12 +71,12 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
-//        this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showEditDialog(getString(R.string.username_label), Utils.USERNAME_INPUT);
-//            }
-//        });
+        this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditDialog(getString(R.string.username_label), Utils.USERNAME_INPUT);
+            }
+        });
 
         this.edit_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,7 +267,14 @@ public class AccountInfoActivity extends AppCompatActivity {
 
                     field_tv.setText(new_data);
                     dialog.dismiss();
-                } else {
+                }
+                else if(response.code() == 405)
+                {
+                    // Username already exists
+                    TextInputLayout edit_input_layout = dialog.findViewById(R.id.edit_text_input_layout);
+                    edit_input_layout.setError(getString(R.string.username_taken_error));
+                }
+                else {
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
                     {
                         updateUserInfo(init_time, new_data, field, dialog);

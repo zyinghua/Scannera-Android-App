@@ -51,9 +51,6 @@ public interface ServerAPI {
     @GET("api/user/getBy/{acc_title}")
     Call<User> getUserByEmailOrUsername(@Path("acc_title") String acc_title);
 
-    @GET("api/user/getByUsername/{username}")
-    Call<User> getUserByUsername(@Path(USERNAME_SERVER) String username);
-
     @DELETE("api/user/delete/{user_id}")
     Call<Void> deleteUserById(@Path(USER_ID_SERVER) String user_id);
 
