@@ -63,9 +63,7 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<User>() {}.getType();
-            user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
+            user = Utils.getLoggedUser(requireActivity());
         }
     }
 

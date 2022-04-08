@@ -166,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
         loading_dialog.show();
 
         //Send a POST request to the server to create the user instance
-        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, password, null);
+        Call<User> call = Utils.getServerAPI(this).postUser(username, firstname, lastname, email, password, null);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -180,7 +180,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(userResponse));
                     startActivity(intent);
                 }
                 else if(response.code() == 405)

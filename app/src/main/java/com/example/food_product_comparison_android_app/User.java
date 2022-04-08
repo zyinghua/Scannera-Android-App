@@ -74,6 +74,19 @@ public class User {
         this.contribution_score = contribution_score;
     }
 
+    public User() {
+        // For error use, avoid app crushing
+        this.login_flag = Utils.LOCAL_LOGIN;
+        this.id = "null";
+        this.username = "null";
+        this.firstname = "null";
+        this.lastname = "null";
+        this.email = "null";
+        this.password = "null";
+        this.profile_img_url = "null";
+        this.contribution_score = 0;
+    }
+
     public String getPassword() {
         return password;
     }

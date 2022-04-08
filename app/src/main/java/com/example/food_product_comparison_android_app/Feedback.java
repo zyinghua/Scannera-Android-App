@@ -1,7 +1,11 @@
 package com.example.food_product_comparison_android_app;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Feedback {
+    @SerializedName("user_id")
     private String userId;
+
     private float rating;
     private String description;
 

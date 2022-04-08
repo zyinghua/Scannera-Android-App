@@ -287,7 +287,6 @@ public class LoginActivity extends AppCompatActivity {
     {
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(Utils.USER_INFO_KEY, gson.toJson(fbUser));
         startActivity(intent);
     }
 
@@ -430,7 +429,7 @@ public class LoginActivity extends AppCompatActivity {
         loading_dialog.show();
 
         //Send a POST request to the server to create the user instance
-        Call<User> call = Utils.getServerAPI(this).createUser(username, firstname, lastname, email, null, profile_img_url);
+        Call<User> call = Utils.getServerAPI(this).postUser(username, firstname, lastname, email, null, profile_img_url);
 
         call.enqueue(new Callback<User>() {
             @Override

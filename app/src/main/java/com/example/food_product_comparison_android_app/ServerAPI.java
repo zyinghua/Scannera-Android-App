@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 public interface ServerAPI {
     @FormUrlEncoded
     @POST("api/user/add")
-    Call<User> createUser(
+    Call<User> postUser(
             @Field("username") String username,
             @Field("firstname") String firstname,
             @Field("lastname") String lastname,
@@ -59,4 +59,8 @@ public interface ServerAPI {
             @Field("user_id") String userId,
             @Field("lastname") String lastname
     );
+
+    @FormUrlEncoded
+    @POST("api/")
+    Call<Void> postFeedback(@Body Feedback feedback);
 }

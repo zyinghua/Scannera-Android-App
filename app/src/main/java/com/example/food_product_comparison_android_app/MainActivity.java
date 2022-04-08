@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String HOME_FRAG_TAG = "home_fragment";
     public static final String ACCOUNT_FRAG_TAG = "account_fragment";
     private GoogleSignInClient mGoogleSignInClient;
-    private String user_info;
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
     private AccountFragment accountFragment;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        this.user_info = getIntent().getStringExtra(Utils.USER_INFO_KEY);
 
         this.findViews();
         this.initialiseFragments();
@@ -109,14 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialiseFragments()
     {
-        Bundle bundle = new Bundle();
-        bundle.putString(Utils.USER_INFO_KEY, user_info);
-
         this.homeFragment = new HomeFragment();
         this.accountFragment = new AccountFragment();
-
-        homeFragment.setArguments(bundle);
-        accountFragment.setArguments(bundle);
     }
 
     private void navigateTo(int frag)

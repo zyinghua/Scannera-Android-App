@@ -57,9 +57,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.setUpListeners();
 
         // Get user information
-        Gson gson = new Gson();
-        Type type = new TypeToken<User>() {}.getType();
-        this.user = gson.fromJson(getIntent().getStringExtra(Utils.USER_INFO_KEY), type);
+        user = Utils.getLoggedUser(this);
 
         // Populate user information to views
         this.username_tv.setText(this.user.getUsername());

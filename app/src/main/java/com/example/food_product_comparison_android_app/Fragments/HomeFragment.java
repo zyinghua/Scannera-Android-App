@@ -55,9 +55,7 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getArguments() != null) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<User>() {}.getType();
-            user = gson.fromJson(getArguments().getString(Utils.USER_INFO_KEY), type);
+            user = Utils.getLoggedUser(requireActivity());
         }
     }
 

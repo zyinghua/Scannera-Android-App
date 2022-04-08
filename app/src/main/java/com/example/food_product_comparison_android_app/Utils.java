@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -178,6 +182,16 @@ public class Utils {
                 });
             }
         });
+    }
+
+    public static User getLoggedUser(Context context)
+    {
+        Gson gson = new Gson();
+        Type type = new TypeToken<User>() {}.getType();
+        User user =  gson.fromJson(context.getSharedPreferences(Utils.APP_LOCAL_SP, 0)
+                .getString(Utils.LOGGED_USER, null), type);
+
+        return user != null ? user : new User();
     }
 
     public static Retrofit getRetrofit(Context context)
