@@ -77,7 +77,7 @@
     <string name="product_name">Product Name:</string>
     <string name="product_price">Product Original Price:</string>
     <string name="product_category">Product Category:</string>
-    <string name="product_nutritional_info">Product Nutritional Information:</string>
+    <string name="product_nutrition_info">Product Nutrition Information:</string>
     <string name="product_look">Product Look Picture:</string>
     <string name="retake_tvbtn"><u>retake</u></string>
     <string name="edit_tvbtn"><u>edit</u></string>
@@ -183,7 +183,7 @@
     <string name="content_description_end_icon">An end icon displayed</string>
     <string name="back_btn_content_description">A back button</string>
     <string name="close_btn_content_description">A close button</string>
-    <string name="nutritional_pic_content_description">A picture of the product\'s nutritional table taken by the user.</string>
+    <string name="nutrition_pic_content_description">A picture of the product\'s nutrition table taken by the user.</string>
     <string name="product_look_content_description">A picture of the product look taken by the user.</string>
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
 

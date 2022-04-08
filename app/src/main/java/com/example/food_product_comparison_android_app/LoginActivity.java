@@ -37,7 +37,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.apache.harmony.misc.SystemUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -22,9 +22,9 @@
     <string name="forgotten_password_instruction">请输入您的账号绑定的电子邮箱，我们会发送一封密码重置操作说明给您。</string>
     <string name="password_reset_email_subejct">Scannera密码重置操作说明</string>
     <string name="password_reset_email_content">尊敬的用户，
-        \n\n一个重置您的 Scannera 账号密码的请求已被收到。\n\n请在下方找到您的临时密码，然后按照以下说明操作：\n\n
+        \n\n一个重置您的 Scannera 账号密码的请求已被收到。\n\n请在下方找到您的临时密码，并按照以下说明操作：\n\n
         1. 使用下面的临时密码登录 Scannera 应用程序。\n
-        2. 点击底部的“账户”。\n
+        2. 点击底部的“账号”。\n
         3. 点击“帐号信息”。\n
         4. 单击与“密码”对齐的“编辑”，然后输入您自己的新密码。\n\n请尽快重设您的密码，谢谢。
         \n\n您的临时密码： %1$s\n\n如果您没有发起此请求，请立即通过此电子邮件与我们联系。\n\n\n此致敬礼，\nScannera团队
@@ -72,7 +72,7 @@
     <string name="product_name">产品名称：</string>
     <string name="product_price">产品原价格：</string>
     <string name="product_category">产品类别：</string>
-    <string name="product_nutritional_info">产品营养表信息照：</string>
+    <string name="product_nutrition_info">产品营养表信息照：</string>
     <string name="product_look">产品外观照：</string>
     <string name="retake_tvbtn"><u>重新拍摄</u></string>
     <string name="edit_tvbtn"><u>编辑</u></string>
@@ -178,7 +178,7 @@
     <string name="content_description_end_icon">显示了一个结束图标</string>
     <string name="back_btn_content_description">一个后退按钮</string>
     <string name="close_btn_content_description">一个关闭按钮</string>
-    <string name="nutritional_pic_content_description">用户拍摄的产品营养表图片。</string>
+    <string name="nutrition_pic_content_description">用户拍摄的产品营养表图片。</string>
     <string name="product_look_content_description">用户拍摄的产品外观图片。</string>
     <string name="product_star_btn_content_description">用于收藏此产品的星型按钮。</string>
 

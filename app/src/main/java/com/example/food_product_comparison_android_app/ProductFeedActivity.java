@@ -209,7 +209,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
 
                             moveDynamicInputPrompt(mainConstraintLayout, nutri_info_title_views);
-                            input_title.setText(getString(R.string.product_nutritional_info));
+                            input_title.setText(getString(R.string.product_nutrition_info));
 
                             // Remove the input edittext as we don't need it anymore
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
