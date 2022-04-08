@@ -319,12 +319,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void checkLocalUserInput(Long init_time, String login_acc, String password)
+    private void checkLocalUserInput(Long init_time, String login_acc_title, String password)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(login_acc);
+        Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(login_acc_title);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -344,7 +344,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(password.equals(userResponse.getPassword()))
                         {
                             // Log the user in
-                            userResponse.setLogin_flag(Utils.LOCAL_LOGIN);
+                            userResponse.setLoginFlag(Utils.LOCAL_LOGIN);
                             saveUserLoginStatus(userResponse);
                             navigateToLandingActivity();
                         }
@@ -357,7 +357,7 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        checkLocalUserInput(init_time, login_acc, password);
+                        checkLocalUserInput(init_time, login_acc_title, password);
                         Log.e("DEBUG", response.code() + "");
                     } else {
                         Toast.makeText(LoginActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
@@ -396,7 +396,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        userResponse.setLogin_flag(login_flag);
+                        userResponse.setLoginFlag(login_flag);
                         saveUserLoginStatus(userResponse);
                         navigateToLandingActivity();
                     }
@@ -436,7 +436,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     User user = response.body();
-                    user.setLogin_flag(login_flag);
+                    user.setLoginFlag(login_flag);
                     saveUserLoginStatus(user);
                     navigateToLandingActivity();
 

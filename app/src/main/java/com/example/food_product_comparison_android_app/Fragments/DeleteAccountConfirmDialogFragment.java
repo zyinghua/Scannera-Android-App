@@ -25,7 +25,7 @@ public class DeleteAccountConfirmDialogFragment extends DialogFragment {
                 .setTitle(R.string.dialog_delete_account_title)
                 .setPositiveButton(R.string.confirm_red, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ((AccountInfoActivity) requireActivity()).deleteUserAccount();;
+                        ((AccountInfoActivity) requireActivity()).deleteUserAccount(System.currentTimeMillis());;
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

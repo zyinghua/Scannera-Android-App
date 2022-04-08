@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class User {
-    private int login_flag;
+    private int loginFlag;
 
     @SerializedName("user_id")
     private String id;
@@ -33,7 +33,7 @@ public class User {
     private int contribution_score;
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
-        this.login_flag = login_flag;
+        this.loginFlag = login_flag;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -43,7 +43,7 @@ public class User {
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, int contribution_score) {
-        this.login_flag = login_flag;
+        this.loginFlag = login_flag;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -53,7 +53,7 @@ public class User {
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url) {
-        this.login_flag = login_flag;
+        this.loginFlag = login_flag;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,7 +64,7 @@ public class User {
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url, int contribution_score) {
-        this.login_flag = login_flag;
+        this.loginFlag = login_flag;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -76,7 +76,7 @@ public class User {
 
     public User() {
         // For error use, avoid app crushing
-        this.login_flag = Utils.LOCAL_LOGIN;
+        this.loginFlag = Utils.LOCAL_LOGIN;
         this.id = "null";
         this.username = "null";
         this.firstname = "null";
@@ -143,12 +143,12 @@ public class User {
         this.profile_img_url = profile_img_url;
     }
 
-    public int getLogin_flag() {
-        return login_flag;
+    public int getLoginFlag() {
+        return loginFlag;
     }
 
-    public void setLogin_flag(int login_flag) {
-        this.login_flag = login_flag;
+    public void setLoginFlag(int loginFlag) {
+        this.loginFlag = loginFlag;
     }
 
     public int getContribution_score() {

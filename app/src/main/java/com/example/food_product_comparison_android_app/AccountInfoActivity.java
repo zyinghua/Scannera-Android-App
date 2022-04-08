@@ -13,10 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,12 +36,15 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AccountInfoActivity extends AppCompatActivity {
     private static final int EDIT_USERNAME = 0;
     private static final int EDIT_PASSWORD = 1;
-    private static final int EDIT_EMAIL_ADDRESS = 2;
-    private static final int EDIT_FIRSTNAME = 3;
-    private static final int EDIT_LASTNAME = 4;
+    private static final int EDIT_FIRSTNAME = 2;
+    private static final int EDIT_LASTNAME = 3;
     private User user;
     private MaterialButton edit_username_btn;
     private TextView username_tv;
@@ -132,9 +142,6 @@ public class AccountInfoActivity extends AppCompatActivity {
             case EDIT_PASSWORD:
                 dialog.setMaxInputLength(Utils.MAX_LEN_PASSWORD);
                 break;
-            case EDIT_EMAIL_ADDRESS:
-                dialog.setMaxInputLength(Utils.MAX_LEN_EMAIL);
-                break;
             case EDIT_FIRSTNAME:
                 dialog.setMaxInputLength(Utils.MAX_LEN_FIRSTNAME);
                 break;
@@ -168,30 +175,40 @@ public class AccountInfoActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void deleteUserAccount()
-    {
-        google_revokeAccess();
-
-        // Log out and start login activity without a way back
-        Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    private void google_revokeAccess() {
+    private void revokeGoogleAccess() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.google_client_id))
                 .requestEmail()
                 .build();
+
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         GoogleSignIn.getClient(this, gso).revokeAccess()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // ...
-
+                        mGoogleSignInClient.signOut();
                     }
                 });
+    }
+
+    private void revokeFacebookAccess() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if(accessToken == null)
+            return;
+
+        GraphRequest request = GraphRequest.newGraphPathRequest(
+                accessToken,
+                String.format(getString(R.string.facebook_delete_api), accessToken.getUserId()),
+                response -> {
+                    // Response: On Complete
+                    LoginManager.getInstance().logOut();
+                }
+        );
+
+        request.setHttpMethod(HttpMethod.DELETE);
+        request.executeAsync();
     }
 
     private void setUpToolbar()
@@ -214,5 +231,57 @@ public class AccountInfoActivity extends AppCompatActivity {
         {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void deleteUserAccount(Long init_time)
+    {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
+        Call<Void> call = Utils.getServerAPI(this).deleteUserById(user.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
+                if (response.isSuccessful())
+                {
+                    Utils.removeUserLoginStatus(AccountInfoActivity.this);
+
+                    if(user.getLoginFlag() == Utils.FACEBOOK_LOGIN)
+                    {
+                        revokeFacebookAccess();
+                    }
+                    else if(user.getLoginFlag() == Utils.GOOGLE_LOGIN)
+                    {
+                        revokeGoogleAccess();
+                    }
+
+                    // Log out and start login activity without a way back
+                    Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+                else
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        deleteUserAccount(init_time);
+                        Log.e("DEBUG", "Delete user response:" + response.code());
+                    }
+                    else
+                    {
+                        Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

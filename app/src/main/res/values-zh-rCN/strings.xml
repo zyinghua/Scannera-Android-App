@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Scannera</string>
-    <string name="app_email_address">scannera.customerservice@gmail.com</string>
-    <string name="app_email_address_password">fit3162scannera</string>
-    <string name="app_authority">com.example.food_product_comparison_android_app</string>
     <string name="welcome_to_scannera">您好 %1$s, 欢迎来到Scannera!</string>
     <string name="username_or_email_login">用户名 或 电子邮箱</string>
     <string name="password">密码</string>
@@ -96,7 +93,7 @@
     <string name="delete_account">删除我的账号</string>
     <string name="dialog_delete_account_title">您确定要删除您的帐户吗？</string>
     <string name="dialog_delete_account_msg">
-        您将丢失与您的帐户关联的所有数据。\n\n提示：这无法撤消。
+        您将丢失与您的帐户关联的所有数据。\n\n提示：此操作无法撤消。
     </string>
     <string name="cancel">取消</string>
     <string name="confirm_red"><font fgcolor='#A80825'>确定</font></string>
@@ -142,10 +139,6 @@
     </string-array>
 
     <!-- THIRD_PARTY_RELATED -->
-    <string name="facebook_app_id">487504102712984</string>
-    <string name="fb_login_protocol_scheme">fb487504102712984</string>
-    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
-    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
     <string name="google_ps_missing_msg">谷歌登录需要谷歌Play商店, 但其无法被找到。</string>
 
     <!-- ERROR MESSAGES -->
@@ -181,7 +174,4 @@
     <string name="nutrition_pic_content_description">用户拍摄的产品营养表图片。</string>
     <string name="product_look_content_description">用户拍摄的产品外观图片。</string>
     <string name="product_star_btn_content_description">用于收藏此产品的星型按钮。</string>
-
-    <!-- ONLINE SERVER RELATED -->
-    <string name="server_base_url">https://fit3162-app-group7.herokuapp.com/</string>
 </resources>

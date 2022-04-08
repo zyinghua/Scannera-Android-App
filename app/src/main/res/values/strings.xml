@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Scannera</string>
-    <string name="app_email_address">scannera.customerservice@gmail.com</string>
-    <string name="app_email_address_password">fit3162scannera</string>
-    <string name="app_authority">com.example.food_product_comparison_android_app</string>
+    <string name="app_email_address" translatable="false">scannera.customerservice@gmail.com</string>
+    <string name="app_email_address_password" translatable="false">fit3162scannera</string>
+    <string name="app_authority" translatable="false">com.example.food_product_comparison_android_app</string>
     <string name="welcome_to_scannera">Hi %1$s, welcome to Scannera!</string>
     <string name="username_or_email_login">Username or Email</string>
     <string name="password">Password</string>
@@ -147,10 +147,11 @@
     </string-array>
 
     <!-- THIRD_PARTY_RELATED -->
-    <string name="facebook_app_id">487504102712984</string>
-    <string name="fb_login_protocol_scheme">fb487504102712984</string>
-    <string name="facebook_client_token">ff1e8ddff27b8f12ed114806eb47abd5</string>
-    <string name="google_client_id">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">487504102712984</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb487504102712984</string>
+    <string name="facebook_client_token" translatable="false">ff1e8ddff27b8f12ed114806eb47abd5</string>
+    <string name="facebook_delete_api" translatable="false">DELETE /%1$s/permissions</string>
+    <string name="google_client_id" translatable="false">6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com</string>
     <string name="google_ps_missing_msg">Google Play Store is required for Google Sign in, but it\'s missing.</string>
 
     <!-- ERROR MESSAGES -->
@@ -188,5 +189,5 @@
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
 
     <!-- ONLINE SERVER RELATED -->
-    <string name="server_base_url">https://fit3162-app-group7.herokuapp.com/</string>
+    <string name="server_base_url" translatable="false">https://fit3162-app-group7.herokuapp.com/</string>
 </resources>

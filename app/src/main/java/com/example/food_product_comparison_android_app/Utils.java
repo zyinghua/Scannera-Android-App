@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -193,6 +194,16 @@ public class Utils {
         return user != null ? user : new User();
     }
 
+    public static void removeUserLoginStatus(Context context)
+    {
+        SharedPreferences sp = context.getSharedPreferences(Utils.APP_LOCAL_SP, 0);
+        SharedPreferences.Editor sp_editor = sp.edit();
+
+        sp_editor.remove(Utils.LOGGED_USER);
+
+        sp_editor.apply();
+    }
+
     public static Retrofit getRetrofit(Context context)
     {
         return new Retrofit.Builder()
@@ -219,7 +230,7 @@ public class Utils {
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
 
-        Call<Void> call = Utils.getServerAPI(context).updateUserPasswordById(userId, new_password);
+        Call<Void> call = Utils.getServerAPI(context).updateUserInfoById(userId, new_password);
 
         call.enqueue(new Callback<Void>() {
             @Override

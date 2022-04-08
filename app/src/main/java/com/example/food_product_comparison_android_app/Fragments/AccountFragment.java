@@ -95,10 +95,10 @@ public class AccountFragment extends Fragment {
         log_out_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                switch(user.getLogin_flag())
+                switch(user.getLoginFlag())
                 {
                     case Utils.LOCAL_LOGIN:
-                        ((MainActivity) requireActivity()).removeUserLoginStatus();
+                        Utils.removeUserLoginStatus(requireActivity());
                         requireActivity().finish();
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;
