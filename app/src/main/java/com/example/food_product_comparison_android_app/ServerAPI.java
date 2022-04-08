@@ -60,7 +60,6 @@ public interface ServerAPI {
             @Field("lastname") String lastname
     );
 
-    @FormUrlEncoded
     @POST("api/")
     Call<Void> postFeedback(@Body Feedback feedback);
 }

@@ -54,9 +54,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        if (getArguments() != null) {
-            user = Utils.getLoggedUser(requireActivity());
-        }
+        user = Utils.getLoggedUser(requireActivity());
     }
 
     @Override

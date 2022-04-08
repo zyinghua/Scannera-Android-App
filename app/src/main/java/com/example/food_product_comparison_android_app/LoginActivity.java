@@ -220,8 +220,9 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
-            //user = new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url);
+            //handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
+            saveUserLoginStatus(new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url));
+            navigateToLandingActivity();
         }
     }
 
@@ -274,16 +275,12 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         else {
-            Type type = new TypeToken<User>() {}.getType();
-            User user = gson.fromJson(logged_user, type);
-
-            navigateToLandingActivity(user);
-
+            navigateToLandingActivity();
             return true;
         }
     }
 
-    private void navigateToLandingActivity(User fbUser)
+    private void navigateToLandingActivity()
     {
         finish(); // Avoid the users being able to navigate back to this login activity
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -349,7 +346,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Log the user in
                             userResponse.setLogin_flag(Utils.LOCAL_LOGIN);
                             saveUserLoginStatus(userResponse);
-                            navigateToLandingActivity(userResponse);
+                            navigateToLandingActivity();
                         }
                         else
                         {
@@ -401,7 +398,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         userResponse.setLogin_flag(login_flag);
                         saveUserLoginStatus(userResponse);
-                        navigateToLandingActivity(userResponse);
+                        navigateToLandingActivity();
                     }
                 }
                 else
@@ -441,7 +438,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     user.setLogin_flag(login_flag);
                     saveUserLoginStatus(user);
-                    navigateToLandingActivity(user);
+                    navigateToLandingActivity();
 
                     Utils.displayWelcomeToast(LoginActivity.this, firstname, lastname);
                 }

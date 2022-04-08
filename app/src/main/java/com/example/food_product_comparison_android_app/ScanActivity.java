@@ -73,7 +73,6 @@ public class ScanActivity extends AppCompatActivity {
 
                     uiHandler.post(() -> {
                         hint.setText("");
-                        Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
 
                         if (!find_product())
                         {

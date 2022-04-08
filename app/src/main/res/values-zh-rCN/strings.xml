@@ -52,10 +52,10 @@
     <string name="search">搜索</string>
     <string name="barcode_scanner_title">扫描二维码</string>
     <string name="about_us_description">
-        这个应用程序是由莫纳什大学的3名计算机科学专业的学生作为大学项目构建的。旨在帮助澳大利亚客户避免阅读食物产品包装信息的需求，并通过提供营养信息及比较来帮助他们购买食品时的决定。希望您喜欢这个应用程序！
+        这个应用程序是由莫纳什大学的3名计算机科学专业的学生作为大学项目构建的。旨在帮助澳大利亚客户避免阅读食物产品包装信息的需求，并通过提供营养信息及对比来协助他们购买食品时的决定。希望您喜欢这个应用程序！
     </string>
     <string name="provide_feedback">提供反馈信息</string>
-    <string name="rating_feedback_prompt">如果您感兴趣，请给予我们评价，以让我们知道我们的产品质量。我们一直在努力改进，您的反馈将会非常宝贵！</string>
+    <string name="rating_feedback_prompt">如果您感兴趣，请给予我们评价，以让我们知道我们的应用程序质量。我们一直在努力改进，您的反馈将会非常宝贵！</string>
     <string name="feedback">反馈</string>
     <string name="submit">提交</string>
     <string name="rating_empty">请给我们打个分 :D</string>

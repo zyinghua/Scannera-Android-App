@@ -62,9 +62,8 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            user = Utils.getLoggedUser(requireActivity());
-        }
+
+        user = Utils.getLoggedUser(requireActivity());
     }
 
     @Override
@@ -119,7 +118,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AccountInfoActivity.class);
-                intent.putExtra(Utils.USER_INFO_KEY, new Gson().toJson(user));
                 startActivity(intent);
             }
         });

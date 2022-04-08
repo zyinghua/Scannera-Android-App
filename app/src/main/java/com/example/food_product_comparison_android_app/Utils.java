@@ -47,7 +47,6 @@ public class Utils {
     public static final int MAX_LEN_LASTNAME = 25;
     public static final int MAX_LEN_EMAIL = 45;
     public static final int MAX_LEN_PASSWORD = 20;
-    public static final String USER_INFO_KEY = "USER_TRANSIT_KEY";
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
     public static final int MAX_SERVER_RESPOND_SEC = 5;
