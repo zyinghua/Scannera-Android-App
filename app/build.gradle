@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\61472\\.android\\fit3162_scannera_release.keystore.jks')
+            storePassword 'fit3162scannera'
+            keyAlias 'scannera_release.keystore'
+            keyPassword 'fit3162scannera'
+        }
+    }
     compileSdk 31
 
     packagingOptions {
@@ -25,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

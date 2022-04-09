@@ -47,7 +47,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private Gson gson;
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private TextInputLayout login_acc_input_layout;
@@ -67,8 +66,6 @@ public class LoginActivity extends AppCompatActivity {
 
         findViews();
         setAnimationsOnStart();
-
-        this.gson = new Gson();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
