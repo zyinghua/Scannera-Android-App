@@ -10,22 +10,29 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class ScanHistoryActivity extends AppCompatActivity {
+    private URL webServiceEndPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,49 +42,72 @@ public class ScanHistoryActivity extends AppCompatActivity {
         this.setUpToolbar();
         ((TextView) findViewById(R.id.activity_title)).setText(getString(R.string.scan_history));
 
-        LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
-
-        executor.execute(()->{
-            this.setUpContent();
-            uiHandler.post(loading_dialog::dismiss);
-        });
+        this.setUpContent();
     }
 
     private void setUpContent()
     {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // -----------------------------------------------
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product("37766544", "Monash", "FIT3162 Pizza", 33.7f, "Pizza", false));
-        products.add(new Product("37766554", "Monash", "FIT3162 Rice", 16.8f, "Rice", true));
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler uiHandler = new Handler(Looper.getMainLooper());
 
-        ArrayList<String> dates = new ArrayList<>();
-        dates.add("16 Mar 2022, Wednesday");
-        dates.add("5 Apr 2022, Tuesday");
+        executor.execute(() -> {
+            ArrayList<Object> items = new ArrayList<>();
 
-        ArrayList<Object> items = new ArrayList<>();
-        // -----------------------------------------------
+            try {
+                webServiceEndPoint = new URL(getString(R.string.server_base_url));
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceEndPoint.openConnection();
 
-        for (int i = products.size() - 1; i >= 0; i--)
-        {
-            if (i == products.size() - 1 || dates.get(i).compareTo(dates.get(i + 1)) < 0)
-            {
-                items.add(dates.get(i));
+                if (httpsURLConnection.getResponseCode() == 200)
+                {
+                    loading_dialog.dismiss();
+
+                    // -----------------------------------------------
+                    ArrayList<Product> products = new ArrayList<>();
+                    products.add(new Product("37766544", "Monash", "FIT3162 Pizza", 33.7f, "Pizza", false));
+                    products.add(new Product("37766554", "Monash", "FIT3162 Rice", 16.8f, "Rice", true));
+
+                    ArrayList<String> dates = new ArrayList<>();
+                    dates.add("16 Mar 2022, Wednesday");
+                    dates.add("5 Apr 2022, Tuesday");
+
+                    // -----------------------------------------------
+
+                    for (int i = products.size() - 1; i >= 0; i--) {
+                        if (i == products.size() - 1 || dates.get(i).compareTo(dates.get(i + 1)) < 0) {
+                            items.add(dates.get(i));
+                        }
+
+                        items.add(products.get(i));
+                    }
+                    // -----------------------------------------------
+
+
+
+                    uiHandler.post(() -> {
+                        ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), this, items);
+                        recyclerView.setAdapter(shAdapter);
+                    });
+                }
+                else
+                {
+                    // response code = NOT Successful
+                    loading_dialog.dismiss();
+                    Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                }
+
+            } catch(Exception e) {
+                loading_dialog.dismiss();
+                Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                Log.e("DEBUG", "Server Related Exception Error: " + e);
             }
-
-            items.add(products.get(i));
-        }
-        // -----------------------------------------------
-
-        ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(),this, items);
-        recyclerView.setAdapter(shAdapter);
+        });
     }
 
     private void setUpToolbar()

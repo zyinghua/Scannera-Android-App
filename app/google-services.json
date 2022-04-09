@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "6808559454",
+    "project_id": "scannera-1646304965903",
+    "storage_bucket": "scannera-1646304965903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6808559454:android:90996f0c939c431451b9cf",
+        "android_client_info": {
+          "package_name": "com.example.food_product_comparison_android_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6808559454-jrgfmuhbp7gfs68ij7ht4eu156lbac4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_product_comparison_android_app",
+            "certificate_hash": "02a3b491035c7af9e592eeea0d33ee9f4f8f24d7"
+          }
+        },
+        {
+          "client_id": "6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl4TpzcpzPkTgJYnpfOKk-Vr79U8sllxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6808559454-8ud0chumbsoib7ca1365com121uhpf3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
