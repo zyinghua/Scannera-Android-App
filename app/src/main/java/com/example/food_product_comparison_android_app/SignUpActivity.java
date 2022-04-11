@@ -178,6 +178,7 @@ public class SignUpActivity extends AppCompatActivity {
                     User userResponse = response.body();
                     userResponse.setLoginFlag(Utils.LOCAL_LOGIN);
 
+                    Utils.updateUserLoginStatus(SignUpActivity.this, userResponse);
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

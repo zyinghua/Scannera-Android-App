@@ -6,7 +6,7 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\61472\\.android\\fit3162_scannera_release.keystore.jks')
+            storeFile file('F:\\Food_Product_Comparison_Android_App\\external_resources\\CredentialFiles\\fit3162_scannera_release.keystore.jks')
             storePassword 'fit3162scannera'
             keyAlias 'scannera_release.keystore'
             keyPassword 'fit3162scannera'
@@ -31,7 +31,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }

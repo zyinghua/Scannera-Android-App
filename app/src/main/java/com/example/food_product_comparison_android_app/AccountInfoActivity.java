@@ -223,32 +223,30 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void updateUserInfo(Long init_time, String new_data, int field, EditDialog dialog)
     {
-        String attribute;
+        Call<Void> call;
         TextView field_tv;
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
         if (field == Utils.USERNAME_INPUT)
         {
-            attribute = ServerAPI.USERNAME_SERVER;
+            call = Utils.getServerAPI(this).updateUsernameById(this.user.getId(), new_data);
             field_tv = username_tv;
         }
         else if(field == Utils.PASSWORD_INPUT)
         {
-            attribute = ServerAPI.PASSWORD_SERVER;
+            call = Utils.getServerAPI(this).updateUserPasswordById(this.user.getId(), new_data);
             field_tv = password_tv;
         }
         else if(field == Utils.FIRSTNAME_INPUT)
         {
-            attribute = ServerAPI.FIRSTNAME_SERVER;
+            call = Utils.getServerAPI(this).updateUserFirstnameById(this.user.getId(), new_data);
             field_tv = firstname_tv;
         }
-        else {
-            attribute = ServerAPI.LASTNAME_SERVER;
+        else { // Last name
+            call = Utils.getServerAPI(this).updateUserLastnameById(this.user.getId(), new_data);
             field_tv = lastname_tv;
         }
-
-        Call<Void> call = Utils.getServerAPI(this).updateUserInfoById(attribute, this.user.getId(), new_data);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -265,7 +263,8 @@ public class AccountInfoActivity extends AppCompatActivity {
                         user.setFirstname(new_data);
                     else user.setLastname(new_data); // Smart Android IDE
 
-                    field_tv.setText(new_data);
+                    field_tv.setText(field == Utils.PASSWORD_INPUT?
+                            new String(new char[new_data.length()]).replace("\0", "*") : new_data);
                     dialog.dismiss();
                 }
                 else if(response.code() == 405)

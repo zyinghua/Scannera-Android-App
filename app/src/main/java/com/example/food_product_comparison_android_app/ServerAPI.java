@@ -40,39 +40,32 @@ public interface ServerAPI {
             @Field(PASSWORD_SERVER) String password
     );
 
-    @FormUrlEncoded
-    @PUT("api/user/update/{attribute}")
-    Call<Void> updateUserInfoById(
-            @Path("attribute") String attribute,
-            @Field(USER_ID_SERVER) String userId,
-            @Field(PASSWORD_SERVER) String replacement
-    );
-
     @GET("api/user/getBy/{acc_title}")
     Call<User> getUserByEmailOrUsername(@Path("acc_title") String acc_title);
 
-    @DELETE("api/user/delete/{user_id}")
-    Call<Void> deleteUserById(@Path(USER_ID_SERVER) String user_id);
+    @FormUrlEncoded
+    @DELETE("api/user/delete/")
+    Call<Void> deleteUserById(@Field(USER_ID_SERVER) String user_id);
 
     @FormUrlEncoded
     @PUT("api/user/update")
     Call<Void> updateUsernameById(
-            @Field("user_id") String userId,
-            @Field("username") String username
+            @Field(USER_ID_SERVER) String userId,
+            @Field(USERNAME_SERVER) String username
     );
 
     @FormUrlEncoded
     @PUT("api/user/update")
     Call<Void> updateUserFirstnameById(
-            @Field("user_id") String userId,
-            @Field("firstname") String firstname
+            @Field(USER_ID_SERVER) String userId,
+            @Field(FIRSTNAME_SERVER) String firstname
     );
 
     @FormUrlEncoded
     @PUT("api/user/update")
     Call<Void> updateUserLastnameById(
-            @Field("user_id") String userId,
-            @Field("lastname") String lastname
+            @Field(USER_ID_SERVER) String userId,
+            @Field(LASTNAME_SERVER) String lastname
     );
 
     @POST("api/")
