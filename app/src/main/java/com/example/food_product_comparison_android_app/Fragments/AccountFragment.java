@@ -158,8 +158,9 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (user.getProfile_img_url() != null)
+        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null"))
             Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
+
         username_tv.setText(user.getUsername());
         contribution_score_tv.setText(String.format(getString(R.string.contribution_score), user.getContribution_score()));
     }

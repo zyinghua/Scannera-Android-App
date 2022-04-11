@@ -14,6 +14,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ServerAPI {
+    String UPDATE_USER_END_POINT = "api/user/update";
     String USER_ID_SERVER = "user_id";
     String USERNAME_SERVER = "username";
     String FIRSTNAME_SERVER = "firstname";
@@ -34,7 +35,7 @@ public interface ServerAPI {
     );
 
     @FormUrlEncoded
-    @PUT("api/user/update")
+    @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserPasswordById(
             @Field(USER_ID_SERVER) String userId,
             @Field(PASSWORD_SERVER) String password
@@ -43,26 +44,25 @@ public interface ServerAPI {
     @GET("api/user/getBy/{acc_title}")
     Call<User> getUserByEmailOrUsername(@Path("acc_title") String acc_title);
 
-    @FormUrlEncoded
-    @DELETE("api/user/delete/")
-    Call<Void> deleteUserById(@Field(USER_ID_SERVER) String user_id);
+    @DELETE("api/user/delete/{user_id}")
+    Call<Void> deleteUserById(@Path(USER_ID_SERVER) String user_id);
 
     @FormUrlEncoded
-    @PUT("api/user/update")
+    @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUsernameById(
             @Field(USER_ID_SERVER) String userId,
             @Field(USERNAME_SERVER) String username
     );
 
     @FormUrlEncoded
-    @PUT("api/user/update")
+    @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserFirstnameById(
             @Field(USER_ID_SERVER) String userId,
             @Field(FIRSTNAME_SERVER) String firstname
     );
 
     @FormUrlEncoded
-    @PUT("api/user/update")
+    @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserLastnameById(
             @Field(USER_ID_SERVER) String userId,
             @Field(LASTNAME_SERVER) String lastname

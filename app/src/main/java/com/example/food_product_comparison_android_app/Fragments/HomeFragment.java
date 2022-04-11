@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void loadUserProfile() {
-        if (user.getProfile_img_url() != null)
+        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null"))
             Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
 
         welcome_username_tv.setText(getString(R.string.home_greeting)+ user.getUsername());

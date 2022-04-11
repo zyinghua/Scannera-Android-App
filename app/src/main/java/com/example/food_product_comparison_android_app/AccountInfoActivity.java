@@ -350,6 +350,6 @@ public class AccountInfoActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Utils.updateUserLoginStatus(this, this.user);
+        Utils.updateUserLoginStatus(this, this.user); // Update the local sharedPreferences
     }
 }
