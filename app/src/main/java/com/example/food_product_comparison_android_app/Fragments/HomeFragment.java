@@ -47,7 +47,9 @@ public class HomeFragment extends Fragment {
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
+    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView homeRecyclerView;
+    private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,8 +110,8 @@ public class HomeFragment extends Fragment {
 
     private void setUpContent()
     {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        this.homeRecyclerView.setLayoutManager(layoutManager);
+        layoutManager = new LinearLayoutManager(getContext());
+        homeRecyclerView.setLayoutManager(layoutManager);
 
         ArrayList<Object> products = new ArrayList<>();
 
@@ -118,8 +120,8 @@ public class HomeFragment extends Fragment {
             products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
         }
 
-        ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
-        this.homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
+        productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
+        homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
     }
 
     @Override
