@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TITLE_VIEW_TYPE = 0;
     public static final int ITEM_VIEW_TYPE = 1;
+    public static final int LOADING_BAR_VIEW_TYPE = 2;
     private final Context appContext;
     private final Activity activityContext;
     private List<Object> items;
@@ -40,7 +42,9 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     @Override
     public int getItemViewType(int position) {
         if (items.get(position) instanceof String)
-            return TITLE_VIEW_TYPE;
+        {
+            return items.get(position).equals(Utils.LOADING_BAR_TAG)? LOADING_BAR_VIEW_TYPE : TITLE_VIEW_TYPE;
+        }
         else
             return ITEM_VIEW_TYPE;
     }
@@ -53,21 +57,28 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scan_history_date_title, parent, false);
             return new TitleViewHolder(v);
         }
-        else // actual product item
+        else if (viewType == ITEM_VIEW_TYPE) // actual product item
         {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product, parent, false);
             return new ProductViewHolder(v);
         }
+        else
+        {
+            // LOADING_BAR_VIEW_TYPE
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_bar, parent, false);
+            return new LoadingBarViewHolder(v);
+        }
     }
 
-    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == TITLE_VIEW_TYPE) {
+        if (holder.getItemViewType() == TITLE_VIEW_TYPE)
+        {
             TitleViewHolder titleViewHolder = (TitleViewHolder) holder;
             titleViewHolder.tv.setText(items.get(position).toString());
         }
-        else
+        else if(holder.getItemViewType() == ITEM_VIEW_TYPE)
         {
             ProductViewHolder productViewHolder = (ProductViewHolder) holder;
             Product product = (Product) items.get(position);
@@ -139,6 +150,16 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             this.brandTv = view.findViewById(R.id.cardview_product_brand);
             this.priceTv = view.findViewById(R.id.cardview_product_price);
             this.star_btn = view.findViewById(R.id.star_btn);
+        }
+    }
+
+    public static class LoadingBarViewHolder extends RecyclerView.ViewHolder {
+        ProgressBar progressBar;
+
+        public LoadingBarViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            progressBar =itemView.findViewById(R.id.loading_bar);
         }
     }
 

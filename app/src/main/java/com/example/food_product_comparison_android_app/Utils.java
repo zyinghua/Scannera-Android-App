@@ -65,6 +65,9 @@ public class Utils {
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;
 
+    // Others
+    public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
+
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
         if (input.isEmpty())

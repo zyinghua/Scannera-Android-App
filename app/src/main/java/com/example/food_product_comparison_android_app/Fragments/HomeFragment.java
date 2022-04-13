@@ -7,18 +7,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.food_product_comparison_android_app.LoadingDialog;
@@ -47,9 +51,12 @@ public class HomeFragment extends Fragment {
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
-    private RecyclerView.LayoutManager layoutManager;
+    ArrayList<Object> products;
+    private LinearLayoutManager layoutManager;
     private RecyclerView homeRecyclerView;
     private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
+    private boolean isLoading;
+    private Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,18 +117,27 @@ public class HomeFragment extends Fragment {
 
     private void setUpContent()
     {
+        handler = new Handler(Looper.getMainLooper());
+        products = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getContext());
         homeRecyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<Object> products = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++)
-        {
-            products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
-        }
-
         productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
         homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
+        loadASetOfProducts();
+        isLoading = false;
+
+        homeRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if(!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == products.size() - 1)
+                {
+                    loadASetOfProducts();
+                    isLoading = true;
+                }
+            }
+        });
     }
 
     @Override
@@ -133,5 +149,29 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadASetOfProducts()
+    {
+        handler.post(() -> {
+            products.add(Utils.LOADING_BAR_TAG);
+            productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
+        });
+
+        handler.postDelayed(() -> {
+            products.remove(products.size() - 1);
+            productListRecyclerViewAdapter.notifyItemRemoved(products.size() - 1);
+
+            for(int i = 0; i < 5; i++)
+            {
+                products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
+                productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
+            }
+
+            isLoading = false;
+        }, 1000);
+
+
+        //productListRecyclerViewAdapter.notifyDataSetChanged();
     }
 }
