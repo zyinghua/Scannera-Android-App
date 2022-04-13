@@ -47,6 +47,8 @@ public class ScanHistoryActivity extends AppCompatActivity {
 
     private void setUpContent()
     {
+        // Send a GET request via HttpsURLConnection
+
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
@@ -64,7 +66,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
                 webServiceEndPoint = new URL(getString(R.string.server_base_url));
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceEndPoint.openConnection();
 
-                if (httpsURLConnection.getResponseCode() == 200)
+                if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
                 {
                     loading_dialog.dismiss();
 

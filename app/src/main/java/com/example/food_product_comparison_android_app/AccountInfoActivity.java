@@ -308,8 +308,6 @@ public class AccountInfoActivity extends AppCompatActivity {
 
                 if (response.isSuccessful())
                 {
-                    Utils.removeUserLoginStatus(AccountInfoActivity.this);
-
                     if(user.getLoginFlag() == Utils.FACEBOOK_LOGIN)
                     {
                         revokeFacebookAccess();
@@ -318,6 +316,9 @@ public class AccountInfoActivity extends AppCompatActivity {
                     {
                         revokeGoogleAccess();
                     }
+
+                    user = null;
+                    Utils.removeUserLoginStatus(AccountInfoActivity.this);
 
                     // Log out and start login activity without a way back
                     Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
@@ -350,6 +351,7 @@ public class AccountInfoActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Utils.updateUserLoginStatus(this, this.user); // Update the local sharedPreferences
+        if(user != null)
+            Utils.updateUserLoginStatus(this, this.user); // Update the local sharedPreferences
     }
 }
