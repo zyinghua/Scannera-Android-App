@@ -64,7 +64,7 @@ public class ProductInformationActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.product_look = findViewById(R.id.comparisons_product_look_pic);
+        this.product_look = findViewById(R.id.product_look_pic);
         this.category_tv = findViewById(R.id.product_category_value);
         this.name_tv = findViewById(R.id.product_name_value);
         this.brand_tv = findViewById(R.id.product_brand_value);
@@ -90,7 +90,7 @@ public class ProductInformationActivity extends AppCompatActivity {
     {
         //******************************************************
         this.category_tv.setText("Energy Pizza");
-        this.name_tv.setText("Chocolate Pizza");
+        this.name_tv.setText("Chocolate Pizza wahaha balala milk chicken hotpot");
         this.brand_tv.setText("Swisse");
         this.price_tv.setText("$888.88");
         //******************************************************
