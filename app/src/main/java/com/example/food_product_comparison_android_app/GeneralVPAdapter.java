@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class ComparisonsVPAdapter extends FragmentPagerAdapter {
+public class GeneralVPAdapter extends FragmentPagerAdapter {
     private final ArrayList<Fragment> fragments = new ArrayList<>();
     private final ArrayList<String> titles = new ArrayList<>();
 
-    public ComparisonsVPAdapter(@NonNull FragmentManager fm, int behavior) {
+    public GeneralVPAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 

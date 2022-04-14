@@ -133,7 +133,7 @@ public class ProductInformationActivity extends AppCompatActivity {
     {
         this.tabLayout.setupWithViewPager(this.viewPager);
 
-        ComparisonsVPAdapter vpAdapter = new ComparisonsVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        GeneralVPAdapter vpAdapter = new GeneralVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
 
         this.viewPager.setAdapter(vpAdapter);
