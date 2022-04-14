@@ -22,6 +22,8 @@ public interface ServerAPI {
     String EMAIL_SERVER = "email";
     String PASSWORD_SERVER = "password";
     String PIMG_URL_SERVER = "pimg_url";
+    String FEEDBACK_RATING_SERVER = "rating";
+    String FEEDBACK_DESC_SERVER = "description";
 
     @FormUrlEncoded
     @POST("api/user/add")
@@ -68,6 +70,11 @@ public interface ServerAPI {
             @Field(LASTNAME_SERVER) String lastname
     );
 
-    @POST("api/")
-    Call<Void> postFeedback(@Body Feedback feedback);
+    @FormUrlEncoded
+    @POST("api/feedback/new")
+    Call<Void> postFeedback(
+            @Field(USER_ID_SERVER) String user_id,
+            @Field(FEEDBACK_RATING_SERVER) Float rating,
+            @Field(FEEDBACK_DESC_SERVER) String description
+    );
 }

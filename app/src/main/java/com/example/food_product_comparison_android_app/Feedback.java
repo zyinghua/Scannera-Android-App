@@ -3,10 +3,13 @@ package com.example.food_product_comparison_android_app;
 import com.google.gson.annotations.SerializedName;
 
 public class Feedback {
-    @SerializedName("user_id")
+    @SerializedName(ServerAPI.USER_ID_SERVER)
     private String userId;
 
+    @SerializedName(ServerAPI.FEEDBACK_RATING_SERVER)
     private float rating;
+
+    @SerializedName(ServerAPI.FEEDBACK_DESC_SERVER)
     private String description;
 
     public Feedback(String userId, float rating, String description) {

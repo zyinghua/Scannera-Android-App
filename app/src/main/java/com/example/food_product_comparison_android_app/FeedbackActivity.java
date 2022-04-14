@@ -101,7 +101,7 @@ public class FeedbackActivity extends AppCompatActivity {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        Call<Void> call = Utils.getServerAPI(this).postFeedback(feedback);
+        Call<Void> call = Utils.getServerAPI(this).postFeedback(feedback.getUserId(), feedback.getRating(), feedback.getDescription());
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -111,6 +111,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     Toast.makeText(FeedbackActivity.this, getString(R.string.feedback_success), Toast.LENGTH_LONG).show();
+                    Log.d("DEBUG", "Successful feedback sent.");
                     onBackPressed();
                 }
                 else
@@ -118,11 +119,12 @@ public class FeedbackActivity extends AppCompatActivity {
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
                     {
                         createFeedback(init_time, feedback);
-                        Log.e("DEBUG", response.code() + "");
+                        Log.e("DEBUG", "Feedback response code: " + response.code());
                     }
                     else
                     {
                         Toast.makeText(FeedbackActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                        Log.e("DEBUG", "Feedback response code: " + response.code());
                     }
                 }
             }
