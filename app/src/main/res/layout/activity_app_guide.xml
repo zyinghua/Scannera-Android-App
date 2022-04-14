@@ -9,7 +9,7 @@
     tools:ignore="MergeRootFrame">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/home_app_bar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_collapsing_appbar_height"
         android:fitsSystemWindows="true"
@@ -17,7 +17,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/home_collapsing_toolbar"
+            android:id="@+id/app_guide_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -39,13 +39,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                android:theme="@style/Widget.Scannera.ToolbarTheme"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/app_guide_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:tabMode="scrollable"
+            app:tabGravity="fill"/>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/activity_app_guide_content" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/app_guide_vp_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -32,7 +32,8 @@ import java.util.concurrent.Executors;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ScanHistoryActivity extends AppCompatActivity {
-    private URL webServiceEndPoint;
+    private static final String SCAN_HISTORY_END_POINT = "";
+    private URL webServiceUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,8 @@ public class ScanHistoryActivity extends AppCompatActivity {
             ArrayList<Object> items = new ArrayList<>();
 
             try {
-                webServiceEndPoint = new URL(getString(R.string.server_base_url));
-                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceEndPoint.openConnection();
+                webServiceUrl = new URL(getString(R.string.server_base_url) + SCAN_HISTORY_END_POINT);
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
 
                 if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
                 {
