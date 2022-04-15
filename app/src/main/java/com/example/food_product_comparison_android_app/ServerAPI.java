@@ -1,7 +1,10 @@
 package com.example.food_product_comparison_android_app;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,6 +38,7 @@ public interface ServerAPI {
     String PRODUCT_NUTRITION_SERVER = "product_nutrition";
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
+    DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
 
     @FormUrlEncoded
     @POST("api/user/add")

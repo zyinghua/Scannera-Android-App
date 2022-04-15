@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,6 +66,7 @@ public class Utils {
     public static final int MAX_SERVER_RESPOND_SEC = 5;
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
+    public static final DateFormat DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
@@ -76,9 +80,6 @@ public class Utils {
     // Animations
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;
-
-    // Others
-
 
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
@@ -297,7 +298,7 @@ public class Utils {
 
     public static ArrayList<Object> parseProductsFromResponse(Context context, HttpsURLConnection httpsURLConnection) {
         ArrayList<Object> items = new ArrayList<>();
-        String last_scan_date;
+        Date prev_scan_date = null;
 
         try {
             InputStream responseBody = httpsURLConnection.getInputStream();
@@ -340,7 +341,14 @@ public class Utils {
                             product.setStarred(jsonReader.nextString().equals("true"));
                             break;
                         case ServerAPI.PRODUCT_SCAN_DATE_SERVER:
-                            items.add("");
+                            Date date = ServerAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
+
+                            if(date != null && (prev_scan_date == null || Objects.requireNonNull(date).compareTo(prev_scan_date) != 0))
+                            {
+                                prev_scan_date = date;
+                                items.add(Utils.DATE_FORMAT_DISPLAYED.format(date));
+                            }
+
                             break;
                         default:
                             jsonReader.skipValue();
@@ -353,9 +361,9 @@ public class Utils {
             }
 
             jsonReader.endArray();
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
-            Log.e("DEBUG", "IO Exception - parse products: " + e);
+            Log.e("DEBUG", "Exception - parse products: " + e);
         }
 
         return items;
