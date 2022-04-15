@@ -33,9 +33,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
-        <activity
-            android:name=".AppGuideActivity"
-            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -46,6 +43,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/nutrition_pic_file_provider" />
         </provider>
+
+        <activity
+            android:name=".AppGuideActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".AccountInfoActivity"
