@@ -78,7 +78,6 @@ public class ScanHistoryActivity extends AppCompatActivity {
                     // -----------------------------------------------
                     // Parse Data
                     items = Utils.parseProductsFromResponse(this, httpsURLConnection);
-
                     // -----------------------------------------------
 
                     uiHandler.post(() -> {

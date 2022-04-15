@@ -28,8 +28,6 @@ import retrofit2.Response;
 
 public class StarredProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private List<Object> starred_products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +43,8 @@ public class StarredProductActivity extends AppCompatActivity {
     private void setUpContent()
     {
         this.recyclerView = findViewById(R.id.recyclerView);
-        this.layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         this.recyclerView.setLayoutManager(layoutManager);
-        starred_products = new ArrayList<>();
 
         //******************************************************
         this.handleOnGetStarredProducts(System.currentTimeMillis());
@@ -88,15 +85,10 @@ public class StarredProductActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 loading_dialog.dismiss();
 
-                if (response.isSuccessful())
+                if (response.isSuccessful() && response.body() != null)
                 {
-                    for(int i = 0; i < Objects.requireNonNull(response.body()).size(); i++)
-                    {
-                        starred_products.add(response.body().get(i));
-                    }
-
                     ProductListRecyclerViewAdapter spAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(),
-                            StarredProductActivity.this, starred_products);
+                            StarredProductActivity.this, new ArrayList<>(response.body()));
                     recyclerView.setAdapter(spAdapter);
                 }
                 else
