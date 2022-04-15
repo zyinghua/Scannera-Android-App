@@ -1,6 +1,7 @@
 package com.example.food_product_comparison_android_app;
 
 import java.io.File;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,6 +31,7 @@ public interface ServerAPI {
     String PRODUCT_BRAND_SERVER = "product_brand";
     String PRODUCT_CATEGORY_SERVER = "product_cate";
     String PRODUCT_NAME_SERVER = "product_name";
+    String PRODUCT_PRICE_SERVER = "product_price";
     String PRODUCT_NUTRITION_SERVER = "product_nutrition";
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
@@ -88,7 +90,7 @@ public interface ServerAPI {
     );
 
     @GET("api/favourite/get")
-    Call<Void> getStarredProducts(
+    Call<List<Product>> getStarredProducts(
             @Query(USER_ID_SERVER) String user_id
     );
 

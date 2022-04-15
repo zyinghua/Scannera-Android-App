@@ -61,6 +61,8 @@ public class Utils {
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
     public static final int MAX_SERVER_RESPOND_SEC = 5;
+    public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
+    public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
@@ -76,7 +78,7 @@ public class Utils {
     public static final int login_view_animation_duration = 600;
 
     // Others
-    public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
+
 
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
@@ -325,6 +327,9 @@ public class Utils {
                         case ServerAPI.PRODUCT_NAME_SERVER:
                             product.setName(jsonReader.nextString());
                             break;
+                        case ServerAPI.PRODUCT_PRICE_SERVER:
+                            product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                            break;
                         case ServerAPI.PRODUCT_CATEGORY_SERVER:
                             product.setCategory(jsonReader.nextString());
                             break;
@@ -367,7 +372,7 @@ public class Utils {
 
             for(int i = 0; i < Objects.requireNonNull(keys).length(); i++)
             {
-                nutrition.getString(keys.getString(i));
+                nutritionAttributes.add(new NutritionAttribute(keys.getString(i), nutrition.getJSONObject(keys.getString(i)).getString("value")));
             }
 
         } catch(JSONException e) {

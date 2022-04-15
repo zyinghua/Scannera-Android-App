@@ -3,17 +3,34 @@ package com.example.food_product_comparison_android_app;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Product {
+    @SerializedName(ServerAPI.PRODUCT_ID_SERVER)
     private String productId;
+
+    @SerializedName(ServerAPI.PRODUCT_BARCODE_SERVER)
     private String barcode;
+
+    @SerializedName(ServerAPI.PRODUCT_BRAND_SERVER)
     private String brand;
+
+    @SerializedName(ServerAPI.PRODUCT_NAME_SERVER)
     private String name;
+
+    @SerializedName(ServerAPI.PRODUCT_PRICE_SERVER)
     private Float price;
+
+    @SerializedName(ServerAPI.PRODUCT_CATEGORY_SERVER)
     private String category;
+
     private Bitmap product_look_pic;
+
+    @SerializedName(ServerAPI.PRODUCT_IS_STARRED_SERVER)
     private Boolean isStarred;
+
     private ArrayList<NutritionAttribute> nutritionAttributes;
 
     public Product() {

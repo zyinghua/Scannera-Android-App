@@ -19,6 +19,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,7 +35,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     private final Context appContext;
     private final Activity activityContext;
     private List<Object> items;
-    private User user;
+    private final User user;
 
     public ProductListRecyclerViewAdapter(Context appContext, Activity activityContext) {
         this.appContext = appContext;
@@ -109,7 +112,10 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        activityContext.startActivity(new Intent(activityContext, ProductInformationActivity.class));
+                        Intent intent = new Intent(activityContext, ProductInformationActivity.class);
+                        intent.putExtra(Utils.PRODUCT_TRANSFER_TAG, new Gson().toJson(product));
+
+                        activityContext.startActivity(intent);
                     }
                 });
             }
