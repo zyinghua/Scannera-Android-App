@@ -324,6 +324,8 @@ public class AccountInfoActivity extends AppCompatActivity {
                     Intent intent = new Intent(AccountInfoActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+
+                    Toast.makeText(AccountInfoActivity.this, getString(R.string.farewell_user_on_delete), Toast.LENGTH_LONG).show();
                 }
                 else
                 {

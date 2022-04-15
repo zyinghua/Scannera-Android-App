@@ -111,4 +111,9 @@ public interface ServerAPI {
             @Field(USER_ID_SERVER) String user_id,
             @Field(PRODUCT_ID_SERVER) String product_id
     );
+
+    @GET("api/favourite/get")
+    Call<List<Product>> getRecommendedProducts(
+            @Query(USER_ID_SERVER) String user_id
+    );
 }

@@ -209,13 +209,12 @@ public class LoginActivity extends AppCompatActivity {
             String first_name = account.getGivenName();
             String last_name = account.getFamilyName();
             String email = account.getEmail();
-            String id = account.getId();
             String img_url = null;
 
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
+            handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, email, first_name, last_name, email, img_url);
         }
     }
 
@@ -229,11 +228,10 @@ public class LoginActivity extends AppCompatActivity {
                     assert jsonObject != null;
                     String first_name = jsonObject.getString("first_name");
                     String last_name = jsonObject.getString("last_name");
-                    String id = jsonObject.getString("id");
                     String email = jsonObject.getString("email");
                     String img_url = "https://graph.facebook.com/"+jsonObject.getString("id")+"/picture?type=normal";
 
-                    handleThirdPartyUser(System.currentTimeMillis(), Utils.FACEBOOK_LOGIN, id, first_name, last_name, email, img_url);
+                    handleThirdPartyUser(System.currentTimeMillis(), Utils.FACEBOOK_LOGIN, email, first_name, last_name, email, img_url);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

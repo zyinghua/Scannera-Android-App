@@ -15,10 +15,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/home_welcome_text_start_margin"
+        android:maxEms="6"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:fontFamily="@font/roboto_slab"
-        android:maxLength="14"
         android:textColor="@color/black"
         android:textSize="@dimen/activity_title_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/home_user_img"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
@@ -34,8 +38,6 @@
         app:civ_shadow_color="?attr/colorPrimaryDark"
         app:civ_shadow_radius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/welcome_username_tv"
         app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
     <TextView

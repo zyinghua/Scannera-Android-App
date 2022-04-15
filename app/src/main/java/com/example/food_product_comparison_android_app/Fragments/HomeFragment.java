@@ -81,19 +81,8 @@ public class HomeFragment extends Fragment {
 
         this.findViews(view);
         this.setUpToolbar(view);
-
-        LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
-        loading_dialog.show();
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
-
         this.loadUserProfile();
-
-        executor.execute(()->{
-            this.setUpContent();
-            uiHandler.post(loading_dialog::dismiss);
-        });
+        this.setUpContent();
 
         return view;
     }
@@ -119,7 +108,7 @@ public class HomeFragment extends Fragment {
         if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null"))
             Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
 
-        welcome_username_tv.setText(getString(R.string.home_greeting)+ user.getUsername());
+        welcome_username_tv.setText(String.format(getString(R.string.home_greeting), user.getUsername()));
     }
 
     private void setUpContent()
@@ -160,7 +149,7 @@ public class HomeFragment extends Fragment {
         LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
         loading_dialog.show();
 
-        Call<List<Product>> call = Utils.getServerAPI(requireActivity()).getStarredProducts(Utils.getLoggedUser(requireActivity()).getId());
+        Call<List<Product>> call = Utils.getServerAPI(requireActivity()).getRecommendedProducts(Utils.getLoggedUser(requireActivity()).getId());
 
         call.enqueue(new Callback<List<Product>>() {
             @Override
