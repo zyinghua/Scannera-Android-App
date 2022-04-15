@@ -144,6 +144,7 @@
 
     <!-- ERROR MESSAGES -->
     <string name="server_error">抱歉，由于服务器错误，请求未成功，请重试。</string>
+    <string name="general_error">抱歉，由于内部错误导致了请求未成功，请重试。</string>
     <string name="error_input_cannot_be_empty">这一栏不能为空。</string>
     <string name="email_input_error">电子邮件地址格式无效，请重新检查。</string>
     <string name="email_address_taken_error">此电子邮箱已被注册。</string>

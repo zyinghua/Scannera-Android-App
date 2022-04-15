@@ -349,7 +349,7 @@ public class Utils {
 
             jsonReader.endArray();
         } catch (IOException e) {
-            Toast.makeText(context, context.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
             Log.e("DEBUG", "IO Exception - parse products: " + e);
         }
 

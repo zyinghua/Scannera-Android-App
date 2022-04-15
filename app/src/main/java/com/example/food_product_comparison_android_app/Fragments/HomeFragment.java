@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView homeRecyclerView;
     private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
     private boolean isLoading;
-    private Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,27 +116,26 @@ public class HomeFragment extends Fragment {
 
     private void setUpContent()
     {
-        handler = new Handler(Looper.getMainLooper());
         products = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getContext());
         homeRecyclerView.setLayoutManager(layoutManager);
         productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
         homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
-        loadASetOfProducts();
+        loadProductListContent();
         isLoading = false;
 
-        homeRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if(!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == products.size() - 1)
-                {
-                    loadASetOfProducts();
-                    isLoading = true;
-                }
-            }
-        });
+//        homeRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                if(!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == products.size() - 1)
+//                {
+//                    loadASetOfProducts();
+//                    isLoading = true;
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -151,27 +149,32 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadASetOfProducts()
+    private void loadProductListContent()
     {
-        handler.post(() -> {
-            products.add(Utils.LOADING_BAR_TAG);
-            productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
-        });
 
-        handler.postDelayed(() -> {
-            products.remove(products.size() - 1);
-            productListRecyclerViewAdapter.notifyItemRemoved(products.size() - 1);
-
-            for(int i = 0; i < 5; i++)
-            {
-                products.add(new Product("123", i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
-                productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
-            }
-
-            isLoading = false;
-        }, 1000);
-
-
-        //productListRecyclerViewAdapter.notifyDataSetChanged();
     }
+
+//    private void loadASetOfProducts()
+//    {
+//        new Handler(Looper.getMainLooper()).post(() -> {
+//            products.add(Utils.LOADING_BAR_TAG);
+//            productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
+//        });
+//
+//        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//            products.remove(products.size() - 1);
+//            productListRecyclerViewAdapter.notifyItemRemoved(products.size() - 1);
+//
+//            for(int i = 0; i < 5; i++)
+//            {
+//                products.add(new Product("123", i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
+//                productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
+//            }
+//
+//            isLoading = false;
+//        }, 1000);
+//
+//
+//        //productListRecyclerViewAdapter.notifyDataSetChanged();
+//    }
 }

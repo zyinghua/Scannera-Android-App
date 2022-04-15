@@ -12,6 +12,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServerAPI {
     String UPDATE_USER_END_POINT = "api/user/update";
@@ -22,8 +23,8 @@ public interface ServerAPI {
     String EMAIL_SERVER = "email";
     String PASSWORD_SERVER = "password";
     String PIMG_URL_SERVER = "pimg_url";
-    String FEEDBACK_RATING_SERVER = "rating";
-    String FEEDBACK_DESC_SERVER = "description";
+    String FEEDBACK_RATING_SERVER = "feedback_rating";
+    String FEEDBACK_DESC_SERVER = "feedback_description";
     String PRODUCT_ID_SERVER = "product_id";
     String PRODUCT_BARCODE_SERVER = "product_barcode";
     String PRODUCT_BRAND_SERVER = "product_brand";
@@ -84,5 +85,24 @@ public interface ServerAPI {
             @Field(USER_ID_SERVER) String user_id,
             @Field(FEEDBACK_RATING_SERVER) Float rating,
             @Field(FEEDBACK_DESC_SERVER) String description
+    );
+
+    @GET("api/favourite/get")
+    Call<Void> getStarredProducts(
+            @Query(USER_ID_SERVER) String user_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/favourite/add")
+    Call<Void> starProduct(
+            @Field(USER_ID_SERVER) String user_id,
+            @Field(PRODUCT_ID_SERVER) String product_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/favourite/remove")
+    Call<Void> unStarProduct(
+            @Field(USER_ID_SERVER) String user_id,
+            @Field(PRODUCT_ID_SERVER) String product_id
     );
 }

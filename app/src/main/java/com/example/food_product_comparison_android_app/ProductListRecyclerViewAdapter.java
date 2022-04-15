@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TITLE_VIEW_TYPE = 0;
     public static final int ITEM_VIEW_TYPE = 1;
@@ -27,16 +32,19 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     private final Context appContext;
     private final Activity activityContext;
     private List<Object> items;
+    private User user;
 
     public ProductListRecyclerViewAdapter(Context appContext, Activity activityContext) {
         this.appContext = appContext;
         this.activityContext = activityContext;
+        this.user = Utils.getLoggedUser(activityContext);
     }
 
     public ProductListRecyclerViewAdapter(Context context, Activity activityContext, List<Object> items) {
         this.appContext = context;
         this.activityContext = activityContext;
         this.items = items;
+        this.user = Utils.getLoggedUser(activityContext);
     }
 
     @Override
@@ -90,20 +98,14 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 productViewHolder.priceTv.setText("$ " + product.getPrice());
                 productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext,
                         product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
+
                 productViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (product.getStarred())
-                        {
-                            // Un-star the product
-                            productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
-                        } else {
-                            // Star the product
-                            productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
-                        }
-                        product.setStarred(!product.getStarred());
+                        toggleProductStar(System.currentTimeMillis(), productViewHolder, product);
                     }
                 });
+
                 productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -169,5 +171,55 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     public void setItems(List<Object> items) {
         this.items = items;
+    }
+
+    private void toggleProductStar(Long init_time, ProductViewHolder productViewHolder, Product product)
+    {
+        LoadingDialog loading_dialog = new LoadingDialog(activityContext);
+        loading_dialog.show();
+
+        Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).starProduct(user.getId(), product.getProductId())
+                : Utils.getServerAPI(activityContext).unStarProduct(user.getId(), product.getProductId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
+                if (response.isSuccessful())
+                {
+                    if(product.getStarred())
+                    {
+                        productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
+                    }
+                    else
+                    {
+                        productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
+                    }
+
+                    product.setStarred(!product.getStarred());
+                }
+                else
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        toggleProductStar(init_time, productViewHolder, product);
+                        Log.e("DEBUG", "Toggle product star response code: " + response.code());
+                    }
+                    else if(response.code() == 405)
+                    {
+                        Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(activityContext, activityContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
