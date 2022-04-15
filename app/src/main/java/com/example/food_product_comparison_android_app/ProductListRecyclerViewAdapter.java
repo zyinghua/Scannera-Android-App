@@ -89,11 +89,11 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 productViewHolder.brandTv.setText(product.getBrand());
                 productViewHolder.priceTv.setText("$ " + product.getPrice());
                 productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext,
-                        product.getIs_starred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
+                        product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
                 productViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (product.getIs_starred())
+                        if (product.getStarred())
                         {
                             // Un-star the product
                             productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
@@ -101,7 +101,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                             // Star the product
                             productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
                         }
-                        product.setIs_starred(!product.getIs_starred());
+                        product.setStarred(!product.getStarred());
                     }
                 });
                 productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {

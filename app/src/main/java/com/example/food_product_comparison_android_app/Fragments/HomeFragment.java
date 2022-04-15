@@ -164,7 +164,7 @@ public class HomeFragment extends Fragment {
 
             for(int i = 0; i < 5; i++)
             {
-                products.add(new Product(i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
+                products.add(new Product("123", i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99f, "Health Products", true));
                 productListRecyclerViewAdapter.notifyItemInserted(products.size() - 1);
             }
 

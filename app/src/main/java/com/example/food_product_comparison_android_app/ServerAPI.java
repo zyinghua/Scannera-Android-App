@@ -24,6 +24,14 @@ public interface ServerAPI {
     String PIMG_URL_SERVER = "pimg_url";
     String FEEDBACK_RATING_SERVER = "rating";
     String FEEDBACK_DESC_SERVER = "description";
+    String PRODUCT_ID_SERVER = "product_id";
+    String PRODUCT_BARCODE_SERVER = "product_barcode";
+    String PRODUCT_BRAND_SERVER = "product_brand";
+    String PRODUCT_CATEGORY_SERVER = "product_cate";
+    String PRODUCT_NAME_SERVER = "product_name";
+    String PRODUCT_NUTRITION_SERVER = "product_nutrition";
+    String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
+    String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
 
     @FormUrlEncoded
     @POST("api/user/add")

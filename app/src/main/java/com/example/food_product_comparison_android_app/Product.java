@@ -3,44 +3,52 @@ package com.example.food_product_comparison_android_app;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.util.ArrayList;
+
 public class Product {
+    private String productId;
     private String barcode;
     private String brand;
     private String name;
     private Float price;
     private String category;
     private Bitmap product_look_pic;
-    private Boolean is_starred;
+    private Boolean isStarred;
+    private ArrayList<NutritionAttribute> nutritionAttributes;
 
-    public Boolean getIs_starred() {
-        return is_starred;
+    public Product() {
     }
 
-    public void setIs_starred(Boolean is_starred) {
-        this.is_starred = is_starred;
-    }
-
-    public Product(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public Product(String barcode, String brand, String name, Float price, String category, Boolean is_starred) {
+    public Product(String product_id, String barcode, String brand, String name, Float price, String category, Boolean isStarred) {
+        this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
         this.name = name;
         this.price = price;
         this.category = category;
-        this.is_starred = is_starred;
+        this.isStarred = isStarred;
     }
 
-    public Product(String barcode, String brand, String name, Float price, String category, Bitmap product_look_pic, Boolean is_starred) {
+    public Product(String product_id, String barcode, String brand, String name, Float price, String category, Boolean isStarred, ArrayList<NutritionAttribute> nutritionAttributes) {
+        this.productId = product_id;
+        this.barcode = barcode;
+        this.brand = brand;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.isStarred = isStarred;
+        this.nutritionAttributes = nutritionAttributes;
+    }
+
+    public Product(String barcode, String brand, String name, Float price, String category, Bitmap product_look_pic, Boolean isStarred) {
+        this.productId = productId;
         this.barcode = barcode;
         this.brand = brand;
         this.name = name;
         this.price = price;
         this.category = category;
         this.product_look_pic = product_look_pic;
-        this.is_starred = is_starred;
+        this.isStarred = isStarred;
     }
 
     public String getBrand() {
@@ -90,4 +98,29 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Boolean getStarred() {
+        return isStarred;
+    }
+
+    public void setStarred(Boolean starred) {
+        isStarred = starred;
+    }
+
+    public ArrayList<NutritionAttribute> getNutritionAttributes() {
+        return nutritionAttributes;
+    }
+
+    public void setNutritionAttributes(ArrayList<NutritionAttribute> nutritionAttributes) {
+        this.nutritionAttributes = nutritionAttributes;
+    }
+
 }

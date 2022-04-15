@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,7 +15,15 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,6 +36,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
+import javax.net.ssl.HttpsURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -281,5 +291,89 @@ public class Utils {
                 Toast.makeText(context, context.getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static ArrayList<Object> parseProductsFromResponse(Context context, HttpsURLConnection httpsURLConnection) {
+        ArrayList<Object> items = new ArrayList<>();
+        String last_scan_date;
+
+        try {
+            InputStream responseBody = httpsURLConnection.getInputStream();
+            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, StandardCharsets.UTF_8);
+            JsonReader jsonReader = new JsonReader(responseBodyReader);
+            String keyName;
+
+            jsonReader.beginArray();
+            while (jsonReader.hasNext()) {
+                // Parse a single product
+                Product product = new Product();
+
+                jsonReader.beginObject();
+                while (jsonReader.hasNext()) {
+                    keyName = jsonReader.nextName();
+
+                    switch(keyName) {
+                        case ServerAPI.PRODUCT_ID_SERVER:
+                            product.setProductId(jsonReader.nextString());
+                            break;
+                        case ServerAPI.PRODUCT_BARCODE_SERVER:
+                            product.setBarcode(jsonReader.nextString());
+                            break;
+                        case ServerAPI.PRODUCT_BRAND_SERVER:
+                            product.setBrand(jsonReader.nextString());
+                            break;
+                        case ServerAPI.PRODUCT_NAME_SERVER:
+                            product.setName(jsonReader.nextString());
+                            break;
+                        case ServerAPI.PRODUCT_CATEGORY_SERVER:
+                            product.setCategory(jsonReader.nextString());
+                            break;
+                        case ServerAPI.PRODUCT_NUTRITION_SERVER:
+                            product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
+                            break;
+                        case ServerAPI.PRODUCT_IS_STARRED_SERVER:
+                            product.setStarred(jsonReader.nextString().equals("true"));
+                            break;
+                        case ServerAPI.PRODUCT_SCAN_DATE_SERVER:
+                            items.add("");
+                            break;
+                        default:
+                            jsonReader.skipValue();
+                            break;
+                    }
+                }
+
+                items.add(product);
+                jsonReader.endObject();
+            }
+
+            jsonReader.endArray();
+        } catch (IOException e) {
+            Toast.makeText(context, context.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+            Log.e("DEBUG", "IO Exception - parse products: " + e);
+        }
+
+        return items;
+    }
+
+    public static ArrayList<NutritionAttribute> parseProductNutritionFromJSON(String product_nutrition)
+    {
+        ArrayList<NutritionAttribute> nutritionAttributes = new ArrayList<>();
+
+        try
+        {
+            JSONObject nutrition = new JSONObject(product_nutrition);
+            JSONArray keys = nutrition.names();
+
+            for(int i = 0; i < Objects.requireNonNull(keys).length(); i++)
+            {
+                nutrition.getString(keys.getString(i));
+            }
+
+        } catch(JSONException e) {
+            Log.e("DEBUG", "JSON exception - parse product nutrition: " + e);
+        }
+
+        return nutritionAttributes;
     }
 }

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +22,12 @@ import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -61,7 +65,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
         Handler uiHandler = new Handler(Looper.getMainLooper());
 
         executor.execute(() -> {
-            ArrayList<Object> items = new ArrayList<>();
+            ArrayList<Object> items;
 
             try {
                 webServiceUrl = new URL(getString(R.string.server_base_url) + SCAN_HISTORY_END_POINT);
@@ -72,26 +76,10 @@ public class ScanHistoryActivity extends AppCompatActivity {
                     loading_dialog.dismiss();
 
                     // -----------------------------------------------
-                    ArrayList<Product> products = new ArrayList<>();
-                    products.add(new Product("37766544", "Monash", "FIT3162 Pizza", 33.7f, "Pizza", false));
-                    products.add(new Product("37766554", "Monash", "FIT3162 Rice", 16.8f, "Rice", true));
-
-                    ArrayList<String> dates = new ArrayList<>();
-                    dates.add("16 Mar 2022, Wednesday");
-                    dates.add("5 Apr 2022, Tuesday");
+                    // Parse Data
+                    items = Utils.parseProductsFromResponse(this, httpsURLConnection);
 
                     // -----------------------------------------------
-
-                    for (int i = products.size() - 1; i >= 0; i--) {
-                        if (i == products.size() - 1 || dates.get(i).compareTo(dates.get(i + 1)) < 0) {
-                            items.add(dates.get(i));
-                        }
-
-                        items.add(products.get(i));
-                    }
-                    // -----------------------------------------------
-
-
 
                     uiHandler.post(() -> {
                         ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), this, items);
