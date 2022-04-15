@@ -178,8 +178,8 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
         LoadingDialog loading_dialog = new LoadingDialog(activityContext);
         loading_dialog.show();
 
-        Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).starProduct(user.getId(), product.getProductId())
-                : Utils.getServerAPI(activityContext).unStarProduct(user.getId(), product.getProductId());
+        Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).unStarProduct(user.getId(), product.getProductId())
+                : Utils.getServerAPI(activityContext).starProduct(user.getId(), product.getProductId());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {

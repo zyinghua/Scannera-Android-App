@@ -215,9 +215,7 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null)
                 img_url = account.getPhotoUrl().toString();
 
-            //handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
-            Utils.updateUserLoginStatus(LoginActivity.this, new User(Utils.GOOGLE_LOGIN, first_name, first_name, last_name, email, null, img_url));
-            navigateToLandingActivity();
+            handleThirdPartyUser(System.currentTimeMillis(), Utils.GOOGLE_LOGIN, id, first_name, last_name, email, img_url);
         }
     }
 
