@@ -116,6 +116,7 @@
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>
+    <string name="review_successful_submit">Thank you very much for your review!</string>
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
 
     <!-- Category Dropdown Menu String Array -->

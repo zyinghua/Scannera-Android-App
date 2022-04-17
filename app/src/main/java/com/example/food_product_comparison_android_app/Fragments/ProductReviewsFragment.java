@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.ProductInformationActivity;
 import com.example.food_product_comparison_android_app.ProductReview;
+import com.example.food_product_comparison_android_app.ProductReviewListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.User;
 import com.example.food_product_comparison_android_app.Utils;
@@ -76,6 +77,7 @@ public class ProductReviewsFragment extends Fragment {
         this.recyclerView.setLayoutManager(layoutManager);
 
         reviews = new ArrayList<>();
+        this.getProductReviews(System.currentTimeMillis());
 
         this.write_review_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,10 +130,20 @@ public class ProductReviewsFragment extends Fragment {
     private void getProductReviews(Long init_time)
     {
         // Send a GET request here to the server to get all the reviews of the current product
+        for (int i = 0; i < 10; i++)
+        {
+            reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "18/04/2022", 4.2f, "This is a very tasty food!"));
+        }
+
+        ProductReviewListRecyclerViewAdapter reviewAdapter = new ProductReviewListRecyclerViewAdapter(reviews);
+        this.recyclerView.setAdapter(reviewAdapter);
+        this.total_num_of_reviews_tv.setText(String.format(getString(R.string.total_num_of_reviews), reviews.size()));
     }
 
     private void postProductReview(Long init_time, Dialog dialog)
     {
         // Send a POST request to the server
+        dialog.dismiss();
+        Toast.makeText(requireActivity(), getString(R.string.review_successful_submit), Toast.LENGTH_LONG).show();
     }
 }
