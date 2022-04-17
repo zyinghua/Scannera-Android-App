@@ -48,19 +48,19 @@ public class FeedbackActivity extends AppCompatActivity {
                     Animation shake = AnimationUtils.loadAnimation(FeedbackActivity.this, R.anim.shake);
                     rating_bar.startAnimation(shake);
 
-                    Toast.makeText(FeedbackActivity.this, getString(R.string.rating_empty), Toast.LENGTH_LONG).show();
+                    Toast.makeText(FeedbackActivity.this, getString(R.string.on_feedback_empty_msg), Toast.LENGTH_LONG).show();
                 }
                 else if (feedback.isEmpty())
                 {
                     Animation shake = AnimationUtils.loadAnimation(FeedbackActivity.this, R.anim.shake);
                     feedback_et.startAnimation(shake);
 
-                    Toast.makeText(FeedbackActivity.this, getString(R.string.feedback_empty), Toast.LENGTH_LONG).show();
+                    Toast.makeText(FeedbackActivity.this, getString(R.string.on_feedback_empty_msg), Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     // Send the rating and feedback to the server here
-                    createFeedback(System.currentTimeMillis(),
+                    postFeedback(System.currentTimeMillis(),
                             new Feedback(Utils.getLoggedUser(FeedbackActivity.this).getId(), rating, feedback));
                 }
             }
@@ -96,7 +96,7 @@ public class FeedbackActivity extends AppCompatActivity {
         }
     }
 
-    private void createFeedback(Long init_time, Feedback feedback)
+    private void postFeedback(Long init_time, Feedback feedback)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
@@ -118,13 +118,12 @@ public class FeedbackActivity extends AppCompatActivity {
                 {
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
                     {
-                        createFeedback(init_time, feedback);
+                        postFeedback(init_time, feedback);
                         Log.e("DEBUG", "Feedback response code: " + response.code());
                     }
                     else
                     {
                         Toast.makeText(FeedbackActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                        Log.e("DEBUG", "Feedback response code: " + response.code());
                     }
                 }
             }

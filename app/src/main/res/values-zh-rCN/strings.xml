@@ -56,8 +56,8 @@
     <string name="rating_feedback_prompt">如果您感兴趣，请给予我们评价，以让我们知道我们的应用程序质量。我们一直在努力改进，您的反馈将会非常宝贵！</string>
     <string name="feedback">反馈</string>
     <string name="submit">提交</string>
-    <string name="rating_empty">请给我们打个分 :D</string>
-    <string name="feedback_empty">请麻烦以写一些反馈来让我们知道您的想法 :D</string>
+    <string name="on_rating_empty_msg">请给我们打个分 :D</string>
+    <string name="on_feedback_empty_msg">请麻烦以写一些反馈来让我们知道您的想法 :D</string>
     <string name="feedback_success">提交成功！非常感谢您的反馈！</string>
     <string name="loading">加载中…</string>
     <string name="loading_dialog_tag">Loading Dialog</string>
@@ -107,6 +107,7 @@
     <string name="sort_by">排序方式：</string>
     <string name="product_reviews">产品评价</string>
     <string name="write_a_review">Write A Review</string>
+    <string name="total_num_of_reviews">共&#160;%1$d&#160;条评价</string>
     <string name="farewell_user_on_delete">成功删除账号，祝一切顺利并期待下次再见！</string>
 
 
@@ -169,6 +170,7 @@
     <string name="feedback_et_hint">请在此处输入您的反馈</string>
     <string name="category_drop_down_menu_hint">请选择或输入类别</string>
     <string name="sort_by_selection_hint">通过选择一个选项对产品进行排序</string>
+    <string name="product_review_et_hint">您对这个产品有什么看法呢</string>
 
     <string name="login_title_image">Scannera应用程序的象征性图片</string>
     <string name="home_collapsing_image_content_description">与Scannera应用程序相关的象征性活动图像</string>

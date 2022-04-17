@@ -31,6 +31,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ProductInformationActivity extends AppCompatActivity {
+    public static final String PRODUCT_ID_TRANSFER_TAG = "PRODUCT_ID_TRANSFER_TAG";
     private ImageView product_look;
     private TextView category_tv;
     private TextView name_tv;

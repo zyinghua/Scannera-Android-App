@@ -13,5 +13,5 @@
     <color name="grey">#7E7E7E</color>
     <color name="blue_grey">#4E5357</color>
     <color name="textInputOutlineColor">#45D5E8</color>
-    <color name="rating_star_color">#F9D31E</color>
+    <color name="feedback_rating_star_color">#F9D31E</color>
 </resources>

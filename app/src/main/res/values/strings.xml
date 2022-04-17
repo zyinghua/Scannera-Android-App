@@ -62,8 +62,8 @@
     <string name="rating_feedback_prompt">If you are interested in, please rate us and let us know how we are doing! We are always trying to improve and your feedback is invaluable!</string>
     <string name="feedback">Feedback</string>
     <string name="submit">Submit</string>
-    <string name="rating_empty">Please give us a rate. :)</string>
-    <string name="feedback_empty">Please let us know what you thought by writing some feedback. :)</string>
+    <string name="on_rating_empty_msg">Please give us a rate. :)</string>
+    <string name="on_feedback_empty_msg">Please let us know what you thought by writing some feedback. :)</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
     <string name="loading">Loading…</string>
     <string name="loading_dialog_tag">Loading Dialog</string>
@@ -115,6 +115,7 @@
     <string name="sort_by">Sort by:</string>
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
+    <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
 
     <!-- Category Dropdown Menu String Array -->
@@ -181,6 +182,7 @@
     <string name="feedback_et_hint">Please write your feedback here</string>
     <string name="category_drop_down_menu_hint">Please select or enter a category</string>
     <string name="sort_by_selection_hint">Sort the products by selecting a factor</string>
+    <string name="product_review_et_hint">What do you think about this product?</string>
 
     <string name="login_title_image">A symbolic image of Scannera App</string>
     <string name="home_collapsing_image_content_description">A symbolic activity image related to Scannera App</string>

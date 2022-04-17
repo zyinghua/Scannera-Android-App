@@ -56,19 +56,20 @@
         android:id="@+id/about_us_rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:progressTint="@color/rating_star_color"
+        android:progressTint="@color/feedback_rating_star_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rating_guideline" />
 
     <EditText
         android:id="@+id/feedback_et"
-        android:layout_width="@dimen/lottie_square_animation_size"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="@string/feedback_et_hint"
         android:inputType="textMultiLine"
         android:lines="6"
+        android:maxLength="500"
         android:scrollHorizontally="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

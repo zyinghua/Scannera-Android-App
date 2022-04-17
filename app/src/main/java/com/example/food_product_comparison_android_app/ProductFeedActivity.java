@@ -218,7 +218,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             set.connect(R.id.next_btn, ConstraintSet.TOP, R.id.input_title, ConstraintSet.BOTTOM);
                             set.applyTo(dynamic_input_prompt);
 
-                            // change next  button text and add an icon to it
+                            // change next button text and add an icon to it
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setText(getString(R.string.capture));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_capture_photo));
                             ((MaterialButton) dynamic_input_prompt.findViewById(R.id.next_btn)).setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
