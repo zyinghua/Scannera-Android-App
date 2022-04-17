@@ -1,32 +1,42 @@
 package com.example.food_product_comparison_android_app;
 
 public class ProductReview {
-    private String product_id;
-    private String user_id;
+    private String username;
+    private String userPImgUrl;
+    private String date;
     private float rating;
     private String description;
 
-    public ProductReview(String product_id, String user_id, float rating, String description) {
-        this.product_id = product_id;
-        this.user_id = user_id;
+    public ProductReview(String username, String userPImgUrl, String date, float rating, String description) {
+        this.username = username;
+        this.userPImgUrl = userPImgUrl;
+        this.date = date;
         this.rating = rating;
         this.description = description;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserPImgUrl() {
+        return userPImgUrl;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserPImgUrl(String userPImgUrl) {
+        this.userPImgUrl = userPImgUrl;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public float getRating() {
