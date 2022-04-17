@@ -45,6 +45,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -183,8 +184,14 @@ public class HomeFragment extends Fragment {
                     loading_dialog.dismiss();
 
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        handleOnGetRecommendedProducts(init_time);
-                        Log.e("DEBUG", "Home Recommended Products Response code: " + httpsURLConnection.getResponseCode());
+                        uiHandler.post(() -> {
+                            handleOnGetRecommendedProducts(init_time);
+                            try {
+                                Log.e("DEBUG", "Home Recommended Products Response code: " + httpsURLConnection.getResponseCode());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
                     }
                     else
                     {

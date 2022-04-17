@@ -39,6 +39,7 @@ public interface ServerAPI {
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
+    String GET_STARRED_PRODUCTS_SERVER = "api/favourite/get";
 
     @FormUrlEncoded
     @POST("api/user/add")
@@ -93,7 +94,7 @@ public interface ServerAPI {
             @Field(FEEDBACK_DESC_SERVER) String description
     );
 
-    @GET("api/favourite/get")
+    @GET(GET_STARRED_PRODUCTS_SERVER)
     Call<List<Product>> getStarredProducts(
             @Query(USER_ID_SERVER) String user_id
     );

@@ -22,6 +22,7 @@ import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -96,8 +97,14 @@ public class ScanHistoryActivity extends AppCompatActivity {
                     loading_dialog.dismiss();
 
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        handleOnGetScannedProducts(init_time);
-                        Log.e("DEBUG", "Update Password Response code: " + httpsURLConnection.getResponseCode());
+                        uiHandler.post(() -> {
+                            handleOnGetScannedProducts(init_time);
+                            try {
+                                Log.e("DEBUG", "Update Password Response code: " + httpsURLConnection.getResponseCode());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
                     }
                     else
                     {
