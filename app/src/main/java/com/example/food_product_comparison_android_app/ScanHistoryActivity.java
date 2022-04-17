@@ -36,8 +36,9 @@ import java.util.concurrent.Executors;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ScanHistoryActivity extends AppCompatActivity {
-    private static final String SCAN_HISTORY_END_POINT = "";
+    private static final String SCAN_HISTORY_END_POINT = "api/";
     private URL webServiceUrl;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +53,18 @@ public class ScanHistoryActivity extends AppCompatActivity {
 
     private void setUpContent()
     {
-        // Send a GET request via HttpsURLConnection
+        this.recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        this.recyclerView.setLayoutManager(layoutManager);
 
+        // Send a GET request via HttpsURLConnection
+        this.handleOnGetScannedProducts(System.currentTimeMillis());
+    }
+
+    private void handleOnGetScannedProducts(Long init_time)
+    {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler uiHandler = new Handler(Looper.getMainLooper());
@@ -89,13 +94,25 @@ public class ScanHistoryActivity extends AppCompatActivity {
                 {
                     // response code = NOT Successful
                     loading_dialog.dismiss();
-                    Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        handleOnGetScannedProducts(init_time);
+                        Log.e("DEBUG", "Update Password Response code: " + httpsURLConnection.getResponseCode());
+                    }
+                    else
+                    {
+                        uiHandler.post(() -> {
+                            Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                        });
+                    }
                 }
 
             } catch(Exception e) {
                 loading_dialog.dismiss();
-                Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                Log.e("DEBUG", "Server Related Exception Error: " + e);
+                uiHandler.post(() -> {
+                    Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    Log.e("DEBUG", "Server Related Exception Error: " + e);
+                });
             }
         });
     }

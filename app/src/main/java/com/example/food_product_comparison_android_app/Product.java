@@ -21,7 +21,7 @@ public class Product {
     private String name;
 
     @SerializedName(ServerAPI.PRODUCT_PRICE_SERVER)
-    private Float price;
+    private Double price;
 
     @SerializedName(ServerAPI.PRODUCT_CATEGORY_SERVER)
     private String category;
@@ -36,7 +36,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String product_id, String barcode, String brand, String name, Float price, String category, Boolean isStarred) {
+    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred) {
         this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
@@ -46,7 +46,7 @@ public class Product {
         this.isStarred = isStarred;
     }
 
-    public Product(String product_id, String barcode, String brand, String name, Float price, String category, Boolean isStarred, ArrayList<NutritionAttribute> nutritionAttributes) {
+    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred, ArrayList<NutritionAttribute> nutritionAttributes) {
         this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
@@ -57,7 +57,7 @@ public class Product {
         this.nutritionAttributes = nutritionAttributes;
     }
 
-    public Product(String barcode, String brand, String name, Float price, String category, Bitmap product_look_pic, Boolean isStarred) {
+    public Product(String barcode, String brand, String name, Double price, String category, Bitmap product_look_pic, Boolean isStarred) {
         this.productId = productId;
         this.barcode = barcode;
         this.brand = brand;
@@ -76,12 +76,12 @@ public class Product {
         this.brand = brand;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
-        price = price;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Bitmap getProduct_look_pic() {

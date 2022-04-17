@@ -329,7 +329,7 @@ public class Utils {
                             product.setName(jsonReader.nextString());
                             break;
                         case ServerAPI.PRODUCT_PRICE_SERVER:
-                            product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                            product.setPrice(jsonReader.nextDouble());
                             break;
                         case ServerAPI.PRODUCT_CATEGORY_SERVER:
                             product.setCategory(jsonReader.nextString());
@@ -338,7 +338,7 @@ public class Utils {
                             product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
                             break;
                         case ServerAPI.PRODUCT_IS_STARRED_SERVER:
-                            product.setStarred(jsonReader.nextString().equals("true"));
+                            product.setStarred(jsonReader.nextBoolean());
                             break;
                         case ServerAPI.PRODUCT_SCAN_DATE_SERVER:
                             Date date = ServerAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
@@ -363,7 +363,7 @@ public class Utils {
             jsonReader.endArray();
         } catch (IOException | ParseException e) {
             Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
-            Log.e("DEBUG", "Exception - parse products: " + e);
+            Log.e("DEBUG", "IOException|ParseException - parse products: " + e);
         }
 
         return items;

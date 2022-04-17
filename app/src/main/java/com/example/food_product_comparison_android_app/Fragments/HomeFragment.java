@@ -31,6 +31,7 @@ import com.example.food_product_comparison_android_app.LoadingDialog;
 import com.example.food_product_comparison_android_app.Product;
 import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
+import com.example.food_product_comparison_android_app.ScanHistoryActivity;
 import com.example.food_product_comparison_android_app.StarredProductActivity;
 import com.example.food_product_comparison_android_app.User;
 import com.example.food_product_comparison_android_app.Utils;
@@ -45,11 +46,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,7 +66,6 @@ public class HomeFragment extends Fragment {
     private List<Product> recommended_products;
     private LinearLayoutManager layoutManager;
     private RecyclerView homeRecyclerView;
-    private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
     // private boolean isLoading;
 
     @Override
@@ -149,38 +152,54 @@ public class HomeFragment extends Fragment {
         LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
         loading_dialog.show();
 
-        Call<List<Product>> call = Utils.getServerAPI(requireActivity()).getRecommendedProducts(Utils.getLoggedUser(requireActivity()).getId());
+        ExecutorService executor = Executors.newSingleThreadExecutor(); // get a thread to execute the request
+        Handler uiHandler = new Handler(Looper.getMainLooper());
 
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
-                loading_dialog.dismiss();
+        executor.execute(() -> {
+            ArrayList<Object> recommended_products;
 
-                if (response.isSuccessful() && response.body() != null)
+            try {
+                URL webServiceUrl = new URL(getString(R.string.server_base_url) + "api/favourite/get?user_id="+user.getId());
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
+
+                if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
                 {
-                    recommended_products = response.body();
+                    loading_dialog.dismiss();
 
-                    productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
-                            requireActivity().getApplicationContext(),getActivity(), new ArrayList<>(recommended_products));
-                    homeRecyclerView.setAdapter(productListRecyclerViewAdapter);
+                    // -----------------------------------------------
+                    // Parse Data
+                    recommended_products = Utils.parseProductsFromResponse(getActivity(), httpsURLConnection);
+                    // -----------------------------------------------
+
+                    uiHandler.post(() -> {
+                        ProductListRecyclerViewAdapter rpAdapter = new ProductListRecyclerViewAdapter(
+                                requireActivity().getApplicationContext(), getActivity(), recommended_products);
+                        homeRecyclerView.setAdapter(rpAdapter);
+                    });
                 }
                 else
                 {
+                    // response code = NOT Successful
+                    loading_dialog.dismiss();
+
                     if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
                         handleOnGetRecommendedProducts(init_time);
-                        Log.e("DEBUG", "Get Recommended products code: " + response.code());
+                        Log.e("DEBUG", "Home Recommended Products Response code: " + httpsURLConnection.getResponseCode());
                     }
                     else
                     {
-                        Toast.makeText(requireActivity(), getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                        uiHandler.post(() -> {
+                            Toast.makeText(getActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                        });
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
+            } catch(Exception e) {
                 loading_dialog.dismiss();
-                Toast.makeText(requireActivity(), getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                uiHandler.post(() -> {
+                    Toast.makeText(getActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    Log.e("DEBUG", "Server Related Exception Error: " + e);
+                });
             }
         });
     }
