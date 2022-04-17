@@ -28,4 +28,5 @@
     <dimen name="account_info_value_margin_end">12dp</dimen>
     <dimen name="comparisons_activity_text_size">16sp</dimen>
     <dimen name="app_collapsing_appbar_height">300dp</dimen>
+    <dimen name="product_review_text_size">16sp</dimen>
 </resources>
