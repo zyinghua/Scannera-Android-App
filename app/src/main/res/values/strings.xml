@@ -113,6 +113,8 @@
     <string name="nutri_info_with_units">Nutrition Information:\n(Per 100 g/mL/kJ)</string>
     <string name="similar_products">Similar Products</string>
     <string name="sort_by">Sort by:</string>
+    <string name="product_reviews">Product Reviews</string>
+    <string name="write_a_review">Write A Review</string>
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
 
     <!-- Category Dropdown Menu String Array -->

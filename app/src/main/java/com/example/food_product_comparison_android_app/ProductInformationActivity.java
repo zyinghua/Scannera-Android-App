@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.food_product_comparison_android_app.Fragments.ProductReviewsFragment;
 import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -135,6 +136,7 @@ public class ProductInformationActivity extends AppCompatActivity {
 
         GeneralVPAdapter vpAdapter = new GeneralVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
+        vpAdapter.addFragment(new ProductReviewsFragment(), getString(R.string.product_reviews));
 
         this.viewPager.setAdapter(vpAdapter);
     }

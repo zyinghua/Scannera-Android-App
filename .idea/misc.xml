@@ -54,14 +54,14 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_similar_products.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/activity_test.xml" value="0.2692502532928065" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_nutritional_attribute.xml" value="0.5536458333333333" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_product.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_product.xml" value="0.4368421052631579" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_edit.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_enlarged_image.xml" value="0.2692502532928065" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_loading.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_product_feed_tv_edit.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_product_feed_tv_edit_category.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_product_not_found.xml" value="0.5" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_account.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_account.xml" value="0.4894366197183099" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_camera_permission_required_dialog.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_forgotten_password.xml" value="0.5390625" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_home.xml" value="0.2678931451612903" />
@@ -72,12 +72,13 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_login_main.xml" value="0.44570837642192346" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_me.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_password_reset_email_sent.xml" value="0.1" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_product_reviews.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_profile.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_pure_recyclerview.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_scan_history_list_content.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_settings.xml" value="0.5536458333333333" />
-        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_similar_products.xml" value="0.5536458333333333" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_similar_products.xml" value="0.4937833037300178" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/fragment_starred_product_list_content.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/home_recom_product_cardview.xml" value="0.4126712328767123" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/loading_bar.xml" value="0.3374094202898551" />

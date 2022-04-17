@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/total_review_number_tv"
+            style="@style/Widget.Scannera.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_recommendation_title"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/user_profile_img"
+            android:layout_width="@dimen/medium_btn_height"
+            android:layout_height="@dimen/medium_btn_height"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="?attr/colorPrimaryDark"
+            app:civ_shadow_radius="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/write_a_review_btn"
+            app:layout_constraintBottom_toBottomOf="@id/write_a_review_btn"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Scannera.Button"
+            android:id="@+id/write_a_review_btn"
+            android:layout_marginStart="@dimen/general_btn_margin"
+            android:layout_marginTop="12dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/medium_btn_height"
+            android:text="@string/write_a_review"
+            app:icon="@drawable/ic_edit"
+            app:iconGravity="textStart"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/user_profile_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_review_number_tv"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
