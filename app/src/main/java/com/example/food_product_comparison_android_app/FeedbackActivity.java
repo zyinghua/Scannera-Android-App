@@ -111,7 +111,6 @@ public class FeedbackActivity extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     Toast.makeText(FeedbackActivity.this, getString(R.string.feedback_success), Toast.LENGTH_LONG).show();
-                    Log.d("DEBUG", "Successful feedback sent.");
                     onBackPressed();
                 }
                 else

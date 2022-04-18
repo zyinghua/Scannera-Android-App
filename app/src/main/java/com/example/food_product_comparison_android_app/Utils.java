@@ -81,6 +81,14 @@ public class Utils {
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;
 
+    // API end points
+    public static final String SCAN_HISTORY_END_POINT = "api/";
+    public static final String STARRED_PRODUCTS_END_POINT =
+            ServerRetrofitAPI.GET_STARRED_PRODUCTS_SERVER + "?user_id=%s";
+    public static final String RECOMMENDED_PRODUCTS_END_POINT = "api/favourite/get?user_id=%s";
+    public static final String GET_PRODUCT_END_POINT = "api/product/get/%s";
+
+
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
         if (input.isEmpty())
@@ -240,9 +248,9 @@ public class Utils {
                 .build();
     }
 
-    public static ServerAPI getServerAPI(Context context)
+    public static ServerRetrofitAPI getServerAPI(Context context)
     {
-        return getRetrofit(context).create(ServerAPI.class);
+        return getRetrofit(context).create(ServerRetrofitAPI.class);
     }
 
     public static void displayWelcomeToast(Context context, String firstname, String lastname)
@@ -316,32 +324,32 @@ public class Utils {
                     keyName = jsonReader.nextName();
 
                     switch(keyName) {
-                        case ServerAPI.PRODUCT_ID_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_ID_SERVER:
                             product.setProductId(jsonReader.nextString());
                             break;
-                        case ServerAPI.PRODUCT_BARCODE_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_BARCODE_SERVER:
                             product.setBarcode(jsonReader.nextString());
                             break;
-                        case ServerAPI.PRODUCT_BRAND_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_BRAND_SERVER:
                             product.setBrand(jsonReader.nextString());
                             break;
-                        case ServerAPI.PRODUCT_NAME_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_NAME_SERVER:
                             product.setName(jsonReader.nextString());
                             break;
-                        case ServerAPI.PRODUCT_PRICE_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
                             product.setPrice(jsonReader.nextDouble());
                             break;
-                        case ServerAPI.PRODUCT_CATEGORY_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
                             product.setCategory(jsonReader.nextString());
                             break;
-                        case ServerAPI.PRODUCT_NUTRITION_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
                             product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
                             break;
-                        case ServerAPI.PRODUCT_IS_STARRED_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
                             product.setStarred(jsonReader.nextBoolean());
                             break;
-                        case ServerAPI.PRODUCT_SCAN_DATE_SERVER:
-                            Date date = ServerAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
+                        case ServerRetrofitAPI.PRODUCT_SCAN_DATE_SERVER:
+                            Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
 
                             if(date != null && (prev_scan_date == null || Objects.requireNonNull(date).compareTo(prev_scan_date) != 0))
                             {
@@ -369,6 +377,66 @@ public class Utils {
         return items;
     }
 
+    public static Product parseASingleProductFromResponse(Context context, HttpsURLConnection httpsURLConnection)
+    {
+        // ************************************
+        // IT IS GUARANTEED THERE EXISTS ONE PRODUCT IN THE RESPONSE
+        // WHEN CALLING THIS METHOD.
+        // ************************************
+
+        Product product = new Product();
+
+        try{
+            InputStream responseBody = httpsURLConnection.getInputStream();
+            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, StandardCharsets.UTF_8);
+            JsonReader jsonReader = new JsonReader(responseBodyReader);
+            String keyName;
+
+            jsonReader.beginObject();
+
+            while (jsonReader.hasNext()) {
+                keyName = jsonReader.nextName();
+
+                switch(keyName) {
+                    case ServerRetrofitAPI.PRODUCT_ID_SERVER:
+                        product.setProductId(jsonReader.nextString());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_BARCODE_SERVER:
+                        product.setBarcode(jsonReader.nextString());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_BRAND_SERVER:
+                        product.setBrand(jsonReader.nextString());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_NAME_SERVER:
+                        product.setName(jsonReader.nextString());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
+                        product.setPrice(jsonReader.nextDouble());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
+                        product.setCategory(jsonReader.nextString());
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
+                        product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
+                        break;
+                    case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
+                        product.setStarred(jsonReader.nextBoolean());
+                        break;
+                    default:
+                        jsonReader.skipValue();
+                        break;
+                }
+            }
+
+            jsonReader.endObject();
+        }catch (IOException e) {
+            Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
+            Log.e("DEBUG", "IOException - parse a single product: " + e);
+        }
+
+        return product;
+    }
+
     public static ArrayList<NutritionAttribute> parseProductNutritionFromJSON(String product_nutrition)
     {
         ArrayList<NutritionAttribute> nutritionAttributes = new ArrayList<>();
@@ -388,5 +456,12 @@ public class Utils {
         }
 
         return nutritionAttributes;
+    }
+
+    public static void navigateToProductInfoActivity(Context context, Product product)
+    {
+        Intent intent = new Intent(context, ProductInformationActivity.class);
+        intent.putExtra(Utils.PRODUCT_TRANSFER_TAG, new Gson().toJson(product));
+        context.startActivity(intent);
     }
 }

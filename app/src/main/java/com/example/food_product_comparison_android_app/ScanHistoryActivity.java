@@ -37,8 +37,6 @@ import java.util.concurrent.Executors;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ScanHistoryActivity extends AppCompatActivity {
-    private static final String SCAN_HISTORY_END_POINT = "api/";
-    private URL webServiceUrl;
     private RecyclerView recyclerView;
 
     @Override
@@ -74,7 +72,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
             ArrayList<Object> items;
 
             try {
-                webServiceUrl = new URL(getString(R.string.server_base_url) + SCAN_HISTORY_END_POINT);
+                URL webServiceUrl = new URL(getString(R.string.server_base_url) + Utils.SCAN_HISTORY_END_POINT);
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
 
                 if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
@@ -109,7 +107,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
                     else
                     {
                         uiHandler.post(() -> {
-                            Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                         });
                     }
                 }
@@ -117,7 +115,7 @@ public class ScanHistoryActivity extends AppCompatActivity {
             } catch(Exception e) {
                 loading_dialog.dismiss();
                 uiHandler.post(() -> {
-                    Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     Log.e("DEBUG", "Server Related Exception Error: " + e);
                 });
             }

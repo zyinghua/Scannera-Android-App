@@ -106,7 +106,7 @@
     <string name="similar_products">相似产品</string>
     <string name="sort_by">排序方式：</string>
     <string name="product_reviews">产品评价</string>
-    <string name="write_a_review">Write A Review</string>
+    <string name="write_a_review">写评价</string>
     <string name="total_num_of_reviews">共&#160;%1$d&#160;条评价</string>
     <string name="review_successful_submit">非常感谢您的产品评价!</string>
     <string name="farewell_user_on_delete">成功删除账号，祝一切顺利并期待下次再见！</string>

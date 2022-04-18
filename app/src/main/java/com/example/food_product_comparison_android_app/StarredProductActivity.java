@@ -14,25 +14,16 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class StarredProductActivity extends AppCompatActivity {
-    private static final String STARRED_PRODUCTS_END_POINT =
-            ServerAPI.GET_STARRED_PRODUCTS_SERVER + "?user_id=";
     private RecyclerView recyclerView;
 
     @Override
@@ -91,7 +82,8 @@ public class StarredProductActivity extends AppCompatActivity {
             ArrayList<Object> starred_products;
 
             try {
-                URL webServiceUrl = new URL(getString(R.string.server_base_url) + STARRED_PRODUCTS_END_POINT + Utils.getLoggedUser(this).getId());
+                URL webServiceUrl = new URL(getString(R.string.server_base_url) +
+                        String.format(Utils.STARRED_PRODUCTS_END_POINT, Utils.getLoggedUser(this).getId()));
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
 
                 if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful

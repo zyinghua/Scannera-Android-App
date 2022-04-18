@@ -1,37 +1,36 @@
 package com.example.food_product_comparison_android_app;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public class Product {
-    @SerializedName(ServerAPI.PRODUCT_ID_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_ID_SERVER)
     private String productId;
 
-    @SerializedName(ServerAPI.PRODUCT_BARCODE_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_BARCODE_SERVER)
     private String barcode;
 
-    @SerializedName(ServerAPI.PRODUCT_BRAND_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_BRAND_SERVER)
     private String brand;
 
-    @SerializedName(ServerAPI.PRODUCT_NAME_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_NAME_SERVER)
     private String name;
 
-    @SerializedName(ServerAPI.PRODUCT_PRICE_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_PRICE_SERVER)
     private Double price;
 
-    @SerializedName(ServerAPI.PRODUCT_CATEGORY_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER)
     private String category;
 
-    private Bitmap product_look_pic;
-
-    @SerializedName(ServerAPI.PRODUCT_IS_STARRED_SERVER)
+    @SerializedName(ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER)
     private Boolean isStarred;
 
     private ArrayList<NutritionAttribute> nutritionAttributes;
+
+    private Bitmap product_look_pic;
 
     public Product() {
     }

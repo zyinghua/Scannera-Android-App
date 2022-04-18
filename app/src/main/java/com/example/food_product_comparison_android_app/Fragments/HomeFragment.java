@@ -160,7 +160,8 @@ public class HomeFragment extends Fragment {
             ArrayList<Object> recommended_products;
 
             try {
-                URL webServiceUrl = new URL(getString(R.string.server_base_url) + "api/favourite/get?user_id="+user.getId());
+                URL webServiceUrl = new URL(getString(R.string.server_base_url) +
+                        String.format(Utils.RECOMMENDED_PRODUCTS_END_POINT, user.getId()));
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
 
                 if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful

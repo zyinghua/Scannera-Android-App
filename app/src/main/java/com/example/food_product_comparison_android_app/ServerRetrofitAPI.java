@@ -18,7 +18,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ServerAPI {
+public interface ServerRetrofitAPI {
     String UPDATE_USER_END_POINT = "api/user/update";
     String USER_ID_SERVER = "user_id";
     String USERNAME_SERVER = "username";
