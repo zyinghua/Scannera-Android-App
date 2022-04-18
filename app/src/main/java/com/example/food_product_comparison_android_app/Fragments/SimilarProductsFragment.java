@@ -37,15 +37,7 @@ public class SimilarProductsFragment extends Fragment {
         String[] attributes = new String[]{"Sugar", "Fat Total"};
         this.setCategoryAdapter(attributes);
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
-
-        executor.execute(()->{
-            this.setUpContent();
-            uiHandler.post(() -> {
-
-            });
-        });
+        this.setUpContent();
 
         return view;
     }

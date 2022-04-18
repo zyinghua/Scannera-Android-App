@@ -105,17 +105,14 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                 productViewHolder.star_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        toggleProductStar(System.currentTimeMillis(), productViewHolder, product);
+                        Utils.toggleProductStar(System.currentTimeMillis(), activityContext, appContext, productViewHolder.star_btn, product);
                     }
                 });
 
                 productViewHolder.product_cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(activityContext, ProductInformationActivity.class);
-                        intent.putExtra(Utils.PRODUCT_TRANSFER_TAG, new Gson().toJson(product));
-
-                        activityContext.startActivity(intent);
+                        Utils.navigateToProductInfoActivity(activityContext, product);
                     }
                 });
             }
@@ -177,55 +174,5 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     public void setItems(List<Object> items) {
         this.items = items;
-    }
-
-    private void toggleProductStar(Long init_time, ProductViewHolder productViewHolder, Product product)
-    {
-        LoadingDialog loading_dialog = new LoadingDialog(activityContext);
-        loading_dialog.show();
-
-        Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).unStarProduct(user.getId(), product.getProductId())
-                : Utils.getServerAPI(activityContext).starProduct(user.getId(), product.getProductId());
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                loading_dialog.dismiss();
-
-                if (response.isSuccessful())
-                {
-                    if(product.getStarred())
-                    {
-                        productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
-                    }
-                    else
-                    {
-                        productViewHolder.star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
-                    }
-
-                    product.setStarred(!product.getStarred());
-                }
-                else
-                {
-                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        toggleProductStar(init_time, productViewHolder, product);
-                        Log.e("DEBUG", "Toggle product star response code: " + response.code());
-                    }
-                    else if(response.code() == 405)
-                    {
-                        Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(activityContext, activityContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                loading_dialog.dismiss();
-                Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

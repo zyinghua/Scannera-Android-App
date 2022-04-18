@@ -3,6 +3,7 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,17 +20,20 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Fragments.ProductReviewsFragment;
 import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ProductInformationActivity extends AppCompatActivity {
+    private Product product;
     public static final String PRODUCT_ID_TRANSFER_TAG = "PRODUCT_ID_TRANSFER_TAG";
     private ImageView product_look;
     private TextView category_tv;
@@ -47,21 +50,18 @@ public class ProductInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_information);
 
+        this.getProductInfo();
         this.setUpToolbar();
         this.findViews();
         this.setUpListeners();
+        this.setUpContent();
+    }
 
-        LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
-
-        this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
-        executor.execute(()->{
-            setUpContent();
-            uiHandler.post(loading_dialog::dismiss);
-        });
+    private void getProductInfo()
+    {
+        Gson gson = new Gson();
+        Type type = new TypeToken<Product>() {}.getType();
+        this.product = gson.fromJson(getIntent().getStringExtra(Utils.PRODUCT_TRANSFER_TAG), type);
     }
 
     private void findViews()
@@ -86,6 +86,14 @@ public class ProductInformationActivity extends AppCompatActivity {
                 image_dialog.show();
             }
         });
+
+        this.star_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.toggleProductStar(System.currentTimeMillis(), ProductInformationActivity.this,
+                        getApplicationContext(), star_btn, product);
+            }
+        });
     }
 
     private void setUpContent()
@@ -96,6 +104,14 @@ public class ProductInformationActivity extends AppCompatActivity {
         this.brand_tv.setText("Swisse");
         this.price_tv.setText("$888.88");
         //******************************************************
+
+        this.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
+        this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
+        this.category_tv.setText(product.getCategory());
+        this.name_tv.setText(product.getName());
+        this.brand_tv.setText(product.getBrand());
+        this.price_tv.setText(product.getPriceInString());
 
         // Nutrition Recycler View Set Up
         this.setUpNutritionRecyclerView();
@@ -117,17 +133,7 @@ public class ProductInformationActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         this.nutrition_recycler_view.setLayoutManager(layoutManager);
 
-        ArrayList<NutritionAttribute> nutritional_attributes = new ArrayList<>();
-
-        //******************************************************
-        nutritional_attributes.add(new NutritionAttribute("Energy", "100 kJ"));
-        nutritional_attributes.add(new NutritionAttribute("Sugar", "0.5g"));
-        nutritional_attributes.add(new NutritionAttribute("Fat Total", "0.5g"));
-        nutritional_attributes.add(new NutritionAttribute("Sodium", "600mg"));
-        nutritional_attributes.add(new NutritionAttribute("Dietary Fibre", "40g"));
-        //******************************************************
-
-        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(nutritional_attributes);
+        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(product.getNutritionAttributes());
         this.nutrition_recycler_view.setAdapter(nuAdapter);
     }
 

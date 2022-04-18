@@ -79,6 +79,11 @@ public class Product {
         return price;
     }
 
+    public String getPriceInString()
+    {
+        return "$" + price;
+    }
+
     public void setPrice(Double price) {
         this.price = price;
     }

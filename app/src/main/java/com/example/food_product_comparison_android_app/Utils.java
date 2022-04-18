@@ -8,9 +8,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -448,7 +450,10 @@ public class Utils {
 
             for(int i = 0; i < Objects.requireNonNull(keys).length(); i++)
             {
-                nutritionAttributes.add(new NutritionAttribute(keys.getString(i), nutrition.getJSONObject(keys.getString(i)).getString("value")));
+                String name = keys.getString(i);
+                JSONObject data = nutrition.getJSONObject(keys.getString(i));
+
+                nutritionAttributes.add(new NutritionAttribute(name, data.getString("value") + " " + data.getString("unit")));
             }
 
         } catch(JSONException e) {
@@ -456,6 +461,57 @@ public class Utils {
         }
 
         return nutritionAttributes;
+    }
+
+    public static void toggleProductStar(Long init_time, Activity activityContext, Context appContext, ImageButton star_btn, Product product)
+    {
+        LoadingDialog loading_dialog = new LoadingDialog(activityContext);
+        loading_dialog.show();
+
+        Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).
+                unStarProduct(Utils.getLoggedUser(activityContext).getId(), product.getProductId())
+                : Utils.getServerAPI(activityContext).starProduct(Utils.getLoggedUser(activityContext).getId(), product.getProductId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
+                if (response.isSuccessful())
+                {
+                    if(product.getStarred())
+                    {
+                        star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_off));
+                    }
+                    else
+                    {
+                        star_btn.setImageDrawable(ContextCompat.getDrawable(appContext, android.R.drawable.btn_star_big_on));
+                    }
+
+                    product.setStarred(!product.getStarred());
+                }
+                else
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
+                        toggleProductStar(init_time, activityContext, appContext, star_btn, product);
+                        Log.e("DEBUG", "Toggle product star response code: " + response.code());
+                    }
+                    else if(response.code() == 405)
+                    {
+                        Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(activityContext, activityContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public static void navigateToProductInfoActivity(Context context, Product product)
