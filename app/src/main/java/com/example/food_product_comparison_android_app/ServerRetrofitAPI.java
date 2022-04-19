@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -39,7 +40,11 @@ public interface ServerRetrofitAPI {
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
-    String GET_STARRED_PRODUCTS_SERVER = "api/favourite/get";
+    String GET_SINGLE_PRODUCT_SERVER = "api/product/get/";
+    String STARRED_PRODUCTS_SERVER = "api/favourite/";
+    String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
+    String ADD_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "add";
+    String REMOVE_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "remove";
 
     @FormUrlEncoded
     @POST("api/user/add")
@@ -94,27 +99,37 @@ public interface ServerRetrofitAPI {
             @Field(FEEDBACK_DESC_SERVER) String description
     );
 
+    @GET(GET_SINGLE_PRODUCT_SERVER + "{product_barcode}")
+    Call<ResponseBody> getASingleProduct(
+            @Path("product_barcode") String product_barcode
+    );
+
     @GET(GET_STARRED_PRODUCTS_SERVER)
-    Call<List<Product>> getStarredProducts(
+    Call<ResponseBody> getStarredProducts(
             @Query(USER_ID_SERVER) String user_id
     );
 
     @FormUrlEncoded
-    @POST("api/favourite/add")
+    @POST(ADD_STARRED_PRODUCT_SERVER)
     Call<Void> starProduct(
             @Field(USER_ID_SERVER) String user_id,
             @Field(PRODUCT_ID_SERVER) String product_id
     );
 
     @FormUrlEncoded
-    @POST("api/favourite/remove")
+    @POST(REMOVE_STARRED_PRODUCT_SERVER)
     Call<Void> unStarProduct(
             @Field(USER_ID_SERVER) String user_id,
             @Field(PRODUCT_ID_SERVER) String product_id
     );
 
     @GET("api/favourite/get")
-    Call<List<Product>> getRecommendedProducts(
+    Call<ResponseBody> getRecommendedProducts(
             @Query(USER_ID_SERVER) String user_id
+    );
+
+
+    Call<ResponseBody> getScanHistoryProducts(
+
     );
 }

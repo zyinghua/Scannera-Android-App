@@ -43,6 +43,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -379,7 +380,7 @@ public class Utils {
         return items;
     }
 
-    public static Product parseASingleProductFromResponse(Context context, HttpsURLConnection httpsURLConnection)
+    public static Product parseASingleProductFromResponse(Context context, ResponseBody responseBody)
     {
         // ************************************
         // IT IS GUARANTEED THERE EXISTS ONE PRODUCT IN THE RESPONSE
@@ -389,8 +390,8 @@ public class Utils {
         Product product = new Product();
 
         try{
-            InputStream responseBody = httpsURLConnection.getInputStream();
-            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, StandardCharsets.UTF_8);
+            InputStream responseBodyIS = responseBody.byteStream();
+            InputStreamReader responseBodyReader = new InputStreamReader(responseBodyIS, StandardCharsets.UTF_8);
             JsonReader jsonReader = new JsonReader(responseBodyReader);
             String keyName;
 

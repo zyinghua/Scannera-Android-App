@@ -34,6 +34,11 @@ import java.util.concurrent.Executors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private TextView hint;
@@ -117,71 +122,50 @@ public class ScanActivity extends AppCompatActivity {
 
     private void getProduct(Long init_time, String product_barcode)
     {
-        // Send a request to the server here
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
+        Call<ResponseBody> call = Utils.getServerAPI(this).getASingleProduct(product_barcode);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                loading_dialog.dismiss();
 
-        executor.execute(() -> {
-            Product product;
-
-            try {
-                URL webServiceUrl = new URL(getString(R.string.server_base_url) +
-                        String.format(Utils.GET_PRODUCT_END_POINT, product_barcode));
-                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
-
-                if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
+                if(response.isSuccessful() && response.body() != null)
                 {
-                    loading_dialog.dismiss();
-
                     // -----------------------------------------------
                     // Parse Data | IT IS GUARANTEED THERE EXISTS ONE PRODUCT IN THE RESPONSE
-                    product = Utils.parseASingleProductFromResponse(this, httpsURLConnection);
+                    Product product = Utils.parseASingleProductFromResponse(ScanActivity.this, response.body());
                     // -----------------------------------------------
 
-                    uiHandler.post(() -> {
-                        Utils.navigateToProductInfoActivity(this, product);
-                    });
+                    Utils.navigateToProductInfoActivity(ScanActivity.this, product);
                 }
-                else if (httpsURLConnection.getResponseCode() == 405)
+                else if(response.code() == 405)
                 {
                     // Product Not Found
-                    loading_dialog.dismiss();
-                    uiHandler.post(this::showPNFDialog);
+                    showPNFDialog();
                 }
                 else
                 {
                     // response code = NOT Successful
-                    loading_dialog.dismiss();
-
-                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        uiHandler.post(() -> {
-                            getProduct(init_time, product_barcode);
-                            try {
-                                Log.e("DEBUG", "Scan Product Barcode Response code: " + httpsURLConnection.getResponseCode());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        getProduct(init_time, product_barcode);
+                        Log.e("DEBUG", response.code() + "");
                     }
                     else
                     {
-                        uiHandler.post(() -> {
-                            mCodeScanner.startPreview();
-                            Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                        });
+                        mCodeScanner.startPreview();
+                        Toast.makeText(ScanActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     }
                 }
+            }
 
-            } catch(Exception e) {
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 loading_dialog.dismiss();
-                uiHandler.post(() -> {
-                    mCodeScanner.startPreview();
-                    Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                    Log.e("DEBUG", "Server Related Exception Error: " + e);
-                });
+                mCodeScanner.startPreview();
+                Toast.makeText(ScanActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
