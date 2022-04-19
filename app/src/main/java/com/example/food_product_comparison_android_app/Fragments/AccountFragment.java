@@ -136,9 +136,8 @@ public class AccountFragment extends Fragment {
         this.scan_history_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), ScanHistoryActivity.class);
-//                startActivity(intent);
-                Toast.makeText(getActivity(), "Sorry, currently under development...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), ScanHistoryActivity.class);
+                startActivity(intent);
             }
         });
 

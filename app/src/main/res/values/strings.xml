@@ -176,6 +176,7 @@
     <string name="valid_user_input">success</string>
     <string name="invalid_username_or_email">Invalid Username or Email, please check again.</string>
     <string name="user_acc_password_not_match_error">Incorrect username/email or password, please check again.</string>
+    <string name="record_scan_error">Sorry, failed to record the scan due to an server error.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

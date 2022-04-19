@@ -38,15 +38,15 @@ public interface ServerRetrofitAPI {
     String PRODUCT_PRICE_SERVER = "product_price";
     String PRODUCT_NUTRITION_SERVER = "product_nutrition";
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
-    String PRODUCT_SCAN_DATE_SERVER = "product_scan_date";
+    String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String GET_SINGLE_PRODUCT_SERVER = "api/product/get/";
     String STARRED_PRODUCTS_SERVER = "api/favourite/";
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
     String ADD_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "add";
     String REMOVE_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "remove";
-    String ADD_SCANNED_PRODUCT_SERVER = "api/";
-    String GET_SCANNED_PRODUCTS_SERVER = "api/";
+    String ADD_SCANNED_PRODUCT_SERVER = "api/scan/add";
+    String GET_SCANNED_PRODUCTS_SERVER = "api/scan/get";
 
     @FormUrlEncoded
     @POST("api/user/add")
@@ -133,5 +133,12 @@ public interface ServerRetrofitAPI {
     @GET(GET_SCANNED_PRODUCTS_SERVER)
     Call<ResponseBody> getScannedProducts(
             @Query(USER_ID_SERVER) String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(ADD_SCANNED_PRODUCT_SERVER)
+    Call<Void> addScannedProduct(
+            @Field(USER_ID_SERVER) String user_id,
+            @Field(PRODUCT_BARCODE_SERVER) String product_barcode
     );
 }

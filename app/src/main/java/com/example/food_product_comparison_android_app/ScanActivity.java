@@ -62,7 +62,7 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onDecoded(@NonNull Result result) {
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    recordScan(result.getText());
+                    recordScan(System.currentTimeMillis(), result.getText());
                     hint.setText("");
                     mCodeScanner.stopPreview();
                     getProduct(System.currentTimeMillis(), result.getText());
@@ -170,9 +170,38 @@ public class ScanActivity extends AppCompatActivity {
         });
     }
 
-    private void recordScan(String product_barcode)
+    private void recordScan(Long init_time, String product_barcode)
     {
         // Send a post request to the server
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        loading_dialog.show();
+
+        Call<Void> call = Utils.getServerAPI(this).addScannedProduct(Utils.getLoggedUser(this).getId(), product_barcode);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                loading_dialog.dismiss();
+
+                if(!response.isSuccessful())
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        recordScan(init_time, product_barcode);
+                        Log.e("DEBUG", response.code() + "");
+                    }
+                    else
+                    {
+                        Toast.makeText(ScanActivity.this, getString(R.string.record_scan_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(ScanActivity.this, getString(R.string.record_scan_error), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void showPNFDialog()
