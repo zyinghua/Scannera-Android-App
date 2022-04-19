@@ -170,7 +170,7 @@ public class ScanActivity extends AppCompatActivity {
         });
     }
 
-    private void recordScan(String barcode)
+    private void recordScan(String product_barcode)
     {
         // Send a post request to the server
     }

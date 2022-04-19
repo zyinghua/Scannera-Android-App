@@ -45,6 +45,8 @@ public interface ServerRetrofitAPI {
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
     String ADD_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "add";
     String REMOVE_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "remove";
+    String ADD_SCANNED_PRODUCT_SERVER = "api/";
+    String GET_SCANNED_PRODUCTS_SERVER = "api/";
 
     @FormUrlEncoded
     @POST("api/user/add")
@@ -128,8 +130,8 @@ public interface ServerRetrofitAPI {
             @Query(USER_ID_SERVER) String user_id
     );
 
-
-    Call<ResponseBody> getScanHistoryProducts(
-
+    @GET(GET_SCANNED_PRODUCTS_SERVER)
+    Call<ResponseBody> getScannedProducts(
+            @Query(USER_ID_SERVER) String user_id
     );
 }

@@ -36,6 +36,11 @@ import java.util.concurrent.Executors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ScanHistoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
@@ -65,59 +70,37 @@ public class ScanHistoryActivity extends AppCompatActivity {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler uiHandler = new Handler(Looper.getMainLooper());
+        Call<ResponseBody> call = Utils.getServerAPI(this).getScannedProducts(Utils.getLoggedUser(this).getId());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                loading_dialog.dismiss();
 
-        executor.execute(() -> {
-            ArrayList<Object> items;
-
-            try {
-                URL webServiceUrl = new URL(getString(R.string.server_base_url) + Utils.SCAN_HISTORY_END_POINT);
-                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
-
-                if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
+                if(response.isSuccessful() && response.body() != null)
                 {
-                    loading_dialog.dismiss();
-
-                    // -----------------------------------------------
-                    // Parse Data
-                    items = Utils.parseProductsFromResponse(this, httpsURLConnection);
-                    // -----------------------------------------------
-
-                    uiHandler.post(() -> {
-                        ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(), this, items);
-                        recyclerView.setAdapter(shAdapter);
-                    });
+                    ArrayList<Object> items = Utils.parseProductsFromResponse(ScanHistoryActivity.this, response.body());
+                    ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(),
+                            ScanHistoryActivity.this, items);
+                    recyclerView.setAdapter(shAdapter);
                 }
                 else
                 {
-                    // response code = NOT Successful
-                    loading_dialog.dismiss();
-
-                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        uiHandler.post(() -> {
-                            handleOnGetScannedProducts(init_time);
-                            try {
-                                Log.e("DEBUG", "Update Password Response code: " + httpsURLConnection.getResponseCode());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        handleOnGetScannedProducts(init_time);
+                        Log.e("DEBUG", response.code() + "");
                     }
                     else
                     {
-                        uiHandler.post(() -> {
-                            Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                        });
+                        Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     }
                 }
+            }
 
-            } catch(Exception e) {
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 loading_dialog.dismiss();
-                uiHandler.post(() -> {
-                    Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                    Log.e("DEBUG", "Server Related Exception Error: " + e);
-                });
+                Toast.makeText(ScanHistoryActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }

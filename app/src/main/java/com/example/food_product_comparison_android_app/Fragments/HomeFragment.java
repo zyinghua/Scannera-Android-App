@@ -57,6 +57,7 @@ import java.util.concurrent.Executors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -154,61 +155,38 @@ public class HomeFragment extends Fragment {
         LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
         loading_dialog.show();
 
-        ExecutorService executor = Executors.newSingleThreadExecutor(); // get a thread to execute the request
-        Handler uiHandler = new Handler(Looper.getMainLooper());
+        Call<ResponseBody> call = Utils.getServerAPI(requireActivity()).getRecommendedProducts(Utils.getLoggedUser(requireActivity()).getId());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                loading_dialog.dismiss();
 
-        executor.execute(() -> {
-            ArrayList<Object> recommended_products;
-
-            try {
-                URL webServiceUrl = new URL(getString(R.string.server_base_url) +
-                        String.format(Utils.RECOMMENDED_PRODUCTS_END_POINT, user.getId()));
-                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) webServiceUrl.openConnection();
-
-                if (httpsURLConnection.getResponseCode() >= 200 && httpsURLConnection.getResponseCode() < 300) // If successful
+                if(response.isSuccessful() && response.body() != null)
                 {
-                    loading_dialog.dismiss();
+                    ArrayList<Object> recommended_products = Utils.parseProductsFromResponse(requireActivity(), response.body());
 
-                    // -----------------------------------------------
-                    // Parse Data
-                    recommended_products = Utils.parseProductsFromResponse(getActivity(), httpsURLConnection);
-                    // -----------------------------------------------
-
-                    uiHandler.post(() -> {
-                        ProductListRecyclerViewAdapter rpAdapter = new ProductListRecyclerViewAdapter(
-                                requireActivity().getApplicationContext(), getActivity(), recommended_products);
-                        homeRecyclerView.setAdapter(rpAdapter);
-                    });
+                    ProductListRecyclerViewAdapter rpAdapter = new ProductListRecyclerViewAdapter(
+                            requireActivity().getApplicationContext(), getActivity(), recommended_products);
+                    homeRecyclerView.setAdapter(rpAdapter);
                 }
                 else
                 {
-                    // response code = NOT Successful
-                    loading_dialog.dismiss();
-
-                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC) {
-                        uiHandler.post(() -> {
-                            handleOnGetRecommendedProducts(init_time);
-                            try {
-                                Log.e("DEBUG", "Home Recommended Products Response code: " + httpsURLConnection.getResponseCode());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        handleOnGetRecommendedProducts(init_time);
+                        Log.e("DEBUG", response.code() + "");
                     }
                     else
                     {
-                        uiHandler.post(() -> {
-                            Toast.makeText(getActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                        });
+                        Toast.makeText(requireActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     }
                 }
+            }
 
-            } catch(Exception e) {
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 loading_dialog.dismiss();
-                uiHandler.post(() -> {
-                    Toast.makeText(getActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
-                    Log.e("DEBUG", "Server Related Exception Error: " + e);
-                });
+                Toast.makeText(requireActivity(), getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }

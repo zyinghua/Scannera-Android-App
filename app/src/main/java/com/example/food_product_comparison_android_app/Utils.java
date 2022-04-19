@@ -84,14 +84,6 @@ public class Utils {
     public static final int login_view_animation_translation = 300;
     public static final int login_view_animation_duration = 600;
 
-    // API end points
-    public static final String SCAN_HISTORY_END_POINT = "api/";
-    public static final String STARRED_PRODUCTS_END_POINT =
-            ServerRetrofitAPI.GET_STARRED_PRODUCTS_SERVER + "?user_id=%s";
-    public static final String RECOMMENDED_PRODUCTS_END_POINT = "api/favourite/get?user_id=%s";
-    public static final String GET_PRODUCT_END_POINT = "api/product/get/%s";
-
-
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
         if (input.isEmpty())
@@ -307,13 +299,13 @@ public class Utils {
         });
     }
 
-    public static ArrayList<Object> parseProductsFromResponse(Context context, HttpsURLConnection httpsURLConnection) {
+    public static ArrayList<Object> parseProductsFromResponse(Context context, ResponseBody responseBody) {
         ArrayList<Object> items = new ArrayList<>();
         Date prev_scan_date = null;
 
         try {
-            InputStream responseBody = httpsURLConnection.getInputStream();
-            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, StandardCharsets.UTF_8);
+            InputStream responseBodyIS = responseBody.byteStream();
+            InputStreamReader responseBodyReader = new InputStreamReader(responseBodyIS, StandardCharsets.UTF_8);
             JsonReader jsonReader = new JsonReader(responseBodyReader);
             String keyName;
 
@@ -372,6 +364,7 @@ public class Utils {
             }
 
             jsonReader.endArray();
+            responseBody.close();
         } catch (IOException | ParseException e) {
             Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
             Log.e("DEBUG", "IOException|ParseException - parse products: " + e);
@@ -432,6 +425,7 @@ public class Utils {
             }
 
             jsonReader.endObject();
+            responseBody.close();
         }catch (IOException e) {
             Toast.makeText(context, context.getString(R.string.general_error), Toast.LENGTH_LONG).show();
             Log.e("DEBUG", "IOException - parse a single product: " + e);
