@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,13 +107,18 @@ public class ProductInformationActivity extends AppCompatActivity {
         this.price_tv.setText("$888.88");
         //******************************************************
 
-        this.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
-        this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
-        this.category_tv.setText(product.getCategory());
-        this.name_tv.setText(product.getName());
-        this.brand_tv.setText(product.getBrand());
-        this.price_tv.setText(product.getPriceInString());
+        try{
+            this.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                    product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
+            this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
+            this.category_tv.setText(product.getCategory());
+            this.name_tv.setText(product.getName());
+            this.brand_tv.setText(product.getBrand());
+            this.price_tv.setText(product.getPriceInString());
+        } catch (NullPointerException e) {
+            Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
+            onBackPressed();
+        }
 
         // Nutrition Recycler View Set Up
         this.setUpNutritionRecyclerView();
@@ -186,5 +193,9 @@ public class ProductInformationActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.comparisons_toolbar_menu, menu);
         return true;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

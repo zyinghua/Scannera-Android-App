@@ -66,7 +66,7 @@ public class Utils {
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
-    public static final int MAX_SERVER_RESPOND_SEC = 5;
+    public static final int MAX_SERVER_RESPOND_SEC = 3;
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
     public static final DateFormat DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
@@ -338,7 +338,7 @@ public class Utils {
                             product.setCategory(jsonReader.nextString());
                             break;
                         case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
-                            product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
+                            product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
                             break;
                         case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
                             product.setStarred(jsonReader.nextBoolean());
@@ -413,7 +413,7 @@ public class Utils {
                         product.setCategory(jsonReader.nextString());
                         break;
                     case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
-                        product.setNutritionAttributes(parseProductNutritionFromJSON(jsonReader.nextString()));
+                        product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
                         break;
                     case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
                         product.setStarred(jsonReader.nextBoolean());
@@ -434,7 +434,7 @@ public class Utils {
         return product;
     }
 
-    public static ArrayList<NutritionAttribute> parseProductNutritionFromJSON(String product_nutrition)
+    public static ArrayList<NutritionAttribute> parseProductNutritionFromJSON(Context context, String product_nutrition)
     {
         ArrayList<NutritionAttribute> nutritionAttributes = new ArrayList<>();
 
@@ -443,16 +443,19 @@ public class Utils {
             JSONObject nutrition = new JSONObject(product_nutrition);
             JSONArray keys = nutrition.names();
 
-            for(int i = 0; i < Objects.requireNonNull(keys).length(); i++)
+            if (keys != null)
             {
-                String name = keys.getString(i);
-                JSONObject data = nutrition.getJSONObject(keys.getString(i));
+                for(int i = 0; i < keys.length(); i++)
+                {
+                    String name = keys.getString(i);
+                    JSONObject data = nutrition.getJSONObject(keys.getString(i));
 
-                nutritionAttributes.add(new NutritionAttribute(name, data.getString("value") + " " + data.getString("unit")));
+                    nutritionAttributes.add(new NutritionAttribute(name, data.getString("value") + " " + data.getString("unit")));
+                }
             }
 
         } catch(JSONException e) {
-            Log.e("DEBUG", "JSON exception - parse product nutrition: " + e);
+            Toast.makeText(context, context.getString(R.string.parsing_error), Toast.LENGTH_LONG).show();
         }
 
         return nutritionAttributes;

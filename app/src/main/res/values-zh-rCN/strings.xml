@@ -104,7 +104,8 @@
     <string name="price">原价格：</string>
     <string name="nutri_info_with_units">营养信息：\n（每 100 克/毫升）</string>
     <string name="similar_products">相似产品</string>
-    <string name="sort_by">排序方式：</string>
+    <string name="sort_products">排序下列产品：</string>
+    <string name="descending">从高到低</string>
     <string name="product_reviews">产品评价</string>
     <string name="write_a_review">写评价</string>
     <string name="total_num_of_reviews">共&#160;%1$d&#160;条评价</string>
@@ -165,6 +166,7 @@
     <string name="invalid_username_or_email">无效的用户名或电子邮件，请重新检查。</string>
     <string name="user_acc_password_not_match_error">用户名/电子邮箱或密码不正确，请重新检查。</string>
     <string name="record_scan_error">抱歉，由于服务器错误无法记录此次扫描。</string>
+    <string name="parsing_error">抱歉，由于内部错误导致了数据解析未成功。</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>

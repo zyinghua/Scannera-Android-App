@@ -42,12 +42,14 @@ import retrofit2.Response;
 public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private TextView hint;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
+        this.user = Utils.getLoggedUser(this);
         checkPermissions();
         hint = findViewById(R.id.scanner_hint);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
@@ -62,7 +64,6 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onDecoded(@NonNull Result result) {
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    recordScan(System.currentTimeMillis(), result.getText());
                     hint.setText("");
                     mCodeScanner.stopPreview();
                     getProduct(System.currentTimeMillis(), result.getText());
@@ -125,7 +126,7 @@ public class ScanActivity extends AppCompatActivity {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        Call<ResponseBody> call = Utils.getServerAPI(this).getASingleProduct(product_barcode);
+        Call<ResponseBody> call = Utils.getServerAPI(this).getASingleProduct(product_barcode, user.getId());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -135,6 +136,7 @@ public class ScanActivity extends AppCompatActivity {
                 {
                     // -----------------------------------------------
                     // Parse Data | IT IS GUARANTEED THERE EXISTS ONE PRODUCT IN THE RESPONSE
+                    recordScan(System.currentTimeMillis(), product_barcode);
                     Product product = Utils.parseASingleProductFromResponse(ScanActivity.this, response.body());
                     // -----------------------------------------------
 
@@ -176,7 +178,7 @@ public class ScanActivity extends AppCompatActivity {
         LoadingDialog loading_dialog = new LoadingDialog(this);
         loading_dialog.show();
 
-        Call<Void> call = Utils.getServerAPI(this).addScannedProduct(Utils.getLoggedUser(this).getId(), product_barcode);
+        Call<Void> call = Utils.getServerAPI(this).addScannedProduct(user.getId(), product_barcode);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {

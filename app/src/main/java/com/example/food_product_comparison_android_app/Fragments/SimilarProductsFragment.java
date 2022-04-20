@@ -15,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.example.food_product_comparison_android_app.Product;
+import com.example.food_product_comparison_android_app.ProductInformationActivity;
 import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -34,8 +36,8 @@ public class SimilarProductsFragment extends Fragment {
 
         this.recyclerView = view.findViewById(R.id.recyclerView);
         this.sort_by_input = view.findViewById(R.id.sort_by_autoCompleteTv);
-        String[] attributes = new String[]{"Sugar", "Fat Total"};
-        this.setCategoryAdapter(attributes);
+
+        this.setUpSortSelectionAdapter();
 
         this.setUpContent();
 
@@ -58,9 +60,20 @@ public class SimilarProductsFragment extends Fragment {
         this.recyclerView.setAdapter(productListRecyclerViewAdapter);
     }
 
-    private void setCategoryAdapter(String[] nutritional_attributes)
+    private void setUpSortSelectionAdapter()
     {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, nutritional_attributes);
+        ArrayList<String> nutritionAttributesAl = new ArrayList<>();
+        Product product = ((ProductInformationActivity) requireActivity()).getProduct();
+
+        for(int i = 0; i < product.getNutritionAttributes().size(); i++)
+        {
+            nutritionAttributesAl.add(product.getNutritionAttributes().get(i).getAttribute_name());
+        }
+
+        String[] nutritionAttributes = new String[nutritionAttributesAl.size()];
+        nutritionAttributesAl.toArray(nutritionAttributes);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, nutritionAttributes);
         this.sort_by_input.setAdapter(arrayAdapter);
     }
 }

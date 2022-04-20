@@ -5,19 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <TextView-->
-<!--        android:id="@+id/sort_by_label"-->
-<!--        style="@style/Widget.Scannera.TextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/sort_by"-->
-<!--        android:textColor="?attr/colorPrimaryDark"-->
-<!--        android:textSize="16sp" />-->
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sort_by_layout"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="18dp"
@@ -25,20 +14,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.SwitchCompat
+        <TextView
+            android:id="@+id/sort_products_label"
+            style="@style/Widget.Scannera.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sort By Ascending"
-            android:layout_gravity="center"
-            android:layout_marginEnd="12dp"
-            android:textColor="?attr/colorPrimaryDark" />
+            android:text="@string/sort_products"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/sort_desc_switch"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sort_desc_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descending"
+            android:textColor="?attr/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sort_products_label"
+            app:layout_constraintBottom_toBottomOf="@id/sort_products_label"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sort_by_input_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sort_products_label">
 
             <AutoCompleteTextView
                 android:id="@+id/sort_by_autoCompleteTv"
@@ -52,7 +59,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

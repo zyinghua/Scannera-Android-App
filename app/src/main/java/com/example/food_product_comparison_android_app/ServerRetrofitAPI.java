@@ -20,7 +20,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ServerRetrofitAPI {
-    String UPDATE_USER_END_POINT = "api/user/update";
+    String USER_END_POINT_SERVER = "api/user/";
+    String UPDATE_USER_END_POINT = USER_END_POINT_SERVER + "update";
+    String ADD_USER_END_POINT = USER_END_POINT_SERVER + "add";
     String USER_ID_SERVER = "user_id";
     String USERNAME_SERVER = "username";
     String FIRSTNAME_SERVER = "firstname";
@@ -40,7 +42,8 @@ public interface ServerRetrofitAPI {
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
-    String GET_SINGLE_PRODUCT_SERVER = "api/product/get/";
+    String PRODUCT_END_POINT_SERVER = "api/product/";
+    String GET_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "get/";
     String STARRED_PRODUCTS_SERVER = "api/favourite/";
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
     String ADD_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "add";
@@ -49,7 +52,7 @@ public interface ServerRetrofitAPI {
     String GET_SCANNED_PRODUCTS_SERVER = "api/scan/get";
 
     @FormUrlEncoded
-    @POST("api/user/add")
+    @POST(ADD_USER_END_POINT)
     Call<User> postUser(
             @Field(USERNAME_SERVER) String username,
             @Field(FIRSTNAME_SERVER) String firstname,
@@ -101,9 +104,10 @@ public interface ServerRetrofitAPI {
             @Field(FEEDBACK_DESC_SERVER) String description
     );
 
-    @GET(GET_SINGLE_PRODUCT_SERVER + "{product_barcode}")
+    @GET(GET_PRODUCT_SERVER + "{product_barcode}")
     Call<ResponseBody> getASingleProduct(
-            @Path("product_barcode") String product_barcode
+            @Path("product_barcode") String product_barcode,
+            @Query(USER_ID_SERVER) String user_id
     );
 
     @GET(GET_STARRED_PRODUCTS_SERVER)

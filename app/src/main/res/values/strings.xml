@@ -112,7 +112,8 @@
     <string name="price">Price:</string>
     <string name="nutri_info_with_units">Nutrition Information:\n(Per 100 g/mL/kJ)</string>
     <string name="similar_products">Similar Products</string>
-    <string name="sort_by">Sort by:</string>
+    <string name="sort_products">Sort The Similar Products:</string>
+    <string name="descending">Descending</string>
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>
@@ -177,13 +178,14 @@
     <string name="invalid_username_or_email">Invalid Username or Email, please check again.</string>
     <string name="user_acc_password_not_match_error">Incorrect username/email or password, please check again.</string>
     <string name="record_scan_error">Sorry, failed to record the scan due to an server error.</string>
+    <string name="parsing_error">Sorry, failed to parse the data due to an internal error.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>
     <string name="enter_info_hint">Please enter the information here</string>
     <string name="feedback_et_hint">Please write your feedback here</string>
     <string name="category_drop_down_menu_hint">Please select or enter a category</string>
-    <string name="sort_by_selection_hint">Sort the products by selecting a factor</string>
+    <string name="sort_by_selection_hint">Select a factor to sort the products</string>
     <string name="product_review_et_hint">What do you think about this product?</string>
 
     <string name="login_title_image">A symbolic image of Scannera App</string>
