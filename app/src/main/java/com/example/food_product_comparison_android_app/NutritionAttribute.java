@@ -2,10 +2,10 @@ package com.example.food_product_comparison_android_app;
 
 public class NutritionAttribute {
     private String attributeName;
-    private String attributeValue;
+    private float attributeValue;
     private String attributeUnit;
 
-    public NutritionAttribute(String attributeName, String attributeValue, String attributeUnit) {
+    public NutritionAttribute(String attributeName, float attributeValue, String attributeUnit) {
         this.attributeName = attributeName;
         this.attributeValue = attributeValue;
         this.attributeUnit = attributeUnit;
@@ -19,11 +19,11 @@ public class NutritionAttribute {
         this.attributeName = attributeName;
     }
 
-    public String getAttributeValue() {
+    public float getAttributeValue() {
         return attributeValue;
     }
 
-    public void setAttributeValue(String attributeValue) {
+    public void setAttributeValue(float attributeValue) {
         this.attributeValue = attributeValue;
     }
 

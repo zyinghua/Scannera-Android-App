@@ -31,6 +31,9 @@ import com.example.food_product_comparison_android_app.Utils;
 import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -63,18 +66,12 @@ public class SimilarProductsFragment extends Fragment {
         this.sort_by_input = view.findViewById(R.id.sort_by_autoCompleteTv);
         this.sort_desc_switch = view.findViewById(R.id.sort_desc_switch);
 
-        this.setUpSortSelectionAdapter();
         this.setUpContent();
 
-        this.sort_by_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.sort_by_input.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(requireActivity(), "Selected: " + parent.getSelectedItem(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //performSimilarProductsSorting(parent.getItemAtPosition(position) + "");
             }
         });
 
@@ -86,15 +83,8 @@ public class SimilarProductsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Object> products = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++)
-        {
-            products.add(new Product("123", i + "", "Martin & Pleasance", "Rest & Quiet Calm Pastilles", 7.99, "Health Products", true));
-        }
-
-        ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(requireActivity().getApplicationContext(),getActivity(), products);
-        this.recyclerView.setAdapter(productListRecyclerViewAdapter);
+        this.setUpSortSelectionAdapter();
+        this.handleOnGetSimilarProducts(System.currentTimeMillis());
     }
 
     private void setUpSortSelectionAdapter()
@@ -119,7 +109,7 @@ public class SimilarProductsFragment extends Fragment {
         }
 
         Call<ResponseBody> call = Utils.getServerAPI(requireActivity()).getSimilarProducts(
-                Utils.getLoggedUser(requireActivity()).getId(), product.getProductId());
+                product.getProductId(), Utils.getLoggedUser(requireActivity()).getId());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -154,11 +144,19 @@ public class SimilarProductsFragment extends Fragment {
         });
     }
 
-    private void performSorting(String factor)
-    {
-        // Quick sort (Dutch National Flag sort)
-        Boolean descending = this.sort_desc_switch.isChecked();
-
-
-    }
+//    private void performSimilarProductsSorting(String factor)
+//    {
+//        Boolean descending = this.sort_desc_switch.isChecked();
+//
+//        if (similar_products != null)
+//        {
+//            Collections.sort(similar_products, new Comparator<Object>() {
+//
+//                @Override
+//                public int compare(Object o1, Object o2) {
+//                    return ((Product) o1).getSpecificNutritionValue(factor) - ((Product) o2).getSpecificNutritionValue(factor);
+//                }
+//            });
+//        }
+//    }
 }

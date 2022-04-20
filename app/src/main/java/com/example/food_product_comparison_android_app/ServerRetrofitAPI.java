@@ -166,9 +166,9 @@ public interface ServerRetrofitAPI {
             @Field(PRODUCT_REVIEW_DESC_SERVER) String description
     );
 
-    @GET(GET_SIMILAR_PRODUCTS_SERVER)
+    @GET(GET_SIMILAR_PRODUCTS_SERVER + "{product_id}")
     Call<ResponseBody> getSimilarProducts(
-            @Query(USER_ID_SERVER) String user_id,
-            @Query(PRODUCT_ID_SERVER) String product_id
+            @Path("product_id") String product_id,
+            @Query(USER_ID_SERVER) String user_id
     );
 }

@@ -451,10 +451,10 @@ public class Utils {
             {
                 for(int i = 0; i < keys.length(); i++)
                 {
-                    String name = keys.getString(i);
+                    String name = keys.getString(i).toLowerCase();
                     JSONObject data = nutrition.getJSONObject(keys.getString(i));
 
-                    nutritionAttributes.put(name, new NutritionAttribute(name, data.getString("value"), data.getString("unit")));
+                    nutritionAttributes.put(name, new NutritionAttribute(name, Float.parseFloat(data.getString("value")), data.getString("unit")));
                 }
             }
 

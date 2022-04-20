@@ -113,7 +113,7 @@
     <string name="nutri_info_with_units">Nutrition Information:\n(Per 100 g/mL/kJ)</string>
     <string name="similar_products">Similar Products</string>
     <string name="sort_products">Sort The Similar Products:</string>
-    <string name="descending">Descending</string>
+    <string name="descending">High to Low</string>
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>

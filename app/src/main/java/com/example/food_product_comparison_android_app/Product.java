@@ -136,4 +136,9 @@ public class Product {
     public void setNutritionAttributes(HashMap<String, NutritionAttribute> nutritionAttributes) {
         this.nutritionAttributes = nutritionAttributes;
     }
+
+    public float getSpecificNutritionValue(String factor)
+    {
+        return this.nutritionAttributes.get(factor).getAttributeValue();
+    }
 }
