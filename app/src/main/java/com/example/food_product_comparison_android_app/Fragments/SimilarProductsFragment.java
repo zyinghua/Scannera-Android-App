@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -74,6 +75,23 @@ public class SimilarProductsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 performSimilarProductsSorting(parent.getItemAtPosition(position) + "");
+            }
+        });
+
+        this.sort_desc_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!sort_by_input.getText().toString().isEmpty())
+                {
+                    Executors.newSingleThreadExecutor().execute(() -> {
+                        Collections.reverse(similar_products);
+
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            productListRecyclerViewAdapter.notifyDataSetChanged();
+                        });
+                    });
+                }
             }
         });
 
