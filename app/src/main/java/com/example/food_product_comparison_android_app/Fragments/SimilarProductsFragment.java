@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ import retrofit2.Response;
 
 public class SimilarProductsFragment extends Fragment {
     private RecyclerView recyclerView;
+    private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
     private AutoCompleteTextView sort_by_input;
     private SwitchCompat sort_desc_switch;
     private Product product;
@@ -71,7 +73,7 @@ public class SimilarProductsFragment extends Fragment {
         this.sort_by_input.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //performSimilarProductsSorting(parent.getItemAtPosition(position) + "");
+                performSimilarProductsSorting(parent.getItemAtPosition(position) + "");
             }
         });
 
@@ -118,7 +120,7 @@ public class SimilarProductsFragment extends Fragment {
                 if(response.isSuccessful() && response.body() != null)
                 {
                     similar_products = Utils.parseProductsFromResponse(requireActivity(), response.body());
-                    ProductListRecyclerViewAdapter productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
+                    productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
                             requireActivity().getApplicationContext(),getActivity(), similar_products);
                     recyclerView.setAdapter(productListRecyclerViewAdapter);
                 }
@@ -144,19 +146,24 @@ public class SimilarProductsFragment extends Fragment {
         });
     }
 
-//    private void performSimilarProductsSorting(String factor)
-//    {
-//        Boolean descending = this.sort_desc_switch.isChecked();
-//
-//        if (similar_products != null)
-//        {
-//            Collections.sort(similar_products, new Comparator<Object>() {
-//
-//                @Override
-//                public int compare(Object o1, Object o2) {
-//                    return ((Product) o1).getSpecificNutritionValue(factor) - ((Product) o2).getSpecificNutritionValue(factor);
-//                }
-//            });
-//        }
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    private void performSimilarProductsSorting(String factor)
+    {
+        if (similar_products != null)
+        {
+            Executors.newSingleThreadExecutor().execute(() -> {
+                Comparator<Object> comparator = (o1, o2) ->
+                        Float.compare(((Product) o1).getSpecificNutritionValue(factor), ((Product) o2).getSpecificNutritionValue(factor));
+
+                if (this.sort_desc_switch.isChecked())
+                    comparator = comparator.reversed();
+
+                similar_products.sort(comparator);
+
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    productListRecyclerViewAdapter.notifyDataSetChanged();
+                });
+            });
+        }
+    }
 }

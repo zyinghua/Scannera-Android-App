@@ -139,6 +139,11 @@ public class Product {
 
     public float getSpecificNutritionValue(String factor)
     {
-        return this.nutritionAttributes.get(factor).getAttributeValue();
+        NutritionAttribute nutritionAttribute = this.nutritionAttributes.get(factor);
+
+        if (nutritionAttribute == null)
+            return 0.0f;
+        else
+            return nutritionAttribute.getAttributeValue();
     }
 }
