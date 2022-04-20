@@ -50,6 +50,11 @@ public interface ServerRetrofitAPI {
     String REMOVE_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "remove";
     String ADD_SCANNED_PRODUCT_SERVER = "api/scan/add";
     String GET_SCANNED_PRODUCTS_SERVER = "api/scan/get";
+    String PRODUCT_REVIEW_END_POINT = "api/review/";
+    String GET_PRODUCT_REVIEWS_SERVER = PRODUCT_REVIEW_END_POINT + "get";
+    String ADD_PRODUCT_REVIEW_SERVER = PRODUCT_REVIEW_END_POINT + "new";
+    String PRODUCT_REVIEW_RATING_SERVER = "";
+    String PRODUCT_REVIEW_DESC_SERVER = "";
 
     @FormUrlEncoded
     @POST(ADD_USER_END_POINT)
@@ -100,7 +105,7 @@ public interface ServerRetrofitAPI {
     @POST("api/feedback/new")
     Call<Void> postFeedback(
             @Field(USER_ID_SERVER) String user_id,
-            @Field(FEEDBACK_RATING_SERVER) Float rating,
+            @Field(FEEDBACK_RATING_SERVER) float rating,
             @Field(FEEDBACK_DESC_SERVER) String description
     );
 
@@ -144,5 +149,19 @@ public interface ServerRetrofitAPI {
     Call<Void> addScannedProduct(
             @Field(USER_ID_SERVER) String user_id,
             @Field(PRODUCT_BARCODE_SERVER) String product_barcode
+    );
+
+    @GET(GET_PRODUCT_REVIEWS_SERVER)
+    Call<ResponseBody> getProductReviews(
+            @Query(PRODUCT_ID_SERVER) String product_id
+    );
+
+    @FormUrlEncoded
+    @POST(ADD_SCANNED_PRODUCT_SERVER)
+    Call<Void> addProductReview(
+            @Field(USER_ID_SERVER) String user_id,
+            @Field(PRODUCT_ID_SERVER) String product_id,
+            @Field(PRODUCT_REVIEW_RATING_SERVER) float rating,
+            @Field(PRODUCT_REVIEW_DESC_SERVER) String description
     );
 }

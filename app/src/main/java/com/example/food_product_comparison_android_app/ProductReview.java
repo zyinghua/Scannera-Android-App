@@ -1,11 +1,16 @@
 package com.example.food_product_comparison_android_app;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProductReview {
     private String username;
     private String userPImgUrl;
     private String date;
     private float rating;
     private String description;
+
+    public ProductReview() {
+    }
 
     public ProductReview(String username, String userPImgUrl, String date, float rating, String description) {
         this.username = username;
