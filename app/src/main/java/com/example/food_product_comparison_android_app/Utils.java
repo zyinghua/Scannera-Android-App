@@ -256,7 +256,11 @@ public class Utils {
     public static void updateUserPasswordAndActivity(Long init_time, Context context, String email_address, String userId)
     {
         LoadingDialog loading_dialog = new LoadingDialog(context);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         // Randomly generate a new password of length Utils.MIN_PASSWORD_LENGTH
         String new_password = Utils.getAlphaNumericRandomString(Utils.MIN_PASSWORD_LENGTH);
@@ -464,7 +468,11 @@ public class Utils {
     public static void toggleProductStar(Long init_time, Activity activityContext, Context appContext, ImageButton star_btn, Product product)
     {
         LoadingDialog loading_dialog = new LoadingDialog(activityContext);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<Void> call = product.getStarred()? Utils.getServerAPI(activityContext).
                 unStarProduct(Utils.getLoggedUser(activityContext).getId(), product.getProductId())

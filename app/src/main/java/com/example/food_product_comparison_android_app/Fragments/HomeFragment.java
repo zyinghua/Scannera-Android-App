@@ -153,7 +153,11 @@ public class HomeFragment extends Fragment {
     private void handleOnGetRecommendedProducts(Long init_time)
     {
         LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<ResponseBody> call = Utils.getServerAPI(requireActivity()).getRecommendedProducts(Utils.getLoggedUser(requireActivity()).getId());
         call.enqueue(new Callback<ResponseBody>() {

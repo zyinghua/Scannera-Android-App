@@ -163,7 +163,11 @@ public class SignUpActivity extends AppCompatActivity {
     private void attemptToCreateUser(Long init_time, String username, String firstname, String lastname, String email, String password)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         //Send a POST request to the server to create the user instance
         Call<User> call = Utils.getServerAPI(this).postUser(username, firstname, lastname, email, password, null);

@@ -124,7 +124,11 @@ public class ScanActivity extends AppCompatActivity {
     private void getProduct(Long init_time, String product_barcode)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<ResponseBody> call = Utils.getServerAPI(this).getASingleProduct(product_barcode, user.getId());
         call.enqueue(new Callback<ResponseBody>() {
@@ -176,7 +180,11 @@ public class ScanActivity extends AppCompatActivity {
     {
         // Send a post request to the server
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<Void> call = Utils.getServerAPI(this).addScannedProduct(user.getId(), product_barcode);
         call.enqueue(new Callback<Void>() {

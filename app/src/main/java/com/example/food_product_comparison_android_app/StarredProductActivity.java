@@ -78,7 +78,11 @@ public class StarredProductActivity extends AppCompatActivity {
     private void handleOnGetStarredProducts(Long init_time)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<ResponseBody> call = Utils.getServerAPI(this).getStarredProducts(Utils.getLoggedUser(this).getId());
         call.enqueue(new Callback<ResponseBody>() {

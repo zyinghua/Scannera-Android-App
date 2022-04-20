@@ -226,7 +226,11 @@ public class AccountInfoActivity extends AppCompatActivity {
         Call<Void> call;
         TextView field_tv;
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         if (field == Utils.USERNAME_INPUT)
         {
@@ -297,7 +301,11 @@ public class AccountInfoActivity extends AppCompatActivity {
     public void deleteUserAccount(Long init_time)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<Void> call = Utils.getServerAPI(this).deleteUserById(user.getId());
 

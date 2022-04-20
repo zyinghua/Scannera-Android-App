@@ -102,7 +102,11 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
     private void handleOnUserExistence(Long init_time, String email_address)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email_address);
 

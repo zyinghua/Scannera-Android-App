@@ -100,13 +100,6 @@ public class ProductInformationActivity extends AppCompatActivity {
 
     private void setUpContent()
     {
-        //******************************************************
-        this.category_tv.setText("Energy Pizza");
-        this.name_tv.setText("Chocolate Pizza wahaha balala milk chicken hotpot");
-        this.brand_tv.setText("Swisse");
-        this.price_tv.setText("$888.88");
-        //******************************************************
-
         try{
             this.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                     product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));

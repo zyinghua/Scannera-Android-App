@@ -313,7 +313,11 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLocalUserInput(Long init_time, String login_acc_title, String password)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(login_acc_title);
 
@@ -367,7 +371,11 @@ public class LoginActivity extends AppCompatActivity {
     private void handleThirdPartyUser(Long init_time, int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<User> call = Utils.getServerAPI(this).getUserByEmailOrUsername(email);
 
@@ -414,7 +422,11 @@ public class LoginActivity extends AppCompatActivity {
     private void createNewUserFromThirdParty(Long init_time, int login_flag, String username, String firstname, String lastname, String email, String profile_img_url)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         //Send a POST request to the server to create the user instance
         Call<User> call = Utils.getServerAPI(this).postUser(username, firstname, lastname, email, null, profile_img_url);

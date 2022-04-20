@@ -68,7 +68,11 @@ public class ScanHistoryActivity extends AppCompatActivity {
     private void handleOnGetScannedProducts(Long init_time)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<ResponseBody> call = Utils.getServerAPI(this).getScannedProducts(Utils.getLoggedUser(this).getId());
         call.enqueue(new Callback<ResponseBody>() {

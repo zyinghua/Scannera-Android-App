@@ -99,7 +99,11 @@ public class FeedbackActivity extends AppCompatActivity {
     private void postFeedback(Long init_time, Feedback feedback)
     {
         LoadingDialog loading_dialog = new LoadingDialog(this);
-        loading_dialog.show();
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
 
         Call<Void> call = Utils.getServerAPI(this).postFeedback(feedback.getUserId(), feedback.getRating(), feedback.getDescription());
 
