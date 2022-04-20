@@ -69,7 +69,7 @@ public class SimilarProductsFragment extends Fragment {
         this.sort_by_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                Toast.makeText(requireActivity(), "Selected: " + parent.getSelectedItem(), Toast.LENGTH_LONG).show();
             }
 
             @Override
