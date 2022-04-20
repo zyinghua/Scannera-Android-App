@@ -170,6 +170,7 @@
     <string name="similar_product_error">抱歉，由于服务器错误暂时无法加载相关类似产品。</string>
     <string name="post_product_review_error">抱歉，由于服务器错误未能成功提交您的产品评价，请重试。</string>
     <string name="get_product_review_error">抱歉，由于服务器错误暂时无法加载此产品的评价。</string>
+    <string name="capture_photo_io_error">抱歉，由于内部错误导致了无法处理照片，请重试。</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>

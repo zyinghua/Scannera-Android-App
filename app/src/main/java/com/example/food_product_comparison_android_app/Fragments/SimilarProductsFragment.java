@@ -110,12 +110,13 @@ public class SimilarProductsFragment extends Fragment {
     private void setUpSortSelectionAdapter()
     {
 
-        ArrayList<String> nutritionAttributesAl = new ArrayList<>(product.getNutritionAttributes().keySet());
+        ArrayList<String> productFactorsAl = new ArrayList<>(product.getNutritionAttributes().keySet());
+        productFactorsAl.add(0, Utils.PRODUCT_PRICE);
 
-        String[] nutritionAttributes = new String[nutritionAttributesAl.size()];
-        nutritionAttributesAl.toArray(nutritionAttributes);
+        String[] productFactors = new String[productFactorsAl.size()];
+        productFactorsAl.toArray(productFactors);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, nutritionAttributes);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, productFactors);
         this.sort_by_input.setAdapter(arrayAdapter);
     }
 
@@ -171,7 +172,7 @@ public class SimilarProductsFragment extends Fragment {
         {
             Executors.newSingleThreadExecutor().execute(() -> {
                 Comparator<Object> comparator = (o1, o2) ->
-                        Float.compare(((Product) o1).getSpecificNutritionValue(factor), ((Product) o2).getSpecificNutritionValue(factor));
+                        Float.compare(((Product) o1).getSpecificProductValue(factor), ((Product) o2).getSpecificProductValue(factor));
 
                 if (this.sort_desc_switch.isChecked())
                     comparator = comparator.reversed();

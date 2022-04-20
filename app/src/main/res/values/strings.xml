@@ -182,6 +182,7 @@
     <string name="similar_product_error">Sorry, failed to load the similar products due to a server error.</string>
     <string name="post_product_review_error">Sorry, failed to submit your product review due to a server error, please try again.</string>
     <string name="get_product_review_error">Sorry, failed to load the product reviews due to a server error.</string>
+    <string name="capture_photo_io_error">Sorry, failed to process the photo due to an internal error, please try again.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

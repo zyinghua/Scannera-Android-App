@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -53,11 +54,14 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ImageView nutrition_info_pic;
     private ImageView product_look_pic;
     private MaterialButton confirm_btn;
+    private String product_brand;
+    private String product_name;
+    private float product_price;
+    private String product_category;
     private File nutrition_pic_file;
     private File product_look_file;
     private static final String NUTRITION_PIC_FILE_NAME = "nutrition_info.jpg";
     private static final String PRODUCT_LOOK_FILE_NAME = "product_look.jpg";
-    private static final String CAPTURE_PHOTO_IO_EXCEPTION_MSG = "Capture Photo IO Exception";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +124,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                 try {
                     capturePhoto(NUTRITION_PIC_FILE_NAME);
                 } catch (IOException e) {
-                    Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -131,7 +135,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                 try {
                     capturePhoto(PRODUCT_LOOK_FILE_NAME);
                 } catch (IOException e) {
-                    Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -146,6 +150,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         });
 
         this.dynamic_input_prompt.findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 TextView input_title = dynamic_input_prompt.findViewById(R.id.input_title);
@@ -159,22 +164,24 @@ public class ProductFeedActivity extends AppCompatActivity {
                     if (input_layout != null)
                         input_layout.setError(null);
 
-                    if (((TextView) brand_view_group.findViewById(R.id.product_brand_input)).getText().toString().isEmpty()) {
+                    if (input_et != null && ((TextView) brand_view_group.findViewById(R.id.product_brand_input)).getText().toString().isEmpty()) {
                         /*Process brand input*/
 
                         brand_view_group.setVisibility(View.VISIBLE);
-                        ((TextView) brand_view_group.findViewById(R.id.product_brand_input)).setText(input_et.getText().toString());
+                        product_brand = input_et.getText().toString();
+                        ((TextView) brand_view_group.findViewById(R.id.product_brand_input)).setText(product_brand);
 
                         Barrier barrier = mainConstraintLayout.findViewById(R.id.name_barrier);
                         moveDynamicInputPrompt(mainConstraintLayout, barrier);
 
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_name));
-                    } else if (((TextView) name_view_group.findViewById(R.id.product_name_input)).getText().toString().isEmpty()) {
+                    } else if (input_et != null && ((TextView) name_view_group.findViewById(R.id.product_name_input)).getText().toString().isEmpty()) {
                         /*Process name input*/
 
                         name_view_group.setVisibility(View.VISIBLE);
-                        ((TextView) name_view_group.findViewById(R.id.product_name_input)).setText(input_et.getText().toString());
+                        product_name = input_et.getText().toString();
+                        ((TextView) name_view_group.findViewById(R.id.product_name_input)).setText(product_name);
 
                         Barrier barrier = mainConstraintLayout.findViewById(R.id.price_barrier);
                         moveDynamicInputPrompt(mainConstraintLayout, barrier);
@@ -182,11 +189,12 @@ public class ProductFeedActivity extends AppCompatActivity {
                         input_et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         input_et.setText("");
                         input_title.setText(getString(R.string.product_price));
-                    } else if (((TextView) price_view_group.findViewById(R.id.product_price_input)).getText().toString().isEmpty()) {
+                    } else if (input_et != null && ((TextView) price_view_group.findViewById(R.id.product_price_input)).getText().toString().isEmpty()) {
                         /*Process price input*/
 
                         price_view_group.setVisibility(View.VISIBLE);
-                        ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText("$" + input_et.getText().toString());
+                        product_price = Float.parseFloat(input_et.getText().toString());
+                        ((TextView) price_view_group.findViewById(R.id.product_price_input)).setText("$" + product_price);
 
                         Barrier barrier = mainConstraintLayout.findViewById(R.id.category_barrier);
                         moveDynamicInputPrompt(mainConstraintLayout, barrier);
@@ -206,11 +214,11 @@ public class ProductFeedActivity extends AppCompatActivity {
                         else
                         {
                             category_view_group.setVisibility(View.VISIBLE);
-                            ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(acTv.getText().toString());
+                            product_category = acTv.getText().toString();
+                            ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(product_category);
 
                             moveDynamicInputPrompt(mainConstraintLayout, nutri_info_title_views);
                             input_title.setText(getString(R.string.product_nutrition_info));
-
                             // Remove the input edittext as we don't need it anymore
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
                             ConstraintSet set = new ConstraintSet();
@@ -228,14 +236,14 @@ public class ProductFeedActivity extends AppCompatActivity {
                         try {
                             capturePhoto(NUTRITION_PIC_FILE_NAME);
                         } catch (IOException e) {
-                            Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         /*Process Product Look Picture input*/
                         try {
                             capturePhoto(PRODUCT_LOOK_FILE_NAME);
                         } catch (IOException e) {
-                            Toast.makeText(ProductFeedActivity.this, CAPTURE_PHOTO_IO_EXCEPTION_MSG, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                         }
                     }
                 }

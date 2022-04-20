@@ -21,7 +21,7 @@ public class Product {
     private String name;
 
     @SerializedName(ServerRetrofitAPI.PRODUCT_PRICE_SERVER)
-    private Double price;
+    private float price;
 
     @SerializedName(ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER)
     private String category;
@@ -36,7 +36,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred) {
+    public Product(String product_id, String barcode, String brand, String name, float price, String category, Boolean isStarred) {
         this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
@@ -47,7 +47,7 @@ public class Product {
         this.nutritionAttributes = new HashMap<>();
     }
 
-    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred, String productImgUrl) {
+    public Product(String product_id, String barcode, String brand, String name, float price, String category, Boolean isStarred, String productImgUrl) {
         this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
@@ -68,7 +68,7 @@ public class Product {
         this.brand = brand;
     }
 
-    public Double getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -77,7 +77,7 @@ public class Product {
         return "$" + price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -137,13 +137,20 @@ public class Product {
         this.nutritionAttributes = nutritionAttributes;
     }
 
-    public float getSpecificNutritionValue(String factor)
+    public float getSpecificProductValue(String factor)
     {
-        NutritionAttribute nutritionAttribute = this.nutritionAttributes.get(factor);
-
-        if (nutritionAttribute == null)
-            return 0.0f;
+        if(factor.equals(Utils.PRODUCT_PRICE))
+        {
+            return this.getPrice();
+        }
         else
-            return nutritionAttribute.getAttributeValue();
+        {
+            NutritionAttribute nutritionAttribute = this.nutritionAttributes.get(factor);
+
+            if (nutritionAttribute == null)
+                return 0.0f;
+            else
+                return nutritionAttribute.getAttributeValue();
+        }
     }
 }

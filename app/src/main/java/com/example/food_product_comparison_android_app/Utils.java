@@ -70,6 +70,7 @@ public class Utils {
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
     public static final DateFormat DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
+    public static final String PRODUCT_PRICE = "price";
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
@@ -336,7 +337,7 @@ public class Utils {
                             product.setName(jsonReader.nextString());
                             break;
                         case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
-                            product.setPrice(jsonReader.nextDouble());
+                            product.setPrice(Float.parseFloat(jsonReader.nextString()));
                             break;
                         case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
                             product.setCategory(jsonReader.nextString());
@@ -411,7 +412,7 @@ public class Utils {
                         product.setName(jsonReader.nextString());
                         break;
                     case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
-                        product.setPrice(jsonReader.nextDouble());
+                        product.setPrice(Float.parseFloat(jsonReader.nextString()));
                         break;
                     case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
                         product.setCategory(jsonReader.nextString());
