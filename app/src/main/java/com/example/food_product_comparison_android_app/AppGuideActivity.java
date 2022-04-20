@@ -57,7 +57,7 @@ public class AppGuideActivity extends AppCompatActivity {
         this.tabLayout.setupWithViewPager(this.viewPager);
 
         GeneralVPAdapter vpAdapter = new GeneralVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
+        //vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
 
         this.viewPager.setAdapter(vpAdapter);
     }

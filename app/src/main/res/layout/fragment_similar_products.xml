@@ -17,11 +17,12 @@
         <TextView
             android:id="@+id/sort_products_label"
             style="@style/Widget.Scannera.TextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/sort_products"
             android:textColor="?attr/colorPrimaryDark"
             android:textSize="16sp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@id/sort_desc_switch"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

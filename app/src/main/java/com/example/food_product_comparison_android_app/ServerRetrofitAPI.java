@@ -53,6 +53,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_REVIEW_END_POINT = "api/review/";
     String GET_PRODUCT_REVIEWS_SERVER = PRODUCT_REVIEW_END_POINT + "get";
     String ADD_PRODUCT_REVIEW_SERVER = PRODUCT_REVIEW_END_POINT + "new";
+    String GET_SIMILAR_PRODUCTS_SERVER = "api/product/similar/";
     String PRODUCT_REVIEW_RATING_SERVER = "";
     String PRODUCT_REVIEW_DESC_SERVER = "";
 
@@ -157,11 +158,17 @@ public interface ServerRetrofitAPI {
     );
 
     @FormUrlEncoded
-    @POST(ADD_SCANNED_PRODUCT_SERVER)
+    @POST(ADD_PRODUCT_REVIEW_SERVER)
     Call<Void> addProductReview(
             @Field(USER_ID_SERVER) String user_id,
             @Field(PRODUCT_ID_SERVER) String product_id,
             @Field(PRODUCT_REVIEW_RATING_SERVER) float rating,
             @Field(PRODUCT_REVIEW_DESC_SERVER) String description
+    );
+
+    @GET(GET_SIMILAR_PRODUCTS_SERVER)
+    Call<ResponseBody> getSimilarProducts(
+            @Query(USER_ID_SERVER) String user_id,
+            @Query(PRODUCT_ID_SERVER) String product_id
     );
 }

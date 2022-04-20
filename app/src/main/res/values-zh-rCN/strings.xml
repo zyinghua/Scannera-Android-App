@@ -167,6 +167,7 @@
     <string name="user_acc_password_not_match_error">用户名/电子邮箱或密码不正确，请重新检查。</string>
     <string name="record_scan_error">抱歉，由于服务器错误无法记录此次扫描。</string>
     <string name="parsing_error">抱歉，由于内部错误导致了数据解析未成功。</string>
+    <string name="similar_product_error">抱歉，由于服务器错误暂时无法加载相关类似产品。</string>
     <string name="post_product_review_error">抱歉，由于服务器错误未能成功提交您的产品评价，请重试。</string>
     <string name="get_product_review_error">抱歉，由于服务器错误暂时无法加载此产品的评价。</string>
 
