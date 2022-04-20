@@ -438,9 +438,9 @@ public class Utils {
         return product;
     }
 
-    public static ArrayList<NutritionAttribute> parseProductNutritionFromJSON(Context context, String product_nutrition)
+    public static HashMap<String, NutritionAttribute> parseProductNutritionFromJSON(Context context, String product_nutrition)
     {
-        ArrayList<NutritionAttribute> nutritionAttributes = new ArrayList<>();
+        HashMap<String, NutritionAttribute> nutritionAttributes = new HashMap<>();
 
         try
         {
@@ -454,7 +454,7 @@ public class Utils {
                     String name = keys.getString(i);
                     JSONObject data = nutrition.getJSONObject(keys.getString(i));
 
-                    nutritionAttributes.add(new NutritionAttribute(name, data.getString("value") + " " + data.getString("unit")));
+                    nutritionAttributes.put(name, new NutritionAttribute(name, data.getString("value"), data.getString("unit")));
                 }
             }
 

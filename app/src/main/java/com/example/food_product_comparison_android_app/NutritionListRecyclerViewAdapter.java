@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,8 @@ public class NutritionListRecyclerViewAdapter extends RecyclerView.Adapter<Nutri
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.value.setText(attributes.get(position).getAttribute_value());
-        holder.name.setText(attributes.get(position).getAttribute_name());
+        holder.value.setText(attributes.get(position).getAttributePresentation());
+        holder.name.setText(attributes.get(position).getAttributeName());
     }
 
     @Override

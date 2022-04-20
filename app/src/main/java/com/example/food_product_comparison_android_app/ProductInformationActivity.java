@@ -133,7 +133,7 @@ public class ProductInformationActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         this.nutrition_recycler_view.setLayoutManager(layoutManager);
 
-        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(product.getNutritionAttributes());
+        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(new ArrayList<>(product.getNutritionAttributes().values()));
         this.nutrition_recycler_view.setAdapter(nuAdapter);
     }
 

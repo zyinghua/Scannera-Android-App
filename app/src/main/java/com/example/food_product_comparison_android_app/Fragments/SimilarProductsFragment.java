@@ -99,12 +99,8 @@ public class SimilarProductsFragment extends Fragment {
 
     private void setUpSortSelectionAdapter()
     {
-        ArrayList<String> nutritionAttributesAl = new ArrayList<>();
 
-        for(int i = 0; i < product.getNutritionAttributes().size(); i++)
-        {
-            nutritionAttributesAl.add(product.getNutritionAttributes().get(i).getAttribute_name());
-        }
+        ArrayList<String> nutritionAttributesAl = new ArrayList<>(product.getNutritionAttributes().keySet());
 
         String[] nutritionAttributes = new String[nutritionAttributesAl.size()];
         nutritionAttributesAl.toArray(nutritionAttributes);
@@ -161,7 +157,7 @@ public class SimilarProductsFragment extends Fragment {
     private void performSorting(String factor)
     {
         // Quick sort (Dutch National Flag sort)
-        Boolean ascending = this.sort_desc_switch.isChecked();
+        Boolean descending = this.sort_desc_switch.isChecked();
 
 
     }

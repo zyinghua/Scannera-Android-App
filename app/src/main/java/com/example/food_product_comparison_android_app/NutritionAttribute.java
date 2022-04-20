@@ -1,27 +1,41 @@
 package com.example.food_product_comparison_android_app;
 
 public class NutritionAttribute {
-    private String attribute_name;
-    private String attribute_value;
+    private String attributeName;
+    private String attributeValue;
+    private String attributeUnit;
 
-    public NutritionAttribute(String attribute_name, String attribute_value) {
-        this.attribute_name = attribute_name;
-        this.attribute_value = attribute_value;
+    public NutritionAttribute(String attributeName, String attributeValue, String attributeUnit) {
+        this.attributeName = attributeName;
+        this.attributeValue = attributeValue;
+        this.attributeUnit = attributeUnit;
     }
 
-    public String getAttribute_name() {
-        return attribute_name;
+    public String getAttributeName() {
+        return attributeName;
     }
 
-    public void setAttribute_name(String attribute_name) {
-        this.attribute_name = attribute_name;
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
     }
 
-    public String getAttribute_value() {
-        return attribute_value;
+    public String getAttributeValue() {
+        return attributeValue;
     }
 
-    public void setAttribute_value(String attribute_value) {
-        this.attribute_value = attribute_value;
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
+    }
+
+    public String getAttributeUnit() {
+        return attributeUnit;
+    }
+
+    public void setAttributeUnit(String attributeUnit) {
+        this.attributeUnit = attributeUnit;
+    }
+
+    public String getAttributePresentation() {
+        return this.getAttributeValue() + " " + this.getAttributeUnit();
     }
 }

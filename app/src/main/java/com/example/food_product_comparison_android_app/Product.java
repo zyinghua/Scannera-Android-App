@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Product {
     @SerializedName(ServerRetrofitAPI.PRODUCT_ID_SERVER)
@@ -28,9 +29,9 @@ public class Product {
     @SerializedName(ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER)
     private Boolean isStarred;
 
-    private ArrayList<NutritionAttribute> nutritionAttributes;
+    private HashMap<String, NutritionAttribute> nutritionAttributes;
 
-    private Bitmap product_look_pic;
+    private String productImgUrl;
 
     public Product() {
     }
@@ -43,9 +44,10 @@ public class Product {
         this.price = price;
         this.category = category;
         this.isStarred = isStarred;
+        this.nutritionAttributes = new HashMap<>();
     }
 
-    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred, ArrayList<NutritionAttribute> nutritionAttributes) {
+    public Product(String product_id, String barcode, String brand, String name, Double price, String category, Boolean isStarred, String productImgUrl) {
         this.productId = product_id;
         this.barcode = barcode;
         this.brand = brand;
@@ -53,19 +55,10 @@ public class Product {
         this.price = price;
         this.category = category;
         this.isStarred = isStarred;
-        this.nutritionAttributes = nutritionAttributes;
+        this.nutritionAttributes = new HashMap<>();
+        this.productImgUrl = productImgUrl;
     }
 
-    public Product(String barcode, String brand, String name, Double price, String category, Bitmap product_look_pic, Boolean isStarred) {
-        this.productId = productId;
-        this.barcode = barcode;
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.product_look_pic = product_look_pic;
-        this.isStarred = isStarred;
-    }
 
     public String getBrand() {
         return brand;
@@ -88,12 +81,12 @@ public class Product {
         this.price = price;
     }
 
-    public Bitmap getProduct_look_pic() {
-        return product_look_pic;
+    public String getProductImgUrl() {
+        return productImgUrl;
     }
 
-    public void setProduct_look_pic(Bitmap product_look_pic) {
-        this.product_look_pic = product_look_pic;
+    public void setProductImgUrl(String productImgUrl) {
+        this.productImgUrl = productImgUrl;
     }
 
     public String getBarcode() {
@@ -136,12 +129,11 @@ public class Product {
         isStarred = starred;
     }
 
-    public ArrayList<NutritionAttribute> getNutritionAttributes() {
+    public HashMap<String, NutritionAttribute> getNutritionAttributes() {
         return nutritionAttributes;
     }
 
-    public void setNutritionAttributes(ArrayList<NutritionAttribute> nutritionAttributes) {
+    public void setNutritionAttributes(HashMap<String, NutritionAttribute> nutritionAttributes) {
         this.nutritionAttributes = nutritionAttributes;
     }
-
 }
