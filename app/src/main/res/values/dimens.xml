@@ -29,4 +29,6 @@
     <dimen name="comparisons_activity_text_size">16sp</dimen>
     <dimen name="app_collapsing_appbar_height">300dp</dimen>
     <dimen name="product_review_text_size">16sp</dimen>
+    <dimen name="chat_msg_text_size">18sp</dimen>
+    <dimen name="chat_msg_owner_icon_size">45dp</dimen>
 </resources>

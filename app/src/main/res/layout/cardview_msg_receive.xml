@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="start"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="3dp"
+    android:clickable="false"
+    android:background="@drawable/background_msg_receive">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/chat_msg_owner_icon_size"
+            android:layout_height="@dimen/chat_msg_owner_icon_size"
+            android:layout_margin="12dp"
+            android:src="@drawable/ic_bot"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="@dimen/chat_msg_text_size"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

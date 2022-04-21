@@ -66,6 +66,7 @@
     <string name="on_rating_empty_msg">Please give us a rate. :)</string>
     <string name="on_feedback_empty_msg">Please let us know what you thought by writing some feedback. :)</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
+    <string name="enter_message_hint">Please enter your message here</string>
     <string name="loading">Loading…</string>
     <string name="loading_dialog_tag">Loading Dialog</string>
     <string name="product_not_found">Product Not Found</string>
@@ -202,6 +203,7 @@
     <string name="nutrition_pic_content_description">A picture of the product\'s nutrition table taken by the user.</string>
     <string name="product_look_content_description">A picture of the product look taken by the user.</string>
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
+    <string name="message_send_btn_content_description">A Send message button.</string>
 
     <!-- ONLINE SERVER RELATED -->
     <string name="server_base_url" translatable="false">https://fit3162-app-group7.herokuapp.com/</string>
