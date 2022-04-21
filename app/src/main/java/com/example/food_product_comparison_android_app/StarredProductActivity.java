@@ -7,21 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.URL;
+import com.example.food_product_comparison_android_app.Adapters.ProductListRecyclerViewAdapter;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

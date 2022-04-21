@@ -24,15 +24,11 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.google.zxing.Result;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

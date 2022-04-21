@@ -1,10 +1,9 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.GeneralJavaClasses;
 
-import android.graphics.Bitmap;
-
+import com.example.food_product_comparison_android_app.ServerRetrofitAPI;
+import com.example.food_product_comparison_android_app.Utils;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Product {

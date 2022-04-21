@@ -1,4 +1,4 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.GeneralJavaClasses;
 
 public class NutritionAttribute {
     private String attributeName;

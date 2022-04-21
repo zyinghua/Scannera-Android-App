@@ -1,5 +1,6 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.GeneralJavaClasses;
 
+import com.example.food_product_comparison_android_app.Utils;
 import com.facebook.AccessToken;
 import com.google.gson.annotations.SerializedName;
 

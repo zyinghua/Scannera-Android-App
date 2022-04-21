@@ -20,23 +20,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.food_product_comparison_android_app.LoadingDialog;
-import com.example.food_product_comparison_android_app.Product;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
 import com.example.food_product_comparison_android_app.ProductInformationActivity;
-import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
+import com.example.food_product_comparison_android_app.Adapters.ProductListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
-import com.example.food_product_comparison_android_app.StarredProductActivity;
 import com.example.food_product_comparison_android_app.Utils;
-import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import okhttp3.ResponseBody;

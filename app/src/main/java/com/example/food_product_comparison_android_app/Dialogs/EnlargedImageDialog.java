@@ -1,4 +1,4 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+
+import com.example.food_product_comparison_android_app.R;
 
 public class EnlargedImageDialog extends Dialog {
     Context context;

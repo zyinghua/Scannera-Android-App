@@ -1,4 +1,4 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.food_product_comparison_android_app.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class EditDialog extends Dialog {

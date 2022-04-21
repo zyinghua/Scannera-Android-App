@@ -1,21 +1,14 @@
 package com.example.food_product_comparison_android_app.Fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.AboutUsActivity;
 import com.example.food_product_comparison_android_app.AccountInfoActivity;
@@ -25,30 +18,11 @@ import com.example.food_product_comparison_android_app.MainActivity;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.ScanHistoryActivity;
 import com.example.food_product_comparison_android_app.StarredProductActivity;
-import com.example.food_product_comparison_android_app.User;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.example.food_product_comparison_android_app.Utils;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Objects;
-
-import javax.net.ssl.HttpsURLConnection;
-import com.google.gson.Gson;
 
 public class AccountFragment extends Fragment {
     private User user;

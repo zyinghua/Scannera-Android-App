@@ -4,18 +4,12 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,39 +17,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food_product_comparison_android_app.LoadingDialog;
-import com.example.food_product_comparison_android_app.Product;
-import com.example.food_product_comparison_android_app.ProductListRecyclerViewAdapter;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
+import com.example.food_product_comparison_android_app.Adapters.ProductListRecyclerViewAdapter;
 import com.example.food_product_comparison_android_app.R;
-import com.example.food_product_comparison_android_app.ScanHistoryActivity;
-import com.example.food_product_comparison_android_app.StarredProductActivity;
-import com.example.food_product_comparison_android_app.User;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.example.food_product_comparison_android_app.Utils;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

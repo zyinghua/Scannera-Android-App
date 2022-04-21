@@ -1,4 +1,4 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.ProductReview;
+import com.example.food_product_comparison_android_app.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 

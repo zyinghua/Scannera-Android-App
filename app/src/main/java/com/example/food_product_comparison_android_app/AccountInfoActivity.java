@@ -10,7 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;

@@ -12,11 +12,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import com.facebook.login.Login;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Feedback;
 
 import java.util.Objects;
 

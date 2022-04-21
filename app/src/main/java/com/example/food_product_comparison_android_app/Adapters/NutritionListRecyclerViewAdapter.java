@@ -1,6 +1,5 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.NutritionAttribute;
+import com.example.food_product_comparison_android_app.R;
 
 import java.util.List;
 

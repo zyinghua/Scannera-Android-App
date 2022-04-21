@@ -1,10 +1,8 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +17,12 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
+import com.example.food_product_comparison_android_app.R;
+import com.example.food_product_comparison_android_app.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TITLE_VIEW_TYPE = 0;

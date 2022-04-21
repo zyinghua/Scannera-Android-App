@@ -1,4 +1,4 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,5 +1,6 @@
-package com.example.food_product_comparison_android_app;
+package com.example.food_product_comparison_android_app.GeneralJavaClasses;
 
+import com.example.food_product_comparison_android_app.ServerRetrofitAPI;
 import com.google.gson.annotations.SerializedName;
 
 public class Feedback {

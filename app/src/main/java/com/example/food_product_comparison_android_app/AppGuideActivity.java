@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.food_product_comparison_android_app.Fragments.SimilarProductsFragment;
+import com.example.food_product_comparison_android_app.Adapters.GeneralVPAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
