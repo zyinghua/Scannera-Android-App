@@ -118,23 +118,6 @@
             app:layout_constraintTop_toBottomOf="@id/starred_products_btn" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/app_guide_btn"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/user_activity_list_btn_height"
-            android:elegantTextHeight="true"
-            android:gravity="start|center_vertical"
-            android:text="@string/app_guide"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="@dimen/user_activity_list_btn_text_size"
-            app:icon="@drawable/ic_app_guide"
-            app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/about_us_btn"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
@@ -149,7 +132,7 @@
             app:iconPadding="@dimen/user_activity_list_btn_icon_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_guide_btn" />
+            app:layout_constraintTop_toBottomOf="@id/scan_history_btn" />
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.Scannera.Button"
