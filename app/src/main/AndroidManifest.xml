@@ -45,6 +45,11 @@
         </provider>
 
         <activity
+            android:name=".ChatBotActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".AccountInfoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
