@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
-    private List<Product> recommended_products;
     private LinearLayoutManager layoutManager;
     private RecyclerView homeRecyclerView;
     // private boolean isLoading;
@@ -144,6 +143,10 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful() && response.body() != null)
                 {
                     ArrayList<Object> recommended_products = Utils.parseProductsFromResponse(requireActivity(), response.body());
+
+                    if (recommended_products.size() == 0)
+                        ((TextView)requireActivity().findViewById(R.id.recommendation_title)).
+                                setText(requireActivity().getString(R.string.home_no_recommendation_title));
 
                     ProductListRecyclerViewAdapter rpAdapter = new ProductListRecyclerViewAdapter(
                             requireActivity().getApplicationContext(), getActivity(), recommended_products);

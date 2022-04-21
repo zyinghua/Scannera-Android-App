@@ -46,6 +46,7 @@
     <string name="scan_a_barcode">Scan a barcode</string>
     <string name="home_greeting">Hi,&#160;%1$s</string>
     <string name="home_recommendation_title">Products you may like:</string>
+    <string name="home_no_recommendation_title">Sorry, no recommendation is available at the moment, please star or scan product(s) to enable this feature.</string>
     <string name="dialog_camera_permission_title">Camera Access Not Enabled</string>
     <string name="dialog_camera_permission_msg">Camera permission is required to proceed this activity, enable access via "Settings" -> "App info" -> "Scannera".</string>
     <string name="dialog_btn_reject">Reject</string>

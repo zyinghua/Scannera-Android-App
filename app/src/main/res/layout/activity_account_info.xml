@@ -167,7 +167,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/account_info_value_margin_end"
-                android:gravity="start"
+                android:gravity="end"
                 android:text="@string/email_address_default"
                 android:textColor="?attr/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
