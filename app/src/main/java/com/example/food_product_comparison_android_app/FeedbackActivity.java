@@ -114,7 +114,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 if (response.isSuccessful())
                 {
-                    Toast.makeText(FeedbackActivity.this, getString(R.string.feedback_success), Toast.LENGTH_LONG).show();
+                    Toast.makeText(FeedbackActivity.this, String.format(getString(R.string.feedback_success), Utils.FEEDBACK_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                     onBackPressed();
                 }
                 else

@@ -71,9 +71,13 @@ public class Utils {
     public static final String LOGGED_USER = "LOGGED USER";
     public static final int MAX_SERVER_RESPOND_SEC = 3;
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
+    public static final String PRODUCT_BARCODE_TRANSFER_TAG = "PRODUCT_BARCODE_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
     public static final DateFormat DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
     public static final String PRODUCT_PRICE = "price";
+    public static final int FEEDBACK_CONTRIBUTION_POINTS = 5;
+    public static final int PRODUCT_CONTRIBUTION_POINTS = 10;
+    public static final int PRODUCT_REVIEW_CONTRIBUTION_POINTS = 5;
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";

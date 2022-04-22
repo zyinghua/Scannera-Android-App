@@ -269,7 +269,7 @@ public class ProductReviewsFragment extends Fragment {
                 if(response.isSuccessful())
                 {
                     dialog.dismiss();
-                    Toast.makeText(requireActivity(), getString(R.string.review_successful_submit), Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireActivity(), String.format(getString(R.string.review_successful_submit), Utils.PRODUCT_REVIEW_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                 }
                 else
                 {

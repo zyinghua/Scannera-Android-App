@@ -20,7 +20,7 @@ public class Product {
     private String name;
 
     @SerializedName(ServerRetrofitAPI.PRODUCT_PRICE_SERVER)
-    private float price;
+    private Float price;
 
     @SerializedName(ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER)
     private String category;

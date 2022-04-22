@@ -65,7 +65,7 @@
     <string name="submit">Submit</string>
     <string name="on_rating_empty_msg">Please give us a rate. :)</string>
     <string name="on_feedback_empty_msg">Please let us know what you thought by writing some feedback. :)</string>
-    <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
+    <string name="feedback_success">Successfully submitted! Thank you very much for your feedback! You have been awarded %1$d contribution points!</string>
     <string name="chat_bot_activity_title">Chatting With Scannera Bot</string>
     <string name="enter_message_hint">Please enter your message here</string>
     <string name="loading">Loading…</string>
@@ -91,6 +91,7 @@
     <string name="edit_category">Edit Product Category:</string>
     <string name="next">Next</string>
     <string name="capture">Capture</string>
+    <string name="on_successful_product_contribution_msg">Successfully submitted! Thank you very much for your contribution! You have been awarded %1$d contribution points!</string>
     <string name="product_information">Product Information</string>
     <string name="username_label">Username:</string>
     <string name="firstname_label">Firstname:</string>
@@ -120,7 +121,7 @@
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>
-    <string name="review_successful_submit">Thank you very much for your review!</string>
+    <string name="review_successful_submit">Thank you very much for your review! You have been awarded %1$d contribution points!</string>
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
 
     <!-- Category Dropdown Menu String Array -->
@@ -189,6 +190,7 @@
     <string name="message_empty_error">Message cannot be empty.</string>
     <string name="bot_setup_io_exception_error">Sorry, failed to connect to the chat bot due to an IO Exception.</string>
     <string name="bot_reply_error">Sorry, failed to receive the bot message due to an internal error.</string>
+    <string name="collect_contributed_product_data_error">Sorry, Failed to process the information due to an internal error, please try again later.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -33,7 +34,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
+import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -41,6 +45,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Multipart;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout mainConstraintLayout;
@@ -54,19 +67,22 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ImageView nutrition_info_pic;
     private ImageView product_look_pic;
     private MaterialButton confirm_btn;
+    private String product_barcode;
     private String product_brand;
     private String product_name;
-    private float product_price;
+    private Float product_price;
     private String product_category;
     private File nutrition_pic_file;
-    private File product_look_file;
-    private static final String NUTRITION_PIC_FILE_NAME = "nutrition_info.jpg";
-    private static final String PRODUCT_LOOK_FILE_NAME = "product_look.jpg";
+    private File product_pic_file;
+    private static final String NUTRITION_PIC_FILE_NAME = "nutritionInfo";
+    private static final String PRODUCT_PIC_FILE_NAME = "productPic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_feed);
+
+        this.product_barcode = getIntent().getStringExtra(Utils.PRODUCT_BARCODE_TRANSFER_TAG);
 
         this.setUpToolbar();
         this.findViews();
@@ -133,7 +149,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    capturePhoto(PRODUCT_LOOK_FILE_NAME);
+                    capturePhoto(PRODUCT_PIC_FILE_NAME);
                 } catch (IOException e) {
                     Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                 }
@@ -143,9 +159,16 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(ProductFeedActivity.this, ProductInformationActivity.class);
-                startActivity(intent);
+                if (product_barcode == null || product_brand == null ||
+                        product_name == null || product_price == null ||
+                        product_category == null || nutrition_pic_file == null || product_pic_file == null)
+                {
+                    Toast.makeText(ProductFeedActivity.this, getString(R.string.collect_contributed_product_data_error), Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    postProductDataToServer(System.currentTimeMillis());
+                }
             }
         });
 
@@ -241,12 +264,70 @@ public class ProductFeedActivity extends AppCompatActivity {
                     } else {
                         /*Process Product Look Picture input*/
                         try {
-                            capturePhoto(PRODUCT_LOOK_FILE_NAME);
+                            capturePhoto(PRODUCT_PIC_FILE_NAME);
                         } catch (IOException e) {
                             Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
                         }
                     }
                 }
+            }
+        });
+    }
+
+    private void postProductDataToServer(Long init_time)
+    {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
+
+        RequestBody user_id_rb = RequestBody.create(MediaType.parse("text/plain"), Utils.getLoggedUser(this).getId());
+        RequestBody barcode_rb = RequestBody.create(MediaType.parse("text/plain"), product_barcode);
+        RequestBody brand_rb = RequestBody.create(MediaType.parse("text/plain"), product_brand);
+        RequestBody name_rb = RequestBody.create(MediaType.parse("text/plain"), product_name);
+        RequestBody price_rb = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(product_price));
+        RequestBody category_rb = RequestBody.create(MediaType.parse("text/plain"), product_category);
+
+        MultipartBody.Part nutrition_pic_file_part = MultipartBody.Part.createFormData(
+                "nutrition pic file", nutrition_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), nutrition_pic_file));
+
+        MultipartBody.Part product_pic_file_part = MultipartBody.Part.createFormData(
+                "product pic file", product_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), product_pic_file));
+
+        Call<ResponseBody> call = Utils.getServerAPI(this).postProduct(user_id_rb, barcode_rb, brand_rb, name_rb, price_rb, category_rb, nutrition_pic_file_part, product_pic_file_part);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                loading_dialog.dismiss();
+
+                if(response.isSuccessful() && response.body() != null)
+                {
+                    Toast.makeText(ProductFeedActivity.this, String.format(getString(R.string.on_successful_product_contribution_msg), Utils.PRODUCT_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
+
+                    finish();
+                    Product product = Utils.parseASingleProductFromResponse(ProductFeedActivity.this, response.body());
+                    Utils.navigateToProductInfoActivity(ProductFeedActivity.this, product);
+                }
+                else
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        postProductDataToServer(init_time);
+                        Log.e("DEBUG", response.code() + "");
+                    }
+                    else
+                    {
+                        Toast.makeText(ProductFeedActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(ProductFeedActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -266,7 +347,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         else if (requestCode == Utils.PRODUCT_LOOK_PIC_REQUEST && resultCode == RESULT_OK)
         {
             // Get the image from the file path we set up previously rather than the intent itself as a bitmap
-            Bitmap imgBitmap = BitmapFactory.decodeFile(product_look_file.getAbsolutePath());
+            Bitmap imgBitmap = BitmapFactory.decodeFile(product_pic_file.getAbsolutePath());
             this.product_look_pic.setImageBitmap(imgBitmap);
 
             onProductLookPicReceived();
@@ -379,12 +460,12 @@ public class ProductFeedActivity extends AppCompatActivity {
         }
         else
         {
-            this.product_look_file = getPhotoFile(file_name); // Get file
+            this.product_pic_file = getPhotoFile(file_name); // Get file
         }
 
         // Get Uri for the file and put with the particular key to allow the camera app we are
         // delegating to, to be able to access the file and put the output there
-        Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), file_name.equals(NUTRITION_PIC_FILE_NAME) ? this.nutrition_pic_file : this.product_look_file);
+        Uri fpUri = FileProvider.getUriForFile(this, getString(R.string.app_authority), file_name.equals(NUTRITION_PIC_FILE_NAME) ? this.nutrition_pic_file : this.product_pic_file);
         capturePicIntent.putExtra(MediaStore.EXTRA_OUTPUT, fpUri);
 
         if (capturePicIntent.resolveActivity(getPackageManager()) != null)  // Make sure there exists an app that is able to handle such

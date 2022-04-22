@@ -59,7 +59,7 @@
     <string name="submit">提交</string>
     <string name="on_rating_empty_msg">请给我们打个分 :D</string>
     <string name="on_feedback_empty_msg">请麻烦以写一些反馈来让我们知道您的想法 :D</string>
-    <string name="feedback_success">提交成功！非常感谢您的反馈！</string>
+    <string name="feedback_success">提交成功！非常感谢您的反馈！您获得了%1$d贡献值！</string>
     <string name="chat_bot_activity_title">正在与Scannera机器人交流</string>
     <string name="enter_message_hint">请在此输入消息</string>
     <string name="loading">加载中…</string>
@@ -83,6 +83,7 @@
     <string name="edit_category">编辑产品类别：</string>
     <string name="next">下一个</string>
     <string name="capture">拍照</string>
+    <string name="on_successful_product_contribution_msg">提交成功！非常感谢您参与产品数据贡献！您获得了%1$d贡献值！</string>
     <string name="product_information">产品信息</string>
     <string name="username_label">用户名：</string>
     <string name="firstname_label">名：</string>
@@ -112,7 +113,7 @@
     <string name="product_reviews">产品评价</string>
     <string name="write_a_review">写评价</string>
     <string name="total_num_of_reviews">共&#160;%1$d&#160;条评价</string>
-    <string name="review_successful_submit">非常感谢您的产品评价!</string>
+    <string name="review_successful_submit">非常感谢您的产品评价! 您获得了%1$d贡献值！</string>
     <string name="farewell_user_on_delete">成功删除账号，祝一切顺利并期待下次再见！</string>
 
 
@@ -177,6 +178,7 @@
     <string name="message_empty_error">发出的消息不能为空。</string>
     <string name="bot_setup_io_exception_error">抱歉，由于IO异常未能成功连接上服务端。</string>
     <string name="bot_reply_error">抱歉，由于内部错误导致了未能成功接收另一端的消息。</string>
+    <string name="collect_contributed_product_data_error">抱歉，由于内部错误导致了输入的信息处理未成功，请稍后再试。</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>

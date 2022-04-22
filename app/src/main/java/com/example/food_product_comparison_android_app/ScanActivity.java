@@ -145,7 +145,7 @@ public class ScanActivity extends AppCompatActivity {
                 else if(response.code() == 405)
                 {
                     // Product Not Found
-                    showPNFDialog();
+                    showPNFDialog(product_barcode);
                 }
                 else
                 {
@@ -210,7 +210,7 @@ public class ScanActivity extends AppCompatActivity {
         });
     }
 
-    private void showPNFDialog()
+    private void showPNFDialog(String product_barcode)
     {
         final Dialog dialog = new Dialog(this);
 
@@ -230,7 +230,10 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                startActivity(new Intent(ScanActivity.this, ProductFeedActivity.class));
+
+                Intent intent = new Intent(ScanActivity.this, ProductFeedActivity.class);
+                intent.putExtra(Utils.PRODUCT_BARCODE_TRANSFER_TAG, product_barcode);
+                startActivity(intent);
             }
         });
 

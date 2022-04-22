@@ -6,14 +6,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -41,6 +45,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String PRODUCT_END_POINT_SERVER = "api/product/";
+    String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "add";
     String GET_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "get/";
     String STARRED_PRODUCTS_SERVER = "api/favourite/";
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
@@ -106,6 +111,19 @@ public interface ServerRetrofitAPI {
             @Field(USER_ID_SERVER) String user_id,
             @Field(FEEDBACK_RATING_SERVER) float rating,
             @Field(FEEDBACK_DESC_SERVER) String description
+    );
+
+    @Multipart
+    @POST(POST_PRODUCT_SERVER)
+    Call<ResponseBody> postProduct(
+            @Part(USER_ID_SERVER) RequestBody user_id,
+            @Part(PRODUCT_BARCODE_SERVER) RequestBody product_barcode,
+            @Part(PRODUCT_BRAND_SERVER) RequestBody product_brand,
+            @Part(PRODUCT_NAME_SERVER) RequestBody product_name,
+            @Part(PRODUCT_PRICE_SERVER) RequestBody product_price,
+            @Part(PRODUCT_CATEGORY_SERVER) RequestBody product_category,
+            @Part MultipartBody.Part nutrition_pic,
+            @Part MultipartBody.Part product_pic
     );
 
     @GET(GET_PRODUCT_SERVER + "{product_barcode}")
