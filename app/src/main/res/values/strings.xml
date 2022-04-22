@@ -66,6 +66,7 @@
     <string name="on_rating_empty_msg">Please give us a rate. :)</string>
     <string name="on_feedback_empty_msg">Please let us know what you thought by writing some feedback. :)</string>
     <string name="feedback_success">Successfully submitted! Thank you very much for your feedback!</string>
+    <string name="chat_bot_activity_title">Chatting With Scannera Bot</string>
     <string name="enter_message_hint">Please enter your message here</string>
     <string name="loading">Loading…</string>
     <string name="loading_dialog_tag">Loading Dialog</string>
@@ -185,6 +186,9 @@
     <string name="post_product_review_error">Sorry, failed to submit your product review due to a server error, please try again.</string>
     <string name="get_product_review_error">Sorry, failed to load the product reviews due to a server error.</string>
     <string name="capture_photo_io_error">Sorry, failed to process the photo due to an internal error, please try again.</string>
+    <string name="message_empty_error">Message cannot be empty.</string>
+    <string name="bot_setup_io_exception_error">Sorry, failed to connect to the chat bot due to an IO Exception.</string>
+    <string name="bot_reply_error">Sorry, failed to receive the bot message due to an internal error.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

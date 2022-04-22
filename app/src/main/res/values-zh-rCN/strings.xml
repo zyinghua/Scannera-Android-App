@@ -60,6 +60,7 @@
     <string name="on_rating_empty_msg">请给我们打个分 :D</string>
     <string name="on_feedback_empty_msg">请麻烦以写一些反馈来让我们知道您的想法 :D</string>
     <string name="feedback_success">提交成功！非常感谢您的反馈！</string>
+    <string name="chat_bot_activity_title">正在与Scannera机器人交流</string>
     <string name="enter_message_hint">请在此输入消息</string>
     <string name="loading">加载中…</string>
     <string name="loading_dialog_tag">Loading Dialog</string>
@@ -173,6 +174,9 @@
     <string name="post_product_review_error">抱歉，由于服务器错误未能成功提交您的产品评价，请重试。</string>
     <string name="get_product_review_error">抱歉，由于服务器错误暂时无法加载此产品的评价。</string>
     <string name="capture_photo_io_error">抱歉，由于内部错误导致了无法处理照片，请重试。</string>
+    <string name="message_empty_error">发出的消息不能为空。</string>
+    <string name="bot_setup_io_exception_error">抱歉，由于IO异常未能成功连接上服务端。</string>
+    <string name="bot_reply_error">抱歉，由于内部错误导致了未能成功接收另一端的消息。</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>

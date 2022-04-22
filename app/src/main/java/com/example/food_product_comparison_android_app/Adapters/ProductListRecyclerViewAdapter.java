@@ -25,8 +25,8 @@ import com.example.food_product_comparison_android_app.Utils;
 import java.util.List;
 
 public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final int TITLE_VIEW_TYPE = 0;
-    public static final int ITEM_VIEW_TYPE = 1;
+    private static final int TITLE_VIEW_TYPE = 0;
+    private static final int ITEM_VIEW_TYPE = 1;
     public static final int LOADING_BAR_VIEW_TYPE = 2;
     private final Context appContext;
     private final Activity activityContext;

@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editMessage"
+            android:id="@+id/message_et"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
@@ -67,6 +67,7 @@
             android:layout_margin="4dp"
             android:backgroundTint="@color/robin_blue"
             app:tint="@color/white"
+            app:fabCustomSize="45dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

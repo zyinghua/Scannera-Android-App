@@ -22,12 +22,14 @@
             android:src="@drawable/ic_bot"/>
 
         <TextView
+            android:id="@+id/message_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="3dp"
             android:layout_gravity="center"
             android:textSize="@dimen/chat_msg_text_size"
+            android:fontFamily="@font/roboto_slab"
             android:textColor="@color/black"/>
 
     </LinearLayout>

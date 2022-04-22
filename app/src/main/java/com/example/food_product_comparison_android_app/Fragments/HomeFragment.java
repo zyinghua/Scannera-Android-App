@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
     private User user;
     private TextView welcome_username_tv;
     private CircularImageView home_user_img;
-    private LinearLayoutManager layoutManager;
     private RecyclerView homeRecyclerView;
     // private boolean isLoading;
 
@@ -95,7 +94,7 @@ public class HomeFragment extends Fragment {
     private void setUpContent()
     {
         // isLoading = false;
-        layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         homeRecyclerView.setLayoutManager(layoutManager);
 
         handleOnGetRecommendedProducts(System.currentTimeMillis());
