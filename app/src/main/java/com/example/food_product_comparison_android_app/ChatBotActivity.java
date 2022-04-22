@@ -27,6 +27,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2.DetectIntentRequest;
 import com.google.cloud.dialogflow.v2.DetectIntentResponse;
 import com.google.cloud.dialogflow.v2.QueryInput;
+import com.google.cloud.dialogflow.v2.QueryResult;
 import com.google.cloud.dialogflow.v2.SessionName;
 import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
@@ -145,12 +146,24 @@ public class ChatBotActivity extends AppCompatActivity {
 
                 if(detectIntentResponse != null)
                 {
-                    String botReply = detectIntentResponse.getQueryResult().getFulfillmentText();
-                    if(!botReply.isEmpty())
+                    QueryResult queryResult = detectIntentResponse.getQueryResult();
+
+                    if(queryResult.getFulfillmentMessagesCount() != 0)
                     {
-                        messages.add(new BotChatMessage(botReply, true));
-                        chatRecyclerViewAdapter.notifyDataSetChanged();
-                        Objects.requireNonNull(chatRecyclerView.getLayoutManager()).scrollToPosition(messages.size() - 1);
+                        for(int i = 0; i < queryResult.getFulfillmentMessagesCount(); i++)
+                        {
+                            String botReply = queryResult.getFulfillmentMessages(i).getText().getText(0);
+                            if(!botReply.isEmpty())
+                            {
+                                messages.add(new BotChatMessage(botReply, true));
+                                chatRecyclerViewAdapter.notifyItemInserted(messages.size() - 1);
+                                Objects.requireNonNull(chatRecyclerView.getLayoutManager()).scrollToPosition(messages.size() - 1);
+                            }
+                            else
+                            {
+                                Toast.makeText(ChatBotActivity.this, getString(R.string.bot_reply_error), Toast.LENGTH_LONG).show();
+                            }
+                        }
                     }
                     else
                     {
