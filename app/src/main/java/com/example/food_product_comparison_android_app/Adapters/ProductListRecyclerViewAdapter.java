@@ -31,19 +31,17 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     private final Context appContext;
     private final Activity activityContext;
     private List<Object> items;
-    private final User user;
+    private String factorOfComparison;
 
     public ProductListRecyclerViewAdapter(Context appContext, Activity activityContext) {
         this.appContext = appContext;
         this.activityContext = activityContext;
-        this.user = Utils.getLoggedUser(activityContext);
     }
 
     public ProductListRecyclerViewAdapter(Context context, Activity activityContext, List<Object> items) {
         this.appContext = context;
         this.activityContext = activityContext;
         this.items = items;
-        this.user = Utils.getLoggedUser(activityContext);
     }
 
     @Override
@@ -91,7 +89,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             Product product = (Product) items.get(position);
 
             try{
-                productViewHolder.product_look.setImageDrawable(appContext.getDrawable(R.drawable.product_sample));
+                productViewHolder.product_display_img.setImageDrawable(appContext.getDrawable(R.drawable.product_sample));
                 productViewHolder.nameTv.setText(product.getName());
                 productViewHolder.brandTv.setText(product.getBrand());
                 productViewHolder.priceTv.setText("$ " + product.getPrice());
@@ -111,6 +109,13 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
                         Utils.navigateToProductInfoActivity(activityContext, product);
                     }
                 });
+                
+                if (factorOfComparison != null)
+                {
+                    productViewHolder.foc_tv.setVisibility(View.VISIBLE);
+                    productViewHolder.foc_tv.setText(factorOfComparison + ": " + product.getSpecificProductValue(factorOfComparison));
+                }
+
             }
             catch (NullPointerException e) {
                 Toast.makeText(activityContext, "NullPointerException: There exists product(s) not fully initialised.", Toast.LENGTH_LONG).show();
@@ -136,21 +141,23 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         private final CardView product_cv;
-        private final ImageView product_look;
+        private final ImageView product_display_img;
         private final TextView nameTv;
         private final TextView brandTv;
         private final TextView priceTv;
         private final ImageButton star_btn;
+        private final TextView foc_tv;
 
         public ProductViewHolder(View view) {
             super(view);
 
             this.product_cv = view.findViewById(R.id.product_card_view);
-            this.product_look = view.findViewById(R.id.cardview_product_look_pic);
+            this.product_display_img = view.findViewById(R.id.cardview_product_pic);
             this.nameTv = view.findViewById(R.id.cardview_product_name);
             this.brandTv = view.findViewById(R.id.cardview_product_brand);
             this.priceTv = view.findViewById(R.id.cardview_product_price);
             this.star_btn = view.findViewById(R.id.star_btn);
+            this.foc_tv = view.findViewById(R.id.current_factor_of_comparison);
         }
     }
 
@@ -170,5 +177,13 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     public void setItems(List<Object> items) {
         this.items = items;
+    }
+
+    public String getFactorOfComparison() {
+        return factorOfComparison;
+    }
+
+    public void setFactorOfComparison(String factorOfComparison) {
+        this.factorOfComparison = factorOfComparison;
     }
 }

@@ -175,6 +175,7 @@ public class SimilarProductsFragment extends Fragment {
                 similar_products.sort(comparator);
 
                 new Handler(Looper.getMainLooper()).post(() -> {
+                    productListRecyclerViewAdapter.setFactorOfComparison(factor);
                     productListRecyclerViewAdapter.notifyDataSetChanged();
                 });
             });

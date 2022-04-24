@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/cardview_product_look_pic"
+            android:id="@+id/cardview_product_pic"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="12dp"
@@ -83,12 +83,25 @@
             android:textSize="16sp" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/current_factor_of_comparison"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/pinky_red"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cardview_product_info"
+            app:layout_constraintEnd_toEndOf="@id/cardview_product_info"/>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/lr_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
