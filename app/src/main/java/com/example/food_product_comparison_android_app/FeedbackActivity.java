@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.Feedback;
+import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 
 import java.util.Objects;
 
@@ -28,11 +29,14 @@ public class FeedbackActivity extends AppCompatActivity {
     private RatingBar rating_bar;
     private EditText feedback_et;
     private Button submit_btn;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
+
+        this.user = Utils.getLoggedUser(FeedbackActivity.this);
 
         this.setUpToolbar();
         this.findViews();
@@ -61,7 +65,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 {
                     // Send the rating and feedback to the server here
                     postFeedback(System.currentTimeMillis(),
-                            new Feedback(Utils.getLoggedUser(FeedbackActivity.this).getId(), rating, feedback));
+                            new Feedback(user.getId(), rating, feedback));
                 }
             }
         });
@@ -114,6 +118,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 if (response.isSuccessful())
                 {
+                    user.setContributionScore(user.getContributionScore() + Utils.FEEDBACK_CONTRIBUTION_POINTS);
+                    Utils.updateUserLoginStatus(FeedbackActivity.this, user);
                     Toast.makeText(FeedbackActivity.this, String.format(getString(R.string.feedback_success), Utils.FEEDBACK_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                     onBackPressed();
                 }

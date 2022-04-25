@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+import com.example.food_product_comparison_android_app.FeedbackActivity;
 import com.example.food_product_comparison_android_app.ProductInformationActivity;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.ProductReview;
 import com.example.food_product_comparison_android_app.Adapters.ProductReviewListRecyclerViewAdapter;
@@ -270,6 +271,8 @@ public class ProductReviewsFragment extends Fragment {
                 {
                     dialog.dismiss();
                     Toast.makeText(requireActivity(), String.format(getString(R.string.review_successful_submit), Utils.PRODUCT_REVIEW_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
+                    user.setContributionScore(user.getContributionScore() + Utils.PRODUCT_REVIEW_CONTRIBUTION_POINTS);
+                    Utils.updateUserLoginStatus(requireActivity(), user);
                 }
                 else
                 {

@@ -31,7 +31,7 @@ public class User {
     private String profile_img_url;
 
     @SerializedName("user_contribution_score")
-    private int contribution_score;
+    private int contributionScore;
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
         this.loginFlag = login_flag;
@@ -40,7 +40,7 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.contribution_score = 0;
+        this.contributionScore = 0;
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, int contribution_score) {
@@ -50,7 +50,7 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.contribution_score = contribution_score;
+        this.contributionScore = contribution_score;
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url) {
@@ -61,7 +61,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.profile_img_url = profile_img_url;
-        this.contribution_score = 0;
+        this.contributionScore = 0;
     }
 
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url, int contribution_score) {
@@ -72,7 +72,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.profile_img_url = profile_img_url;
-        this.contribution_score = contribution_score;
+        this.contributionScore = contribution_score;
     }
 
     public User() {
@@ -85,7 +85,7 @@ public class User {
         this.email = "null";
         this.password = "null";
         this.profile_img_url = "null";
-        this.contribution_score = 0;
+        this.contributionScore = 0;
     }
 
     public String getPassword() {
@@ -152,11 +152,11 @@ public class User {
         this.loginFlag = loginFlag;
     }
 
-    public int getContribution_score() {
-        return contribution_score;
+    public int getContributionScore() {
+        return contributionScore;
     }
 
-    public void setContribution_score(int contribution_score) {
-        this.contribution_score = contribution_score;
+    public void setContributionScore(int contribution_score) {
+        this.contributionScore = contribution_score;
     }
 }

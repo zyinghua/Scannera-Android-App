@@ -135,6 +135,6 @@ public class AccountFragment extends Fragment {
             Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
 
         username_tv.setText(user.getUsername());
-        contribution_score_tv.setText(String.format(getString(R.string.contribution_score), user.getContribution_score()));
+        contribution_score_tv.setText(String.format(getString(R.string.contribution_score), user.getContributionScore()));
     }
 }

@@ -283,7 +283,8 @@ public class ProductFeedActivity extends AppCompatActivity {
             loading_dialog.dismiss();
         }
 
-        RequestBody user_id_rb = RequestBody.create(MediaType.parse("text/plain"), Utils.getLoggedUser(this).getId());
+        User user = Utils.getLoggedUser(this);
+        RequestBody user_id_rb = RequestBody.create(MediaType.parse("text/plain"), user.getId());
         RequestBody barcode_rb = RequestBody.create(MediaType.parse("text/plain"), product_barcode);
         RequestBody brand_rb = RequestBody.create(MediaType.parse("text/plain"), product_brand);
         RequestBody name_rb = RequestBody.create(MediaType.parse("text/plain"), product_name);
@@ -305,6 +306,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null)
                 {
                     Toast.makeText(ProductFeedActivity.this, String.format(getString(R.string.on_successful_product_contribution_msg), Utils.PRODUCT_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
+                    user.setContributionScore(user.getContributionScore() + Utils.PRODUCT_CONTRIBUTION_POINTS);
+                    Utils.updateUserLoginStatus(ProductFeedActivity.this, user);
 
                     finish();
                     Product product = Utils.parseASingleProductFromResponse(ProductFeedActivity.this, response.body());
