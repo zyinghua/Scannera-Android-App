@@ -60,6 +60,8 @@ public interface ServerRetrofitAPI {
     String PRODUCT_REVIEW_RATING_SERVER = "review_rating";
     String PRODUCT_REVIEW_DESC_SERVER = "review_description";
     String PRODUCT_REVIEW_DATE_SERVER = "review_date";
+    String PRODUCT_NUTRITION_PIC_SERVER = "nutrition_img";
+    String PRODUCT_DISPLAY_PIC_SERVER = "display_img";
 
     @FormUrlEncoded
     @POST(ADD_USER_END_POINT)

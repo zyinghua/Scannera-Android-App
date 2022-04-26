@@ -36,7 +36,7 @@ public class ProductReviewListRecyclerViewAdapter extends RecyclerView.Adapter<P
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductReview review = reviews.get(position);
-        if (review.getUserPImgUrl() != null && !review.getUserPImgUrl().equals("null"))
+        if (review.getUserPImgUrl() != null && !review.getUserPImgUrl().isEmpty())
             Picasso.get().load(review.getUserPImgUrl()).into(holder.user_profile_img);
 
         holder.username_tv.setText(review.getUsername());

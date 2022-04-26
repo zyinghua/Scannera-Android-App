@@ -1,5 +1,6 @@
 package com.example.food_product_comparison_android_app.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -42,6 +43,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -49,21 +51,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductReviewsFragment extends Fragment {
-    private String product_id;
     private MaterialButton write_review_btn;
     private TextView total_num_of_reviews_tv;
     private CircularImageView user_profile_img;
     private RecyclerView recyclerView;
     private User user;
     private ArrayList<ProductReview> reviews;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null)
-            this.product_id = getArguments().getString(ProductInformationActivity.PRODUCT_ID_TRANSFER_TAG);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,20 +87,11 @@ public class ProductReviewsFragment extends Fragment {
         this.recyclerView.setLayoutManager(layoutManager);
 
         reviews = new ArrayList<>();
-        //this.getProductReviews(System.currentTimeMillis());
-
-        reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "26/04/2022", 5f, "I LIKE IT!!"));
-        reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "26/04/2022", 3.5f, "Not too bad, but a bit too sweet."));
-        //---------------------------------------------------------------------------------------------------------------
-        for (int i = 0; i < 10; i++)
-        {
-            reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "18/04/2022", 4.2f, "This is a very tasty food!"));
-        }
+        this.getProductReviews(System.currentTimeMillis());
 
         ProductReviewListRecyclerViewAdapter reviewAdapter = new ProductReviewListRecyclerViewAdapter(reviews);
         this.recyclerView.setAdapter(reviewAdapter);
-        this.total_num_of_reviews_tv.setText(String.format(getString(R.string.total_num_of_reviews), reviews.size()));
-        //---------------------------------------------------------------------------------------------------------------
+        setTotal_num_of_reviews_tv();
 
         this.write_review_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,6 +224,7 @@ public class ProductReviewsFragment extends Fragment {
 
                             if (date != null)
                                 productReview.setDate(Utils.PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED.format(date));
+                            break;
                         default:
                             jsonReader.skipValue();
                             break;
@@ -276,6 +261,7 @@ public class ProductReviewsFragment extends Fragment {
                 );
 
         call.enqueue(new Callback<Void>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 loading_dialog.dismiss();
@@ -286,6 +272,14 @@ public class ProductReviewsFragment extends Fragment {
                     Toast.makeText(requireActivity(), String.format(getString(R.string.review_successful_submit), Utils.PRODUCT_REVIEW_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                     user.setContributionScore(user.getContributionScore() + Utils.PRODUCT_REVIEW_CONTRIBUTION_POINTS);
                     Utils.updateUserLoginStatus(requireActivity(), user);
+
+                    reviews.add(0, new ProductReview(user.getUsername(), user.getProfile_img_url(),
+                            Utils.PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED.format(new Date()), rating, review_desc));
+
+                    if (recyclerView.getAdapter() != null)
+                        recyclerView.getAdapter().notifyDataSetChanged();
+
+                    setTotal_num_of_reviews_tv();
                 }
                 else
                 {
@@ -307,5 +301,10 @@ public class ProductReviewsFragment extends Fragment {
                 Toast.makeText(requireActivity(), getString(R.string.post_product_review_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void setTotal_num_of_reviews_tv()
+    {
+        this.total_num_of_reviews_tv.setText(String.format(getString(R.string.total_num_of_reviews), reviews.size()));
     }
 }

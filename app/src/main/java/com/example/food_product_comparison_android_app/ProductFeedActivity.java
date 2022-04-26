@@ -296,10 +296,10 @@ public class ProductFeedActivity extends AppCompatActivity {
         RequestBody category_rb = RequestBody.create(MediaType.parse("text/plain"), product_category);
 
         MultipartBody.Part nutrition_pic_file_part = MultipartBody.Part.createFormData(
-                "nutrition pic file", nutrition_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), nutrition_pic_file));
+                ServerRetrofitAPI.PRODUCT_NUTRITION_PIC_SERVER, nutrition_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), nutrition_pic_file));
 
         MultipartBody.Part product_pic_file_part = MultipartBody.Part.createFormData(
-                "product pic file", product_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), product_pic_file));
+                ServerRetrofitAPI.PRODUCT_DISPLAY_PIC_SERVER, product_pic_file.getName(), RequestBody.create(MediaType.parse("image/*"), product_pic_file));
 
         Call<ResponseBody> call = Utils.getServerAPI(this).postProduct(user_id_rb, barcode_rb, brand_rb, name_rb, price_rb, category_rb, nutrition_pic_file_part, product_pic_file_part);
         call.enqueue(new Callback<ResponseBody>() {
