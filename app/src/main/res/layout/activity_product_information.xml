@@ -67,6 +67,7 @@
                 android:id="@+id/product_look_pic"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:src="@color/browser_actions_bg_grey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/star_btn"
                 app:layout_constraintTop_toBottomOf="@id/star_btn" />

@@ -31,6 +31,7 @@ import com.example.food_product_comparison_android_app.GeneralJavaClasses.Produc
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.Objects;
 public class ProductInformationActivity extends AppCompatActivity {
     private Product product;
     public static final String PRODUCT_ID_TRANSFER_TAG = "PRODUCT_ID_TRANSFER_TAG";
-    private ImageView product_look;
+    private ImageView product_pic;
     private TextView category_tv;
     private TextView name_tv;
     private TextView brand_tv;
@@ -70,7 +71,7 @@ public class ProductInformationActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        this.product_look = findViewById(R.id.product_look_pic);
+        this.product_pic = findViewById(R.id.product_look_pic);
         this.category_tv = findViewById(R.id.product_category_value);
         this.name_tv = findViewById(R.id.product_name_value);
         this.brand_tv = findViewById(R.id.product_brand_value);
@@ -83,7 +84,7 @@ public class ProductInformationActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
-        this.product_look.setOnClickListener(new View.OnClickListener() {
+        this.product_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final EnlargedImageDialog image_dialog = new EnlargedImageDialog(ProductInformationActivity.this);
@@ -105,7 +106,10 @@ public class ProductInformationActivity extends AppCompatActivity {
         try{
             this.star_btn.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                     product.getStarred() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off));
-            this.product_look.setImageDrawable(getDrawable(R.drawable.product_sample));
+
+            if(product.getProductImgUrl() != null && product.getProductImgUrl().isEmpty())
+                Picasso.get().load(product.getProductImgUrl()).into(this.product_pic);
+
             this.category_tv.setText(product.getCategory());
             this.name_tv.setText(product.getName());
             this.brand_tv.setText(product.getBrand());

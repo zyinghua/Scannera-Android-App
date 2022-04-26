@@ -431,6 +431,8 @@ public class Utils {
                     case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
                         product.setStarred(jsonReader.nextBoolean());
                         break;
+                    case ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER:
+                        product.setProductImgUrl(jsonReader.nextString());
                     default:
                         jsonReader.skipValue();
                         break;

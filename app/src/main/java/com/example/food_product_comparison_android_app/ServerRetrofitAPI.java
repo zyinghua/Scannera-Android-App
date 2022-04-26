@@ -43,6 +43,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_NUTRITION_SERVER = "product_nutrition";
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
+    String PRODUCT_IMG_URL_SERVER = "display_img";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String PRODUCT_END_POINT_SERVER = "api/product/";
     String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "new";

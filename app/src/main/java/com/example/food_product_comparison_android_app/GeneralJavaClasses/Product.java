@@ -30,6 +30,7 @@ public class Product {
 
     private HashMap<String, NutritionAttribute> nutritionAttributes;
 
+    @SerializedName(ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER)
     private String productImgUrl;
 
     public Product() {
