@@ -45,7 +45,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String PRODUCT_END_POINT_SERVER = "api/product/";
-    String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "add";
+    String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "new";
     String GET_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "get/";
     String STARRED_PRODUCTS_SERVER = "api/favourite/";
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
