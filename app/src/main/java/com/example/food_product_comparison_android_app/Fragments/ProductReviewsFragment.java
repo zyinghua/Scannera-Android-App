@@ -39,7 +39,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -94,6 +96,8 @@ public class ProductReviewsFragment extends Fragment {
         reviews = new ArrayList<>();
         //this.getProductReviews(System.currentTimeMillis());
 
+        reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "26/04/2022", 5f, "I LIKE IT!!"));
+        reviews.add(new ProductReview(user.getUsername(), user.getProfile_img_url(), "26/04/2022", 3.5f, "Not too bad, but a bit too sweet."));
         //---------------------------------------------------------------------------------------------------------------
         for (int i = 0; i < 10; i++)
         {
@@ -227,6 +231,11 @@ public class ProductReviewsFragment extends Fragment {
                         case ServerRetrofitAPI.PIMG_URL_SERVER:
                             productReview.setUserPImgUrl(jsonReader.nextString());
                             break;
+                        case ServerRetrofitAPI.PRODUCT_SCAN_DATE_SERVER:
+                            Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
+
+                            if (date != null)
+                                productReview.setDate(Utils.PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED.format(date));
                         default:
                             jsonReader.skipValue();
                             break;
@@ -239,7 +248,7 @@ public class ProductReviewsFragment extends Fragment {
 
             jsonReader.endArray();
             responseBody.close();
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             Toast.makeText(requireActivity(), getString(R.string.general_error), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

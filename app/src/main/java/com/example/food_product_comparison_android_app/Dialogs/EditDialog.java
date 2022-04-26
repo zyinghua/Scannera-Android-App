@@ -34,9 +34,33 @@ public class EditDialog extends Dialog {
         });
     }
 
+    public EditDialog(@NonNull Context context, String titleText, String autoFillInputText) {
+        super(context);
+
+        this.context = context;
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.setCancelable(true);
+        this.setContentView(R.layout.dialog_edit);
+        this.setTitleText(titleText);
+
+        this.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        this.setAutoFillInputText(autoFillInputText);
+    }
+
     public void setTitleText(String titleText)
     {
         ((TextView) this.findViewById(R.id.dialog_title)).setText(context.getString(R.string.edit) + " " + titleText);
+    }
+
+    public void setAutoFillInputText(String autoFillInputText)
+    {
+        ((TextInputEditText) this.findViewById(R.id.edit_et)).setText(autoFillInputText);
     }
 
     public void setInputType(int inputType)

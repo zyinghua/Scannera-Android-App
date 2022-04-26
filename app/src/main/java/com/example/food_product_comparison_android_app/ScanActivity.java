@@ -123,14 +123,16 @@ public class ScanActivity extends AppCompatActivity {
         try {
             loading_dialog.show();
         } catch (Exception e) {
-            loading_dialog.dismiss();
+            if (loading_dialog.isShowing())
+                loading_dialog.dismiss();
         }
 
         Call<ResponseBody> call = Utils.getServerAPI(this).getASingleProduct(product_barcode, user.getId());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                loading_dialog.dismiss();
+                if (loading_dialog.isShowing())
+                    loading_dialog.dismiss();
 
                 if(response.isSuccessful() && response.body() != null)
                 {
@@ -165,7 +167,9 @@ public class ScanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                loading_dialog.dismiss();
+                if (loading_dialog.isShowing())
+                    loading_dialog.dismiss();
+
                 mCodeScanner.startPreview();
                 Toast.makeText(ScanActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }

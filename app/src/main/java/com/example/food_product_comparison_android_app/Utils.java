@@ -73,7 +73,8 @@ public class Utils {
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String PRODUCT_BARCODE_TRANSFER_TAG = "PRODUCT_BARCODE_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
-    public static final DateFormat DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
+    public static final DateFormat SCAN_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
+    public static final DateFormat PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     public static final String PRODUCT_PRICE = "price";
     public static final int FEEDBACK_CONTRIBUTION_POINTS = 5;
     public static final int PRODUCT_CONTRIBUTION_POINTS = 10;
@@ -361,7 +362,7 @@ public class Utils {
                             if(date != null && (prev_scan_date == null || Objects.requireNonNull(date).compareTo(prev_scan_date) != 0))
                             {
                                 prev_scan_date = date;
-                                items.add(Utils.DATE_FORMAT_DISPLAYED.format(date));
+                                items.add(Utils.SCAN_DATE_FORMAT_DISPLAYED.format(date));
                             }
 
                             break;

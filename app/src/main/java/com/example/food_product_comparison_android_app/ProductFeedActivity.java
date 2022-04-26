@@ -109,28 +109,32 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.brand_view_group.findViewById(R.id.product_brand_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input), getString(R.string.product_brand), false);
+                TextView product_brand_input = brand_view_group.findViewById(R.id.product_brand_input);
+                showEditDialog(brand_view_group.findViewById(R.id.product_brand_input), getString(R.string.product_brand), product_brand_input.getText().toString(),  false);
             }
         });
 
         this.name_view_group.findViewById(R.id.product_name_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(name_view_group.findViewById(R.id.product_name_input), getString(R.string.product_name),false);
+                TextView product_name_input = name_view_group.findViewById(R.id.product_name_input);
+                showEditDialog(name_view_group.findViewById(R.id.product_name_input), getString(R.string.product_name), product_name_input.getText().toString(), false);
             }
         });
 
         this.price_view_group.findViewById(R.id.product_price_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog(price_view_group.findViewById(R.id.product_price_input), getString(R.string.product_price),true);
+                TextView product_price_input = price_view_group.findViewById(R.id.product_price_input);
+                showEditDialog(price_view_group.findViewById(R.id.product_price_input), getString(R.string.product_price), product_price_input.getText().toString().substring(1), true);
             }
         });
 
         this.category_view_group.findViewById(R.id.product_category_edit_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCategoryEditDialog(category_view_group.findViewById(R.id.product_category_input));
+                TextView product_category_input = category_view_group.findViewById(R.id.product_category_input);
+                showCategoryEditDialog(category_view_group.findViewById(R.id.product_category_input), product_category_input.getText().toString());
             }
         });
 
@@ -368,9 +372,9 @@ public class ProductFeedActivity extends AppCompatActivity {
         set.applyTo(constraintLayout);
     }
 
-    private void showEditDialog(TextView input, String title, boolean isNumerical)
+    private void showEditDialog(TextView input, String title, String autoFillInputText, boolean isNumerical)
     {
-        final EditDialog dialog = new EditDialog(this, title);
+        final EditDialog dialog = new EditDialog(this, title, autoFillInputText);
 
         if (isNumerical)
             dialog.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -396,7 +400,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void showCategoryEditDialog(TextView input)
+    private void showCategoryEditDialog(TextView input, String autoFillInputText)
     {
         final Dialog dialog = new Dialog(this);
 
@@ -428,6 +432,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ((AutoCompleteTextView) dialog.findViewById(R.id.cdm_autoCompTv_edit)).setText(autoFillInputText);
 
         dialog.show();
     }
