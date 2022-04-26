@@ -213,8 +213,6 @@ public class ProductReviewsFragment extends Fragment {
             JsonReader jsonReader = new JsonReader(responseBodyReader);
             String keyName;
 
-            jsonReader.beginObject();
-
             jsonReader.beginArray();
             while (jsonReader.hasNext()) {
                 // Parse a single product review
@@ -231,7 +229,13 @@ public class ProductReviewsFragment extends Fragment {
                         case ServerRetrofitAPI.PIMG_URL_SERVER:
                             productReview.setUserPImgUrl(jsonReader.nextString());
                             break;
-                        case ServerRetrofitAPI.PRODUCT_SCAN_DATE_SERVER:
+                        case ServerRetrofitAPI.PRODUCT_REVIEW_RATING_SERVER:
+                            productReview.setRating(Float.parseFloat(jsonReader.nextString()));
+                            break;
+                        case ServerRetrofitAPI.PRODUCT_REVIEW_DESC_SERVER:
+                            productReview.setDescription(jsonReader.nextString());
+                            break;
+                        case ServerRetrofitAPI.PRODUCT_REVIEW_DATE_SERVER:
                             Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
 
                             if (date != null)

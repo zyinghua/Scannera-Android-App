@@ -57,8 +57,9 @@ public interface ServerRetrofitAPI {
     String GET_PRODUCT_REVIEWS_SERVER = PRODUCT_REVIEW_END_POINT + "get";
     String ADD_PRODUCT_REVIEW_SERVER = PRODUCT_REVIEW_END_POINT + "new";
     String GET_SIMILAR_PRODUCTS_SERVER = "api/product/similar/";
-    String PRODUCT_REVIEW_RATING_SERVER = "";
-    String PRODUCT_REVIEW_DESC_SERVER = "";
+    String PRODUCT_REVIEW_RATING_SERVER = "review_rating";
+    String PRODUCT_REVIEW_DESC_SERVER = "review_description";
+    String PRODUCT_REVIEW_DATE_SERVER = "review_date";
 
     @FormUrlEncoded
     @POST(ADD_USER_END_POINT)
