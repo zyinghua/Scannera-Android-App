@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,22 +38,22 @@ public class AccountFragment extends Fragment {
     private MaterialButton about_us_btn;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        user = Utils.getLoggedUser(requireActivity());
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         this.findViews(view);
-        this.loadUserProfile();
         this.setUpListeners();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        user = Utils.getLoggedUser(requireActivity());
+        this.loadUserProfile();
     }
 
     private void findViews(View view)

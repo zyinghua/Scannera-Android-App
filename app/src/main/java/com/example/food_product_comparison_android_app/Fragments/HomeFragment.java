@@ -49,8 +49,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        user = Utils.getLoggedUser(requireActivity());
     }
 
     @Override
@@ -61,10 +59,17 @@ public class HomeFragment extends Fragment {
 
         this.findViews(view);
         this.setUpToolbar(view);
-        this.loadUserProfile();
         this.setUpContent();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        user = Utils.getLoggedUser(requireActivity());
+        this.loadUserProfile();
     }
 
     private void findViews(View view)
