@@ -21,6 +21,7 @@ import com.example.food_product_comparison_android_app.GeneralJavaClasses.Produc
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -89,7 +90,9 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             Product product = (Product) items.get(position);
 
             try{
-                productViewHolder.product_display_img.setImageDrawable(appContext.getDrawable(R.drawable.product_sample));
+                if(product.getProductImgUrl() != null && !product.getProductImgUrl().isEmpty())
+                    Picasso.get().load(product.getProductImgUrl()).into( productViewHolder.product_display_img);
+
                 productViewHolder.nameTv.setText(product.getName());
                 productViewHolder.brandTv.setText(product.getBrand());
                 productViewHolder.priceTv.setText("$ " + product.getPrice());

@@ -43,7 +43,9 @@ public interface ServerRetrofitAPI {
     String PRODUCT_NUTRITION_SERVER = "product_nutrition";
     String PRODUCT_IS_STARRED_SERVER = "product_is_starred";
     String PRODUCT_SCAN_DATE_SERVER = "product_scan_timestamp";
-    String PRODUCT_IMG_URL_SERVER = "display_img";
+    String PRODUCT_IMG_URL_SERVER = "product_display_img";
+    String PRODUCT_NUTRITION_PIC_SERVER = "nutrition_img"; // For sending the nutrition img to the server, the key on the server side
+    String PRODUCT_DISPLAY_PIC_SERVER = "display_img"; // For sending the product img to the server, the key on the server side
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String PRODUCT_END_POINT_SERVER = "api/product/";
     String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "new";
@@ -61,8 +63,6 @@ public interface ServerRetrofitAPI {
     String PRODUCT_REVIEW_RATING_SERVER = "review_rating";
     String PRODUCT_REVIEW_DESC_SERVER = "review_description";
     String PRODUCT_REVIEW_DATE_SERVER = "review_date";
-    String PRODUCT_NUTRITION_PIC_SERVER = "nutrition_img";
-    String PRODUCT_DISPLAY_PIC_SERVER = "display_img";
 
     @FormUrlEncoded
     @POST(ADD_USER_END_POINT)

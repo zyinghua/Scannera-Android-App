@@ -45,7 +45,7 @@ public class SimilarProductsFragment extends Fragment {
     private AutoCompleteTextView sort_by_input;
     private SwitchCompat sort_desc_switch;
     private Product product;
-    private ArrayList<Object> similar_products;
+    private ArrayList<Object> similarProducts;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class SimilarProductsFragment extends Fragment {
                 if(!sort_by_input.getText().toString().isEmpty())
                 {
                     Executors.newSingleThreadExecutor().execute(() -> {
-                        Collections.reverse(similar_products);
+                        Collections.reverse(similarProducts);
 
                         new Handler(Looper.getMainLooper()).post(() -> {
                             productListRecyclerViewAdapter.notifyDataSetChanged();
@@ -133,9 +133,9 @@ public class SimilarProductsFragment extends Fragment {
 
                 if(response.isSuccessful() && response.body() != null)
                 {
-                    similar_products = Utils.parseProductsFromResponse(requireActivity(), response.body());
+                    similarProducts = Utils.parseProductsFromResponse(requireActivity(), response.body());
                     productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
-                            requireActivity().getApplicationContext(),getActivity(), similar_products);
+                            requireActivity().getApplicationContext(),getActivity(), similarProducts);
                     recyclerView.setAdapter(productListRecyclerViewAdapter);
                 }
                 else
@@ -163,7 +163,7 @@ public class SimilarProductsFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void performSimilarProductsSorting(String factor)
     {
-        if (similar_products != null)
+        if (similarProducts != null)
         {
             Executors.newSingleThreadExecutor().execute(() -> {
                 Comparator<Object> comparator = (o1, o2) ->
@@ -172,7 +172,7 @@ public class SimilarProductsFragment extends Fragment {
                 if (this.sort_desc_switch.isChecked())
                     comparator = comparator.reversed();
 
-                similar_products.sort(comparator);
+                similarProducts.sort(comparator);
 
                 new Handler(Looper.getMainLooper()).post(() -> {
                     productListRecyclerViewAdapter.setFactorOfComparison(factor);
@@ -180,5 +180,10 @@ public class SimilarProductsFragment extends Fragment {
                 });
             });
         }
+    }
+
+    public ArrayList<Object> getSimilarProducts()
+    {
+        return this.similarProducts;
     }
 }

@@ -191,6 +191,7 @@
     <string name="bot_setup_io_exception_error">Sorry, failed to connect to the chat bot due to an IO Exception.</string>
     <string name="bot_reply_error">Sorry, failed to receive the bot message due to an internal error.</string>
     <string name="collect_contributed_product_data_error">Sorry, Failed to process the information due to an internal error, please try again later.</string>
+    <string name="product_image_empty_error">Sorry, no image is supported for this product at the moment.</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">Point your camera at a barcode to scan</string>

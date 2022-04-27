@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -356,6 +357,13 @@ public class Utils {
                         case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
                             product.setStarred(jsonReader.nextBoolean());
                             break;
+                        case ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER:
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setProductImgUrl(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
+                            break;
                         case ServerRetrofitAPI.PRODUCT_SCAN_DATE_SERVER:
                             Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
 
@@ -432,7 +440,12 @@ public class Utils {
                         product.setStarred(jsonReader.nextBoolean());
                         break;
                     case ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER:
-                        product.setProductImgUrl(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setProductImgUrl(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
+                        break;
                     default:
                         jsonReader.skipValue();
                         break;

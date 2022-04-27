@@ -179,6 +179,7 @@
     <string name="bot_setup_io_exception_error">抱歉，由于IO异常未能成功连接上服务端。</string>
     <string name="bot_reply_error">抱歉，由于内部错误导致了未能成功接收另一端的消息。</string>
     <string name="collect_contributed_product_data_error">抱歉，由于内部错误导致了输入的信息处理未成功，请稍后再试。</string>
+    <string name="product_image_empty_error">抱歉，暂时还没有关于此产品的图片。</string>
 
     <!-- ACCESSIBILITY RELATED -->
     <string name="barcode_scanner_hint">将相机对准条形码进行扫描</string>
