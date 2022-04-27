@@ -34,7 +34,7 @@ public class AccountFragment extends Fragment {
     private MaterialButton account_info_btn;
     private MaterialButton starred_products_btn;
     private MaterialButton scan_history_btn;
-    private MaterialButton chat_with_bot_btn;
+    private MaterialButton ask_bot_btn;
     private MaterialButton about_us_btn;
 
     @Override
@@ -65,7 +65,7 @@ public class AccountFragment extends Fragment {
         this.account_info_btn = view.findViewById(R.id.account_info_btn);
         this.starred_products_btn = view.findViewById(R.id.starred_products_btn);
         this.scan_history_btn = view.findViewById(R.id.scan_history_btn);
-        this.chat_with_bot_btn = view.findViewById(R.id.chat_with_bot_btn);
+        this.ask_bot_btn = view.findViewById(R.id.ask_bot_btn);
         this.about_us_btn = view.findViewById(R.id.about_us_btn);
     }
 
@@ -116,7 +116,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        this.chat_with_bot_btn.setOnClickListener(new View.OnClickListener() {
+        this.ask_bot_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ChatBotActivity.class));

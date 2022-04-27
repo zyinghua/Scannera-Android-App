@@ -38,7 +38,7 @@
     <string name="account_information">账号信息</string>
     <string name="starred_products">产品收藏</string>
     <string name="scan_history">扫描记录</string>
-    <string name="chat_with_bot">咨询Scannera机器人</string>
+    <string name="ask_bot">咨询Scannera机器人</string>
     <string name="about_us">关于我们</string>
     <string name="scan_a_barcode">扫描二维码</string>
     <string name="home_greeting">您好，&#160;%1$s</string>

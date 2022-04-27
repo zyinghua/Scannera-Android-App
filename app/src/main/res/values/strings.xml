@@ -41,7 +41,7 @@
     <string name="account_information">Account Information</string>
     <string name="starred_products">Starred Products</string>
     <string name="scan_history">Scan History</string>
-    <string name="chat_with_bot">Chat With Scannera Bot</string>
+    <string name="ask_bot">Ask Scannera Bot</string>
     <string name="about_us">About Us</string>
     <string name="scan_a_barcode">Scan a barcode</string>
     <string name="home_greeting">Hi,&#160;%1$s</string>
