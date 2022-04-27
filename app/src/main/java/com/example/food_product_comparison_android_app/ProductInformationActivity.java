@@ -137,13 +137,7 @@ public class ProductInformationActivity extends AppCompatActivity {
             onBackPressed();
         }
 
-        // Nutrition Recycler View Set Up
-        this.setUpNutritionRecyclerView();
-
-        //Tab Layout & ViewPager Set Up
-        this.setUpTabLayoutViewPager();
-
-        //this.setUpNutritionAverages();
+        handleOnGetSimilarProducts(System.currentTimeMillis());
     }
 
     private void setUpToolbar()
@@ -159,18 +153,16 @@ public class ProductInformationActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         this.nutrition_recycler_view.setLayoutManager(layoutManager);
 
-        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(new ArrayList<>(product.getNutritionAttributes().values()));
+        NutritionListRecyclerViewAdapter nuAdapter = new NutritionListRecyclerViewAdapter(new ArrayList<>(product.getNutritionAttributes().values()), nutritionAverages);
         this.nutrition_recycler_view.setAdapter(nuAdapter);
     }
 
     private void setUpTabLayoutViewPager()
     {
         this.tabLayout.setupWithViewPager(this.viewPager);
-        SimilarProductsFragment similarProductsFragment = new SimilarProductsFragment();
-        this.similarProducts = similarProductsFragment.getSimilarProducts();
 
         GeneralVPAdapter vpAdapter = new GeneralVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpAdapter.addFragment(similarProductsFragment, getString(R.string.similar_products));
+        vpAdapter.addFragment(new SimilarProductsFragment(), getString(R.string.similar_products));
         vpAdapter.addFragment(new ProductReviewsFragment(), getString(R.string.product_reviews));
 
         this.viewPager.setAdapter(vpAdapter);
@@ -220,27 +212,82 @@ public class ProductInformationActivity extends AppCompatActivity {
         return product;
     }
 
-//    public void setUpNutritionAverages() {
-//        nutritionAverages = new HashMap<>();
-//
-//        if (product != null)
-//        {
-//            for (String key : product.getNutritionAttributes().keySet())
-//            {
-//                // Initialise nutritionAverages hashmap
-//                nutritionAverages.put(key, 0.0f);
-//            }
-//
-//            for (int i = 0; i < similarProducts.size(); i++)
-//            {
-//                Product similarProduct = (Product) similarProducts.get(i);
-//
-//                // Incrementally update the value of each nutrition attribute,
-//                // eventually will end up with values in total among the similar products.
-//                nutritionAverages.replaceAll((k, v) -> nutritionAverages.get(k) + similarProduct.getSpecificProductValue(k));
-//            }
-//
-//            nutritionAverages.replaceAll((k, v) -> nutritionAverages.get(k) / similarProducts.size());
-//        }
-//    }
+    public ArrayList<Object> getSimilarProducts() {
+        return similarProducts;
+    }
+
+    private void handleOnGetSimilarProducts(Long init_time)
+    {
+        LoadingDialog loading_dialog = new LoadingDialog(this);
+        try {
+            loading_dialog.show();
+        } catch (Exception e) {
+            loading_dialog.dismiss();
+        }
+
+        Call<ResponseBody> call = Utils.getServerAPI(this).getSimilarProducts(
+                product.getProductId(), Utils.getLoggedUser(this).getId());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                loading_dialog.dismiss();
+
+                if(response.isSuccessful() && response.body() != null)
+                {
+                    // All the following items are dependent on the similar products.
+                    similarProducts = Utils.parseProductsFromResponse(ProductInformationActivity.this, response.body());
+                    setUpNutritionAverages();
+
+                    // Nutrition Recycler View Set Up
+                    setUpNutritionRecyclerView();
+
+                    //Tab Layout & ViewPager Set Up
+                    setUpTabLayoutViewPager();
+                }
+                else
+                {
+                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
+                    {
+                        handleOnGetSimilarProducts(init_time);
+                        Log.e("DEBUG", response.code() + "");
+                    }
+                    else
+                    {
+                        Toast.makeText(ProductInformationActivity.this, getString(R.string.similar_product_error), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                loading_dialog.dismiss();
+                Toast.makeText(ProductInformationActivity.this, getString(R.string.similar_product_error), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void setUpNutritionAverages() {
+        nutritionAverages = new HashMap<>();
+
+        if (product != null)
+        {
+            for (String key : product.getNutritionAttributes().keySet())
+            {
+                // Initialise nutritionAverages hashmap
+                nutritionAverages.put(key, 0.0f);
+            }
+
+            for (int i = 0; i < similarProducts.size(); i++)
+            {
+                Product similarProduct = (Product) similarProducts.get(i);
+
+                // Incrementally update the value of each nutrition attribute,
+                // eventually will end up with values in total among the similar products.
+                nutritionAverages.replaceAll((k, v) -> nutritionAverages.get(k) + similarProduct.getSpecificProductValue(k));
+            }
+
+            if(similarProducts.size() != 0)
+                nutritionAverages.replaceAll((k, v) -> nutritionAverages.get(k) / similarProducts.size());
+        }
+    }
 }

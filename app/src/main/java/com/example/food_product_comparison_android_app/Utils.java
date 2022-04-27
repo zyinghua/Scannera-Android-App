@@ -80,6 +80,7 @@ public class Utils {
     public static final int FEEDBACK_CONTRIBUTION_POINTS = 5;
     public static final int PRODUCT_CONTRIBUTION_POINTS = 10;
     public static final int PRODUCT_REVIEW_CONTRIBUTION_POINTS = 5;
+    public static final float NUTRITION_DEGREE_DIFF_TOLERANCE = 0.3f;
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";

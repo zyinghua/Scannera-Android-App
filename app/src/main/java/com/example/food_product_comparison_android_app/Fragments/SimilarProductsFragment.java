@@ -32,6 +32,7 @@ import com.example.food_product_comparison_android_app.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 
 import okhttp3.ResponseBody;
@@ -99,12 +100,15 @@ public class SimilarProductsFragment extends Fragment {
         this.recyclerView.setLayoutManager(layoutManager);
 
         this.setUpSortSelectionAdapter();
-        this.handleOnGetSimilarProducts(System.currentTimeMillis());
+
+        this.similarProducts = ((ProductInformationActivity) requireActivity()).getSimilarProducts();
+        productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
+                requireActivity().getApplicationContext(),getActivity(), similarProducts);
+        recyclerView.setAdapter(productListRecyclerViewAdapter);
     }
 
     private void setUpSortSelectionAdapter()
     {
-
         ArrayList<String> productFactorsAl = new ArrayList<>(product.getNutritionAttributes().keySet());
         productFactorsAl.add(0, Utils.PRODUCT_PRICE);
 
@@ -113,51 +117,6 @@ public class SimilarProductsFragment extends Fragment {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, productFactors);
         this.sort_by_input.setAdapter(arrayAdapter);
-    }
-
-    private void handleOnGetSimilarProducts(Long init_time)
-    {
-        LoadingDialog loading_dialog = new LoadingDialog(requireActivity());
-        try {
-            loading_dialog.show();
-        } catch (Exception e) {
-            loading_dialog.dismiss();
-        }
-
-        Call<ResponseBody> call = Utils.getServerAPI(requireActivity()).getSimilarProducts(
-                product.getProductId(), Utils.getLoggedUser(requireActivity()).getId());
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                loading_dialog.dismiss();
-
-                if(response.isSuccessful() && response.body() != null)
-                {
-                    similarProducts = Utils.parseProductsFromResponse(requireActivity(), response.body());
-                    productListRecyclerViewAdapter = new ProductListRecyclerViewAdapter(
-                            requireActivity().getApplicationContext(),getActivity(), similarProducts);
-                    recyclerView.setAdapter(productListRecyclerViewAdapter);
-                }
-                else
-                {
-                    if ((System.currentTimeMillis() - init_time) / 1000 < Utils.MAX_SERVER_RESPOND_SEC)
-                    {
-                        handleOnGetSimilarProducts(init_time);
-                        Log.e("DEBUG", response.code() + "");
-                    }
-                    else
-                    {
-                        Toast.makeText(requireActivity(), getString(R.string.similar_product_error), Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                loading_dialog.dismiss();
-                Toast.makeText(requireActivity(), getString(R.string.similar_product_error), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -180,10 +139,5 @@ public class SimilarProductsFragment extends Fragment {
                 });
             });
         }
-    }
-
-    public ArrayList<Object> getSimilarProducts()
-    {
-        return this.similarProducts;
     }
 }
