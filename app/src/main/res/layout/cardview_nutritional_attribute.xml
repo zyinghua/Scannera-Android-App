@@ -14,7 +14,7 @@
         android:layout_margin="10dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="true"
-        android:clickable="false"
+        android:clickable="true"
         card_view:cardCornerRadius="5dp"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
