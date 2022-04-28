@@ -118,6 +118,9 @@
     <string name="similar_products">Similar Products</string>
     <string name="sort_products">Sort The Similar Products:</string>
     <string name="descending">High to Low</string>
+    <string name="nutrition_degree_low">Low</string>
+    <string name="nutrition_degree_normal">Normal</string>
+    <string name="nutrition_degree_high">High</string>
     <string name="product_reviews">Product Reviews</string>
     <string name="write_a_review">Write A Review</string>
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>

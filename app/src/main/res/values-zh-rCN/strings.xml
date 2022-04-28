@@ -110,6 +110,9 @@
     <string name="similar_products">相似产品</string>
     <string name="sort_products">排序下列产品：</string>
     <string name="descending">从高到低</string>
+    <string name="nutrition_degree_low">低</string>
+    <string name="nutrition_degree_normal">正常</string>
+    <string name="nutrition_degree_high">高</string>
     <string name="product_reviews">产品评价</string>
     <string name="write_a_review">撰写评价</string>
     <string name="total_num_of_reviews">共&#160;%1$d&#160;条评价</string>
