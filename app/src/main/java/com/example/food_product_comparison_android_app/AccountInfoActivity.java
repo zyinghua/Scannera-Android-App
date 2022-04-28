@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
+import com.example.food_product_comparison_android_app.Dialogs.EnlargedImageDialog;
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
@@ -27,6 +28,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
+
 import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,12 +38,13 @@ import retrofit2.Response;
 
 public class AccountInfoActivity extends AppCompatActivity {
     private User user;
-    private MaterialButton edit_username_btn;
+    private CircularImageView user_profile_img;
     private TextView username_tv;
     private TextView password_tv;
     private TextView email_address_tv;
     private TextView firstname_tv;
     private TextView lastname_tv;
+    private MaterialButton edit_username_btn;
     private MaterialButton edit_password_btn;
     private MaterialButton edit_firstname_btn;
     private MaterialButton edit_lastname_btn;
@@ -55,12 +60,13 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         this.setUpToolbar();
         this.findViews();
-        this.setUpListeners();
         this.populateWithUserData();
+        this.setUpListeners();
     }
 
     private void findViews()
     {
+        this.user_profile_img = findViewById(R.id.user_profile_img);
         this.username_tv = findViewById(R.id.username_tv);
         this.password_tv = findViewById(R.id.password_tv);
         this.email_address_tv = findViewById(R.id.email_address_tv);
@@ -75,6 +81,21 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
+        this.user_profile_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null") && !user.getProfile_img_url().isEmpty())
+                {
+                    final EnlargedImageDialog image_dialog = new EnlargedImageDialog(AccountInfoActivity.this, user.getProfile_img_url());
+                    image_dialog.show();
+                }
+                else
+                {
+                    Toast.makeText(AccountInfoActivity.this, getString(R.string.user_image_empty_error), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         this.edit_username_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +135,9 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private void populateWithUserData()
     {
+        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null") && !user.getProfile_img_url().isEmpty())
+            Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
+
         this.username_tv.setText(this.user.getUsername());
         this.password_tv.setText(this.user.getPassword() == null ? "" : new String(new char[this.user.getPassword().length()]).replace("\0", "*"));
         this.email_address_tv.setText(this.user.getEmail());

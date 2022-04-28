@@ -194,6 +194,7 @@
     <string name="bot_setup_io_exception_error">Sorry, failed to connect to the chat bot due to an IO Exception.</string>
     <string name="bot_reply_error">Sorry, failed to receive the bot message due to an internal error.</string>
     <string name="collect_contributed_product_data_error">Sorry, Failed to process the information due to an internal error, please try again later.</string>
+    <string name="user_image_empty_error">No user profile image has been added, please add an image first via the camera button at the right bottom corner.</string>
     <string name="product_image_empty_error">Sorry, no image is supported for this product at the moment.</string>
 
     <!-- ACCESSIBILITY RELATED -->
@@ -214,6 +215,7 @@
     <string name="product_look_content_description">A picture of the product look taken by the user.</string>
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
     <string name="message_send_btn_content_description">A Send message button.</string>
+    <string name="edit_user_profile_img_fab_content_description">A button for editing user profile image.</string>
 
     <!-- ONLINE SERVER RELATED -->
     <string name="server_base_url" translatable="false">https://fit3162-app-group7.herokuapp.com/</string>

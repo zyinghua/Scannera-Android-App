@@ -44,16 +44,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
+        <FrameLayout
+            android:id="@+id/user_profile_img_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_title">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/user_profile_img"
+                android:layout_width="@dimen/acc_info_user_profile_img_size"
+                android:layout_height="@dimen/acc_info_user_profile_img_size"
+                android:src="@drawable/ic_person"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="?attr/colorPrimaryDark"
+                app:civ_shadow_radius="0dp"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/user_profile_img_edit_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                android:src="@drawable/ic_camera"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="@string/edit_user_profile_img_fab_content_description" />
+        </FrameLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/username_views"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/account_info_elem_margin"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/account_info_elem_margin"
+            android:layout_margin="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_title">
+            app:layout_constraintTop_toBottomOf="@id/user_profile_img_layout">
 
             <TextView
                 android:id="@+id/ai_username_label"

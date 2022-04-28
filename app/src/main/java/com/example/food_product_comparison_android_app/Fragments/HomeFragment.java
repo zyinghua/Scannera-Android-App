@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
     private void findViews(View view)
     {
         this.welcome_username_tv = view.findViewById(R.id.welcome_username_tv);
-        this.home_user_img = view.findViewById(R.id.home_user_img);
+        this.home_user_img = view.findViewById(R.id.home_user_profile_img);
         this.homeRecyclerView = view.findViewById(R.id.home_recyclerView);
     }
 
@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void loadUserProfile() {
-        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null"))
+        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null") && !user.getProfile_img_url().isEmpty())
             Picasso.get().load(user.getProfile_img_url()).into(home_user_img);
 
         welcome_username_tv.setText(String.format(getString(R.string.home_greeting), user.getUsername()));

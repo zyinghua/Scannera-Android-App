@@ -132,7 +132,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadUserProfile() {
-        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null"))
+        if (user.getProfile_img_url() != null && !user.getProfile_img_url().equals("null") && !user.getProfile_img_url().isEmpty())
             Picasso.get().load(user.getProfile_img_url()).into(user_profile_img);
 
         username_tv.setText(user.getUsername());
