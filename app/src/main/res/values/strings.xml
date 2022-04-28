@@ -105,6 +105,9 @@
     <string name="lastname_default">/{lastname}/</string>
     <string name="email_address_default">/{email address}/</string>
     <string name="password_default">/{password}/</string>
+    <string name="select_profile_image">Select profile image</string>
+    <string name="select_from_album">Select from photo album</string>
+    <string name="take_a_photo">Take a photo</string>
     <string name="delete_account">Delete My Account</string>
     <string name="dialog_delete_account_title">Are you sure you want to delete your account?</string>
     <string name="dialog_delete_account_msg">

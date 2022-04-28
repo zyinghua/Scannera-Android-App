@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -44,6 +47,7 @@ public class AccountInfoActivity extends AppCompatActivity {
     private TextView email_address_tv;
     private TextView firstname_tv;
     private TextView lastname_tv;
+    private FloatingActionButton user_profile_img_edit_fab;
     private MaterialButton edit_username_btn;
     private MaterialButton edit_password_btn;
     private MaterialButton edit_firstname_btn;
@@ -72,6 +76,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         this.email_address_tv = findViewById(R.id.email_address_tv);
         this.firstname_tv = findViewById(R.id.firstname_tv);
         this.lastname_tv = findViewById(R.id.lastname_tv);
+        this.user_profile_img_edit_fab = findViewById(R.id.user_profile_img_edit_fab);
         this.edit_username_btn = findViewById(R.id.edit_username_btn);
         this.edit_password_btn = findViewById(R.id.edit_password_btn);
         this.edit_firstname_btn = findViewById(R.id.edit_firstname_btn);
@@ -93,6 +98,13 @@ public class AccountInfoActivity extends AppCompatActivity {
                 {
                     Toast.makeText(AccountInfoActivity.this, getString(R.string.user_image_empty_error), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        this.user_profile_img_edit_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSelectProfileImgBottomSheetDialog();
             }
         });
 
@@ -247,6 +259,37 @@ public class AccountInfoActivity extends AppCompatActivity {
         {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showSelectProfileImgBottomSheetDialog()
+    {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.dialog_bottom_sheet_profile_img_select);
+
+        LinearLayout select_from_album = bottomSheetDialog.findViewById(R.id.select_from_photo_album_layout);
+        LinearLayout take_a_photo = bottomSheetDialog.findViewById(R.id.take_a_photo_layout);
+
+        if (select_from_album != null) {
+            select_from_album.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+        }
+
+        if (take_a_photo != null) {
+            take_a_photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+        }
+
+        bottomSheetDialog.show();
     }
 
     private void updateUserInfo(Long init_time, String new_data, int field, EditDialog dialog)

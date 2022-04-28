@@ -12,6 +12,8 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/border_line_bottom_grey.xml" value="0.2365" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/border_line_top.xml" value="0.2365" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/border_outlined.xml" value="0.1835" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/bottom_sheet_dialog_rounded_corners_bg.xml" value="0.261" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/bottom_sheet_dialog_top_slide_bar.xml" value="0.261" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/button_round_style.xml" value="0.199" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_app_guide.xml" value="0.327" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_camera.xml" value="0.409" />
@@ -29,6 +31,7 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_person.xml" value="0.193" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_person_outline.xml" value="0.193" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_phone_android.xml" value="0.2875" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_photos.xml" value="0.4195" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_scannera_text.xml" value="0.512962962962963" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_send.xml" value="0.327" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/drawable/ic_star.xml" value="0.327" />
@@ -77,6 +80,8 @@
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_nutritional_attribute.xml" value="0.5536458333333333" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_product.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/cardview_product_review.xml" value="0.5" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_bottom_sheet_profile_img_choose.xml" value="0.5" />
+        <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_bottom_sheet_profile_img_select.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_edit.xml" value="0.5" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_enlarged_image.xml" value="0.2692502532928065" />
         <entry key="..\:/Food_Product_Comparison_Android_App/app/src/main/res/layout/dialog_loading.xml" value="0.5536458333333333" />
