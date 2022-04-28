@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
@@ -36,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText password_input;
     private TextInputEditText confirm_password_input;
     private MaterialButton sign_up_btn;
+    private TextView login_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,13 @@ public class SignUpActivity extends AppCompatActivity {
                 clearFieldErrors();
 
                 checkUserInput();
+            }
+        });
+
+        this.login_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -71,6 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.password_input = findViewById(R.id.password_sign_up_et);
         this.confirm_password_input = findViewById(R.id.confirm_password_sign_up_et);
         this.sign_up_btn = findViewById(R.id.sign_up_btn);
+        this.login_tv = findViewById(R.id.login_tv);
     }
 
     private void setAnimationsOnStart()
