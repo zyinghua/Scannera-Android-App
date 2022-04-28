@@ -3,7 +3,12 @@ package com.example.food_product_comparison_android_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,10 +16,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
 import com.example.food_product_comparison_android_app.Dialogs.EnlargedImageDialog;
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
+import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.Fragments.ConfirmProfileImgFragment;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.facebook.AccessToken;
@@ -34,6 +40,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +60,8 @@ public class AccountInfoActivity extends AppCompatActivity {
     private MaterialButton edit_firstname_btn;
     private MaterialButton edit_lastname_btn;
     private MaterialButton delete_acc_btn;
+    private File selected_profile_image_file;
+    public static final String SELECTED_PROFILE_IMAGE_FILE = "selectedImage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -426,6 +435,32 @@ public class AccountInfoActivity extends AppCompatActivity {
                 Toast.makeText(AccountInfoActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void checkPermissions()
+    {
+        int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
+
+        if (permission != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case Utils.CAMERA_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
+                    cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

@@ -53,7 +53,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 
 public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout mainConstraintLayout;
@@ -62,7 +61,7 @@ public class ProductFeedActivity extends AppCompatActivity {
     private ConstraintLayout name_view_group;
     private ConstraintLayout price_view_group;
     private ConstraintLayout category_view_group;
-    private ConstraintLayout nutri_info_title_views;
+    private ConstraintLayout nutrition_info_title_views;
     private ConstraintLayout product_look_title_views;
     private ImageView nutrition_info_pic;
     private ImageView product_look_pic;
@@ -96,7 +95,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.name_view_group = findViewById(R.id.product_name_views);
         this.price_view_group = findViewById(R.id.product_price_views);
         this.category_view_group = findViewById(R.id.product_category_views);
-        this.nutri_info_title_views = findViewById(R.id.product_nutritional_info_title_views);
+        this.nutrition_info_title_views = findViewById(R.id.product_nutritional_info_title_views);
         this.product_look_title_views = findViewById(R.id.product_look_title_views);
         this.nutrition_info_pic = findViewById(R.id.nutritional_info_pic);
         this.product_look_pic = findViewById(R.id.product_look_pic);
@@ -138,7 +137,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             }
         });
 
-        this.nutri_info_title_views.findViewById(R.id.nutri_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
+        this.nutrition_info_title_views.findViewById(R.id.nutri_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -244,7 +243,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                             product_category = acTv.getText().toString();
                             ((TextView) category_view_group.findViewById(R.id.product_category_input)).setText(product_category);
 
-                            moveDynamicInputPrompt(mainConstraintLayout, nutri_info_title_views);
+                            moveDynamicInputPrompt(mainConstraintLayout, nutrition_info_title_views);
                             input_title.setText(getString(R.string.product_nutrition_info));
                             // Remove the input edittext as we don't need it anymore
                             dynamic_input_prompt.removeView(dynamic_input_prompt.findViewById(R.id.category_dropdown_menu));
@@ -489,7 +488,7 @@ public class ProductFeedActivity extends AppCompatActivity {
 
     private void onNutritionPicReceived()
     {
-        this.nutri_info_title_views.setVisibility(View.VISIBLE);
+        this.nutrition_info_title_views.setVisibility(View.VISIBLE);
 
         moveDynamicInputPrompt(mainConstraintLayout, nutrition_info_pic);
         ((TextView) dynamic_input_prompt.findViewById(R.id.input_title)).setText(getString(R.string.product_look));

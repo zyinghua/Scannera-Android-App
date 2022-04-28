@@ -74,6 +74,7 @@ public class Utils {
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String PRODUCT_BARCODE_TRANSFER_TAG = "PRODUCT_BARCODE_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
+    public static final String IMAGE_FILE_TRANSFER_TAG = "IMAGE_FILE_TRANSFER_TAG";
     public static final DateFormat SCAN_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
     public static final DateFormat PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     public static final String PRODUCT_PRICE = "price";
