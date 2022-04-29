@@ -19,6 +19,7 @@ import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.NutritionAttribute;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
+import com.google.api.client.util.IOUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,7 +60,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Utils {
     // This class is for general, common data that is being shared among multiple units
     public static final int CAMERA_REQUEST_CODE = 814736521;
-    public static final int ALBUM_ACCESS_REQUEST_CODE = 517869743;
+    public static final int EXTERNAL_STORAGE_REQUEST_CODE = 517869743;
     public static final int NUTRITION_TABLE_PIC_REQUEST = 572194326;
     public static final int PRODUCT_LOOK_PIC_REQUEST = 307188697;
     public static final int USER_PROFILE_PIC_REQUEST = 307754666;
@@ -548,6 +551,17 @@ public class Utils {
                 Toast.makeText(activityContext, activityContext.getString(R.string.general_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static File inputStreamToFile(InputStream in, String file_name) throws IOException {
+        final File tempFile = File.createTempFile(file_name, ".jpg");
+        tempFile.deleteOnExit();
+
+        try (FileOutputStream out = new FileOutputStream(tempFile)) {
+            IOUtils.copy(in, out);
+        }
+
+        return tempFile;
     }
 
     public static void navigateToProductInfoActivity(Context context, Product product)

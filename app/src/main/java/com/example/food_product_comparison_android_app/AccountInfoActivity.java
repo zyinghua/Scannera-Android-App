@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -23,7 +24,7 @@ import android.widget.Toast;
 import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
 import com.example.food_product_comparison_android_app.Dialogs.EnlargedImageDialog;
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
-import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.Fragments.PermissionRequiredDialogFragment;
 import com.example.food_product_comparison_android_app.Fragments.DeleteAccountConfirmDialogFragment;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.facebook.AccessToken;
@@ -51,8 +52,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AccountInfoActivity extends AppCompatActivity {
-    private static final int SELECT_FROM_PHOTO_ALBUM = 0;
-    private static final int TAKE_A_PHOTO = 1;
     private User user;
     private CircularImageView user_profile_img;
     private TextView username_tv;
@@ -289,7 +288,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-                    checkPermissionsBeforeExecution(SELECT_FROM_PHOTO_ALBUM);
+                    checkPermissionsBeforeExecution(Utils.EXTERNAL_STORAGE_REQUEST_CODE);
                 }
             });
         }
@@ -299,7 +298,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-                    checkPermissionsBeforeExecution(TAKE_A_PHOTO);
+                    checkPermissionsBeforeExecution(Utils.CAMERA_REQUEST_CODE);
                 }
             });
         }
@@ -443,20 +442,30 @@ public class AccountInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void checkPermissionsBeforeExecution(int tag) {
-        int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
-
-        if (permission != PackageManager.PERMISSION_GRANTED)
+    private void checkPermissionsBeforeExecution(int requestCode) {
+        if (requestCode == Utils.EXTERNAL_STORAGE_REQUEST_CODE)
         {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
+            int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+            if (permission != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        Utils.EXTERNAL_STORAGE_REQUEST_CODE);
+            }
+            else
+            {
+                selectPhotoFromAlbum();
+            }
         }
         else
         {
-            if (tag == SELECT_FROM_PHOTO_ALBUM)
-            {
+            int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
 
+            if (permission != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
             }
-            else if(tag == TAKE_A_PHOTO)
+            else
             {
                 captureProfilePhoto();
             }
@@ -468,19 +477,31 @@ public class AccountInfoActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_STAY);
-            cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+            PermissionRequiredDialogFragment permissionDialogFragment = new PermissionRequiredDialogFragment(
+                    getApplicationContext().getPackageName(),
+                    requestCode == Utils.EXTERNAL_STORAGE_REQUEST_CODE?
+                            getString(R.string.external_storage) : getString(R.string.camera),
+                    Utils.ON_PERMISSION_DENIED_STAY);
+            permissionDialogFragment.show(getSupportFragmentManager(),
+                    requestCode == Utils.EXTERNAL_STORAGE_REQUEST_CODE?
+                            "External Storage" : "Camera Permission");
         }
         else
         {
-            if(requestCode == Utils.CAMERA_REQUEST_CODE) {
+            if(requestCode == Utils.EXTERNAL_STORAGE_REQUEST_CODE) {
+                selectPhotoFromAlbum();
+            }
+            else if(requestCode == Utils.CAMERA_REQUEST_CODE) {
                 captureProfilePhoto();
             }
-            else if(requestCode == Utils.ALBUM_ACCESS_REQUEST_CODE) {
-
-            }
         }
-}
+    }
+
+    private void selectPhotoFromAlbum() {
+        Intent selectPhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        selectPhotoIntent.setType("image/*");
+        startActivityForResult(selectPhotoIntent, Utils.USER_PROFILE_PIC_REQUEST);
+    }
 
     private void captureProfilePhoto() {
         // SHOULD BE CALLED WHEN CAMERA PERMISSION IS GRANTED
@@ -516,8 +537,28 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         if (requestCode == Utils.USER_PROFILE_PIC_REQUEST && resultCode == RESULT_OK)
         {
-            // Get the image from the file path we set up previously rather than the intent itself as a bitmap
-            navigateToConfirmProfileImageActivity();
+            if (selected_profile_image_file == null)
+            {
+                if(data != null)
+                {
+                    try {
+                        selected_profile_image_file = Utils.inputStreamToFile(getContentResolver().openInputStream(data.getData()), SELECTED_PROFILE_IMAGE_FILENAME);
+                    } catch (IOException e) {
+                        Toast.makeText(AccountInfoActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+
+                    navigateToConfirmProfileImageActivity();
+                }
+                else
+                {
+                    Toast.makeText(AccountInfoActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+                }
+            }
+            else
+            {
+                navigateToConfirmProfileImageActivity();
+            }
         }
     }
 
@@ -525,6 +566,7 @@ public class AccountInfoActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, ConfirmProfileImageActivity.class);
         intent.putExtra(Utils.IMAGE_FILE_TRANSFER_TAG, new Gson().toJson(selected_profile_image_file));
+        selected_profile_image_file = null; // For next time use
         startActivity(intent);
     }
 

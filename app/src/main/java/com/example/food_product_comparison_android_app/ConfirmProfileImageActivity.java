@@ -17,6 +17,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import java.io.File;
 import java.util.Objects;
 
+import retrofit2.Call;
+
 public class ConfirmProfileImageActivity extends AppCompatActivity {
     private CircularImageView user_profile_img;
     private MaterialButton confirm_btn;
@@ -66,6 +68,9 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
     private void requestUserProfileImageUpdate(Long init_time)
     {
         onBackPressed();
+
+
+        //Call<String> call = Utils.getServerAPI(this).updateUserProfileImage();
     }
 
     private void setUpToolbar()

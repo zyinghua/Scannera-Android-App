@@ -35,7 +35,7 @@ import android.widget.Toast;
 
 import com.example.food_product_comparison_android_app.Dialogs.EditDialog;
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
-import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.Fragments.PermissionRequiredDialogFragment;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.google.android.material.button.MaterialButton;
@@ -516,7 +516,8 @@ public class ProductFeedActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_STAY);
+            DialogFragment cameraDialogFragment = new PermissionRequiredDialogFragment(
+                    getApplicationContext().getPackageName(), getString(R.string.camera), Utils.ON_PERMISSION_DENIED_STAY);
             cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
         }
         else

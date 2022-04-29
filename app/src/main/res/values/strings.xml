@@ -49,8 +49,8 @@
     <string name="home_greeting">Hi,&#160;%1$s</string>
     <string name="home_recommendation_title">Products you may like:</string>
     <string name="home_no_recommendation_title">Sorry, no recommendation is available at the moment, please star or scan product(s) to enable this feature.</string>
-    <string name="dialog_camera_permission_title">Camera Access Not Enabled</string>
-    <string name="dialog_camera_permission_msg">Camera permission is required to proceed this activity, enable access via "Settings" -> "App info" -> "Scannera".</string>
+    <string name="dialog_permission_required_title">%1$s Access Not Enabled</string>
+    <string name="dialog_permission_required_msg">%1$s permission is required to proceed this activity, enable access via "Settings" -> "App info" -> "Scannera".</string>
     <string name="dialog_btn_reject">Reject</string>
     <string name="dialog_btn_enable">Enable</string>
     <string name="search">Search</string>
@@ -105,7 +105,7 @@
     <string name="lastname_default">/{lastname}/</string>
     <string name="email_address_default">/{email address}/</string>
     <string name="password_default">/{password}/</string>
-    <string name="select_profile_image">Select profile image</string>
+    <string name="select_profile_image">Select a profile image</string>
     <string name="select_from_album">Select from photo album</string>
     <string name="take_a_photo">Take a photo</string>
     <string name="preview_profile_image">Preview Profile Image</string>
@@ -133,6 +133,8 @@
     <string name="total_num_of_reviews">%1$d&#160;reviews in total</string>
     <string name="review_successful_submit">Thank you very much for your review! You have been awarded %1$d contribution points!</string>
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
+    <string name="camera">Camera</string>
+    <string name="external_storage">Files and media</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

@@ -25,7 +25,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
-import com.example.food_product_comparison_android_app.Fragments.CameraPermissionRequiredDialogFragment;
+import com.example.food_product_comparison_android_app.Fragments.PermissionRequiredDialogFragment;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.Product;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.google.zxing.Result;
@@ -111,7 +111,8 @@ public class ScanActivity extends AppCompatActivity {
 
         if (requestCode == Utils.CAMERA_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_BACK);
+                DialogFragment cameraDialogFragment = new PermissionRequiredDialogFragment(
+                        getApplicationContext().getPackageName(), getString(R.string.camera), Utils.ON_PERMISSION_DENIED_BACK);
                 cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission Dialog");
             }
         }

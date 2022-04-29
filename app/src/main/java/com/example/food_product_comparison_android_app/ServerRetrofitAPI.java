@@ -25,13 +25,14 @@ public interface ServerRetrofitAPI {
     String USER_END_POINT_SERVER = "api/user/";
     String UPDATE_USER_END_POINT = USER_END_POINT_SERVER + "update";
     String ADD_USER_END_POINT = USER_END_POINT_SERVER + "add";
+    String UPDATE_USER_PIMG_SERVER = UPDATE_USER_END_POINT + "";
     String USER_ID_SERVER = "user_id";
-    String USERNAME_SERVER = "username";
-    String FIRSTNAME_SERVER = "firstname";
-    String LASTNAME_SERVER = "lastname";
-    String EMAIL_SERVER = "email";
-    String PASSWORD_SERVER = "password";
-    String PIMG_URL_SERVER = "pimg_url";
+    String USER_USERNAME_SERVER = "username";
+    String USER_FIRSTNAME_SERVER = "firstname";
+    String USER_LASTNAME_SERVER = "lastname";
+    String USER_EMAIL_SERVER = "email";
+    String USER_PASSWORD_SERVER = "password";
+    String USER_PIMG_URL_SERVER = "pimg_url";
     String FEEDBACK_RATING_SERVER = "feedback_rating";
     String FEEDBACK_DESC_SERVER = "feedback_description";
     String PRODUCT_ID_SERVER = "product_id";
@@ -59,7 +60,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_REVIEW_END_POINT = "api/review/";
     String GET_PRODUCT_REVIEWS_SERVER = PRODUCT_REVIEW_END_POINT + "get";
     String ADD_PRODUCT_REVIEW_SERVER = PRODUCT_REVIEW_END_POINT + "new";
-    String GET_SIMILAR_PRODUCTS_SERVER = "api/product/similar/";
+    String GET_SIMILAR_PRODUCTS_SERVER = PRODUCT_END_POINT_SERVER + "similar/";
     String PRODUCT_REVIEW_RATING_SERVER = "review_rating";
     String PRODUCT_REVIEW_DESC_SERVER = "review_description";
     String PRODUCT_REVIEW_DATE_SERVER = "review_date";
@@ -67,19 +68,19 @@ public interface ServerRetrofitAPI {
     @FormUrlEncoded
     @POST(ADD_USER_END_POINT)
     Call<User> postUser(
-            @Field(USERNAME_SERVER) String username,
-            @Field(FIRSTNAME_SERVER) String firstname,
-            @Field(LASTNAME_SERVER) String lastname,
-            @Field(EMAIL_SERVER) String email,
-            @Field(PASSWORD_SERVER) String password,
-            @Field(PIMG_URL_SERVER) String profile_img_url
+            @Field(USER_USERNAME_SERVER) String username,
+            @Field(USER_FIRSTNAME_SERVER) String firstname,
+            @Field(USER_LASTNAME_SERVER) String lastname,
+            @Field(USER_EMAIL_SERVER) String email,
+            @Field(USER_PASSWORD_SERVER) String password,
+            @Field(USER_PIMG_URL_SERVER) String profile_img_url
     );
 
     @FormUrlEncoded
     @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserPasswordById(
             @Field(USER_ID_SERVER) String userId,
-            @Field(PASSWORD_SERVER) String password
+            @Field(USER_PASSWORD_SERVER) String password
     );
 
     @GET("api/user/getBy/{acc_title}")
@@ -92,21 +93,21 @@ public interface ServerRetrofitAPI {
     @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUsernameById(
             @Field(USER_ID_SERVER) String userId,
-            @Field(USERNAME_SERVER) String username
+            @Field(USER_USERNAME_SERVER) String username
     );
 
     @FormUrlEncoded
     @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserFirstnameById(
             @Field(USER_ID_SERVER) String userId,
-            @Field(FIRSTNAME_SERVER) String firstname
+            @Field(USER_FIRSTNAME_SERVER) String firstname
     );
 
     @FormUrlEncoded
     @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserLastnameById(
             @Field(USER_ID_SERVER) String userId,
-            @Field(LASTNAME_SERVER) String lastname
+            @Field(USER_LASTNAME_SERVER) String lastname
     );
 
     @FormUrlEncoded
@@ -190,5 +191,12 @@ public interface ServerRetrofitAPI {
     Call<ResponseBody> getSimilarProducts(
             @Path("product_id") String product_id,
             @Query(USER_ID_SERVER) String user_id
+    );
+
+    @Multipart
+    @PUT(UPDATE_USER_PIMG_SERVER)
+    Call<String> updateUserProfileImage(
+            @Part(USER_ID_SERVER) RequestBody user_id,
+            @Part MultipartBody.Part user_profile_img_file
     );
 }
