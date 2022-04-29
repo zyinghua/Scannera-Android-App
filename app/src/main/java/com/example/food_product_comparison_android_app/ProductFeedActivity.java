@@ -140,24 +140,14 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.nutrition_info_title_views.findViewById(R.id.nutri_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    capturePhoto(NUTRITION_PIC_FILE_NAME);
-                } catch (IOException e) {
-                    Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+                checkPermissionsBeforeExecution(Utils.NUTRITION_TABLE_PIC_REQUEST);
             }
         });
 
         this.product_look_title_views.findViewById(R.id.plook_retake_tvbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    capturePhoto(PRODUCT_PIC_FILE_NAME);
-                } catch (IOException e) {
-                    Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+                checkPermissionsBeforeExecution(Utils.PRODUCT_LOOK_PIC_REQUEST);
             }
         });
 
@@ -261,18 +251,10 @@ public class ProductFeedActivity extends AppCompatActivity {
                         }
                     } else if (nutrition_info_pic.getDrawable() == null) {
                         /*Process Nutritional Information Picture input*/
-                        try {
-                            capturePhoto(NUTRITION_PIC_FILE_NAME);
-                        } catch (IOException e) {
-                            Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
-                        }
+                        checkPermissionsBeforeExecution(Utils.NUTRITION_TABLE_PIC_REQUEST);
                     } else {
                         /*Process Product Look Picture input*/
-                        try {
-                            capturePhoto(PRODUCT_PIC_FILE_NAME);
-                        } catch (IOException e) {
-                            Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
-                        }
+                        checkPermissionsBeforeExecution(Utils.PRODUCT_LOOK_PIC_REQUEST);
                     }
                 }
             }
@@ -459,18 +441,24 @@ public class ProductFeedActivity extends AppCompatActivity {
         acTv.setAdapter(categoryArrayAdapter);
     }
 
-    private void capturePhoto(String file_name) throws IOException {
-        checkPermissions();
+    private void capturePhoto(String file_name){
+        // SHOULD BE CALLED WHEN CAMERA PERMISSION IS GRANTED
 
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if (file_name.equals(NUTRITION_PIC_FILE_NAME))
+        try {
+            if (file_name.equals(NUTRITION_PIC_FILE_NAME))
+            {
+                this.nutrition_pic_file = getPhotoFile(file_name); // Get file
+            }
+            else
+            {
+                this.product_pic_file = getPhotoFile(file_name); // Get file
+            }
+        } catch (IOException e)
         {
-            this.nutrition_pic_file = getPhotoFile(file_name); // Get file
-        }
-        else
-        {
-            this.product_pic_file = getPhotoFile(file_name); // Get file
+            Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
 
         // Get Uri for the file and put with the particular key to allow the camera app we are
@@ -504,13 +492,22 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.confirm_btn.setVisibility(View.VISIBLE);
     }
 
-    private void checkPermissions()
+    private void checkPermissionsBeforeExecution(int requestCode)
     {
         int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
 
         if (permission != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, requestCode);
+        }
+        else
+        {
+            // Permission already granted
+            if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST) {
+                capturePhoto(NUTRITION_PIC_FILE_NAME);
+            } else {
+                capturePhoto(PRODUCT_PIC_FILE_NAME);
+            }
         }
     }
 
@@ -518,10 +515,16 @@ public class ProductFeedActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == Utils.CAMERA_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
-                cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+        if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_STAY);
+            cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+        }
+        else
+        {
+            if (requestCode == Utils.NUTRITION_TABLE_PIC_REQUEST) {
+                capturePhoto(NUTRITION_PIC_FILE_NAME);
+            } else {
+                capturePhoto(PRODUCT_PIC_FILE_NAME);
             }
         }
     }

@@ -18,15 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.food_product_comparison_android_app.R;
+import com.example.food_product_comparison_android_app.Utils;
 
 import java.util.Objects;
 
 public class CameraPermissionRequiredDialogFragment extends DialogFragment {
     private final String app_package_name;
+    private final int onDenyAction;
 
-    public CameraPermissionRequiredDialogFragment(String app_package_name)
+    public CameraPermissionRequiredDialogFragment(String app_package_name, int onDenyAction)
     {
         this.app_package_name = app_package_name;
+        this.onDenyAction = onDenyAction;
     }
 
     @Override
@@ -48,7 +51,10 @@ public class CameraPermissionRequiredDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.dialog_btn_reject, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        requireActivity().onBackPressed();
+                        if(onDenyAction == Utils.ON_PERMISSION_DENIED_BACK)
+                        {
+                            requireActivity().onBackPressed();
+                        }
                     }
                 });
         // Create the AlertDialog object and return it

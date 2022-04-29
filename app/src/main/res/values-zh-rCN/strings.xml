@@ -185,6 +185,7 @@
     <string name="post_product_review_error">抱歉，由于服务器错误未能成功提交您的产品评价，请重试。</string>
     <string name="get_product_review_error">抱歉，由于服务器错误暂时无法加载此产品的评价。</string>
     <string name="capture_photo_io_error">抱歉，由于内部错误导致了无法处理照片，请重试。</string>
+    <string name="select_photo_io_error">抱歉，由于内部错误导致了无法处理照片选取，请重试。</string>
     <string name="message_empty_error">发出的消息不能为空。</string>
     <string name="bot_setup_io_exception_error">抱歉，由于IO异常未能成功连接上服务端。</string>
     <string name="bot_reply_error">抱歉，由于内部错误导致了未能成功接收另一端的消息。</string>

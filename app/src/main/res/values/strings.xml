@@ -197,6 +197,7 @@
     <string name="post_product_review_error">Sorry, failed to submit your product review due to a server error, please try again.</string>
     <string name="get_product_review_error">Sorry, failed to load the product reviews due to a server error.</string>
     <string name="capture_photo_io_error">Sorry, failed to process the photo due to an internal error, please try again.</string>
+    <string name="select_photo_io_error">Sorry, failed to process the photo selection due to an internal error, please try again.</string>
     <string name="message_empty_error">Message cannot be empty.</string>
     <string name="bot_setup_io_exception_error">Sorry, failed to connect to the chat bot due to an IO Exception.</string>
     <string name="bot_reply_error">Sorry, failed to receive the bot message due to an internal error.</string>

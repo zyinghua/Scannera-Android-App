@@ -57,6 +57,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Utils {
     // This class is for general, common data that is being shared among multiple units
     public static final int CAMERA_REQUEST_CODE = 814736521;
+    public static final int ALBUM_ACCESS_REQUEST_CODE = 517869743;
     public static final int NUTRITION_TABLE_PIC_REQUEST = 572194326;
     public static final int PRODUCT_LOOK_PIC_REQUEST = 307188697;
     public static final int USER_PROFILE_PIC_REQUEST = 307754666;
@@ -83,6 +84,8 @@ public class Utils {
     public static final int PRODUCT_CONTRIBUTION_POINTS = 10;
     public static final int PRODUCT_REVIEW_CONTRIBUTION_POINTS = 5;
     public static final float NUTRITION_DEGREE_DIFF_TOLERANCE = 0.3f;
+    public static final int ON_PERMISSION_DENIED_BACK = 0;
+    public static final int ON_PERMISSION_DENIED_STAY = 1;
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";

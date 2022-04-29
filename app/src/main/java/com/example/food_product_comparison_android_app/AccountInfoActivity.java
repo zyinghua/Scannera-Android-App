@@ -51,6 +51,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AccountInfoActivity extends AppCompatActivity {
+    private static final int SELECT_FROM_PHOTO_ALBUM = 0;
+    private static final int TAKE_A_PHOTO = 1;
     private User user;
     private CircularImageView user_profile_img;
     private TextView username_tv;
@@ -286,8 +288,8 @@ public class AccountInfoActivity extends AppCompatActivity {
             select_from_album.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     bottomSheetDialog.dismiss();
+                    checkPermissionsBeforeExecution(SELECT_FROM_PHOTO_ALBUM);
                 }
             });
         }
@@ -297,13 +299,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-
-                    try {
-                        captureProfilePhoto();
-                    } catch (IOException e) {
-                        Toast.makeText(AccountInfoActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
+                    checkPermissionsBeforeExecution(TAKE_A_PHOTO);
                 }
             });
         }
@@ -447,13 +443,23 @@ public class AccountInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void checkPermissions()
-    {
+    private void checkPermissionsBeforeExecution(int tag) {
         int permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
 
         if (permission != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, Utils.CAMERA_REQUEST_CODE);
+        }
+        else
+        {
+            if (tag == SELECT_FROM_PHOTO_ALBUM)
+            {
+
+            }
+            else if(tag == TAKE_A_PHOTO)
+            {
+                captureProfilePhoto();
+            }
         }
     }
 
@@ -461,21 +467,33 @@ public class AccountInfoActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == Utils.CAMERA_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
-                cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+        if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_STAY);
+            cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+        }
+        else
+        {
+            if(requestCode == Utils.CAMERA_REQUEST_CODE) {
+                captureProfilePhoto();
+            }
+            else if(requestCode == Utils.ALBUM_ACCESS_REQUEST_CODE) {
+
             }
         }
-    }
+}
 
-    private void captureProfilePhoto() throws IOException {
-        checkPermissions(); // Check the camera permission first
+    private void captureProfilePhoto() {
+        // SHOULD BE CALLED WHEN CAMERA PERMISSION IS GRANTED
 
         // Initialise the intent to use the camera App
         Intent capturePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        selected_profile_image_file = getProfilePhotoFile(); // Get the file
+        try {
+            selected_profile_image_file = getProfilePhotoFile(); // Get the file
+        } catch (IOException e) {
+            Toast.makeText(AccountInfoActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
 
         // Get Uri for the file and put with the particular key to allow the camera app we are
         // delegating to, to be able to access the file and put the output there

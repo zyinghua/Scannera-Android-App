@@ -111,7 +111,7 @@ public class ScanActivity extends AppCompatActivity {
 
         if (requestCode == Utils.CAMERA_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
+                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName(), Utils.ON_PERMISSION_DENIED_BACK);
                 cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission Dialog");
             }
         }
