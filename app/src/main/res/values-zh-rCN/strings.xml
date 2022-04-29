@@ -127,6 +127,7 @@
     <string name="farewell_user_on_delete">成功删除账号，祝一切顺利并期待下次再见！</string>
     <string name="camera">相机</string>
     <string name="external_storage">外部储存</string>
+    <string name="user_pimg_updated">您的用户头像已更换成功！</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
