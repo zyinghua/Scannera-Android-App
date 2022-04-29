@@ -38,10 +38,10 @@ public class CameraPermissionRequiredDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.dialog_btn_enable, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Intent dialogIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            dialogIntent.setData(Uri.parse("package:" + app_package_name));
-                            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(dialogIntent);
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            intent.setData(Uri.parse("package:" + app_package_name));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                         }catch (ActivityNotFoundException e) {
                         }
                     }

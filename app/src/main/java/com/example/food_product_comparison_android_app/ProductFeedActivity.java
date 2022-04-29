@@ -144,6 +144,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                     capturePhoto(NUTRITION_PIC_FILE_NAME);
                 } catch (IOException e) {
                     Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             }
         });
@@ -155,6 +156,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                     capturePhoto(PRODUCT_PIC_FILE_NAME);
                 } catch (IOException e) {
                     Toast.makeText(ProductFeedActivity.this, getString(R.string.capture_photo_io_error), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             }
         });
@@ -516,15 +518,11 @@ public class ProductFeedActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case Utils.CAMERA_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
-                    cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
-                }
-                break;
-            default:
-                break;
+        if (requestCode == Utils.CAMERA_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                DialogFragment cameraDialogFragment = new CameraPermissionRequiredDialogFragment(getApplicationContext().getPackageName());
+                cameraDialogFragment.show(getSupportFragmentManager(), "Camera Permission");
+            }
         }
     }
 

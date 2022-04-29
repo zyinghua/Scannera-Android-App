@@ -21,8 +21,12 @@
 
         <package android:name="com.facebook.katana" />
 
-        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" /> <!-- allows app to access Facebook app features -->
-        <provider android:authorities="com.facebook.orca.provider.PlatformProvider" /> <!-- allows sharing to Messenger app -->
+        <provider
+            android:authorities="com.facebook.katana.provider.PlatformProvider"
+            android:exported="false" /> <!-- allows app to access Facebook app features -->
+        <provider
+            android:authorities="com.facebook.orca.provider.PlatformProvider"
+            android:exported="false" /> <!-- allows sharing to Messenger app -->
     </queries>
 
     <application
@@ -47,7 +51,12 @@
         <activity
             android:name=".ChatBotActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ConfirmProfileImageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".AccountInfoActivity"

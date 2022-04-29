@@ -57,8 +57,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Utils {
     // This class is for general, common data that is being shared among multiple units
     public static final int CAMERA_REQUEST_CODE = 814736521;
-    public static final int NUTRITION_TABLE_PIC_REQUEST = 57219432;
+    public static final int NUTRITION_TABLE_PIC_REQUEST = 572194326;
     public static final int PRODUCT_LOOK_PIC_REQUEST = 307188697;
+    public static final int USER_PROFILE_PIC_REQUEST = 307754666;
     public static final int RC_SIGN_IN = 900914;
     public static final int LOCAL_LOGIN = 1;
     public static final int FACEBOOK_LOGIN = 2;
