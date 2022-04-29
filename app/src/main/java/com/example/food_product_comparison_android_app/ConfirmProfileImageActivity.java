@@ -65,7 +65,9 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
         this.confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestUserProfileImageUpdate(System.currentTimeMillis());
+                Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_LONG).show();
+                onBackPressed();
+                //requestUserProfileImageUpdate(System.currentTimeMillis());
             }
         });
 
@@ -101,7 +103,7 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
                     user.setProfile_img_url(response.body());
                     Utils.updateUserLoginStatus(ConfirmProfileImageActivity.this, user);
 
-                    Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_LONG).show();
                     onBackPressed();
                 }
                 else
