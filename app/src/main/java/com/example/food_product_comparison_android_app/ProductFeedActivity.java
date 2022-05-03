@@ -41,6 +41,7 @@ import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -295,8 +296,8 @@ public class ProductFeedActivity extends AppCompatActivity {
                     Toast.makeText(ProductFeedActivity.this, String.format(getString(R.string.on_successful_product_contribution_msg), Utils.PRODUCT_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                     user.setContributionScore(user.getContributionScore() + Utils.PRODUCT_CONTRIBUTION_POINTS);
                     Utils.updateUserLoginStatus(ProductFeedActivity.this, user);
-
                     finish();
+
                     Product product = Utils.parseASingleProductFromResponse(ProductFeedActivity.this, response.body());
                     Utils.navigateToProductInfoActivity(ProductFeedActivity.this, product);
                 }
