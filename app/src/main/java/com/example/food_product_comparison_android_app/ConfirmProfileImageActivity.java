@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,9 +71,7 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
         this.confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_LONG).show();
-                onBackPressed();
-                //requestUserProfileImageUpdate(System.currentTimeMillis());
+                requestUserProfileImageUpdate(System.currentTimeMillis());
             }
         });
 
@@ -90,21 +94,54 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
         
         RequestBody user_id_rb = RequestBody.create(MediaType.parse("text/plain"), user.getId());
         MultipartBody.Part user_pimg_file_part = MultipartBody.Part.createFormData(
-                ServerRetrofitAPI.PRODUCT_NUTRITION_PIC_SERVER, selected_image_file.getName(), RequestBody.create(MediaType.parse("image/*"), selected_image_file));
+                ServerRetrofitAPI.PROFILE_IMG_SERVER, selected_image_file.getName(), RequestBody.create(MediaType.parse("image/*"), selected_image_file));
 
-        Call<String> call = Utils.getServerAPI(this).updateUserProfileImage(user_id_rb, user_pimg_file_part);
-        call.enqueue(new Callback<String>() {
+        Call<ResponseBody> call = Utils.getServerAPI(this).updateUserProfileImage(user_id_rb, user_pimg_file_part);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 loading_dialog.dismiss();
 
-                if (response.isSuccessful())
+                if (response.isSuccessful() && response.body() != null)
                 {
-                    user.setProfile_img_url(response.body());
-                    Utils.updateUserLoginStatus(ConfirmProfileImageActivity.this, user);
+                    try {
+                        InputStream responseBodyIS = response.body().byteStream();
+                        InputStreamReader responseBodyReader = new InputStreamReader(responseBodyIS, StandardCharsets.UTF_8);
+                        JsonReader jsonReader = new JsonReader(responseBodyReader);
+                        String keyName;
+                        String new_pimg_url = "";
 
-                    Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_LONG).show();
-                    onBackPressed();
+                        jsonReader.beginObject();
+
+                        while (jsonReader.hasNext()) {
+                            keyName = jsonReader.nextName();
+
+                            if (keyName.equals("user_pimg_url"))
+                            {
+                                new_pimg_url = jsonReader.nextString();
+                            }
+                            else
+                            {
+                                jsonReader.skipValue();
+                            }
+                        }
+
+                        jsonReader.endObject();
+
+                        if(!new_pimg_url.isEmpty())
+                        {
+                            user.setProfile_img_url(new_pimg_url);
+                            Utils.updateUserLoginStatus(ConfirmProfileImageActivity.this, user);
+                            Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.user_pimg_updated), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            showErrorToast();
+                        }
+
+                        onBackPressed();
+                    } catch(IOException e) {
+                        showErrorToast();
+                    }
                 }
                 else
                 {
@@ -115,15 +152,15 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                        showErrorToast();
                     }
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 loading_dialog.dismiss();
-                Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                showErrorToast();
             }
         });
     }
@@ -148,5 +185,10 @@ public class ConfirmProfileImageActivity extends AppCompatActivity {
         {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showErrorToast()
+    {
+        Toast.makeText(ConfirmProfileImageActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
     }
 }

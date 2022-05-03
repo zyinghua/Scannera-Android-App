@@ -73,13 +73,18 @@ public class AccountInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
 
-        // Get user information
-        user = Utils.getLoggedUser(this);
-
         this.setUpToolbar();
         this.findViews();
-        this.populateWithUserData();
         this.setUpListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Get user information
+        user = Utils.getLoggedUser(this);
+        this.populateWithUserData();
     }
 
     private void findViews()

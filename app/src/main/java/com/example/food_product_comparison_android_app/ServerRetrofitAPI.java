@@ -25,7 +25,7 @@ public interface ServerRetrofitAPI {
     String USER_END_POINT_SERVER = "api/user/";
     String UPDATE_USER_END_POINT = USER_END_POINT_SERVER + "update";
     String ADD_USER_END_POINT = USER_END_POINT_SERVER + "add";
-    String UPDATE_USER_PIMG_SERVER = UPDATE_USER_END_POINT + "";
+    String UPDATE_USER_PIMG_SERVER = USER_END_POINT_SERVER + "profileImg";
     String USER_ID_SERVER = "user_id";
     String USER_USERNAME_SERVER = "username";
     String USER_FIRSTNAME_SERVER = "firstname";
@@ -47,6 +47,7 @@ public interface ServerRetrofitAPI {
     String PRODUCT_IMG_URL_SERVER = "product_display_img";
     String PRODUCT_NUTRITION_PIC_SERVER = "nutrition_img"; // For sending the nutrition img to the server, the key on the server side
     String PRODUCT_DISPLAY_PIC_SERVER = "display_img"; // For sending the product img to the server, the key on the server side
+    String PROFILE_IMG_SERVER = "profile_img";
     DateFormat DATE_FORMAT_SERVER = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
     String PRODUCT_END_POINT_SERVER = "api/product/";
     String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "new";
@@ -196,7 +197,7 @@ public interface ServerRetrofitAPI {
 
     @Multipart
     @PUT(UPDATE_USER_PIMG_SERVER)
-    Call<String> updateUserProfileImage(
+    Call<ResponseBody> updateUserProfileImage(
             @Part(USER_ID_SERVER) RequestBody user_id,
             @Part MultipartBody.Part user_profile_img_file
     );
