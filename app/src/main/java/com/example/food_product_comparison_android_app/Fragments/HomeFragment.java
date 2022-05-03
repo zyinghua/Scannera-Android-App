@@ -26,6 +26,7 @@ import com.example.food_product_comparison_android_app.Adapters.ProductListRecyc
 import com.example.food_product_comparison_android_app.R;
 import com.example.food_product_comparison_android_app.GeneralJavaClasses.User;
 import com.example.food_product_comparison_android_app.Utils;
+import com.google.gson.Gson;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 

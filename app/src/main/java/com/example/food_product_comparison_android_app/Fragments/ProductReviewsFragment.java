@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -211,7 +212,11 @@ public class ProductReviewsFragment extends Fragment {
                             productReview.setUsername(jsonReader.nextString());
                             break;
                         case ServerRetrofitAPI.USER_PIMG_URL_SERVER:
-                            productReview.setUserPImgUrl(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                productReview.setUserPImgUrl(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_REVIEW_RATING_SERVER:
                             productReview.setRating(Float.parseFloat(jsonReader.nextString()));

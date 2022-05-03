@@ -52,6 +52,7 @@ public interface ServerRetrofitAPI {
     String POST_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "new";
     String GET_PRODUCT_SERVER = PRODUCT_END_POINT_SERVER + "get/";
     String STARRED_PRODUCTS_SERVER = "api/favourite/";
+    String RECOMMENDED_PRODUCTS_SERVER = "/api/product/recommended";
     String GET_STARRED_PRODUCTS_SERVER = STARRED_PRODUCTS_SERVER + "get";
     String ADD_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "add";
     String REMOVE_STARRED_PRODUCT_SERVER = STARRED_PRODUCTS_SERVER + "remove";
@@ -156,7 +157,7 @@ public interface ServerRetrofitAPI {
             @Field(PRODUCT_ID_SERVER) String product_id
     );
 
-    @GET("api/favourite/get")
+    @GET(RECOMMENDED_PRODUCTS_SERVER)
     Call<ResponseBody> getRecommendedProducts(
             @Query(USER_ID_SERVER) String user_id
     );
