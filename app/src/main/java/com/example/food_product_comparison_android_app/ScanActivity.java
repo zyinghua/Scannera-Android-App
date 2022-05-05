@@ -39,6 +39,8 @@ public class ScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private TextView hint;
     private User user;
+    private CodeScannerView scannerView;
+    private ImageButton back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,9 @@ public class ScanActivity extends AppCompatActivity {
 
         this.user = Utils.getLoggedUser(this);
         checkPermissions();
-        hint = findViewById(R.id.scanner_hint);
-        CodeScannerView scannerView = findViewById(R.id.scanner_view);
+
+        findViews();
+
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
         mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
@@ -73,26 +76,26 @@ public class ScanActivity extends AppCompatActivity {
                 mCodeScanner.startPreview();
             }
         });
-
-        ImageButton back_btn = findViewById(R.id.top_back_btn);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mCodeScanner.startPreview();
+        enableTopBackBtn();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mCodeScanner.releaseResources(); // avoid memory leaks
+    }
+
+    private void findViews()
+    {
+        back_btn = findViewById(R.id.top_back_btn);
+        hint = findViewById(R.id.scanner_hint);
+        scannerView = findViewById(R.id.scanner_view);
     }
 
     private void checkPermissions()
@@ -120,6 +123,8 @@ public class ScanActivity extends AppCompatActivity {
 
     private void getProduct(Long init_time, String product_barcode)
     {
+        disableTopBackBtn(); // To avoid back btn being pressed during the period that could cause App crash
+
         LoadingDialog loading_dialog = new LoadingDialog(this);
         try {
             loading_dialog.show();
@@ -149,6 +154,7 @@ public class ScanActivity extends AppCompatActivity {
                 {
                     // Product Not Found
                     showPNFDialog(product_barcode);
+                    enableTopBackBtn();
                 }
                 else
                 {
@@ -160,6 +166,7 @@ public class ScanActivity extends AppCompatActivity {
                     }
                     else
                     {
+                        enableTopBackBtn();
                         mCodeScanner.startPreview();
                         Toast.makeText(ScanActivity.this, getString(R.string.server_error), Toast.LENGTH_LONG).show();
                     }
@@ -243,5 +250,24 @@ public class ScanActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    private void enableTopBackBtn()
+    {
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void disableTopBackBtn()
+    {
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 }

@@ -75,7 +75,7 @@ public class Utils {
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
-    public static final int MAX_SERVER_RESPOND_SEC = 3;
+    public static final int MAX_SERVER_RESPOND_SEC = 2;
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String PRODUCT_BARCODE_TRANSFER_TAG = "PRODUCT_BARCODE_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
