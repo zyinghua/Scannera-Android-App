@@ -3,6 +3,8 @@
     <string name="app_email_address" translatable="false">scannera.customerservice@gmail.com</string>
     <string name="app_email_address_password" translatable="false">fit3162scannera</string>
     <string name="app_authority" translatable="false">com.example.food_product_comparison_android_app</string>
+    <string name="scannera_privacy_policy_url" translatable="false">https://sites.google.com/view/scannera-app-privacy-policy/%E9%A6%96%E9%A1%B5</string>
+    <string name="scannera_terms_and_conditions_url" translatable="false">https://sites.google.com/view/scannera-app-terms-conditions/%E9%A6%96%E9%A1%B5</string>
     <string name="welcome_to_scannera">Hi %1$s, welcome to Scannera!</string>
     <string name="username_or_email_login">Username or Email</string>
     <string name="password">Password</string>
@@ -136,6 +138,8 @@
     <string name="camera">Camera</string>
     <string name="external_storage">Files and media</string>
     <string name="user_pimg_updated">Your profile image is successfully updated!</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="terms_and_conditions"><u>Terms And Conditions</u></string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

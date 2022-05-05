@@ -89,6 +89,9 @@ public class Utils {
     public static final float NUTRITION_DEGREE_DIFF_TOLERANCE = 0.3f;
     public static final int ON_PERMISSION_DENIED_BACK = 0;
     public static final int ON_PERMISSION_DENIED_STAY = 1;
+    public static final String WEB_ACTIVITY_URL_TRANSFER_TAG = "WEB_ACTIVITY_URL_TRANSFER_TAG";
+    public static final String PRIVACY_POLICY_URL_TAG = "PRIVACY_POLICY_URL_TAG";
+    public static final String TERMS_AND_CONDITIONS_URL_TAG = "TERMS_AND_CONDITIONS_URL_TAG";
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";

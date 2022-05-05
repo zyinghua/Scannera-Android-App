@@ -132,6 +132,7 @@ public class ProductInformationActivity extends AppCompatActivity {
             this.name_tv.setText(product.getName());
             this.brand_tv.setText(product.getBrand());
             this.price_tv.setText(product.getPriceInString());
+
         } catch (NullPointerException e) {
             Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
             onBackPressed();

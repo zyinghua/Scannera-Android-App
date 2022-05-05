@@ -16,6 +16,7 @@ import com.example.food_product_comparison_android_app.Adapters.ProductListRecyc
 import com.example.food_product_comparison_android_app.Dialogs.LoadingDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
