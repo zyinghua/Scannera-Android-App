@@ -64,6 +64,10 @@ public class ScanHistoryActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null)
                 {
                     ArrayList<Object> items = Utils.parseProductsFromResponse(ScanHistoryActivity.this, response.body());
+
+                    if(items.size() == 0)
+                        items.add(getString(R.string.no_scanned_products));
+
                     ProductListRecyclerViewAdapter shAdapter = new ProductListRecyclerViewAdapter(getApplicationContext(),
                             ScanHistoryActivity.this, items);
                     recyclerView.setAdapter(shAdapter);

@@ -194,19 +194,42 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:id="@+id/nutrition_info_instructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_info_section">
+
         <TextView
             android:id="@+id/nutritional_info_label"
             style="@style/Widget.Scannera.TextView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nutri_info_with_units"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/comparisons_activity_text_size"
             android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_info_section" />
+             />
+
+            <TextView
+                android:id="@+id/nutritional_info_hint"
+                style="@style/Widget.Scannera.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nutri_info_hint"
+                android:layout_gravity="center"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:gravity="center"
+                />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nutrition_recyclerView"
@@ -216,7 +239,7 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nutritional_info_label" />
+            app:layout_constraintTop_toBottomOf="@id/nutrition_info_instructions" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/comparisons_tab_layout"

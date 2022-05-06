@@ -44,7 +44,9 @@
     <string name="contribution_score">Contribution:&#160;%1$d</string>
     <string name="account_information">Account Information</string>
     <string name="starred_products">Starred Products</string>
+    <string name="no_starred_products">No product has been starred yet…</string>
     <string name="scan_history">Scan History</string>
+    <string name="no_scanned_products">No product has been scanned yet…</string>
     <string name="ask_bot">Ask Scannera Bot</string>
     <string name="about_us">About Us</string>
     <string name="scan_a_barcode">Scan a barcode</string>
@@ -124,6 +126,7 @@
     <string name="brand">Brand:</string>
     <string name="price">Price:</string>
     <string name="nutri_info_with_units">Nutrition Information:\n(Per 100 g/mL/kJ)</string>
+    <string name="nutri_info_hint">Please scroll horizontally to view other nutrition attributes. Click each nutrition for its degree, based on the similar products.</string>
     <string name="similar_products">Similar Products</string>
     <string name="sort_products">Sort Similar Products:</string>
     <string name="descending">High to Low</string>
@@ -227,7 +230,7 @@
     <string name="back_btn_content_description">A back button</string>
     <string name="close_btn_content_description">A close button</string>
     <string name="nutrition_pic_content_description">A picture of the product\'s nutrition table taken by the user.</string>
-    <string name="product_look_content_description">A picture of the product itself taken by the user.</string>
+    <string name="product_pic_content_description">A picture of the product itself taken by the user.</string>
     <string name="product_star_btn_content_description">A Star button for starring the product.</string>
     <string name="message_send_btn_content_description">A Send message button.</string>
     <string name="edit_user_profile_img_fab_content_description">A button for editing user profile image.</string>

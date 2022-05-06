@@ -39,7 +39,9 @@
     <string name="contribution_score">贡献值：&#160;%1$d</string>
     <string name="account_information">账号信息</string>
     <string name="starred_products">产品收藏</string>
+    <string name="no_starred_products">您还未收藏任何产品…</string>
     <string name="scan_history">扫描记录</string>
+    <string name="no_scanned_products">您还未扫描过任何产品…</string>
     <string name="ask_bot">咨询Scannera机器人</string>
     <string name="about_us">关于我们</string>
     <string name="scan_a_barcode">扫描二维码</string>
@@ -114,6 +116,7 @@
     <string name="brand">品牌：</string>
     <string name="price">原价格：</string>
     <string name="nutri_info_with_units">营养信息：\n（每 100 克/毫升）</string>
+    <string name="nutri_info_hint">请左右滑动以查看其它营养元素，点击营养元素可查看其根据相似产品算出的程度。</string>
     <string name="similar_products">相似产品</string>
     <string name="sort_products">排序下列产品：</string>
     <string name="descending">从高到低</string>
@@ -212,7 +215,7 @@
     <string name="back_btn_content_description">一个后退按钮</string>
     <string name="close_btn_content_description">一个关闭按钮</string>
     <string name="nutrition_pic_content_description">用户拍摄的产品营养表图片。</string>
-    <string name="product_look_content_description">用户拍摄的产品外观图片。</string>
+    <string name="product_pic_content_description">用户拍摄的产品外观图片。</string>
     <string name="product_star_btn_content_description">用于收藏此产品的星型按钮。</string>
     <string name="message_send_btn_content_description">一个发送消息的按钮。</string>
     <string name="edit_user_profile_img_fab_content_description">一个更换用户头像的按钮。</string>

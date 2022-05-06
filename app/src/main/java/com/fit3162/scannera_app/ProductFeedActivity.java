@@ -481,7 +481,7 @@ public class ProductFeedActivity extends AppCompatActivity {
         this.nutrition_info_title_views.setVisibility(View.VISIBLE);
 
         moveDynamicInputPrompt(mainConstraintLayout, nutrition_info_pic);
-        ((TextView) dynamic_input_prompt.findViewById(R.id.input_title)).setText(getString(R.string.product_look));
+        ((TextView) dynamic_input_prompt.findViewById(R.id.input_title)).setText(getString(R.string.product_pic));
     }
 
     private void onProductLookPicReceived()

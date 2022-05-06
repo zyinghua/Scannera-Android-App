@@ -87,6 +87,10 @@ public class StarredProductActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null)
                 {
                     ArrayList<Object> starred_products = Utils.parseProductsFromResponse(StarredProductActivity.this, response.body());
+
+                    if(starred_products.size() == 0)
+                        starred_products.add(getString(R.string.no_starred_products));
+
                     ProductListRecyclerViewAdapter spAdapter = new ProductListRecyclerViewAdapter(
                             getApplicationContext(), StarredProductActivity.this, starred_products);
                     recyclerView.setAdapter(spAdapter);
