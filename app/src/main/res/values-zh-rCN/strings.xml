@@ -76,7 +76,7 @@
     <string name="product_price">产品原价格：</string>
     <string name="product_category">产品类别：</string>
     <string name="product_nutrition_info">产品营养表信息照：</string>
-    <string name="product_look">产品外观照：</string>
+    <string name="product_pic">产品外观照：</string>
     <string name="retake_tvbtn"><u>重新拍摄</u></string>
     <string name="edit_tvbtn"><u>编辑</u></string>
     <string name="close">关闭</string>

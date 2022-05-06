@@ -103,6 +103,7 @@
                     android:inputType="textAutoComplete"
                     android:hint="@string/category_drop_down_menu_hint"
                     android:maxLength="50"
+                    android:maxLines="1"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
