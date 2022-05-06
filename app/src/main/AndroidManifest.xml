@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scannera_app">
+    package="com.fit3162.scannera_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -38,7 +38,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Product_Comparison_Android_App">
         <activity
-            android:name="com.example.scannera_app.WebActivity"
+            android:name="com.fit3162.scannera_app.WebActivity"
             android:exported="false" />
 
         <provider
@@ -52,85 +52,85 @@
         </provider>
 
         <activity
-            android:name="com.example.scannera_app.ChatBotActivity"
+            android:name="com.fit3162.scannera_app.ChatBotActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.ConfirmProfileImageActivity"
+            android:name="com.fit3162.scannera_app.ConfirmProfileImageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.AccountInfoActivity"
+            android:name="com.fit3162.scannera_app.AccountInfoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.ProductInformationActivity"
+            android:name="com.fit3162.scannera_app.ProductInformationActivity"
             android:exported="false"
-            android:parentActivityName="com.example.scannera_app.ScanActivity"
+            android:parentActivityName="com.fit3162.scannera_app.ScanActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scannera_app.ScanActivity" />
+                android:value="com.fit3162.scannera_app.ScanActivity" />
         </activity>
         <activity
-            android:name="com.example.scannera_app.StarredProductActivity"
+            android:name="com.fit3162.scannera_app.StarredProductActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.ProductFeedActivity"
+            android:name="com.fit3162.scannera_app.ProductFeedActivity"
             android:exported="false"
-            android:parentActivityName="com.example.scannera_app.ScanActivity"
+            android:parentActivityName="com.fit3162.scannera_app.ScanActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scannera_app.ScanActivity" />
+                android:value="com.fit3162.scannera_app.ScanActivity" />
         </activity>
         <activity
-            android:name="com.example.scannera_app.ScanHistoryActivity"
+            android:name="com.fit3162.scannera_app.ScanHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.FeedbackActivity"
+            android:name="com.fit3162.scannera_app.FeedbackActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.AboutUsActivity"
+            android:name="com.fit3162.scannera_app.AboutUsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.ScanActivity"
+            android:name="com.fit3162.scannera_app.ScanActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.ForgottenPasswordActivity"
+            android:name="com.fit3162.scannera_app.ForgottenPasswordActivity"
             android:exported="false"
-            android:parentActivityName="com.example.scannera_app.LoginActivity"
+            android:parentActivityName="com.fit3162.scannera_app.LoginActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scannera_app.LoginActivity" />
+                android:value="com.fit3162.scannera_app.LoginActivity" />
         </activity>
         <activity
-            android:name="com.example.scannera_app.PasswordEmailSentActivity"
+            android:name="com.fit3162.scannera_app.PasswordEmailSentActivity"
             android:exported="false"
-            android:parentActivityName="com.example.scannera_app.LoginActivity"
+            android:parentActivityName="com.fit3162.scannera_app.LoginActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scannera_app.LoginActivity" />
+                android:value="com.fit3162.scannera_app.LoginActivity" />
         </activity>
         <activity
-            android:name="com.example.scannera_app.MainActivity"
+            android:name="com.fit3162.scannera_app.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.scannera_app.SignUpActivity"
+            android:name="com.fit3162.scannera_app.SignUpActivity"
             android:exported="false"
-            android:parentActivityName="com.example.scannera_app.LoginActivity"
+            android:parentActivityName="com.fit3162.scannera_app.LoginActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scannera_app.LoginActivity" />
+                android:value="com.fit3162.scannera_app.LoginActivity" />
         </activity>
 
         <meta-data
@@ -144,7 +144,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.example.scannera_app.LoginActivity"
+            android:name="com.fit3162.scannera_app.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.scannera_app"
+        applicationId "com.fit3162.scannera_app"
         minSdk 28
         targetSdk 31
         versionCode 1

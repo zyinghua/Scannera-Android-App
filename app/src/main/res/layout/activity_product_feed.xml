@@ -6,7 +6,7 @@
     android:id="@+id/product_feed_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductFeedActivity">
+    tools:context="com.fit3162.scannera_app.ProductFeedActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/product_feed_constraint_layout"

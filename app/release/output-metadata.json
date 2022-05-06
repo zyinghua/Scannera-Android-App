@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.food_product_comparison_android_app",
+  "applicationId": "com.fit3162.scannera_app",
   "variantName": "release",
   "elements": [
     {
