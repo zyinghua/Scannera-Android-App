@@ -216,7 +216,7 @@ public class Utils {
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress((sender)));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email_address));
-                message.setSubject(context.getString(R.string.password_reset_email_subejct));
+                message.setSubject(context.getString(R.string.password_reset_email_subject));
                 message.setText(email_msg);
                 Transport.send(message);
             } catch(MessagingException e) {

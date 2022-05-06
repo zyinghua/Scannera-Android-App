@@ -19,7 +19,7 @@
     <string name="send_email">发送邮件</string>
     <string name="forgot_your_password_title">忘记了您的密码？</string>
     <string name="forgotten_password_instruction">请输入您的账号绑定的电子邮箱，我们会发送一封密码重置操作说明给您。</string>
-    <string name="password_reset_email_subejct">Scannera密码重置操作说明</string>
+    <string name="password_reset_email_subject">Scannera密码重置操作说明</string>
     <string name="password_reset_email_content">尊敬的用户，
         \n\n一个重置您的 Scannera 账号密码的请求已被收到。\n\n请在下方找到您的临时密码，并按照以下说明操作：\n\n
         1. 使用下面的临时密码登录 Scannera 应用程序。\n
