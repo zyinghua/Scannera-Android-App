@@ -179,6 +179,7 @@
     <string name="username_input_error">抱歉，用户名不应包含任何特殊字符（比如, !@#$%^&amp;*）。</string>
     <string name="username_taken_error">此用户名已注册。</string>
     <string name="password_input_too_short_error">抱歉,密码必须至少包含%1$d位数。</string>
+    <string name="password_input_no_upper_lower_cases_error">抱歉，密码必须至少包含一个小写和一个大写字符。</string>
     <string name="password_input_no_lowercase_error">抱歉，密码必须至少包含一个小写字符。</string>
     <string name="password_input_no_uppercase_error">抱歉，密码必须至少包含一个大写字符。</string>
     <string name="flname_input_error">抱歉，此字段只能包含英文字符。</string>

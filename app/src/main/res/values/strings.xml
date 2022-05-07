@@ -194,6 +194,7 @@
     <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
     <string name="username_taken_error">This username has already been registered.</string>
     <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
+    <string name="password_input_no_upper_lower_cases_error">Sorry, password must contain at least one lowercase and one uppercase characters.</string>
     <string name="password_input_no_lowercase_error">Sorry, password must contain at least one lowercase character.</string>
     <string name="password_input_no_uppercase_error">Sorry, password must contain at least one uppercase character.</string>
     <string name="flname_input_error">Sorry, this field must only contain English characters.</string>

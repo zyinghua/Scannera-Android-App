@@ -95,6 +95,7 @@ public class Utils {
 
     // User Input Validation
     public static final String REGEX_CONTAIN_LOWERCASE = "^.*[a-z].*$";
+    public static final String REGEX_CONTAIN_UPPERCASE = "^.*[A-Z].*$";
     public static final int EMAIL_INPUT = 0;
     public static final int USERNAME_INPUT = 1;
     public static final int PASSWORD_INPUT = 2;
@@ -133,11 +134,16 @@ public class Utils {
                 {
                     if (input.length() < 8) {
                         return String.format(context.getString(R.string.password_input_too_short_error), MIN_PASSWORD_LENGTH);
-                    } else if (!patternMatches(input, REGEX_CONTAIN_LOWERCASE))
+                    }
+                    else if (!patternMatches(input, REGEX_CONTAIN_LOWERCASE) && !patternMatches(input, REGEX_CONTAIN_UPPERCASE))
+                    {
+                        return context.getString(R.string.password_input_no_upper_lower_cases_error);
+                    }
+                    else if (!patternMatches(input, REGEX_CONTAIN_LOWERCASE))
                     {
                         return context.getString(R.string.password_input_no_lowercase_error);
                     }
-                    else
+                    else // Not contain upper case only
                     {
                         return context.getString(R.string.password_input_no_uppercase_error);
                     }
