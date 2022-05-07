@@ -43,8 +43,9 @@ public class NutritionListRecyclerViewAdapter extends RecyclerView.Adapter<Nutri
         holder.value.setText(attributes.get(position).getAttributePresentation());
         holder.name.setText(attributes.get(position).getAttributeName());
 
-        float diff = attributes.get(position).getAttributeValue()
-                / nutritionAverages.get(attributes.get(position).getAttributeName());
+        float average = nutritionAverages.get(attributes.get(position).getAttributeName());
+        float diff = average != 0? (attributes.get(position).getAttributeValue() / average) : attributes.get(position).getAttributeValue();
+
         holder.nutrition_attribute_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
