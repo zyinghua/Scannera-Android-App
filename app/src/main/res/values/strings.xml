@@ -117,7 +117,7 @@
     <string name="delete_account">Delete My Account</string>
     <string name="dialog_delete_account_title">Are you sure you want to delete your account?</string>
     <string name="dialog_delete_account_msg">
-        You will lose all the data associated with your account.\n\nWarning: This cannot be undone.
+        You will lose all the data associated with your account.\n\nWARNING: This cannot be undone.
     </string>
     <string name="cancel">Cancel</string>
     <string name="confirm_red"><font fgcolor='#A80825'>Confirm</font></string>
@@ -126,7 +126,7 @@
     <string name="brand">Brand:</string>
     <string name="price">Price:</string>
     <string name="nutri_info_with_units">Nutrition Information:\n(Per 100 g/mL/kJ)</string>
-    <string name="nutri_info_hint">Please scroll horizontally to view other nutrition attributes. Click each nutrition for its degree, based on the similar products.</string>
+    <string name="nutri_info_hint">Click each nutrition for its degree, based on the similar products.</string>
     <string name="similar_products">Similar Products</string>
     <string name="sort_products">Sort Similar Products:</string>
     <string name="descending">High to Low</string>

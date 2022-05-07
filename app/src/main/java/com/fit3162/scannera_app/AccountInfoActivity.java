@@ -415,7 +415,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                         revokeGoogleAccess();
                     }
 
-                    user = null;
+                    user = null; // Prevents user info update whenever onPause is called
                     Utils.removeUserLoginStatus(AccountInfoActivity.this);
 
                     // Log out and start login activity without a way back

@@ -239,7 +239,10 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nutrition_info_instructions" />
+            app:layout_constraintTop_toBottomOf="@id/nutrition_info_instructions"
+            android:scrollbars="horizontal"
+            android:scrollbarThumbVertical="@android:color/darker_gray"
+            android:scrollbarSize="@dimen/general_scrollbar_size"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/comparisons_tab_layout"

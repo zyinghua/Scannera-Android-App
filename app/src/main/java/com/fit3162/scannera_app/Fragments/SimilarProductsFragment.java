@@ -35,15 +35,7 @@ public class SimilarProductsFragment extends Fragment {
     private ProductListRecyclerViewAdapter productListRecyclerViewAdapter;
     private AutoCompleteTextView sort_by_input;
     private SwitchCompat sort_desc_switch;
-    private Product product;
     private ArrayList<Object> similarProducts;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        product = ((ProductInformationActivity) requireActivity()).getProduct();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,6 +91,7 @@ public class SimilarProductsFragment extends Fragment {
 
     private void setUpSortSelectionAdapter()
     {
+        Product product = ((ProductInformationActivity) requireActivity()).getProduct();
         ArrayList<String> productFactorsAl = new ArrayList<>(product.getNutritionAttributes().keySet());
         productFactorsAl.add(0, Utils.PRODUCT_PRICE);
 

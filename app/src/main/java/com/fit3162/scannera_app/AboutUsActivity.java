@@ -30,7 +30,6 @@ public class AboutUsActivity extends AppCompatActivity {
         provide_feedback_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 startActivity(new Intent(AboutUsActivity.this, FeedbackActivity.class));
             }
         });

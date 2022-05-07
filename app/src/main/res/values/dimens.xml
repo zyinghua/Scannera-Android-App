@@ -32,4 +32,5 @@
     <dimen name="product_review_text_size">16sp</dimen>
     <dimen name="chat_msg_text_size">16sp</dimen>
     <dimen name="chat_msg_owner_icon_size">45dp</dimen>
+    <dimen name="general_scrollbar_size">5dp</dimen>
 </resources>
