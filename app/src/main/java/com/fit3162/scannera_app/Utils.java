@@ -82,7 +82,7 @@ public class Utils {
     public static final String IMAGE_FILE_TRANSFER_TAG = "IMAGE_FILE_TRANSFER_TAG";
     public static final DateFormat SCAN_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.ENGLISH);
     public static final DateFormat PRODUCT_REVIEW_DATE_FORMAT_DISPLAYED = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-    public static final String PRODUCT_PRICE = "price";
+    public static final String PRODUCT_PRICE = "PRICE";
     public static final int FEEDBACK_CONTRIBUTION_POINTS = 5;
     public static final int PRODUCT_CONTRIBUTION_POINTS = 10;
     public static final int PRODUCT_REVIEW_CONTRIBUTION_POINTS = 5;
@@ -493,7 +493,7 @@ public class Utils {
             {
                 for(int i = 0; i < keys.length(); i++)
                 {
-                    String name = keys.getString(i).toLowerCase();
+                    String name = keys.getString(i).toUpperCase();
                     JSONObject data = nutrition.getJSONObject(keys.getString(i));
 
                     nutritionAttributes.put(name, new NutritionAttribute(name, Float.parseFloat(data.getString("value")), data.getString("unit")));
