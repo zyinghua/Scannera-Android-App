@@ -129,7 +129,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity {
                     {
                         // Send an email to user with randomly generated new password &
                         // a server request to update the user password.
-                        Utils.updateUserPasswordAndActivity(System.currentTimeMillis(),ForgottenPasswordActivity.this, email_address, userResponse.getId());
+                        Utils.updateUserForgottenPasswordAndActivity(System.currentTimeMillis(),ForgottenPasswordActivity.this, email_address, userResponse.getId());
                     }
                 }
                 else

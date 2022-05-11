@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.fit3162.scannera_app.AccountInfoActivity;
 import com.fit3162.scannera_app.R;
 
 public class DeleteAccountConfirmDialogFragment extends DialogFragment {
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction

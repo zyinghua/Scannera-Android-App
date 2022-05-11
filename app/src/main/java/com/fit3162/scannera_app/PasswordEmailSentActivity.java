@@ -50,7 +50,7 @@ public class PasswordEmailSentActivity extends AppCompatActivity {
         this.resend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.updateUserPasswordAndActivity(System.currentTimeMillis(),PasswordEmailSentActivity.this, target_email, target_user_id);
+                Utils.updateUserForgottenPasswordAndActivity(System.currentTimeMillis(),PasswordEmailSentActivity.this, target_email, target_user_id);
             }
         });
     }
