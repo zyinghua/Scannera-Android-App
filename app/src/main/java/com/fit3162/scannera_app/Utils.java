@@ -75,7 +75,7 @@ public class Utils {
     public static final int MAX_LEN_PASSWORD = 20;
     public static final String APP_LOCAL_SP = "APP LOCAL SHARED PREFERENCES";
     public static final String LOGGED_USER = "LOGGED USER";
-    public static final int MAX_SERVER_RESPOND_SEC = 0;
+    public static final int MAX_SERVER_RESPOND_SEC = 3;
     public static final String PRODUCT_TRANSFER_TAG = "PRODUCT_TRANSFER_TAG";
     public static final String PRODUCT_BARCODE_TRANSFER_TAG = "PRODUCT_BARCODE_TRANSFER_TAG";
     public static final String LOADING_BAR_TAG = "LOADING_BAR_TAG";
@@ -107,6 +107,8 @@ public class Utils {
 
     public static String validateUserInfoInput(Context context, String input, int input_type)
     {
+        // This function returns the error directly instead of a boolean value.
+
         if (input.isEmpty())
             return context.getString(R.string.error_input_cannot_be_empty);
 
@@ -115,6 +117,14 @@ public class Utils {
         switch (input_type)
         {
             case EMAIL_INPUT:
+                /*
+                * It allows numeric values from 0 to 9.
+                * Both uppercase and lowercase letters from a to z are allowed.
+                * Special characters allowed are underscore “_”, hyphen “-“, and dot “.”.
+                * Dot isn't allowed at the start and end of the local part.
+                * Consecutive dots aren't allowed.
+                * For the local part, a maximum of 64 characters are allowed.
+                * */
                 regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_.-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
                 if (!patternMatches(input, regexPattern))
                     return context.getString(R.string.email_input_error);
@@ -130,7 +140,7 @@ public class Utils {
                 regexPattern = "^(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
                 if (!patternMatches(input, regexPattern))
                 {
-                    if (input.length() < 8) {
+                    if (input.length() < MIN_PASSWORD_LENGTH) {
                         return String.format(context.getString(R.string.password_input_too_short_error), MIN_PASSWORD_LENGTH);
                     }
                     else if (!patternMatches(input, REGEX_CONTAIN_LOWERCASE) && !patternMatches(input, REGEX_CONTAIN_UPPERCASE))
