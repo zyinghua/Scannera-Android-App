@@ -13,8 +13,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.fit3162.scannera_app.GeneralJavaClasses.NutritionAttribute;
 import com.fit3162.scannera_app.GeneralJavaClasses.User;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -24,6 +28,8 @@ import com.google.gson.Gson;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleUnitTest {
+    private User sampleUser;
+
     @Mock
     private Context mockContext;
 
@@ -35,10 +41,10 @@ public class ExampleUnitTest {
         MockitoAnnotations.initMocks(this);
         mockContext = mock(Context.class);
 
-//        when(mockContext.getSharedPreferences(Utils.APP_LOCAL_SP, 0)).thenReturn(mockSharedPreferences);
-//        when(mockSharedPreferences.getString(Utils.LOGGED_USER, null)).thenReturn(
-//                new Gson().toJson(new User(0, "testuser", "test",
-//                        "user", "testuser@gmail.com", "Testuser123", "http://sampleurl.com", 0)));
+        sampleUser = new User(0, "testuser", "test", "user", "testuser@gmail.com", "Testuser123", "http://sampleurl.com", 0);
+        sampleUser.setId("123456789");
+        when(mockContext.getSharedPreferences(Utils.APP_LOCAL_SP, 0)).thenReturn(mockSharedPreferences);
+        when(mockSharedPreferences.getString(Utils.LOGGED_USER, null)).thenReturn(new Gson().toJson(sampleUser));
         when(mockContext.getString(R.string.email_input_error)).thenReturn("Invalid email address format, please check again.");
         when(mockContext.getString(R.string.username_input_error)).thenReturn("Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).");
         when(mockContext.getString(R.string.password_input_too_short_error)).thenReturn("Sorry, password must contain at least %1$d characters.");
@@ -116,5 +122,10 @@ public class ExampleUnitTest {
     public void flNameValidation_validFLNameShouldIndicateCorrect() {
         assertEquals(mockContext.getString(R.string.valid_user_input),
                 Utils.validateUserInfoInput(mockContext, "User", Utils.LASTNAME_INPUT));
+    }
+
+    @Test
+    public void UserDataLocalSPTest_getUserData() {
+        assertEquals(new Gson().toJson(sampleUser), new Gson().toJson(Utils.getLoggedUser(mockContext)));
     }
 }

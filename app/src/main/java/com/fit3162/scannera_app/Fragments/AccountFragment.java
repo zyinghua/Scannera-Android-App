@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.fit3162.scannera_app.StarredProductActivity;
 import com.fit3162.scannera_app.GeneralJavaClasses.User;
 import com.fit3162.scannera_app.Utils;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -77,6 +80,7 @@ public class AccountFragment extends Fragment {
                 {
                     case Utils.LOCAL_LOGIN:
                         Utils.removeUserLoginStatus(requireActivity());
+                        Log.d("DEBUG", new Gson().toJson(Utils.getLoggedUser(requireActivity())));
                         requireActivity().finish();
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         break;

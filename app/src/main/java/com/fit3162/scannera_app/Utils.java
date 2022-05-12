@@ -65,6 +65,7 @@ public class Utils {
     public static final int PRODUCT_LOOK_PIC_REQUEST = 307188697;
     public static final int USER_PROFILE_PIC_REQUEST = 307754666;
     public static final int RC_SIGN_IN = 900914;
+    public static final int NOT_LOGGED_IN = 0;
     public static final int LOCAL_LOGIN = 1;
     public static final int FACEBOOK_LOGIN = 2;
     public static final int GOOGLE_LOGIN = 3;
@@ -199,6 +200,8 @@ public class Utils {
             sb.append(alphaNumericString
                     .charAt(index));
         }
+
+        Log.d("DEBUG", sb.toString());
 
         return sb.toString();
     }

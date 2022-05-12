@@ -186,7 +186,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 loading_dialog.dismiss();
 
-                if (response.isSuccessful())
+                if (response.isSuccessful() && response.body() != null)
                 {
                     User userResponse = response.body();
                     userResponse.setLoginFlag(Utils.LOCAL_LOGIN);

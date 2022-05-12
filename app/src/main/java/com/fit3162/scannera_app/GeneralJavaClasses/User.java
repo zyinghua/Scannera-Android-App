@@ -30,37 +30,6 @@ public class User {
     @SerializedName("user_contribution_score")
     private int contributionScore;
 
-    public User(int login_flag, String username, String firstname, String lastname, String email, String password) {
-        this.loginFlag = login_flag;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.contributionScore = 0;
-    }
-
-    public User(int login_flag, String username, String firstname, String lastname, String email, String password, int contribution_score) {
-        this.loginFlag = login_flag;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.contributionScore = contribution_score;
-    }
-
-    public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url) {
-        this.loginFlag = login_flag;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.profile_img_url = profile_img_url;
-        this.contributionScore = 0;
-    }
-
     public User(int login_flag, String username, String firstname, String lastname, String email, String password, String profile_img_url, int contribution_score) {
         this.loginFlag = login_flag;
         this.username = username;
@@ -74,7 +43,7 @@ public class User {
 
     public User() {
         // For error use, avoid app crushing
-        this.loginFlag = Utils.LOCAL_LOGIN;
+        this.loginFlag = Utils.NOT_LOGGED_IN;
         this.id = "null";
         this.username = "null";
         this.firstname = "null";
