@@ -290,7 +290,7 @@ public class ProductFeedActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 loading_dialog.dismiss();
 
-                if(response.isSuccessful() && response.body() != null)
+                if((response.isSuccessful() || response.code() == 302) && response.body() != null)
                 {
                     Toast.makeText(ProductFeedActivity.this, String.format(getString(R.string.on_successful_product_contribution_msg), Utils.PRODUCT_CONTRIBUTION_POINTS), Toast.LENGTH_LONG).show();
                     user.setContributionScore(user.getContributionScore() + Utils.PRODUCT_CONTRIBUTION_POINTS);
