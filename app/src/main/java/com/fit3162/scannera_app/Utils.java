@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import javax.mail.Message;
@@ -50,6 +51,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -276,9 +278,16 @@ public class Utils {
 
     public static Retrofit getRetrofit(Context context)
     {
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
         return new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.server_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
     }
 

@@ -298,6 +298,7 @@ public class ProductFeedActivity extends AppCompatActivity {
                     finish();
 
                     Product product = Utils.parseASingleProductFromResponse(ProductFeedActivity.this, response.body());
+                    product.setStarred(false);
                     Utils.navigateToProductInfoActivity(ProductFeedActivity.this, product);
                 }
                 else
