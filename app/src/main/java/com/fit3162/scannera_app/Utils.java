@@ -372,28 +372,60 @@ public class Utils {
 
                     switch(keyName) {
                         case ServerRetrofitAPI.PRODUCT_ID_SERVER:
-                            product.setProductId(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setProductId(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_BARCODE_SERVER:
-                            product.setBarcode(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setBarcode(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_BRAND_SERVER:
-                            product.setBrand(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setBrand(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_NAME_SERVER:
-                            product.setName(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setName(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
-                            product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
-                            product.setCategory(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setCategory(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
-                            product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
-                            product.setStarred(jsonReader.nextBoolean());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                product.setStarred(jsonReader.nextBoolean());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER:
                             if(jsonReader.peek() != JsonToken.NULL)
@@ -403,13 +435,18 @@ public class Utils {
 
                             break;
                         case ServerRetrofitAPI.PRODUCT_SCAN_DATE_SERVER:
-                            Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
-
-                            if(date != null && (prev_scan_date == null || Objects.requireNonNull(date).compareTo(prev_scan_date) != 0))
+                            if(jsonReader.peek() != JsonToken.NULL)
                             {
-                                prev_scan_date = date;
-                                items.add(Utils.SCAN_DATE_FORMAT_DISPLAYED.format(date));
+                                Date date = ServerRetrofitAPI.DATE_FORMAT_SERVER.parse(jsonReader.nextString());
+
+                                if(date != null && (prev_scan_date == null || Objects.requireNonNull(date).compareTo(prev_scan_date) != 0))
+                                {
+                                    prev_scan_date = date;
+                                    items.add(Utils.SCAN_DATE_FORMAT_DISPLAYED.format(date));
+                                }
                             }
+                            else
+                                jsonReader.skipValue();
 
                             break;
                         default:
@@ -454,28 +491,60 @@ public class Utils {
 
                 switch(keyName) {
                     case ServerRetrofitAPI.PRODUCT_ID_SERVER:
-                        product.setProductId(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setProductId(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_BARCODE_SERVER:
-                        product.setBarcode(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setBarcode(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_BRAND_SERVER:
-                        product.setBrand(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setBrand(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_NAME_SERVER:
-                        product.setName(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setName(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_PRICE_SERVER:
-                        product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setPrice(Float.parseFloat(jsonReader.nextString()));
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_CATEGORY_SERVER:
-                        product.setCategory(jsonReader.nextString());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setCategory(jsonReader.nextString());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_NUTRITION_SERVER:
-                        product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setNutritionAttributes(parseProductNutritionFromJSON(context, jsonReader.nextString()));
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_IS_STARRED_SERVER:
-                        product.setStarred(jsonReader.nextBoolean());
+                        if(jsonReader.peek() != JsonToken.NULL)
+                            product.setStarred(jsonReader.nextBoolean());
+                        else
+                            jsonReader.skipValue();
+
                         break;
                     case ServerRetrofitAPI.PRODUCT_IMG_URL_SERVER:
                         if(jsonReader.peek() != JsonToken.NULL)
