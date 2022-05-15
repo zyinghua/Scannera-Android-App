@@ -140,7 +140,7 @@
     <string name="farewell_user_on_delete">User account successfully deleted, all the best and hope to see you again!</string>
     <string name="camera">Camera</string>
     <string name="external_storage">Files and media</string>
-    <string name="user_pimg_updated">Your profile image is successfully updated!</string>
+    <string name="user_pimg_updated">Your profile image has been successfully updated!</string>
     <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="terms_and_conditions"><u>Terms And Conditions</u></string>
 
