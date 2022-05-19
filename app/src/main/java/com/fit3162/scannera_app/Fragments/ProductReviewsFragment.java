@@ -206,7 +206,11 @@ public class ProductReviewsFragment extends Fragment {
 
                     switch (keyName) {
                         case ServerRetrofitAPI.USER_USERNAME_SERVER:
-                            productReview.setUsername(jsonReader.nextString());
+                            if(jsonReader.peek() != JsonToken.NULL)
+                                productReview.setUsername(jsonReader.nextString());
+                            else
+                                jsonReader.skipValue();
+
                             break;
                         case ServerRetrofitAPI.USER_PIMG_URL_SERVER:
                             if(jsonReader.peek() != JsonToken.NULL)

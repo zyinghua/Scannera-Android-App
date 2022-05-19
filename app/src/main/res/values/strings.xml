@@ -143,6 +143,7 @@
     <string name="user_pimg_updated">Your profile image has been successfully updated!</string>
     <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="terms_and_conditions"><u>Terms And Conditions</u></string>
+    <string name="deleted_user">&#60;Deleted User&#62;</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">

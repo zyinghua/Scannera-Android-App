@@ -78,18 +78,18 @@ public interface ServerRetrofitAPI {
             @Field(USER_PIMG_URL_SERVER) String profile_img_url
     );
 
+    @GET("api/user/getBy/{acc_title}")
+    Call<User> getUserByEmailOrUsername(@Path("acc_title") String acc_title);
+
+    @DELETE("api/user/delete/{user_id}")
+    Call<Void> deleteUserById(@Path(USER_ID_SERVER) String user_id);
+
     @FormUrlEncoded
     @PUT(UPDATE_USER_END_POINT)
     Call<Void> updateUserPasswordById(
             @Field(USER_ID_SERVER) String userId,
             @Field(USER_PASSWORD_SERVER) String password
     );
-
-    @GET("api/user/getBy/{acc_title}")
-    Call<User> getUserByEmailOrUsername(@Path("acc_title") String acc_title);
-
-    @DELETE("api/user/delete/{user_id}")
-    Call<Void> deleteUserById(@Path(USER_ID_SERVER) String user_id);
 
     @FormUrlEncoded
     @PUT(UPDATE_USER_END_POINT)

@@ -133,6 +133,7 @@
     <string name="user_pimg_updated">您的用户头像已更换成功！</string>
     <string name="privacy_policy"><u>隐私权政策</u></string>
     <string name="terms_and_conditions"><u>条款和条件</u></string>
+    <string name="deleted_user">&#60;用户已删除&#62;</string>
 
     <!-- Category Dropdown Menu String Array -->
     <string-array name="categories">
