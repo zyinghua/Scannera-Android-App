@@ -192,7 +192,7 @@
     <string name="email_input_error">Invalid email address format, please check again.</string>
     <string name="email_address_taken_error">This email address has already been registered.</string>
     <string name="email_user_not_registered_error">This email address hasn\'t been registered yet, please register first.</string>
-    <string name="username_input_error">Sorry, username should not contain any special characters (e.g., !@#$%^&amp;*).</string>
+    <string name="username_input_error">Sorry, username should not contain any space or special characters (e.g., !@#$%^&amp;*).</string>
     <string name="username_taken_error">This username has already been registered.</string>
     <string name="password_input_too_short_error">Sorry, password must contain at least %1$d characters.</string>
     <string name="password_input_no_upper_lower_cases_error">Sorry, password must contain at least one lowercase and one uppercase characters.</string>
