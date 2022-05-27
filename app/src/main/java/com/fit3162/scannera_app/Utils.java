@@ -278,17 +278,11 @@ public class Utils {
 
     public static Retrofit getRetrofit(Context context)
     {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS).build();
 
-        return new Retrofit.Builder()
-                .baseUrl(context.getString(R.string.server_base_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
+        return new Retrofit.Builder().baseUrl(context.getString(R.string.server_base_url)).addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient).build();
     }
 
     public static ServerRetrofitAPI getServerAPI(Context context)

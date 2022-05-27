@@ -90,7 +90,9 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
             try{
                 if(product.getProductImgUrl() != null && !product.getProductImgUrl().isEmpty())
-                    Picasso.get().load(product.getProductImgUrl()).into( productViewHolder.product_display_img);
+                    Picasso.get().load(product.getProductImgUrl()).into(productViewHolder.product_display_img);
+                else
+                    productViewHolder.product_display_img.setImageDrawable(null);
 
                 productViewHolder.nameTv.setText(product.getName());
                 productViewHolder.brandTv.setText(product.getBrand());
