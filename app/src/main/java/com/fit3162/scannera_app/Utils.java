@@ -208,7 +208,7 @@ public class Utils {
         return sb.toString();
     }
 
-    public static void sendPasswordResetEmailToTargetAddress(Context context, String email_address, String new_password)
+    public static void sendPasswordResetEmailToTargetAddress(Context context, String email_address, String new_password, String userId)
     {
         // email_address must be guaranteed to be valid before executing this method.
 
@@ -238,6 +238,13 @@ public class Utils {
                 message.setSubject(context.getString(R.string.password_reset_email_subject));
                 message.setText(email_msg);
                 Transport.send(message);
+
+                // Navigate to the email sent activity once sent
+                ((Activity) context).finish();
+                Intent intent = new Intent(context, PasswordEmailSentActivity.class);
+                intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, email_address);
+                intent.putExtra(ForgottenPasswordActivity.RESET_USER_ID, userId);
+                context.startActivity(intent);
             } catch(MessagingException e) {
                 uiHandler.post(() -> {
                     Toast.makeText(context, "Messaging Exception:" + e, Toast.LENGTH_LONG).show();
@@ -316,14 +323,7 @@ public class Utils {
 
                 if(response.isSuccessful())
                 {
-                    Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password);
-
-                    // Navigate to the email sent activity once sent
-                    ((Activity) context).finish();
-                    Intent intent = new Intent(context, PasswordEmailSentActivity.class);
-                    intent.putExtra(ForgottenPasswordActivity.RESET_EMAIl_ADDRESS_KEY, email_address);
-                    intent.putExtra(ForgottenPasswordActivity.RESET_USER_ID, userId);
-                    context.startActivity(intent);
+                    Utils.sendPasswordResetEmailToTargetAddress(context, email_address, new_password, userId);
                 }
                 else
                 {
